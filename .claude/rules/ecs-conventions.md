@@ -44,9 +44,9 @@ _entityFactory.Event()
 
 Consumed as `GetEvents(GameMatcher.AllOf(GameMatcher.KillEvent))` — **always exactly one component in that matcher**. `GameMatcher.AllOf(params IMatcher[])` accepts only single-index matchers, so a composed event throws `MatcherException` at runtime.
 
-**Never modify `EventGroupExtensions` to make a wider matcher fit.** Infrastructure bending to accommodate a new shape means the shape is wrong. This was tried and reverted: composed events also forced five systems to loop the same `IReadOnlyList<IEffect>` doing `if (effect is DealDamageEffect)` — type-switching in systems, exactly what matchers exist to remove.
+**Never modify `EventGroupExtensions` to make a wider matcher fit.** Infrastructure bending to accommodate a new shape means the shape is wrong — a composed event forces consumers to type-switch inside the loop, exactly what matchers exist to remove.
 
-If a payload must be *dispatched on* rather than read, it is not an event: unfold it into effect entities through `IEffectFactory.CreateAll(effects, EffectSourceDto)` and let each `Process<X>EffectSystem` match its marker component.
+If a payload must be *dispatched on* rather than read, it is not an event: unfold it into one entity per item, each carrying its own marker component, and let a system per marker match it.
 
 `PickupCollectedEvent` and `DeathEvent` are the in-repo reference for the event shape. Check them before inventing a new one; if nothing equivalent exists, the construct is probably wrong.
 
@@ -77,12 +77,11 @@ If the rule isn't queryable yet, add the marker component plus a small `Mark*` s
 - **Verb first, never a noun phrase:** `ApplyProjectileHitSystem`, not `HitProjectileSystem`. `SteerHomingProjectileSystem`, not `HomingProjectileSystem`. `SetTargetSystem` / `RemoveInvalidTargetSystem` / `AimWeaponSystem`.
 - **Plainest word the team already uses.** No industry jargon that needs explaining — `ModuleSlot`, not `Hardpoint`.
 - **One system does one thing.** If the name needs "and", split it: `SyncModuleToSlotSystem` became `UpdateModulePositionSystem` + `UpdateModuleAimDirectionSystem`.
-- **`...On<Event>System` must name the actual event component** — `ApplyDamageOnTriggeredEffectsSystem` ← `TriggeredEffects`.
-- **`Request` means a command**: the payload placed on a request entity (`AddPlayVfxRequest(new VfxSpawnRequest(...))`) or a "create me this" factory argument. Never a bag of query parameters — pass the entity and read its components instead (`weapon.IsInFireArc(...)`, `targets.FindNearestFor(seeker, buffer)`).
-- Effect descriptors are named by what they do: `DealDamageEffect`, `SpreadToNearbyEffect`, `PlayVfxEffect`, `ApplyStatModifierEffect`.
+- **`...On<Event>System` must name the actual event component** — `AccumulateScoreOnPickupCollectedSystem` ← `PickupCollectedEvent`.
+- **`Request` means a command**: the payload placed on a request entity (`AddPlayVfxRequest(new VfxSpawnRequest(...))`) or a "create me this" factory argument. Never a bag of query parameters — pass the entity and read its components instead.
 
 ### No speculative settings
 
-Every field on a config or effect descriptor must be demanded by a **named perk or ability in the design docs**. If nothing requires it, it isn't written.
+Every field on a config must be demanded by a mechanic that already exists or is being written now. If nothing reads it, it isn't written — a jam has no room for options nobody uses.
 
-Two mechanisms doing the same job is the same violation: "damage everyone in radius" and "damage the N nearest" are one `SpreadToNearbyEffect { radius, maxTargets, effects }` where `maxTargets: 0` means everyone — not two descriptors with two systems.
+Two mechanisms doing the same job is the same violation: "collect everything in radius" and "collect the N nearest" are one config with `maxTargets: 0` meaning everyone — not two code paths.
