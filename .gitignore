@@ -1,0 +1,24 @@
+# OS-specific
+*.DS_Store
+
+# IDE
+.idea/
+src/*/.idea/
+
+# Build output
+bin/
+obj/
+
+# Custom
+.utmp/
+artifacts/
+
+# Raw asset archives — commit the extracted assets, not the zips (GitHub 100MB limit)
+*.zip
+
+# MCP config (platform-specific paths)
+.mcp.json
+.claude/settings.local.json
+
+# Unity mono crash dumps
+mono_crash.mem.*.blob

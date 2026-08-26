@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 3
+  tags: []
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - Player
+  - RefineryPostProcessing
+  - Loot
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Decals
+    uniqueID: 202318889
+    locked: 0
+  - name: Background
+    uniqueID: 592744411
+    locked: 0
+  - name: Gameplay
+    uniqueID: 1531169999
+    locked: 0
+  - name: Foreground
+    uniqueID: 3782231809
+    locked: 0
+  - name: ForegroundPost
+    uniqueID: 2637282971
+    locked: 0
+  - name: UI
+    uniqueID: 1124581579
+    locked: 0
+  - name: CameraSortingLayer
+    uniqueID: 1519792197
+    locked: 0
+  - name: Vfx
+    uniqueID: 1751035867
+    locked: 0
+  m_RenderingLayers:
+  - Default

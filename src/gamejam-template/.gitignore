@@ -1,0 +1,68 @@
+# Unity
+Library/
+Temp/
+obj/
+Build/
+Builds/
+Logs/
+UserSettings/
+MemoryCaptures/
+Recordings/
+
+# Unity generated meta files
+*.pidb.meta
+*.pdb.meta
+*.mdb.meta
+
+# Unity crash reports
+sysinfo.txt
+
+# Addressables
+Assets/AddressableAssetsData/*/*.bin*
+
+# Visual Studio / Rider
+.vs/
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+*.sln
+*.csproj
+*.unityproj
+
+# JetBrains Rider
+Assets/Plugins/Editor/JetBrains*
+
+# Gradle
+.gradle/
+
+# Android
+*.apk
+*.aab
+*.unitypackage
+*.app
+Assets/StreamingAssets/aa/*
+Assets/StreamingAssets/aa.meta
+
+# Crashlytics
+crashlytics-build.properties
+
+# Logs
+*.log
+
+# Consulo
+.consulo/
+ExportedObj/
+
+# Custom
+.vscode/
+/Assets/Saves/
+*.DotSettings.user
+*.DotSettings

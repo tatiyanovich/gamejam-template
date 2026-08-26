@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Configs
+  m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
+  m_GroupName: Configs
+  m_GUID: 413413c0cf0f3413987ae5fb219c38cf
+  m_SerializeEntries:
+  - m_GUID: 84a2eaba3ef44471883b373c6fb4ceca
+    m_Address: configs_folder
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9c5aa64f3ec445458519e5de2151a12d
+    m_Address: camera_shake_default
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - camera_shake_configs
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c92a51b125eef7a43a60062aa578e48f
+    m_Address: player_camera_config
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fc61a827f8778df43ab8aadb24bc2b50
+    m_Address: window_configs_folder
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - window_configs
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9e223f15a6e74023b43e82f5edc4f72b
+    m_Address: pickups_config
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 93b346209c333447f9df9a22fceba535, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 5d06bd06ef048431f8b414a71d633e56, type: 2}
+    - {fileID: 11400000, guid: e8baa456e0d1e423faced1c8af02b276, type: 2}
