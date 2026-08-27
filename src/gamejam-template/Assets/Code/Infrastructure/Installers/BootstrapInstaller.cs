@@ -1,5 +1,7 @@
 using Code.Gameplay.Camera.Services;
 using Code.Gameplay.CoreLoop;
+using Code.Gameplay.Fuel;
+using Code.Gameplay.Fuel.Services;
 using Code.Gameplay.Lifetime;
 using Code.Gameplay.Pickups;
 using Code.Gameplay.Pickups.Services;
@@ -53,6 +55,7 @@ namespace Code.Infrastructure.Installers
 			Container.BindInterfacesTo<CameraConfigsService>().AsSingle();
 			Container.BindInterfacesTo<PlayerConfigsService>().AsSingle();
 			Container.BindInterfacesTo<PickupConfigsService>().AsSingle();
+			Container.BindInterfacesTo<FuelConfigsService>().AsSingle();
 		}
 
 		private void BindInfrastructureServices()
@@ -113,6 +116,7 @@ namespace Code.Infrastructure.Installers
 			new LifetimeInstaller(Container).InstallBindings();
 			new PlayerInstaller(Container).InstallBindings();
 			new PickupsInstaller(Container).InstallBindings();
+			new FuelInstaller(Container).InstallBindings();
 
 			Container.BindInterfacesTo<CameraQuery>().AsSingle();
 			Container.BindInterfacesTo<CameraSwitcher>().AsSingle();

@@ -50,120 +50,125 @@ public static class GameComponentsLookup {
     public const int CloseBranchRequest = 39;
     public const int GoToBranchRequest = 40;
     public const int GoToLoopNodeRequest = 41;
-    public const int Alive = 42;
-    public const int CurrentHP = 43;
-    public const int Damageable = 44;
-    public const int Damaged = 45;
-    public const int DamageEvent = 46;
-    public const int Dead = 47;
-    public const int DeathEvent = 48;
-    public const int DestructOnDeath = 49;
-    public const int HideOnDeath = 50;
-    public const int LifetimeLeft = 51;
-    public const int MaxHP = 52;
-    public const int CanMove = 53;
-    public const int FollowOffset = 54;
-    public const int FollowSmoothSpeed = 55;
-    public const int Heading = 56;
-    public const int Impulse = 57;
-    public const int KinematicMovement = 58;
-    public const int LookDirection = 59;
-    public const int MaxMovementSpeed = 60;
-    public const int MaxTurnRate = 61;
-    public const int MinMovementSpeed = 62;
-    public const int MinTurnFactor = 63;
-    public const int MovementAcceleration = 64;
-    public const int MovementDirection = 65;
-    public const int MovementSlowDownModifier = 66;
-    public const int MovementSpeed = 67;
-    public const int MovementSpeedMultiplier = 68;
-    public const int MovementSpeedUpModifier = 69;
-    public const int MovementStep = 70;
-    public const int Moving = 71;
-    public const int RigidbodyInterpolatedMovement = 72;
-    public const int RigidbodyPositionMovement = 73;
-    public const int RigidbodyVelocity2DMovement = 74;
-    public const int RigidbodyVelocityMovement = 75;
-    public const int RotationSharpness = 76;
-    public const int RotationSpeed = 77;
-    public const int RotationSpeedMultiplier = 78;
-    public const int SmoothFollowMovement = 79;
-    public const int TargetVelocity = 80;
-    public const int TransformLateMovement = 81;
-    public const int TransformMovement = 82;
-    public const int TurnAcceleration = 83;
-    public const int TurnSpeed = 84;
-    public const int TurnSpeedReference = 85;
-    public const int Velocity = 86;
-    public const int Parent = 87;
-    public const int ParentAttached = 88;
-    public const int ParentId = 89;
-    public const int CollectRadius = 90;
-    public const int Pickup = 91;
-    public const int PickupCollectedEvent = 92;
-    public const int Score = 93;
-    public const int ScoreHolder = 94;
-    public const int ScoreValue = 95;
-    public const int BodyCollider2D = 96;
-    public const int Player = 97;
-    public const int SpawnPoint = 98;
-    public const int Cooldown = 99;
-    public const int Interval = 100;
-    public const int IntervalUp = 101;
-    public const int Ticking = 102;
-    public const int TimeIsUp = 103;
-    public const int TimeLeft = 104;
-    public const int Timer = 105;
-    public const int PlayVfxRequest = 106;
-    public const int Vfx = 107;
-    public const int VfxAnimator = 108;
-    public const int VfxTargetRadius = 109;
-    public const int Destructed = 110;
-    public const int InactiveSceneEntity = 111;
-    public const int LoopNodeScope = 112;
-    public const int PersistAcrossLoopNodes = 113;
-    public const int Event = 114;
-    public const int Id = 115;
-    public const int LocalPosition = 116;
-    public const int LocalRotation = 117;
-    public const int LossyScale = 118;
-    public const int Name = 119;
-    public const int Ready = 120;
-    public const int Request = 121;
-    public const int InitializeSceneEntityRequest = 122;
-    public const int StaleRequest = 123;
-    public const int BecameHiddenEvent = 124;
-    public const int LoadingView = 125;
-    public const int View = 126;
-    public const int ViewAddressableKey = 127;
-    public const int ViewAssetReference = 128;
-    public const int ViewPath = 129;
-    public const int ViewPrefab = 130;
-    public const int WorldPosition = 131;
-    public const int WorldRotation = 132;
-    public const int AutoSaveTimer = 133;
-    public const int SaveProgressRequest = 134;
-    public const int CompletedChanged = 135;
-    public const int CurrentHPChanged = 136;
-    public const int HiddenChanged = 137;
-    public const int IdChanged = 138;
-    public const int LocalPositionChanged = 139;
-    public const int LocalRotationChanged = 140;
-    public const int LookDirectionChanged = 141;
-    public const int LossyScaleChanged = 142;
-    public const int MovementSpeedChanged = 143;
-    public const int NameChanged = 144;
-    public const int OnCooldownChanged = 145;
-    public const int ProcessedChanged = 146;
-    public const int ReadyChanged = 147;
-    public const int ScoreChanged = 148;
-    public const int StartedChanged = 149;
-    public const int VelocityChanged = 150;
-    public const int ViewChanged = 151;
-    public const int WorldPositionChanged = 152;
-    public const int WorldRotationChanged = 153;
+    public const int Fuel = 42;
+    public const int FuelDrainRate = 43;
+    public const int FuelEmpty = 44;
+    public const int MaxFuel = 45;
+    public const int Alive = 46;
+    public const int CurrentHP = 47;
+    public const int Damageable = 48;
+    public const int Damaged = 49;
+    public const int DamageEvent = 50;
+    public const int Dead = 51;
+    public const int DeathEvent = 52;
+    public const int DestructOnDeath = 53;
+    public const int HideOnDeath = 54;
+    public const int LifetimeLeft = 55;
+    public const int MaxHP = 56;
+    public const int CanMove = 57;
+    public const int FollowOffset = 58;
+    public const int FollowSmoothSpeed = 59;
+    public const int Heading = 60;
+    public const int Impulse = 61;
+    public const int KinematicMovement = 62;
+    public const int LookDirection = 63;
+    public const int MaxMovementSpeed = 64;
+    public const int MaxTurnRate = 65;
+    public const int MinMovementSpeed = 66;
+    public const int MinTurnFactor = 67;
+    public const int MovementAcceleration = 68;
+    public const int MovementDirection = 69;
+    public const int MovementSlowDownModifier = 70;
+    public const int MovementSpeed = 71;
+    public const int MovementSpeedMultiplier = 72;
+    public const int MovementSpeedUpModifier = 73;
+    public const int MovementStep = 74;
+    public const int Moving = 75;
+    public const int RigidbodyInterpolatedMovement = 76;
+    public const int RigidbodyPositionMovement = 77;
+    public const int RigidbodyVelocity2DMovement = 78;
+    public const int RigidbodyVelocityMovement = 79;
+    public const int RotationSharpness = 80;
+    public const int RotationSpeed = 81;
+    public const int RotationSpeedMultiplier = 82;
+    public const int SmoothFollowMovement = 83;
+    public const int TargetVelocity = 84;
+    public const int TransformLateMovement = 85;
+    public const int TransformMovement = 86;
+    public const int TurnAcceleration = 87;
+    public const int TurnSpeed = 88;
+    public const int TurnSpeedReference = 89;
+    public const int Velocity = 90;
+    public const int Parent = 91;
+    public const int ParentAttached = 92;
+    public const int ParentId = 93;
+    public const int CollectRadius = 94;
+    public const int Pickup = 95;
+    public const int PickupCollectedEvent = 96;
+    public const int Score = 97;
+    public const int ScoreHolder = 98;
+    public const int ScoreValue = 99;
+    public const int BodyCollider2D = 100;
+    public const int Player = 101;
+    public const int SpawnPoint = 102;
+    public const int Cooldown = 103;
+    public const int Interval = 104;
+    public const int IntervalUp = 105;
+    public const int Ticking = 106;
+    public const int TimeIsUp = 107;
+    public const int TimeLeft = 108;
+    public const int Timer = 109;
+    public const int PlayVfxRequest = 110;
+    public const int Vfx = 111;
+    public const int VfxAnimator = 112;
+    public const int VfxTargetRadius = 113;
+    public const int Destructed = 114;
+    public const int InactiveSceneEntity = 115;
+    public const int LoopNodeScope = 116;
+    public const int PersistAcrossLoopNodes = 117;
+    public const int Event = 118;
+    public const int Id = 119;
+    public const int LocalPosition = 120;
+    public const int LocalRotation = 121;
+    public const int LossyScale = 122;
+    public const int Name = 123;
+    public const int Ready = 124;
+    public const int Request = 125;
+    public const int InitializeSceneEntityRequest = 126;
+    public const int StaleRequest = 127;
+    public const int BecameHiddenEvent = 128;
+    public const int LoadingView = 129;
+    public const int View = 130;
+    public const int ViewAddressableKey = 131;
+    public const int ViewAssetReference = 132;
+    public const int ViewPath = 133;
+    public const int ViewPrefab = 134;
+    public const int WorldPosition = 135;
+    public const int WorldRotation = 136;
+    public const int AutoSaveTimer = 137;
+    public const int SaveProgressRequest = 138;
+    public const int CompletedChanged = 139;
+    public const int CurrentHPChanged = 140;
+    public const int FuelChanged = 141;
+    public const int HiddenChanged = 142;
+    public const int IdChanged = 143;
+    public const int LocalPositionChanged = 144;
+    public const int LocalRotationChanged = 145;
+    public const int LookDirectionChanged = 146;
+    public const int LossyScaleChanged = 147;
+    public const int MovementSpeedChanged = 148;
+    public const int NameChanged = 149;
+    public const int OnCooldownChanged = 150;
+    public const int ProcessedChanged = 151;
+    public const int ReadyChanged = 152;
+    public const int ScoreChanged = 153;
+    public const int StartedChanged = 154;
+    public const int VelocityChanged = 155;
+    public const int ViewChanged = 156;
+    public const int WorldPositionChanged = 157;
+    public const int WorldRotationChanged = 158;
 
-    public const int TotalComponents = 154;
+    public const int TotalComponents = 159;
 
     public static readonly string[] componentNames = {
         "AliveChanged",
@@ -208,6 +213,10 @@ public static class GameComponentsLookup {
         "CloseBranchRequest",
         "GoToBranchRequest",
         "GoToLoopNodeRequest",
+        "Fuel",
+        "FuelDrainRate",
+        "FuelEmpty",
+        "MaxFuel",
         "Alive",
         "CurrentHP",
         "Damageable",
@@ -303,6 +312,7 @@ public static class GameComponentsLookup {
         "SaveProgressRequest",
         "CompletedChanged",
         "CurrentHPChanged",
+        "FuelChanged",
         "HiddenChanged",
         "IdChanged",
         "LocalPositionChanged",
@@ -365,6 +375,10 @@ public static class GameComponentsLookup {
         typeof(Code.Gameplay.CoreLoop.CloseBranchRequest),
         typeof(Code.Gameplay.CoreLoop.GoToBranchRequest),
         typeof(Code.Gameplay.CoreLoop.GoToLoopNodeRequest),
+        typeof(Code.Gameplay.Fuel.Fuel),
+        typeof(Code.Gameplay.Fuel.FuelDrainRate),
+        typeof(Code.Gameplay.Fuel.FuelEmpty),
+        typeof(Code.Gameplay.Fuel.MaxFuel),
         typeof(Code.Gameplay.Lifetime.Alive),
         typeof(Code.Gameplay.Lifetime.CurrentHP),
         typeof(Code.Gameplay.Lifetime.Damageable),
@@ -460,6 +474,7 @@ public static class GameComponentsLookup {
         typeof(Code.Storage.SaveProgressRequest),
         typeof(CompletedChanged),
         typeof(CurrentHPChanged),
+        typeof(FuelChanged),
         typeof(HiddenChanged),
         typeof(IdChanged),
         typeof(LocalPositionChanged),

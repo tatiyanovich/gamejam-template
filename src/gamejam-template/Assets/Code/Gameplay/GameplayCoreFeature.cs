@@ -1,3 +1,4 @@
+using Code.Gameplay.Fuel;
 using Code.Gameplay.Movement;
 using Code.Gameplay.Pickups;
 using Code.Gameplay.Player;
@@ -20,6 +21,8 @@ namespace Code.Gameplay
 			Add(systemFactory.Create<PickupsFeature>());
 
 			Add(systemFactory.Create<MovementUpdateFeature>());
+
+			Add(systemFactory.Create<FuelFeature>());
 
 			Add(systemFactory.Create<UIFeature>());
 

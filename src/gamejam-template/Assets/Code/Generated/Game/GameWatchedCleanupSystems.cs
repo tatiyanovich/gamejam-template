@@ -13,6 +13,7 @@ public sealed class GameWatchedCleanupSystems : Feature {
         Add(new RemoveAmountChangedGameSystem(contexts));
         Add(new RemoveCompletedChangedGameSystem(contexts));
         Add(new RemoveCurrentHPChangedGameSystem(contexts));
+        Add(new RemoveFuelChangedGameSystem(contexts));
         Add(new RemoveHiddenChangedGameSystem(contexts));
         Add(new RemoveIdChangedGameSystem(contexts));
         Add(new RemoveLocalPositionChangedGameSystem(contexts));
