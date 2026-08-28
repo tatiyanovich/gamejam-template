@@ -6,8 +6,6 @@ using SF = UnityEngine.SerializeField;
 
 namespace Code.UI
 {
-	// The screen-space layer for widgets that track world objects (healthbars, damage numbers,
-	// markers). Systems spawn widgets under WidgetsRoot; the window closes whatever it finds there.
 	public class WorldOverlayWindow : WindowBase
 	{
 		[SF] private Canvas rootCanvas;

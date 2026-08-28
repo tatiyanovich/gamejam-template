@@ -43,7 +43,7 @@ namespace Code.Gameplay.Player.Services
 				.AddMovementAcceleration(playerConfig.MoveAcceleration)
 				.AddMovementSpeedMultiplier(1f)
 				.AddRotationSpeedMultiplier(1f)
-				.AddRotationSharpness(playerConfig.RotationSharpness)
+				.AddRotationSpeed(playerConfig.RotationSpeed)
 				.AddWorldRotation(Quaternion.identity)
 				.AddLookDirection(Vector3.up)
 

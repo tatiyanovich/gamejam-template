@@ -19,7 +19,6 @@ namespace Code.Gameplay.Movement
 	[Game] public class MinMovementSpeed : IComponent { public float Value; }
 	[Game] public class MovementAcceleration : IComponent { public float Value; }
 	[Game] public class RotationSpeed : IComponent { public float Value; }
-	[Game] public class RotationSharpness : IComponent { public float Value; }
 	[Game] public class MaxTurnRate : IComponent { public float Value; }
 	[Game] public class TurnAcceleration : IComponent { public float Value; }
 	[Game] public class TurnSpeed : IComponent { public float Value; }

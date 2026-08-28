@@ -14,12 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
   m_GroupName: Prefabs
   m_GUID: 6fc7ef3ea518cca4396c588363eb584a
-  m_SerializeEntries:
-  - m_GUID: e405a991ebcce43a4bae88f5708ed351
-    m_Address: pickup_prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
+  m_SerializeEntries: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 93b346209c333447f9df9a22fceba535, type: 2}
   m_SchemaSet:

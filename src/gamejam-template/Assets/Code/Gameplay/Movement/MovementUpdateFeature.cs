@@ -12,15 +12,15 @@ namespace Code.Gameplay.Movement
 			Add(systems.Create<MarkIsMovingSystem>());
 			Add(systems.Create<TransformMovementSystem>());
 
+			Add(systems.Create<RotateTowardsLookDirectionSystem>());
+			Add(systems.Create<RotateTowardsLookDirection2DSystem>());
+
 			Add(systems.Create<UpdateWorldPositionForRigidbodiesSystem>());
 			Add(systems.Create<UpdateTransformWorldPositionSystem>());
 			Add(systems.Create<UpdateTransformLocalPositionSystem>());
 			Add(systems.Create<UpdateTransformRotationSystem>());
 			Add(systems.Create<UpdateRigidbodyRotationSystem>());
 			Add(systems.Create<UpdateTransformScaleSystem>());
-
-			Add(systems.Create<RotateTowardsLookDirectionSystem>());
-			Add(systems.Create<RotateTowardsLookDirection2DSystem>());
 		}
 	}
 }

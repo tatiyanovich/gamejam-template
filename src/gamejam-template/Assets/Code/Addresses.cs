@@ -8,14 +8,11 @@ namespace Code
 
 		public const string CameraPrefab = "camera_prefab";
 
-		public const string PickupPrefab = "pickup_prefab";
-
 		public static class Labels
 		{
 			public const string UI = "ui";
 		}
 
-		// Window and widget addresses are GUIDs, generated with the ID drawer on the WindowConfig asset.
 		public static class UI
 		{
 			public const string FadeWindow = "f8cb932a-43f6-4d7c-a179-1a5deb54f709";
@@ -24,7 +21,6 @@ namespace Code
 			public const string GameplayWindow = "01bfb656-1111-4f5a-9e0e-4b28f2ccd4d9";
 			public const string WorldOverlayWindow = "ffb30672-1a48-4c1a-a8f6-fbeaa607f3cf";
 			public const string ResultWindow = "d42e63dc-a28d-43ca-9042-4c10d2bc25a5";
-			public const string SettingsWindow = "c92d1af7-6367-4cd8-bf57-6f2cadfe7cc2";
 			public const string ErrorWindow = "c600db1d-870e-4976-ade5-812c93188d53";
 			public const string JoystickWindow = "2a4b6c8e-1f3d-4e5a-9b7c-8d9e0f1a2b3c";
 		}

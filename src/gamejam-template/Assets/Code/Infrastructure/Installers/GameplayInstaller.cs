@@ -1,7 +1,7 @@
 using Code.Gameplay.Camera.Services;
 using Code.Gameplay.Debugging.Services;
 using Code.Gameplay.Movement.Services;
-using Code.Gameplay.Pickups.Services;
+using Code.Gameplay.Drilling.Services;
 using Code.Gameplay.Player.Services;
 using Code.Gameplay.Vfx.Services;
 using Framework.Instantiation;
@@ -9,8 +9,6 @@ using Zenject;
 
 namespace Code.Infrastructure.Installers
 {
-	// Lives on the Boot scene's SceneContext. Bind here anything a gameplay scene needs;
-	// bindings that must survive a scene swap belong to BootstrapInstaller instead.
 	public class GameplayInstaller : MonoInstaller
 	{
 		public override void InstallBindings()
@@ -32,14 +30,13 @@ namespace Code.Infrastructure.Installers
 			Container.BindInterfacesTo<CameraFactory>().AsSingle();
 			Container.BindInterfacesTo<VfxFactory>().AsSingle();
 			Container.BindInterfacesTo<PlayerFactory>().AsSingle();
-			Container.BindInterfacesTo<PickupFactory>().AsSingle();
+			Container.BindInterfacesTo<DrillRunFactory>().AsSingle();
 		}
 
 		private void BindDebugServices()
 		{
 			Container.BindInterfacesTo<TriggerCameraShakeDebugAction>().AsSingle();
 			Container.BindInterfacesTo<BattleSessionChangeDebugAction>().AsSingle();
-			Container.BindInterfacesTo<AddScoreDebugAction>().AsSingle();
 		}
 	}
 }

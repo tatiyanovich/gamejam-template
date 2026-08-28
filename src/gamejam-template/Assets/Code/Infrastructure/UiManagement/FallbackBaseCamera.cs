@@ -11,7 +11,8 @@ namespace Code.Infrastructure.UiManagement
 		[SF] private Camera uiCamera;
 
 		private GameObject _fallbackCamera;
-		
+		private bool _isQuitting;
+
 		private IFallbackBaseCameraService _fallbackBaseCameraService;
 
 		[Inject]
@@ -25,8 +26,16 @@ namespace Code.Infrastructure.UiManagement
 			_fallbackBaseCameraService.Register(this);
 		}
 
+		private void OnApplicationQuit()
+		{
+			_isQuitting = true;
+		}
+
 		public void EnableCamera()
 		{
+			if (_isQuitting)
+				return;
+
 			if (_fallbackCamera == null)
 			{
 				CreateCamera();

@@ -15,7 +15,7 @@ MonoBehaviour:
   moveSpeed: 8
   maxMoveSpeed: 12
   moveAcceleration: 40
-  rotationSharpness: 12
+  rotationSpeed: 720
   moveDeadzone: 0.1
   obstacleMask:
     serializedVersion: 2

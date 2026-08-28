@@ -5,8 +5,6 @@ using Entitas;
 
 namespace Code.Gameplay.Fuel.Systems
 {
-	// Fills the tank of any player that has none yet, so the feature stays self-contained:
-	// PlayerFactory knows nothing about fuel and a respawned drill gets a full tank too.
 	public class InitializePlayerFuelSystem : IExecuteSystem
 	{
 		private readonly IFuelConfigsService _fuelConfigsService;

@@ -7,8 +7,6 @@ using Framework.UI.UiManagement.Services;
 
 namespace Code.Infrastructure.StateManagement.States
 {
-	// Per-node preparation after its scene is loaded but before its pipeline starts: open the
-	// windows that node owns, warm up whatever it needs, then hand over to RunLoopSceneState.
 	public class PrepareLoopSceneState : IState, IPayloadedEnter<LoopScenePayload>
 	{
 		private readonly IGameStateMachine _gameStateMachine;

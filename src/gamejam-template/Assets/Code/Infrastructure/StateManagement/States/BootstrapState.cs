@@ -10,7 +10,6 @@ using Code.UI.Joystick;
 using Code.UI.Launch;
 using Code.UI.Loading;
 using Code.UI.Result;
-using Code.UI.Settings;
 using Cysharp.Threading.Tasks;
 using Framework.Essentials.CursorManagement;
 using Framework.StateManagement;
@@ -80,8 +79,6 @@ namespace Code.Infrastructure.StateManagement.States
 				_uiService.OpenWindow<FadeWindow>());
 		}
 
-		// Every window needs a definition here before IUiService can open it: the address points at
-		// a WindowConfig asset labelled 'window_configs', which in turn references the window prefab.
 		private void AddWindowDefinitions()
 		{
 			_uiDefinitionService
@@ -92,7 +89,6 @@ namespace Code.Infrastructure.StateManagement.States
 				.AddDefinition(new WindowDefinition(typeof(WorldOverlayWindow), Addresses.UI.WorldOverlayWindow))
 				.AddDefinition(new WindowDefinition(typeof(JoystickWindow), Addresses.UI.JoystickWindow))
 				.AddDefinition(new WindowDefinition(typeof(ResultWindow), Addresses.UI.ResultWindow))
-				.AddDefinition(new WindowDefinition(typeof(SettingsWindow), Addresses.UI.SettingsWindow))
 				.AddDefinition(new WindowDefinition(typeof(ErrorWindow), Addresses.UI.ErrorWindow));
 		}
 	}

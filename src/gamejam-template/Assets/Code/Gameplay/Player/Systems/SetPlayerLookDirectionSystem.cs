@@ -2,8 +2,6 @@ using Entitas;
 
 namespace Code.Gameplay.Player.Systems
 {
-	// The drill faces where it drives. Swap the source component for PointerWorldPosition
-	// if the game needs aim-independent-of-movement steering instead.
 	public sealed class SetPlayerLookDirectionSystem : IExecuteSystem
 	{
 		private readonly IGroup<GameEntity> _players;

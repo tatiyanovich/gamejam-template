@@ -11,7 +11,7 @@ namespace Code.Gameplay.Player.Configs
 		[SF, Min(0f)] private float moveAcceleration = 40f;
 
 		[Header("Kinematic")]
-		[SF, Min(0f)] private float rotationSharpness = 12f;
+		[SF, Min(0f)] private float rotationSpeed = 720f;
 		[SF, Range(0f, 1f)] private float moveDeadzone = 0.1f;
 		[SF] private LayerMask obstacleMask = ~0;
 
@@ -19,7 +19,7 @@ namespace Code.Gameplay.Player.Configs
 		public float MaxMoveSpeed => maxMoveSpeed;
 		public float MoveAcceleration => moveAcceleration;
 
-		public float RotationSharpness => rotationSharpness;
+		public float RotationSpeed => rotationSpeed;
 		public float MoveDeadzone => moveDeadzone;
 		public LayerMask ObstacleMask => obstacleMask;
 	}

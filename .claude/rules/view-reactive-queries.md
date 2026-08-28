@@ -13,56 +13,56 @@ A View (animator, VFX behaviour, UI widget, window) must be **driven by an event
 **Do not** write a per-frame `IExecuteSystem` that iterates entities and calls a method on their view component:
 
 ```csharp
-// ANTI-PATTERN — PushScoreToHudSystem
+// ANTI-PATTERN — PushDistanceToHudSystem
 public void Execute()
 {
-    foreach (GameEntity holder in _scoreHolders.GetEntities(_buffer))
-        _hud.SetScore(holder.Score);   // system pokes the view every frame
+    foreach (GameEntity run in _runs.GetEntities(_buffer))
+        _hud.SetDistance(run.DrilledDistance);   // system pokes the view every frame
 }
 ```
 
 This runs every frame regardless of change, couples a domain system to a specific view type, and puts view logic in the system pipeline.
 
-### The pattern (reference: `ScoreQuery` + `GameplayWindow`)
+### The pattern (reference: `DrillingQuery` + `GameplayWindow`)
 
 **1. Mark the component `[Watched]` and implement `IReactiveQuery`.** Codegen emits an `XChanged` flag, raised whenever the component is added or removed (tag components) or its value is reassigned; `GameWatchedCleanupSystems` clears it in the frame's infra tail. Match on `GameMatcher.XChanged` and fire the event from `ReactToChanges()`, which `NotifyQueryChangesSystem` drives.
 
 This applies to tag components too — `[Watched]` on a tag covers add and remove both. Never hand-subscribe to `group.OnEntityAdded`/`OnEntityRemoved`: that fires mid-pipeline the instant any system mutates the entity, rather than at the one defined point in the frame, and it forces the query to be `IDisposable`.
 
 ```csharp
-public class ScoreQuery : IScoreQuery, IReactiveQuery
+public class DrillingQuery : IDrillingQuery, IReactiveQuery
 {
-    private readonly IGroup<GameEntity> _scoreHolders;
-    private readonly IGroup<GameEntity> _changedScoreHolders;
+    private readonly IGroup<GameEntity> _runs;
+    private readonly IGroup<GameEntity> _changedRuns;
 
-    public event Action<int> OnScoreChanged;
+    public event Action<float> OnDistanceChanged;
 
-    public ScoreQuery(GameContext game)
+    public DrillingQuery(GameContext game)
     {
-        _scoreHolders = game.GetGroup(GameMatcher
+        _runs = game.GetGroup(GameMatcher
             .AllOf(
-                GameMatcher.ScoreHolder,
-                GameMatcher.Score));
+                GameMatcher.DrillRun,
+                GameMatcher.DrilledDistance));
 
-        _changedScoreHolders = game.GetGroup(GameMatcher
+        _changedRuns = game.GetGroup(GameMatcher
             .AllOf(
-                GameMatcher.ScoreHolder,
-                GameMatcher.Score,
-                GameMatcher.ScoreChanged));
+                GameMatcher.DrillRun,
+                GameMatcher.DrilledDistance,
+                GameMatcher.DrilledDistanceChanged));
     }
 
     public void ReactToChanges()
     {
-        foreach (GameEntity scoreHolder in _changedScoreHolders)
-            OnScoreChanged?.Invoke(scoreHolder.Score);
+        foreach (GameEntity run in _changedRuns)
+            OnDistanceChanged?.Invoke(run.DrilledDistance);
     }
 
-    public int GetScore()
+    public float GetDistance()
     {
-        foreach (GameEntity scoreHolder in _scoreHolders)
-            return scoreHolder.Score;
+        foreach (GameEntity run in _runs)
+            return run.DrilledDistance;
 
-        return 0;
+        return 0f;
     }
 }
 ```
@@ -76,23 +76,23 @@ Expose a getter alongside the event: a view that opens mid-session needs the cur
 ```csharp
 protected override UniTask OnOpen(CancellationToken cancellationToken = default)
 {
-    _scoreQuery.OnScoreChanged += HandleScoreChanged;
+    _drillingQuery.OnDistanceChanged += HandleDistanceChanged;
 
-    HandleScoreChanged(_scoreQuery.GetScore());
+    HandleDistanceChanged(_drillingQuery.GetDistance());
 
     return base.OnOpen(cancellationToken);
 }
 
 protected override UniTask OnClose(CancellationToken cancellationToken = default)
 {
-    _scoreQuery.OnScoreChanged -= HandleScoreChanged;
+    _drillingQuery.OnDistanceChanged -= HandleDistanceChanged;
 
     return base.OnClose(cancellationToken);
 }
 
-private void HandleScoreChanged(int score)
+private void HandleDistanceChanged(float distance)
 {
-    scoreText.text = score.ToString();
+    distanceText.text = $"{Mathf.FloorToInt(distance)} M";
 }
 ```
 
@@ -101,19 +101,19 @@ private void HandleScoreChanged(int score)
 ```csharp
 public override void RegisterComponents()
 {
-    Entity.AddPickupGlowAnimator(this);
-    _pickupQuery.OnCollectedChanged += HandleCollectedChanged;
+    Entity.AddDrillGlowAnimator(this);
+    _fuelQuery.OnFuelEmptied += HandleFuelEmptied;
 }
 
 public override void UnregisterComponents()
 {
-    Entity.SafeRemovePickupGlowAnimator();
-    _pickupQuery.OnCollectedChanged -= HandleCollectedChanged;
+    Entity.SafeRemoveDrillGlowAnimator();
+    _fuelQuery.OnFuelEmptied -= HandleFuelEmptied;
 }
 
-private void HandleCollectedChanged(GameEntity pickup)
+private void HandleFuelEmptied(GameEntity drill)
 {
-    if (pickup != Entity)
+    if (drill != Entity)
         return;
 
     PlayGlow();

@@ -48,7 +48,7 @@ Consumed as `GetEvents(GameMatcher.AllOf(GameMatcher.KillEvent))` — **always e
 
 If a payload must be *dispatched on* rather than read, it is not an event: unfold it into one entity per item, each carrying its own marker component, and let a system per marker match it.
 
-`PickupCollectedEvent` and `DeathEvent` are the in-repo reference for the event shape. Check them before inventing a new one; if nothing equivalent exists, the construct is probably wrong.
+`DeathEvent` and `DamageEvent` are the in-repo reference for the event shape. Check them before inventing a new one; if nothing equivalent exists, the construct is probably wrong.
 
 ### Systems hold no state
 
@@ -77,7 +77,7 @@ If the rule isn't queryable yet, add the marker component plus a small `Mark*` s
 - **Verb first, never a noun phrase:** `ApplyProjectileHitSystem`, not `HitProjectileSystem`. `SteerHomingProjectileSystem`, not `HomingProjectileSystem`. `SetTargetSystem` / `RemoveInvalidTargetSystem` / `AimWeaponSystem`.
 - **Plainest word the team already uses.** No industry jargon that needs explaining — `ModuleSlot`, not `Hardpoint`.
 - **One system does one thing.** If the name needs "and", split it: `SyncModuleToSlotSystem` became `UpdateModulePositionSystem` + `UpdateModuleAimDirectionSystem`.
-- **`...On<Event>System` must name the actual event component** — `AccumulateScoreOnPickupCollectedSystem` ← `PickupCollectedEvent`.
+- **`...On<Event>System` must name the actual event component** — `DestructOnDeathSystem` ← `DeathEvent`.
 - **`Request` means a command**: the payload placed on a request entity (`AddPlayVfxRequest(new VfxSpawnRequest(...))`) or a "create me this" factory argument. Never a bag of query parameters — pass the entity and read its components instead.
 
 ### No speculative settings

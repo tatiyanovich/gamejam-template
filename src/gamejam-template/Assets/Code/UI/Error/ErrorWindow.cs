@@ -11,8 +11,6 @@ using SF = UnityEngine.SerializeField;
 
 namespace Code.UI.Error
 {
-	// Opened by ErrorHappenedState after an uncaught exception. Shows the tail of the log so a
-	// tester can report what happened, and offers the only safe action left — quit.
 	public class ErrorWindow : WindowBase
 	{
 		[SF] private TextMeshProUGUI logsText;

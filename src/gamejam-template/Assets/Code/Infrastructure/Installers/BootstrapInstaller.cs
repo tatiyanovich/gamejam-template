@@ -3,8 +3,7 @@ using Code.Gameplay.CoreLoop;
 using Code.Gameplay.Fuel;
 using Code.Gameplay.Fuel.Services;
 using Code.Gameplay.Lifetime;
-using Code.Gameplay.Pickups;
-using Code.Gameplay.Pickups.Services;
+using Code.Gameplay.Drilling;
 using Code.Gameplay.Player;
 using Code.Gameplay.Player.Services;
 using Code.Infrastructure.EntityComponentSystem.Destruct.Services;
@@ -37,8 +36,6 @@ using SF = UnityEngine.SerializeField;
 
 namespace Code.Infrastructure.Installers
 {
-	// Lives on the Boot scene and survives every scene swap. Anything a state, a query or a
-	// service needs across scenes is bound here; per-scene bindings go to GameplayInstaller.
 	public class BootstrapInstaller : MonoInstaller
 	{
 		[SF] private UiHolder uiHolder;
@@ -54,7 +51,6 @@ namespace Code.Infrastructure.Installers
 		{
 			Container.BindInterfacesTo<CameraConfigsService>().AsSingle();
 			Container.BindInterfacesTo<PlayerConfigsService>().AsSingle();
-			Container.BindInterfacesTo<PickupConfigsService>().AsSingle();
 			Container.BindInterfacesTo<FuelConfigsService>().AsSingle();
 		}
 
@@ -108,14 +104,12 @@ namespace Code.Infrastructure.Installers
 				.AsSingle();
 		}
 
-		// Feature installers live here rather than in GameplayInstaller because their queries and
-		// services are resolved by states and windows that outlive any single gameplay scene.
 		private void BindInstallers()
 		{
 			new CoreLoopInstaller(Container).InstallBindings();
 			new LifetimeInstaller(Container).InstallBindings();
 			new PlayerInstaller(Container).InstallBindings();
-			new PickupsInstaller(Container).InstallBindings();
+			new DrillingInstaller(Container).InstallBindings();
 			new FuelInstaller(Container).InstallBindings();
 
 			Container.BindInterfacesTo<CameraQuery>().AsSingle();

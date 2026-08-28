@@ -10,7 +10,6 @@ namespace Code.Gameplay.Fuel
 		{
 		}
 
-		// BindInterfacesTo, not BindInterfacesAndSelfTo: the query is collected as IReactiveQuery.
 		public override void InstallBindings() => Container.BindInterfacesTo<FuelQuery>().AsSingle();
 	}
 }

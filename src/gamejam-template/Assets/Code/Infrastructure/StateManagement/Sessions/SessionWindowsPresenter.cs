@@ -3,13 +3,13 @@ using Code.Infrastructure.CoreLoop;
 using Code.UI;
 using Code.UI.Gameplay;
 using Code.UI.Joystick;
+using Code.UI.Launch;
+using Code.UI.Result;
 using Cysharp.Threading.Tasks;
 using Framework.UI.UiManagement.Services;
 
 namespace Code.Infrastructure.StateManagement.Sessions
 {
-	// Owns which windows belong to which loop node. Add a branch per node you introduce —
-	// closing the previous node's windows here is what keeps sessions from stacking HUDs.
 	public class SessionWindowsPresenter : ISessionWindowsPresenter
 	{
 		private readonly IUiService _uiService;
@@ -30,12 +30,36 @@ namespace Code.Infrastructure.StateManagement.Sessions
 			}
 		}
 
-		private UniTask PresentBattle()
+		public UniTask Dismiss(LoopNodeId nodeId)
 		{
-			return UniTask.WhenAll(
+			switch (nodeId)
+			{
+				case LoopNodeId.Battle:
+					return DismissBattle();
+				default:
+					throw new ArgumentOutOfRangeException(nameof(nodeId), nodeId, null);
+			}
+		}
+
+		private async UniTask PresentBattle()
+		{
+			await UniTask.WhenAll(
+				_uiService.CloseWindow<LaunchWindow>(withAnimation: false),
+				_uiService.CloseWindow<ResultWindow>(withAnimation: false));
+
+			await UniTask.WhenAll(
 				_uiService.OpenWindow<WorldOverlayWindow>(),
 				_uiService.OpenWindow<GameplayWindow>(),
 				_uiService.OpenWindow<JoystickWindow>());
+		}
+
+		private UniTask DismissBattle()
+		{
+			return UniTask.WhenAll(
+				_uiService.CloseWindow<ResultWindow>(withAnimation: false),
+				_uiService.CloseWindow<JoystickWindow>(withAnimation: false),
+				_uiService.CloseWindow<GameplayWindow>(withAnimation: false),
+				_uiService.CloseWindow<WorldOverlayWindow>(withAnimation: false));
 		}
 	}
 }

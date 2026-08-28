@@ -3,8 +3,6 @@ using UnityEngine;
 
 namespace Code.Gameplay.Fuel.Systems
 {
-	// Clearing the velocity is what makes the drill halt instead of coasting: dropping CanMove
-	// alone freezes the last velocity, which would fling the drill forward on the next refuel.
 	public class StopMovementWithoutFuelSystem : IExecuteSystem
 	{
 		private readonly IGroup<GameEntity> _emptyTanks;

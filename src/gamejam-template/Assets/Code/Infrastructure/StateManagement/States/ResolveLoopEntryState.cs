@@ -5,7 +5,6 @@ using Framework.Storage;
 
 namespace Code.Infrastructure.StateManagement.States
 {
-	// Picks the loop node the player left off at, so a relaunch resumes where the save says.
 	public class ResolveLoopEntryState : IState, IEnter
 	{
 		private readonly IGameStateMachine _gameStateMachine;

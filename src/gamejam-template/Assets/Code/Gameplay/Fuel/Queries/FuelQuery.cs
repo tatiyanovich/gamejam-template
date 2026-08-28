@@ -4,8 +4,6 @@ using Entitas;
 
 namespace Code.Gameplay.Fuel.Queries
 {
-	// The read side of the fuel tank for Views, mirroring ScoreQuery: the HUD subscribes once and
-	// NotifyQueryChangesSystem pushes the new value after gameplay whenever Fuel was replaced.
 	public class FuelQuery : IFuelQuery, IReactiveQuery
 	{
 		private readonly IGroup<GameEntity> _tanks;

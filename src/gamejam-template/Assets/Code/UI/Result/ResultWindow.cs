@@ -1,7 +1,7 @@
 using System.Threading;
 using Code.Gameplay.Camera.Services;
 using Code.Gameplay.CoreLoop.Services;
-using Code.Gameplay.Pickups.Queries;
+using Code.Gameplay.Drilling.Queries;
 using Code.Infrastructure.CoreLoop;
 using Code.UI.Fade;
 using Cysharp.Threading.Tasks;
@@ -15,18 +15,17 @@ using SF = UnityEngine.SerializeField;
 
 namespace Code.UI.Result
 {
-	// A popup over the HUD: shows the run's score and routes back into the core loop through
-	// requests. Windows never enter states directly — they create requests the systems handle.
 	public class ResultWindow : WindowBase
 	{
 		[SF] private RectTransform content;
-		[SF] private TextMeshProUGUI scoreText;
+		[SF] private TextMeshProUGUI distanceText;
+		[SF] private TextMeshProUGUI bestDistanceText;
 		[SF] private Button replayButton;
 		[SF] private Button menuButton;
 
 		private ICoreLoopRequestFactory _coreLoopRequestFactory;
 		private ICameraSwitcher _cameraSwitcher;
-		private IScoreQuery _scoreQuery;
+		private IDrillingQuery _drillingQuery;
 
 		private const float FadeInDuration = 0.3f;
 		private const float ScaleDuration = 0.5f;
@@ -35,17 +34,18 @@ namespace Code.UI.Result
 		public void Construct(
 			ICoreLoopRequestFactory coreLoopRequestFactory,
 			ICameraSwitcher cameraSwitcher,
-			IScoreQuery scoreQuery)
+			IDrillingQuery drillingQuery)
 		{
 			_coreLoopRequestFactory = coreLoopRequestFactory;
 			_cameraSwitcher = cameraSwitcher;
-			_scoreQuery = scoreQuery;
+			_drillingQuery = drillingQuery;
 		}
 
 		protected override UniTask OnOpen(CancellationToken cancellationToken = default)
 		{
 			content.localScale = Vector3.zero;
-			scoreText.text = _scoreQuery.GetScore().ToString();
+			distanceText.text = $"{Mathf.FloorToInt(_drillingQuery.GetDistance())} M";
+			bestDistanceText.text = $"BEST {Mathf.FloorToInt(_drillingQuery.GetBestDistance())} M";
 
 			replayButton.OnClicked += HandleReplayClicked;
 			menuButton.OnClicked += HandleMenuClicked;
@@ -90,8 +90,6 @@ namespace Code.UI.Result
 
 			_cameraSwitcher.SwitchTo(loopNodeId);
 
-			// Replaying means closing the branch first so the node rebuilds; going back to the menu
-			// leaves the branch behind and reloads the launch scene as a plain pipeline.
 			if (loopNodeId == LoopNodeId.Battle)
 			{
 				_coreLoopRequestFactory.CreateCloseBranchRequest(LoopNodeId.Battle);

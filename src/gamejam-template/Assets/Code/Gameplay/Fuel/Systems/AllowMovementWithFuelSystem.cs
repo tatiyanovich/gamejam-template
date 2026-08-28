@@ -3,8 +3,6 @@ using Entitas;
 
 namespace Code.Gameplay.Fuel.Systems
 {
-	// The counterpart of ForbidMovementWithoutFuelSystem: a refuelled drill drives again.
-	// Dead entities stay excluded so this never overrides ForbidMovementOnDeathSystem.
 	public class AllowMovementWithFuelSystem : IExecuteSystem
 	{
 		private readonly IGroup<GameEntity> _refuelledTanks;

@@ -11,6 +11,7 @@ namespace Code.Infrastructure.StateManagement.States
 	{
 		private readonly ISystemFactory _systemFactory;
 		private readonly ISessionService _sessionService;
+		private readonly ISessionRevealGate _revealGate;
 
 		private CoreLoopFeatureBase _gameplayCoreFeatureBase;
 		private FixedUpdateFeature _fixedUpdateFeature;
@@ -19,10 +20,12 @@ namespace Code.Infrastructure.StateManagement.States
 
 		public RunLoopSceneState(
 			ISystemFactory systemFactory,
-			ISessionService sessionService)
+			ISessionService sessionService,
+			ISessionRevealGate revealGate)
 		{
 			_systemFactory = systemFactory;
 			_sessionService = sessionService;
+			_revealGate = revealGate;
 		}
 
 		public void Enter(LoopScenePayload loopScenePayload)
@@ -42,6 +45,9 @@ namespace Code.Infrastructure.StateManagement.States
 			{
 				_gameplayCoreFeatureBase = _systemFactory.Create<LaunchCoreFeature>();
 				_gameplayCoreFeatureBase.Initialize();
+
+				_revealGate.SetNextRevealDelay(0f);
+				_revealGate.NotifyReady();
 			}
 
 			Debug.Log($"Run node {_nodeId}, session={RunsAsSession(_nodeId)}");
@@ -75,6 +81,10 @@ namespace Code.Infrastructure.StateManagement.States
 				return;
 
 			_gameplayCoreFeatureBase.Execute();
+
+			if (_gameplayCoreFeatureBase == null)
+				return;
+
 			_gameplayCoreFeatureBase.Cleanup();
 		}
 
@@ -90,8 +100,6 @@ namespace Code.Infrastructure.StateManagement.States
 			_lateUpdateFeature.Cleanup();
 		}
 
-		// Session nodes run inside a branch of the BranchedStateMachine, so several of them can be
-		// live at once (gameplay + minigame, for example). Everything else runs as a single pipeline.
 		private bool RunsAsSession(LoopNodeId nodeId) =>
 			nodeId is LoopNodeId.Battle;
 	}

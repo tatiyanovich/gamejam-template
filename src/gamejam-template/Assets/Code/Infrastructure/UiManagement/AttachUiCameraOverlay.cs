@@ -35,5 +35,10 @@ namespace Code.Infrastructure.UiManagement
 			// UI overlay would render through two base cameras.
 			_fallbackBaseCameraService.DisableCamera();
 		}
+
+		private void OnDestroy()
+		{
+			_fallbackBaseCameraService.EnableCamera();
+		}
 	}
 }

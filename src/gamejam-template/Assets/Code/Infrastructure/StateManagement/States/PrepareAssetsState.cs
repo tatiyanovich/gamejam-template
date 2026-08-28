@@ -4,8 +4,6 @@ using UnityEngine;
 
 namespace Code.Infrastructure.StateManagement.States
 {
-	// Warms up everything that must be in memory before the first loop scene runs, so gameplay
-	// never waits on an Addressables load mid-frame.
 	public class PrepareAssetsState : IState, IEnter
 	{
 		private readonly IAssetsService _assets;
@@ -35,7 +33,6 @@ namespace Code.Infrastructure.StateManagement.States
 		private void PreparePrefabs()
 		{
 			_assets.Load<GameObject>(Addresses.PlayerCharacterKey);
-			_assets.Load<GameObject>(Addresses.PickupPrefab);
 			_assets.Load<GameObject>(Addresses.CameraPrefab);
 		}
 	}

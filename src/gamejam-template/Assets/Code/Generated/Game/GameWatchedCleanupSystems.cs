@@ -11,8 +11,10 @@ public sealed class GameWatchedCleanupSystems : Feature {
     public GameWatchedCleanupSystems(Contexts contexts) {
         Add(new RemoveAliveChangedGameSystem(contexts));
         Add(new RemoveAmountChangedGameSystem(contexts));
+        Add(new RemoveBestDrilledDistanceChangedGameSystem(contexts));
         Add(new RemoveCompletedChangedGameSystem(contexts));
         Add(new RemoveCurrentHPChangedGameSystem(contexts));
+        Add(new RemoveDrilledDistanceChangedGameSystem(contexts));
         Add(new RemoveFuelChangedGameSystem(contexts));
         Add(new RemoveHiddenChangedGameSystem(contexts));
         Add(new RemoveIdChangedGameSystem(contexts));
@@ -25,7 +27,7 @@ public sealed class GameWatchedCleanupSystems : Feature {
         Add(new RemoveOnCooldownChangedGameSystem(contexts));
         Add(new RemoveProcessedChangedGameSystem(contexts));
         Add(new RemoveReadyChangedGameSystem(contexts));
-        Add(new RemoveScoreChangedGameSystem(contexts));
+        Add(new RemoveRunFinishedChangedGameSystem(contexts));
         Add(new RemoveStartedChangedGameSystem(contexts));
         Add(new RemoveVelocityChangedGameSystem(contexts));
         Add(new RemoveViewChangedGameSystem(contexts));

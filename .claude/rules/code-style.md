@@ -23,14 +23,14 @@ description: C# code style rules enforced across the project
   private readonly IPlayerConfigsService _playerConfigsService;
 
   private readonly IGroup<GameEntity> _players;
-  private readonly IGroup<GameEntity> _pickups;
+  private readonly IGroup<GameEntity> _runs;
   private readonly IGroup<GameEntity> _damageables;
 
   private readonly List<GameEntity> _buffer = new(4);
   ```
 - **Systems must be stateless** — no instance fields that change over time.
 - **Events — fluent on the next line.** `_entityFactory.Event()` on its own line, `.AddXEvent(...)` indented on the next line. Never `_entityFactory.Event().AddXEvent(...)` on one line.
-- **Matchers — always fully expanded and indented, even for a single component.** `GameMatcher` on the `GetGroup(` line, `.AllOf(`/`.NoneOf(` each on their own line, each component on its own line (see `CollectPickupsSystem`). Never the compact `GameMatcher.AllOf(GameMatcher.X)` or `.AllOf(GameMatcher.X)` form.
+- **Matchers — always fully expanded and indented, even for a single component.** `GameMatcher` on the `GetGroup(` line, `.AllOf(`/`.NoneOf(` each on their own line, each component on its own line (see `AccumulateDrilledDistanceSystem`). Never the compact `GameMatcher.AllOf(GameMatcher.X)` or `.AllOf(GameMatcher.X)` form.
 - **Filter with matchers, not `hasX`** — never guard iteration with `if (entity.hasFoo)`. Add `GameMatcher.Foo` to the group's `AllOf(...)` (or `NoneOf(...)`) so the group only ever contains valid entities. Access `entity.Foo` directly inside the loop. Same principle as favoring `group.ContainsEntity` over `== null`: express presence/absence in the query, not in per-entity branches.
 - **One class/interface per file** (exception: generic overloads with same name).
 - **Namespaces** mirror folder paths: `namespace Code.Gameplay.Effects.Systems`.

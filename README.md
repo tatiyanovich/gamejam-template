@@ -28,10 +28,11 @@ slice you are expected to delete.
 
 ## The sample gameplay slice
 
-Drive around with WASD or the on-screen stick, touch a pickup, score goes up, score survives a restart.
-It exists to prove the pipeline end to end: input → system → component → reactive query → HUD, plus
-entity → snapshot → save file. Three files own it — `Assets/Code/Gameplay/Pickups/`,
-`Assets/Code/Storage/Systems/RefreshScoreSystem.cs`, `Assets/Code/UI/Gameplay/GameplayWindow.cs`.
+Drive the drill around an endless field with WASD or the on-screen stick. Moving burns fuel; when the
+tank runs dry the run ends, the result screen shows the distance drilled, and the record survives a
+restart. It exists to prove the pipeline end to end: input → system → component → reactive query → HUD,
+plus entity → snapshot → save file. Three places own it — `Assets/Code/Gameplay/Drilling/`,
+`Assets/Code/Gameplay/Fuel/`, `Assets/Code/Storage/Systems/RefreshDrillRunSystem.cs`.
 Delete them when your real gameplay lands.
 
 ## Adding a feature

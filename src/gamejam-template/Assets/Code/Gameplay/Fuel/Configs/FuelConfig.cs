@@ -8,10 +8,8 @@ namespace Code.Gameplay.Fuel.Configs
 	{
 		[SF, Min(0f)] private float maxFuel = 100f;
 		[SF, Min(0f)] private float drainPerSecond = 4f;
-		[SF, Min(0f)] private float refuelPerPickup = 25f;
 
 		public float MaxFuel => maxFuel;
 		public float DrainPerSecond => drainPerSecond;
-		public float RefuelPerPickup => refuelPerPickup;
 	}
 }

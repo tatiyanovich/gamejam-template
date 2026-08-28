@@ -6,8 +6,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 A game-jam starter: Unity 6 (6000.3.6f1) ECS project on Entitas with a three-layer architecture
 (View / Domain / Storage). Zenject for DI, UniTask for async, Addressables for assets, DOTween for
-tweens. Everything here is infrastructure plus one deliberately trivial gameplay slice — collect
-pickups, score goes up, score persists. Build the actual game on top; don't preserve the sample.
+tweens. Everything here is infrastructure plus one deliberately trivial gameplay slice — drive a drill
+over an endless field, burn fuel, and the distance record survives a restart. Build the actual game
+on top; don't preserve the sample.
 
 The Unity project lives in `src/gamejam-template/`. The `Jenny/` code-gen tooling lives at the repo root.
 
@@ -61,7 +62,7 @@ every consumer sees them. Consume with `game.GetEvents(matcher)` — exactly one
 
 **Queries** (read API): read-only access to ECS state, mostly for Views. Implement `IReactiveQuery`
 for push notifications via C# events; `NotifyQueryChangesSystem` drives the reactive cycle.
-`ScoreQuery` is the reference example.
+`DrillingQuery` is the reference example.
 
 **Core loop**: the game is a graph of nodes (`LoopNodeId`). `StartLaunch` (menu) runs as a single
 pipeline; every other node runs as a **session branch** so several can tick at once. Views never
@@ -97,7 +98,7 @@ its GUID to `Addresses.UI`, and register a `WindowDefinition` in `BootstrapState
 Saveable state always enters the world from its snapshot. Systems MUST NOT write to the save file
 during gameplay — all snapshot mutation happens in `RefreshSnapshotsFeature`, triggered by
 `ISaveLoadService.OnSaveRequested`. `AutoSaveSystem` requests a save every 5s;
-`SaveProgressByRequestSystem` performs it. `RefreshScoreSystem` is the reference example.
+`SaveProgressByRequestSystem` performs it. `RefreshDrillRunSystem` is the reference example.
 
 ## Auto-loaded Rules
 

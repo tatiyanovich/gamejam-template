@@ -45,6 +45,10 @@ namespace Code.Infrastructure.StateManagement.States
 			_branchedStateMachine.ExecuteBranches();
 
 			_infraTail.Execute();
+
+			if (_infraTail == null)
+				return;
+
 			_infraTail.Cleanup();
 		}
 

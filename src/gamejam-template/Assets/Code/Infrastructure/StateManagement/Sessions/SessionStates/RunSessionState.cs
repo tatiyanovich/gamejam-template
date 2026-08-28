@@ -12,108 +12,112 @@ using UnityEngine.ResourceManagement.ResourceProviders;
 
 namespace Code.Infrastructure.StateManagement.Sessions.SessionStates
 {
-    public class RunSessionState : IState, IPayloadedEnter<LoopScenePayload>, IExecutable, IExit
-    {
-        private readonly ISystemFactory _systemFactory;
-        private readonly ISessionRevealGate _revealGate;
-        private readonly ISceneLoadService _sceneLoadService;
-        private readonly ILoadedSceneRegistry _loadedSceneRegistry;
-        private readonly ILoopNodeContext _loopNodeContext;
+	public class RunSessionState : IState, IPayloadedEnter<LoopScenePayload>, IExecutable, IExit
+	{
+		private readonly ISystemFactory _systemFactory;
+		private readonly ISessionRevealGate _revealGate;
+		private readonly ISessionWindowsPresenter _windowsPresenter;
+		private readonly ISceneLoadService _sceneLoadService;
+		private readonly ILoadedSceneRegistry _loadedSceneRegistry;
+		private readonly ILoopNodeContext _loopNodeContext;
 
-        private Feature _runFeature;
-        private LoopNodeId _nodeId;
+		private Feature _runFeature;
+		private LoopNodeId _nodeId;
 
-        private const float RevealDelay = 1f;
+		private const float RevealDelay = 1f;
 
-        public RunSessionState(
-            ISystemFactory systemFactory,
-            ISessionRevealGate revealGate,
-            ISceneLoadService sceneLoadService,
-            ILoadedSceneRegistry loadedSceneRegistry,
-            ILoopNodeContext loopNodeContext)
-        {
-            _systemFactory = systemFactory;
-            _revealGate = revealGate;
-            _sceneLoadService = sceneLoadService;
-            _loadedSceneRegistry = loadedSceneRegistry;
-            _loopNodeContext = loopNodeContext;
-        }
+		public RunSessionState(
+			ISystemFactory systemFactory,
+			ISessionRevealGate revealGate,
+			ISessionWindowsPresenter windowsPresenter,
+			ISceneLoadService sceneLoadService,
+			ILoadedSceneRegistry loadedSceneRegistry,
+			ILoopNodeContext loopNodeContext)
+		{
+			_systemFactory = systemFactory;
+			_revealGate = revealGate;
+			_windowsPresenter = windowsPresenter;
+			_sceneLoadService = sceneLoadService;
+			_loadedSceneRegistry = loadedSceneRegistry;
+			_loopNodeContext = loopNodeContext;
+		}
 
-        public void Enter(LoopScenePayload loopScenePayload)
-        {
-            _nodeId = loopScenePayload.LoopNodeId;
+		public void Enter(LoopScenePayload loopScenePayload)
+		{
+			_nodeId = loopScenePayload.LoopNodeId;
 
-            if (_runFeature == null)
-            {
-                _runFeature = GetTargetLoopFeature();
-                _loopNodeContext.Current = _nodeId;
-                try
-                {
-                    _runFeature.Initialize();
-                }
-                finally
-                {
-                    _loopNodeContext.Current = LoopNodeId.Unknown;
-                }
-            }
+			if (_runFeature == null)
+			{
+				_runFeature = GetTargetLoopFeature();
+				_loopNodeContext.Current = _nodeId;
+				try
+				{
+					_runFeature.Initialize();
+				}
+				finally
+				{
+					_loopNodeContext.Current = LoopNodeId.Unknown;
+				}
+			}
 
-            UnloadLaunchScene();
+			UnloadLaunchScene();
 
-            _revealGate.SetNextRevealDelay(RevealDelay);
-            _revealGate.NotifyReady();
+			_revealGate.SetNextRevealDelay(RevealDelay);
+			_revealGate.NotifyReady();
 
 			Debug.Log($"[Run Session State] Session with type {_runFeature.GetType()} is running.");
 
+			Feature GetTargetLoopFeature()
+			{
+				switch (loopScenePayload.LoopNodeId)
+				{
+					case LoopNodeId.Battle:
+						return _systemFactory.Create<GameplayCoreFeature>();
+					default:
+						throw new NotImplementedException(
+							$"No core feature is mapped to session node {loopScenePayload.LoopNodeId}");
+				}
+			}
+		}
 
-            Feature GetTargetLoopFeature()
-            {
-                switch (loopScenePayload.LoopNodeId)
-                {
-                    case LoopNodeId.Battle:
-                        return _systemFactory.Create<GameplayCoreFeature>();
-                    default:
-                        throw new NotImplementedException(
-                            $"No core feature is mapped to session node {loopScenePayload.LoopNodeId}");
-                }
-            }
-        }
+		public void Execute()
+		{
+			_runFeature.Execute();
+			_runFeature.Cleanup();
+		}
 
-        public void Execute()
-        {
-            _runFeature.Execute();
-            _runFeature.Cleanup();
-        }
+		public void Exit()
+		{
+			_windowsPresenter.Dismiss(_nodeId).Forget();
 
-        public void Exit()
-        {
-            if (LoopNodes.IsPersistent(_nodeId))
-                return;
+			if (LoopNodes.IsPersistent(_nodeId))
+				return;
 
-            Debug.Log($"[Run Session State] state with type {_runFeature.GetType()} was torn down.");
+			Debug.Log($"[Run Session State] state with type {_runFeature.GetType()} was torn down.");
 
-            _runFeature.Cleanup();
-            _runFeature.TearDown();
-            _runFeature = null;
+			_runFeature.Cleanup();
+			_runFeature.TearDown();
+			_runFeature = null;
 
-            UnloadSessionScene();
-        }
+			UnloadSessionScene();
+		}
 
-        private void UnloadSessionScene()
-        {
-            if (_loadedSceneRegistry.TryGet(_nodeId, out SceneInstance scene) == false)
-                return;
+		private void UnloadSessionScene()
+		{
+			if (_loadedSceneRegistry.TryGet(_nodeId, out SceneInstance scene) == false)
+				return;
 
-            _loadedSceneRegistry.Remove(_nodeId);
-            _sceneLoadService.UnloadScene(scene).Forget();
-        }
+			_loadedSceneRegistry.Remove(_nodeId);
+			_sceneLoadService.UnloadScene(scene).Forget();
+		}
 
-        private void UnloadLaunchScene()
-        {
-            if (_loadedSceneRegistry.TryGet(LoopNodeId.StartLaunch, out SceneInstance launchScene) == false)
-                return;
+		private void UnloadLaunchScene()
+		{
+			if (_loadedSceneRegistry.TryGet(LoopNodeId.StartLaunch, out SceneInstance launchScene) == false)
+				return;
 
-            _loadedSceneRegistry.Remove(LoopNodeId.StartLaunch);
-            _sceneLoadService.UnloadScene(launchScene).Forget();
-        }
-    }
+			_loadedSceneRegistry.Remove(LoopNodeId.StartLaunch);
+			_sceneLoadService.UnloadScene(launchScene).Forget();
+		}
+	}
 }
