@@ -2,6 +2,16 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Current Jam Project: COPYCAT (deadline 6 Sep 2026, 14:00)
+
+The template below is being turned into **COPYCAT** — a comedy stealth/input game about a kitten cheating on
+a Cat Academy exam by meowing into a real microphone (theme: *Cheat to Win!*, mandatory rubber duck).
+**Read `docs/` before touching anything:** `docs/GDD.md` (design source of truth), `docs/PROJECT.md`
+(team, decisions, code mapping, work log), `docs/PLAN.md` (tasks, schedule, cut line), `docs/ART_BIBLE.md`
+(visual style and asset pipeline). Decisions in `PROJECT.md §4` are final unless a new decision supersedes them.
+Every unit of work must leave a trace in the docs — see `.claude/rules/docs-maintenance.md`.
+The drill sample described below is being deleted; do not preserve or extend it.
+
 ## Project Overview
 
 A game-jam starter: Unity 6 (6000.3.6f1) ECS project on Entitas with a three-layer architecture

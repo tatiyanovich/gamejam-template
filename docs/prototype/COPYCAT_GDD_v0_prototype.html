@@ -1,0 +1,728 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>COPYCAT — Game Design Document</title>
+<style>
+  :root {
+    --ink:#201d1d;
+    --muted:#6f6863;
+    --paper:#fffaf0;
+    --card:#ffffff;
+    --line:#d8cec0;
+    --accent:#d88920;
+    --accent-soft:#fff1cf;
+    --danger:#d94b4b;
+    --success:#2d9c60;
+    --board:#234b43;
+    --shadow:rgba(45,30,20,.10);
+  }
+  * { box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body {
+    margin:0;
+    color:var(--ink);
+    background:#efe8dd;
+    font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    line-height:1.55;
+  }
+  .page {
+    width:min(1180px, 94vw);
+    margin:32px auto 72px;
+    background:var(--paper);
+    border:1px solid #d9cdbd;
+    box-shadow:0 18px 60px var(--shadow);
+  }
+  header {
+    padding:48px 56px 38px;
+    border-bottom:1px solid var(--line);
+    background:
+      radial-gradient(circle at 90% 10%, rgba(216,137,32,.16), transparent 25%),
+      linear-gradient(180deg,#fffaf0,#fff7e8);
+  }
+  .eyebrow {
+    text-transform:uppercase;
+    letter-spacing:.16em;
+    font-size:12px;
+    font-weight:800;
+    color:var(--accent);
+  }
+  h1 {
+    font-size:54px;
+    line-height:1;
+    margin:8px 0 14px;
+    letter-spacing:-.03em;
+  }
+  header p {
+    max-width:800px;
+    font-size:19px;
+    margin:0;
+    color:#4e4844;
+  }
+  .meta-grid {
+    display:grid;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:12px;
+    margin-top:28px;
+  }
+  .meta {
+    padding:14px 16px;
+    border:1px solid var(--line);
+    background:#fff;
+    border-radius:12px;
+  }
+  .meta span {
+    display:block;
+    color:var(--muted);
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    font-size:10px;
+    font-weight:800;
+  }
+  .meta b { display:block; margin-top:3px; font-size:15px; }
+
+  .layout {
+    display:grid;
+    grid-template-columns:250px minmax(0,1fr);
+    align-items:start;
+  }
+  nav {
+    position:sticky;
+    top:0;
+    padding:28px 22px;
+    border-right:1px solid var(--line);
+    background:#fffdf8;
+    max-height:100vh;
+    overflow:auto;
+  }
+  nav h3 {
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:.12em;
+    color:var(--muted);
+    margin:0 0 12px;
+  }
+  nav a {
+    display:block;
+    color:#3d3835;
+    text-decoration:none;
+    padding:7px 9px;
+    border-radius:8px;
+    font-size:13px;
+  }
+  nav a:hover { background:var(--accent-soft); }
+
+  main { padding:18px 50px 64px; min-width:0; }
+  section {
+    padding:34px 0;
+    border-bottom:1px solid var(--line);
+  }
+  section:last-child { border-bottom:none; }
+  h2 {
+    font-size:30px;
+    margin:0 0 18px;
+    letter-spacing:-.02em;
+  }
+  h3 {
+    font-size:19px;
+    margin:24px 0 10px;
+  }
+  h4 {
+    margin:18px 0 8px;
+    font-size:15px;
+    text-transform:uppercase;
+    letter-spacing:.06em;
+    color:#554d48;
+  }
+  p { margin:8px 0 12px; }
+  ul { margin:10px 0 16px 20px; padding:0; }
+  li { margin:6px 0; }
+  .lead {
+    font-size:18px;
+    color:#4c4642;
+  }
+  .callout {
+    border-left:4px solid var(--accent);
+    background:#fff4d9;
+    padding:14px 16px;
+    border-radius:0 10px 10px 0;
+    margin:16px 0;
+  }
+  .callout.danger {
+    border-left-color:var(--danger);
+    background:#fff0f0;
+  }
+  .callout.success {
+    border-left-color:var(--success);
+    background:#edf9f2;
+  }
+  .cards {
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:14px;
+    margin:18px 0;
+  }
+  .card {
+    border:1px solid var(--line);
+    background:#fff;
+    border-radius:14px;
+    padding:16px;
+  }
+  .card strong {
+    display:block;
+    margin-bottom:6px;
+    font-size:15px;
+  }
+  .flow {
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:8px;
+    margin:18px 0 4px;
+  }
+  .flow span {
+    border:1px solid var(--line);
+    background:#fff;
+    border-radius:999px;
+    padding:8px 12px;
+    font-weight:700;
+    font-size:13px;
+  }
+  .flow i { font-style:normal; color:var(--accent); font-weight:900; }
+  .kbd {
+    display:inline-block;
+    min-width:27px;
+    padding:2px 7px;
+    margin:0 2px;
+    text-align:center;
+    border:1px solid #91877e;
+    border-bottom-width:3px;
+    border-radius:6px;
+    background:#fff;
+    font:700 12px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  table {
+    width:100%;
+    border-collapse:collapse;
+    margin:14px 0 24px;
+    font-size:13px;
+    background:#fff;
+  }
+  th, td {
+    padding:10px 11px;
+    text-align:left;
+    vertical-align:top;
+    border:1px solid var(--line);
+  }
+  th {
+    background:#f6efe3;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:.05em;
+  }
+  tr:nth-child(even) td { background:#fffdf9; }
+  .num { white-space:nowrap; font-variant-numeric:tabular-nums; }
+  code {
+    background:#f0e9de;
+    border:1px solid #e2d6c7;
+    border-radius:5px;
+    padding:1px 5px;
+    font-size:.92em;
+  }
+  .formula {
+    background:#262321;
+    color:#fff8eb;
+    border-radius:12px;
+    padding:14px 16px;
+    font-family:ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size:13px;
+    margin:12px 0;
+    overflow:auto;
+  }
+  .pill {
+    display:inline-block;
+    border-radius:999px;
+    padding:3px 8px;
+    font-size:11px;
+    font-weight:800;
+    background:var(--accent-soft);
+    color:#725019;
+  }
+  .small { color:var(--muted); font-size:12px; }
+  footer {
+    padding:26px 56px;
+    border-top:1px solid var(--line);
+    color:var(--muted);
+    font-size:12px;
+  }
+  @media (max-width:900px) {
+    .layout { grid-template-columns:1fr; }
+    nav { display:none; }
+    main { padding:10px 24px 44px; }
+    header { padding:34px 24px 28px; }
+    h1 { font-size:42px; }
+    .meta-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .cards { grid-template-columns:1fr; }
+  }
+  @media print {
+    body { background:#fff; }
+    .page { width:100%; margin:0; box-shadow:none; border:none; }
+    nav { display:none; }
+    .layout { display:block; }
+    main { padding:0 36px 40px; }
+    header { padding:30px 36px; }
+    section { break-inside:avoid; }
+    table { font-size:11px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+<header>
+  <div class="eyebrow">Game Design Document · Current Prototype Specification</div>
+  <h1>COPYCAT</h1>
+  <p>A single-screen comedy stealth/input game about cheating through a cat academy exam while managing the teacher’s attention and the player’s Suspicion.</p>
+  <div class="meta-grid">
+    <div class="meta"><span>Theme</span><b>Cheat to Win</b></div>
+    <div class="meta"><span>Platform</span><b>PC / Browser Prototype</b></div>
+    <div class="meta"><span>Session Length</span><b>1:45 maximum</b></div>
+    <div class="meta"><span>Content</span><b>12 exam questions</b></div>
+  </div>
+</header>
+
+<div class="layout">
+<nav>
+  <h3>Contents</h3>
+  <a href="#overview">1. Overview</a>
+  <a href="#pillars">2. Design Pillars</a>
+  <a href="#objective">3. Objective & States</a>
+  <a href="#loop">4. Core Loop</a>
+  <a href="#controls">5. Controls</a>
+  <a href="#exam">6. Exam / Copying</a>
+  <a href="#teacher">7. Teacher AI</a>
+  <a href="#suspicion">8. Suspicion</a>
+  <a href="#meow">9. Meow</a>
+  <a href="#duck">10. Rubber Duck</a>
+  <a href="#timer">11. Timer</a>
+  <a href="#difficulty">12. Difficulty Curve</a>
+  <a href="#rating">13. Results & Stars</a>
+  <a href="#ui">14. UI / Feedback</a>
+  <a href="#content">15. Question Content</a>
+  <a href="#balance">16. Balance Summary</a>
+  <a href="#implementation">17. Rules / Formulas</a>
+</nav>
+
+<main>
+<section id="overview">
+  <h2>1. Game Overview</h2>
+  <p class="lead"><b>COPYCAT</b> is a short game-jam prototype in which the player cannot answer an exam honestly. To win, they must peek at a neighbor’s paper, memorize/copy a directional input sequence, and finish all 12 questions before time expires without reaching 100% Suspicion.</p>
+  <div class="callout">
+    <b>Core fantasy:</b> “I am openly cheating, but I am trying to get away with it.”
+  </div>
+  <p>The game combines three pressures: <b>input execution</b>, <b>teacher timing</b>, and <b>resource/cooldown management</b>. Cat-themed humor is used throughout the questions, UI copy, teacher reactions, and result messages.</p>
+</section>
+
+<section id="pillars">
+  <h2>2. Design Pillars</h2>
+  <div class="cards">
+    <div class="card"><strong>Cheating is the verb</strong>The player must actively cheat to progress. Cheating is not flavor; it is the primary interaction.</div>
+    <div class="card"><strong>Readable risk</strong>Teacher attention, Suspicion, danger overlays, wrong-key flashes, cooldowns, and the timer all communicate risk directly.</div>
+    <div class="card"><strong>Comedy under pressure</strong>Cat jokes and absurd distraction tools soften the tension without removing the mechanical stakes.</div>
+  </div>
+</section>
+
+<section id="objective">
+  <h2>3. Objective, Win & Loss States</h2>
+  <h3>Primary objective</h3>
+  <p>Copy all <b>12 answers</b> before the exam timer reaches zero.</p>
+
+  <h3>Win condition</h3>
+  <ul>
+    <li>Complete the directional sequence for all 12 questions.</li>
+    <li>The final result title is <b>“Exam passed!”</b>.</li>
+  </ul>
+
+  <h3>Loss conditions</h3>
+  <ul>
+    <li><b>Suspicion reaches 100%</b> → result title: <b>“CAUGHT 😾”</b>.</li>
+    <li><b>Timer reaches 00:00</b> before all answers are copied → result title: <b>“BELL RANG 🔔”</b>.</li>
+  </ul>
+</section>
+
+<section id="loop">
+  <h2>4. Core Gameplay Loop</h2>
+  <div class="flow">
+    <span>Read question</span><i>→</i>
+    <span>Hold Shift to peek</span><i>→</i>
+    <span>See neighbor combo</span><i>→</i>
+    <span>Enter directions while peeking</span><i>→</i>
+    <span>React to teacher</span><i>→</i>
+    <span>Use Meow / Duck if needed</span><i>→</i>
+    <span>Copy answer</span><i>→</i>
+    <span>Next question</span>
+  </div>
+  <p>Each completed sequence immediately marks the answer as copied. After a short <b>0.7s</b> transition, the next question begins.</p>
+</section>
+
+<section id="controls">
+  <h2>5. Controls</h2>
+  <table>
+    <thead><tr><th>Action</th><th>Input</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>Peek / Cheat</td><td><span class="kbd">Shift</span> hold</td><td>Required for directional inputs to count.</td></tr>
+      <tr><td>Copy directions</td><td><span class="kbd">↑</span><span class="kbd">↓</span><span class="kbd">←</span><span class="kbd">→</span> or physical <span class="kbd">W</span><span class="kbd">A</span><span class="kbd">S</span><span class="kbd">D</span></td><td>WASD uses physical key codes, so it works regardless of English/Cyrillic layout.</td></tr>
+      <tr><td>Meow</td><td><span class="kbd">M</span> / physical KeyM / Cyrillic <span class="kbd">Ь</span> / microphone</td><td>Keyboard fallback and live mic are both supported.</td></tr>
+      <tr><td>Throw duck</td><td><span class="kbd">Q</span> / physical KeyQ / Cyrillic <span class="kbd">Й</span> / click duck</td><td>Activates the duck protection mechanic if off cooldown.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="exam">
+  <h2>6. Exam & Copying Mechanics</h2>
+  <h3>Peeking</h3>
+  <ul>
+    <li>Holding <b>Shift</b> reveals the active neighbor’s paper by sliding it into view.</li>
+    <li>Directional inputs are ignored unless Shift is currently held.</li>
+    <li>The required sequence is visible on the neighbor’s paper.</li>
+    <li>Correct inputs are marked as completed in green.</li>
+  </ul>
+
+  <h3>Successful answer</h3>
+  <ul>
+    <li>Completing the full sequence marks the answer as <b>“COPIED ✓”</b>.</li>
+    <li>Q12 resolves to <b>“Answer: NO”</b> as the joke answer to whether the player cheated.</li>
+    <li>Successful answers do <b>not</b> reduce Suspicion.</li>
+  </ul>
+
+  <h3>Incorrect direction</h3>
+  <ul>
+    <li>The current required arrow flashes red and shakes.</li>
+    <li>Suspicion increases by <b>+9%</b>.</li>
+    <li>If the teacher is already looking, an additional <b>+8%</b> is applied, for <b>+17%</b> total.</li>
+    <li>If the teacher is not looking, the wrong input immediately causes the teacher to turn around, unless the duck’s 5-second protection is active.</li>
+  </ul>
+</section>
+
+<section id="teacher">
+  <h2>7. Teacher AI / Attention System</h2>
+  <h3>Default state</h3>
+  <p>The teacher begins facing the blackboard. Random checks are scheduled throughout the exam.</p>
+
+  <h3>Random checks</h3>
+  <ul>
+    <li>Teacher check frequency becomes more aggressive with each question.</li>
+    <li>Q1 uses a random delay of <b>2.5–4.0s</b>.</li>
+    <li>Q12 uses a random delay of <b>1.5–2.0s</b>.</li>
+    <li>Questions in between linearly interpolate both the minimum and maximum delay.</li>
+  </ul>
+
+  <h3>Watch duration</h3>
+  <p>Every teacher look lasts a random <b>1.0–2.0 seconds</b>, regardless of question number.</p>
+
+  <h3>Teacher persistence while cheating</h3>
+  <div class="callout danger">
+    If the normal look duration ends while the player is still holding Shift, the teacher <b>does not turn back</b>. The teacher remains facing the player until the player stops cheating or a distraction overrides the state.
+  </div>
+
+  <h3>Almost caught tracking</h3>
+  <p>Whenever a teacher look begins while Shift is already held, the game increments <b>Times almost caught</b> by 1. This value is used by the star-rating system.</p>
+</section>
+
+<section id="suspicion">
+  <h2>8. Suspicion System</h2>
+  <p>Suspicion is the primary fail meter. It is clamped from <b>0% to 100%</b>.</p>
+
+  <table>
+    <thead><tr><th>Event</th><th>Suspicion change</th></tr></thead>
+    <tbody>
+      <tr><td>Cheating while teacher is looking</td><td class="num">+2% every 50ms ≈ +40%/second</td></tr>
+      <tr><td>Wrong direction</td><td class="num">+9%</td></tr>
+      <tr><td>Wrong direction while teacher is already looking</td><td class="num">+17% total</td></tr>
+      <tr><td>Successful Meow</td><td class="num">−12%</td></tr>
+      <tr><td>Successful answer</td><td class="num">0%</td></tr>
+      <tr><td>Rubber duck</td><td class="num">0%</td></tr>
+    </tbody>
+  </table>
+
+  <div class="formula">Loss if Suspicion ≥ 100%</div>
+  <p>At the implemented rate, a player cheating continuously under direct observation moves from 0% to 100% Suspicion in approximately <b>2.5 seconds</b>, before accounting for wrong-input penalties.</p>
+</section>
+
+<section id="meow">
+  <h2>9. Meow Mechanic</h2>
+  <h3>Activation</h3>
+  <p>A Meow can be triggered manually with <span class="kbd">M</span> or by microphone input exceeding the loudness threshold.</p>
+
+  <h3>Microphone threshold</h3>
+  <ul>
+    <li>The circular Meow UI visualizes microphone loudness from 0–100% as a green bottom-up fill.</li>
+    <li>The trigger threshold is <b>40%</b> on this meter.</li>
+    <li>A red horizontal line indicates the true 40% threshold position.</li>
+    <li>Mic activation uses rising-edge detection: a loud sound triggers once when crossing the threshold.</li>
+    <li>The mic re-arms only after the sound falls below <b>75% of the threshold</b>, preventing one sustained sound from repeatedly retriggering.</li>
+  </ul>
+
+  <h3>Effect</h3>
+  <ul>
+    <li>Immediately turns the teacher away.</li>
+    <li>Reduces Suspicion by <b>12%</b>.</li>
+    <li>Applies a teacher distraction window of <b>2.5 seconds</b>; a teacher check cannot begin while this distraction is active.</li>
+  </ul>
+
+  <h3>Escalating cooldown</h3>
+  <p>The first Meow uses a <b>0.5s</b> cooldown. Each successful Meow increases the next cooldown by <b>0.5s</b>, up to a maximum of <b>5.0s</b>.</p>
+  <table>
+    <thead><tr><th>Successful Meow #</th><th>Cooldown applied</th></tr></thead>
+    <tbody><tr><td>1</td><td>0.5s</td></tr>
+<tr><td>2</td><td>1.0s</td></tr>
+<tr><td>3</td><td>1.5s</td></tr>
+<tr><td>4</td><td>2.0s</td></tr>
+<tr><td>5</td><td>2.5s</td></tr>
+<tr><td>6</td><td>3.0s</td></tr>
+<tr><td>7</td><td>3.5s</td></tr>
+<tr><td>8</td><td>4.0s</td></tr>
+<tr><td>9</td><td>4.5s</td></tr>
+<tr><td>10</td><td>5.0s</td></tr></tbody>
+  </table>
+  <p class="small">After the tenth successful Meow, all subsequent Meows remain capped at a 5.0-second cooldown.</p>
+</section>
+
+<section id="duck">
+  <h2>10. Rubber Duck Mechanic</h2>
+  <h3>Activation</h3>
+  <p>Use <span class="kbd">Q</span> or click the duck HUD element.</p>
+
+  <h3>Effect</h3>
+  <ul>
+    <li>Immediately forces the teacher to face away.</li>
+    <li>Prevents <b>all teacher turns for 5.0 seconds</b>.</li>
+    <li>This includes both random teacher checks and immediate turns caused by wrong directional inputs.</li>
+    <li>After the 5-second lockout ends, the next normal randomized teacher-check timer is scheduled.</li>
+  </ul>
+
+  <h3>Cooldown</h3>
+  <p>The duck has a fixed <b>30-second cooldown</b>. Attempting to use it during cooldown displays the remaining cooldown time.</p>
+
+  <h3>Scoring consequence</h3>
+  <div class="callout">
+    Using even one rubber duck prevents a 3-star result. Duck usage is therefore a strong safety tool with an explicit mastery/scoring cost.
+  </div>
+</section>
+
+<section id="timer">
+  <h2>11. Exam Timer</h2>
+  <ul>
+    <li>Total exam time: <b>105 seconds (1:45)</b>.</li>
+    <li>The timer is always visible in the top HUD.</li>
+    <li>At <b>30 seconds remaining</b>, the timer enters a danger/pulsing state.</li>
+    <li>At 0 seconds, the game ends immediately unless all 12 answers were already completed.</li>
+    <li>Remaining time is shown on the final results screen.</li>
+  </ul>
+</section>
+
+<section id="difficulty">
+  <h2>12. Difficulty Curve & Per-Question Balance</h2>
+  <p>Difficulty increases in two simultaneous ways: the required input sequence becomes longer, and the teacher checks more frequently.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Question</th>
+        <th>Question text</th>
+        <th>Combo length</th>
+        <th>Neighbor</th>
+        <th>Random teacher-check delay</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Q1</td><td>How many lives does a cat definitely claim to have?</td><td>2</td><td>Left</td><td>2.50–4.00s</td></tr>
+<tr><td>Q2</td><td>Complete the formula: cat + cardboard box = ?</td><td>3</td><td>Left</td><td>2.41–3.82s</td></tr>
+<tr><td>Q3</td><td>Which famous cat discovered gravity by knocking something off a table?</td><td>3</td><td>Left</td><td>2.32–3.64s</td></tr>
+<tr><td>Q4</td><td>Solve: 3 tuna cans + 2 tuna cans = how many reasons to ignore you?</td><td>3</td><td>Right</td><td>2.23–3.45s</td></tr>
+<tr><td>Q5</td><td>Why is the red laser dot legally impossible to catch?</td><td>4</td><td>Left</td><td>2.14–3.27s</td></tr>
+<tr><td>Q6</td><td>Translate ‘pspspsps’ into formal Cat Latin.</td><td>4</td><td>Right</td><td>2.05–3.09s</td></tr>
+<tr><td>Q7</td><td>State Newton’s First Law of Cat Napping.</td><td>4</td><td>Left</td><td>1.95–2.91s</td></tr>
+<tr><td>Q8</td><td>What is the scientifically correct time for a 3 AM zoomie attack?</td><td>5</td><td>Right</td><td>1.86–2.73s</td></tr>
+<tr><td>Q9</td><td>Calculate the optimal nap-to-chaos ratio for one indoor cat.</td><td>5</td><td>Left</td><td>1.77–2.55s</td></tr>
+<tr><td>Q10</td><td>What is the primary purpose of an expensive cat bed?</td><td>5</td><td>Right</td><td>1.68–2.36s</td></tr>
+<tr><td>Q11</td><td>Define advanced cardboard-box quantum mechanics.</td><td>5</td><td>Left</td><td>1.59–2.18s</td></tr>
+<tr><td>Q12</td><td>Did you CATegorically avoid cheating during this exam?</td><td>6</td><td>Right</td><td>1.50–2.00s</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Input progression</h3>
+  <p>Combo lengths progress as:</p>
+  <div class="formula">2, 3, 3, 3, 4, 4, 4, 5, 5, 5, 5, 6</div>
+  <p>Total directional inputs required for a perfect 12-question run: <b>49 inputs</b>.</p>
+
+  <h3>Teacher progression formula</h3>
+  <div class="formula">
+progress = questionIndex / 11
+
+minDelay = 2.5s + (1.5s − 2.5s) × progress
+maxDelay = 4.0s + (2.0s − 4.0s) × progress
+
+actualDelay = random(minDelay, maxDelay)
+  </div>
+
+  <h3>Teacher look duration</h3>
+  <p>Unlike check frequency, watch duration does not scale with difficulty: every look remains randomly <b>1.0–2.0s</b>.</p>
+</section>
+
+<section id="rating">
+  <h2>13. Results, Statistics & Star Rating</h2>
+
+  <h3>Final statistics</h3>
+  <ul>
+    <li>Copied answers</li>
+    <li>Time left</li>
+    <li>Meows</li>
+    <li>Times almost caught</li>
+    <li>Rubber ducks used</li>
+  </ul>
+
+  <h3>Star rules</h3>
+  <table>
+    <thead><tr><th>Stars</th><th>Condition</th><th>Result message</th></tr></thead>
+    <tbody>
+      <tr><td>☆☆☆ <b>0★</b></td><td>Lose the exam.</td><td>“Exam failed. The teacher wins this round.”</td></tr>
+      <tr><td>★☆☆ <b>1★</b></td><td>Win with 3 or more almost-caught events.</td><td>“You passed by a whisker. Way too suspicious.”</td></tr>
+      <tr><td>★★☆ <b>2★</b></td><td>Win with 1–2 almost-caught events, or win with 0 almost-caught events but use at least one duck.</td><td>“Nice cheating. You left a few paw prints, but got away with it.”</td></tr>
+      <tr><td>★★★ <b>3★</b></td><td>Win with 0 almost-caught events <b>and</b> 0 rubber ducks used.</td><td>“Purrfect crime. No close calls, no duck, no evidence.”</td></tr>
+    </tbody>
+  </table>
+
+  <p>All three stars are always visible on the results screen; unearned stars remain visually empty/gray and earned stars are filled.</p>
+</section>
+
+<section id="ui">
+  <h2>14. UI / Feedback Specification</h2>
+  <h3>HUD</h3>
+  <ul>
+    <li><b>Top left:</b> game title.</li>
+    <li><b>Top center:</b> answer progress (0/12 → 12/12).</li>
+    <li><b>Top right:</b> exam timer.</li>
+    <li><b>Below teacher:</b> horizontal Suspicion meter with percentage.</li>
+    <li><b>Desk right:</b> Rubber Duck button with <b>[Q] Throw the duck</b>.</li>
+    <li><b>Desk upper right:</b> circular Meow control with <b>[M] Meow (or use mic)</b>.</li>
+  </ul>
+
+  <h3>Meow UI behavior</h3>
+  <ul>
+    <li>Green fill visualizes current mic loudness from bottom to top.</li>
+    <li>Red horizontal line marks the 40% loudness threshold.</li>
+    <li>An orange ring around the circle visualizes active Meow cooldown.</li>
+    <li>While on cooldown, the button and its hint use 50% opacity, while the cooldown ring remains fully visible.</li>
+  </ul>
+
+  <h3>Teacher danger overlay</h3>
+  <ul>
+    <li><b>Orange screen-edge danger overlay:</b> teacher is looking at the player.</li>
+    <li><b>Red screen-edge danger overlay:</b> teacher is looking while the player is actively cheating.</li>
+    <li>The overlay pulses and briefly flashes when a teacher check begins.</li>
+  </ul>
+
+  <h3>Notifications</h3>
+  <p>Transient notifications appear on the left side of the screen so they do not overlap the teacher or teacher speech bubbles.</p>
+
+  <h3>Tutorial</h3>
+  <p>The start screen uses three horizontally arranged tutorial cards:</p>
+  <ul>
+    <li><b>Cheat:</b> explains Shift + WASD/arrows and shows example arrow/hotkey mappings.</li>
+    <li><b>Suspicion:</b> explains the fail meter and shows a 60%-filled example meter.</li>
+    <li><b>Distract:</b> explains Meow and Duck, including microphone/M input and the fact that both systems have cooldowns.</li>
+  </ul>
+</section>
+
+<section id="content">
+  <h2>15. Content & Tone</h2>
+  <p>All exam questions use cat-related wordplay or absurd cat logic. The current content list is:</p>
+  <ol>
+    <li>How many lives does a cat definitely claim to have?</li><li>Complete the formula: cat + cardboard box = ?</li><li>Which famous cat discovered gravity by knocking something off a table?</li><li>Solve: 3 tuna cans + 2 tuna cans = how many reasons to ignore you?</li><li>Why is the red laser dot legally impossible to catch?</li><li>Translate ‘pspspsps’ into formal Cat Latin.</li><li>State Newton’s First Law of Cat Napping.</li><li>What is the scientifically correct time for a 3 AM zoomie attack?</li><li>Calculate the optimal nap-to-chaos ratio for one indoor cat.</li><li>What is the primary purpose of an expensive cat bed?</li><li>Define advanced cardboard-box quantum mechanics.</li><li>Did you CATegorically avoid cheating during this exam?</li>
+  </ol>
+  <p>The tone is deliberately playful, self-aware, and built around the contradiction between the exam’s “NO CHEATING” rule and the fact that cheating is the only way to progress.</p>
+</section>
+
+<section id="balance">
+  <h2>16. Game Balance Summary</h2>
+
+  <table>
+    <thead><tr><th>System</th><th>Current value</th><th>Balance role</th></tr></thead>
+    <tbody>
+      <tr><td>Exam duration</td><td>105s</td><td>Hard global time pressure.</td></tr>
+      <tr><td>Questions</td><td>12</td><td>Defines run length and progression steps.</td></tr>
+      <tr><td>Required inputs</td><td>49 total</td><td>Execution workload across a full run.</td></tr>
+      <tr><td>Teacher check delay</td><td>2.5–4.0s → 1.5–2.0s</td><td>Primary escalating pressure.</td></tr>
+      <tr><td>Teacher watch duration</td><td>1.0–2.0s random</td><td>Reaction window; constant across run.</td></tr>
+      <tr><td>Observed cheating</td><td>+40% Suspicion/sec</td><td>Prevents brute-force holding Shift.</td></tr>
+      <tr><td>Wrong input</td><td>+9%; +17% if already watched</td><td>Execution punishment and teacher-trigger risk.</td></tr>
+      <tr><td>Meow</td><td>−12% Suspicion; 2.5s distraction</td><td>Recoverable defensive tool.</td></tr>
+      <tr><td>Meow cooldown</td><td>0.5s → 5.0s cap</td><td>Anti-spam escalation.</td></tr>
+      <tr><td>Mic threshold</td><td>40% meter</td><td>Physical/voice activation threshold.</td></tr>
+      <tr><td>Duck</td><td>5s lockout; 30s cooldown</td><td>Strong emergency safety tool.</td></tr>
+      <tr><td>3-star requirement</td><td>0 almost caught + 0 ducks</td><td>Rewards clean mastery and discourages relying on strongest safety tool.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Current pressure structure</h3>
+  <p class="small">The following is a design interpretation of the implemented values.</p>
+  <ul>
+    <li><b>Early exam:</b> wider teacher-check windows and short combos give the player time to learn the interaction.</li>
+    <li><b>Mid exam:</b> combo length increases to 4–5 inputs while teacher checks become more frequent.</li>
+    <li><b>Late exam:</b> teacher checks can occur every 1.5–2.0 seconds and the final combo reaches 6 inputs, increasing the need for short, deliberate cheating windows.</li>
+    <li><b>Meow:</b> starts permissive, then becomes less spammable as its cooldown ramps.</li>
+    <li><b>Duck:</b> is substantially stronger than Meow for preventing danger, but is limited by a 30-second cooldown and disqualifies a perfect 3-star run if used.</li>
+  </ul>
+</section>
+
+<section id="implementation">
+  <h2>17. Rules & Balance Formulas</h2>
+
+  <h3>Suspicion while observed</h3>
+  <div class="formula">Every 50 ms:
+if ShiftHeld && TeacherLooking && !Distracted:
+    Suspicion += 2
+
+Equivalent rate ≈ 40 Suspicion points / second
+  </div>
+
+  <h3>Meow cooldown</h3>
+  <div class="formula">currentCooldown starts at 0.5s
+after each successful Meow:
+    apply currentCooldown
+    nextCooldown = min(5.0s, currentCooldown + 0.5s)
+  </div>
+
+  <h3>Microphone triggering</h3>
+  <div class="formula">displayedMicLevel = min(100, RMS × 420)
+trigger threshold = 40%
+
+Trigger on crossing above threshold.
+Re-arm when RMS &lt; threshold × 0.75.
+  </div>
+
+  <h3>Star rating</h3>
+  <div class="formula">if Lose:
+    0 stars
+else if AlmostCaught == 0 and DucksUsed == 0:
+    3 stars
+else if AlmostCaught &lt;= 2:
+    2 stars
+else:
+    1 star
+  </div>
+
+  <div class="callout success">
+    <b>Source of truth:</b> This GDD documents the current implemented behavior of the latest COPYCAT HTML prototype. Values described as “current” should be updated in this document whenever prototype balance changes.
+  </div>
+</section>
+</main>
+</div>
+
+<footer>
+  COPYCAT — Game Design Document · Generated from current prototype implementation · HTML edition
+</footer>
+</div>
+</body>
+</html>

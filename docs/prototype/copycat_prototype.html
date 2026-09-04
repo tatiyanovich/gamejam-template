@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>COPYCAT — Cheat To Win!</title>
+<style>
+  :root{
+    --ink:#221f1f;
+    --paper:#fffaf0;
+    --desk:#b98759;
+    --desk-dark:#8c6242;
+    --red:#ff5b5b;
+    --green:#55d68b;
+    --yellow:#ffd769;
+    --blue:#7ac7ff;
+    --cream:#f8efdd;
+    --shadow:rgba(40,20,10,.22);
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    min-height:100vh;
+    font-family: ui-rounded, "SF Pro Rounded", Inter, system-ui, sans-serif;
+    background:
+      radial-gradient(circle at 20% 10%, rgba(255,255,255,.8), transparent 25%),
+      linear-gradient(#b9d6d2 0 30%, #d7b48e 30% 100%);
+    color:var(--ink);
+    overflow:hidden;
+  }
+  .game{
+    min-height:100vh;
+    position:relative;
+    display:grid;
+    grid-template-rows:auto 1fr auto;
+  }
+  .hud{
+    z-index:20;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:16px;
+    padding:16px 20px;
+  }
+  .chip{
+    background:rgba(255,255,255,.88);
+    border:3px solid var(--ink);
+    box-shadow:0 5px 0 rgba(0,0,0,.13);
+    border-radius:18px;
+    padding:10px 14px;
+    font-weight:900;
+    letter-spacing:.02em;
+  }
+  .title{
+    font-size:26px;
+    transform:rotate(-1deg);
+  }
+  .title small{
+    display:block;
+    font-size:11px;
+    opacity:.62;
+    letter-spacing:.14em;
+  }
+  .timer{
+    min-width:130px;
+    text-align:center;
+    font-size:24px;
+  }
+  .timer.danger{background:#ffe7e7;color:#a51111;animation:pulse .65s infinite}
+  @keyframes pulse{50%{transform:scale(1.04)}}
+
+  .stage{
+    position:relative;
+    display:flex;
+    justify-content:center;
+    align-items:flex-end;
+    padding-bottom:26px;
+    transition:transform .28s ease;
+  }
+
+  /* Blackboard */
+  .board{
+    position:absolute;
+    top:14px;
+    left:50%;
+    width:min(620px,70vw);
+    height:155px;
+    transform:translateX(-50%);
+    background:#234b43;
+    border:10px solid #6f4e34;
+    border-radius:10px;
+    box-shadow:0 10px 24px var(--shadow);
+    color:#f4f1dd;
+    padding:20px 28px;
+    font-family:"Comic Sans MS", ui-rounded, sans-serif;
+  }
+  .board h2{margin:0 0 8px;font-size:28px}
+  .board .rule{opacity:.88;font-size:18px}
+  .board .rule b{color:#ffe386}
+
+  /* Teacher */
+  .teacher-wrap{
+    position:absolute;
+    top:120px;
+    left:50%;
+    transform:translateX(-50%);
+    z-index:6;
+  }
+  .teacher{
+    position:relative;
+    width:150px;
+    height:175px;
+    transition:transform .28s ease;
+    filter:drop-shadow(0 8px 4px rgba(0,0,0,.15));
+  }
+  .teacher .head{
+    position:absolute;
+    left:20px;top:0;
+    width:110px;height:105px;
+    background:#f0c78f;
+    border:4px solid var(--ink);
+    border-radius:44% 44% 40% 40%;
+  }
+  .teacher .ear{
+    position:absolute;
+    width:38px;height:45px;
+    background:#f0c78f;
+    border:4px solid var(--ink);
+    top:-16px;
+    transform:rotate(45deg);
+    z-index:-1;
+  }
+  .teacher .ear.left{left:24px}
+  .teacher .ear.right{right:24px;transform:rotate(135deg)}
+  .teacher .eyes{
+    position:absolute;top:42px;left:20px;right:20px;
+    display:flex;justify-content:space-between;
+  }
+  .eye{
+    width:16px;height:19px;background:var(--ink);border-radius:50%;
+    transition:transform .18s ease, height .18s ease;
+  }
+  .teacher.look-left .eye{transform:translateX(-8px)}
+  .teacher.look-right .eye{transform:translateX(8px)}
+  .teacher.distracted .eye{height:4px;transform:none}
+  .teacher .mouth{
+    position:absolute;left:50%;top:70px;transform:translateX(-50%);
+    width:26px;height:12px;border-bottom:4px solid var(--ink);border-radius:50%;
+  }
+  .teacher.distracted .mouth{
+    width:22px;height:22px;border:4px solid var(--ink);border-radius:50%;
+  }
+  .teacher .body{
+    position:absolute;left:12px;top:94px;width:126px;height:82px;
+    background:#6d84d8;border:4px solid var(--ink);
+    border-radius:26px 26px 8px 8px;
+  }
+  .teacher .tie{
+    position:absolute;left:63px;top:112px;width:22px;height:45px;background:#d94b4b;
+    clip-path:polygon(50% 0,100% 35%,65% 100%,35% 100%,0 35%);
+    transition:opacity .18s ease;
+  }
+
+  /* When the teacher is not watching the class, show the back of the head. */
+  .teacher.facing-board .eyes,
+  .teacher.facing-board .mouth,
+  .teacher.facing-board .tie{opacity:0}
+
+  .teacher.facing-board .head{
+    background:#e7b874;
+  }
+
+  .teacher.facing-board .head:after{
+    content:"";
+    position:absolute;
+    left:50%;top:16px;
+    width:46px;height:58px;
+    transform:translateX(-50%);
+    border-radius:48% 48% 42% 42%;
+    background:
+      linear-gradient(90deg, transparent 0 34%, rgba(120,72,35,.28) 34% 42%, transparent 42% 58%, rgba(120,72,35,.28) 58% 66%, transparent 66%),
+      linear-gradient(#efc486,#dfaa68);
+    opacity:.9;
+  }
+
+  .teacher.facing-board .body{
+    background:#6076c7;
+  }
+  .teacher-bubble{
+    position:absolute;
+    left:110px;top:-12px;
+    width:max-content;
+    max-width:220px;
+    background:white;border:3px solid var(--ink);
+    border-radius:18px;padding:10px 12px;font-weight:900;
+    opacity:0;transform:translateY(6px) scale(.96);
+    transition:.18s;
+  }
+  .teacher-bubble.show{opacity:1;transform:none}
+  .teacher-bubble:after{
+    content:"";position:absolute;left:12px;bottom:-12px;
+    width:18px;height:18px;background:white;border-right:3px solid var(--ink);border-bottom:3px solid var(--ink);transform:rotate(45deg)
+  }
+
+  .desk{
+    position:relative;
+    width:min(1000px,92vw);
+    height:440px;
+    background:linear-gradient(180deg,#c99a6d,#ad7a50);
+    border:5px solid var(--desk-dark);
+    border-radius:34px 34px 12px 12px;
+    box-shadow:0 18px 0 #7b5538,0 24px 35px var(--shadow);
+    z-index:8;
+    overflow:hidden;
+  }
+
+  .paper{
+    position:absolute;
+    width:420px;height:330px;
+    left:50%;top:52px;transform:translateX(-50%) rotate(-1deg);
+    background:var(--paper);
+    border:2px solid #c9bfae;
+    box-shadow:0 8px 18px rgba(0,0,0,.16);
+    padding:24px 26px;
+    transition:.28s ease;
+  }
+  .paper h1{
+    margin:0 0 8px;
+    font-size:24px;
+    font-family:Georgia,serif;
+  }
+  .paper .meta{font-size:13px;opacity:.55;border-bottom:1px solid #999;padding-bottom:10px;margin-bottom:16px}
+  .question{font:700 22px/1.3 Georgia,serif;margin-bottom:16px}
+  .answerline{
+    font:900 28px/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+    min-height:40px;
+    border-bottom:3px solid #aaa;
+    letter-spacing:.08em;
+  }
+  .answer-tip{
+    font:700 14px/1.2 ui-rounded, "SF Pro Rounded", Inter, system-ui, sans-serif;
+    letter-spacing:.02em;
+    opacity:.52;
+    font-style:italic;
+  }
+  .scribbles{margin-top:18px;display:grid;gap:8px}
+  .scribble{height:5px;background:#8e8e8e;border-radius:99px;opacity:.5}
+  .scribble:nth-child(2){width:78%}.scribble:nth-child(3){width:62%}.scribble:nth-child(4){width:88%}
+
+  .neighbor{
+    position:absolute;
+    top:105px;width:310px;height:270px;
+    background:#fffdf7;border:2px solid #c9bfae;
+    box-shadow:0 6px 12px rgba(0,0,0,.13);
+    padding:18px 20px;
+    transition:.3s ease;
+  }
+  .neighbor.left{left:-220px;transform:rotate(8deg)}
+  .neighbor.right{right:-220px;transform:rotate(-8deg)}
+  .neighbor.active.left{left:16px;transform:rotate(3deg)}
+  .neighbor.active.right{right:16px;transform:rotate(-3deg)}
+  .neighbor h3{margin:0 0 10px;font:700 16px Georgia,serif}
+  .combo{
+    margin-top:18px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  .key{
+    width:52px;height:52px;border:3px solid var(--ink);border-radius:12px;
+    display:grid;place-items:center;background:white;font-size:28px;font-weight:900;
+    box-shadow:0 4px 0 #b9b9b9;
+  }
+  .key.done{background:#dff8e7;border-color:#2d9c60;color:#17683c}
+  .key.wrong{
+    background:#ff5b5b;
+    border-color:#9f1616;
+    color:white;
+    animation:wrongBlink .12s 5 alternate, shake .2s 2;
+  }
+  @keyframes wrongBlink{
+    from{background:#fff;color:var(--ink);box-shadow:0 4px 0 #b9b9b9}
+    to{background:#ff3b3b;color:white;box-shadow:0 4px 0 #8e1111,0 0 18px rgba(255,40,40,.75)}
+  }
+  @keyframes shake{25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+  .neighbor .catpaw{
+    position:absolute;right:16px;bottom:14px;font-size:42px;
+  }
+
+  .hands{position:absolute;left:50%;bottom:-22px;transform:translateX(-50%);font-size:78px;filter:drop-shadow(0 5px 3px rgba(0,0,0,.15))}
+  .duck{
+    position:absolute;right:35px;bottom:35px;
+    width:92px;height:92px;border-radius:26px;
+    background:#ffe055;border:4px solid var(--ink);
+    display:grid;place-items:center;font-size:52px;
+    box-shadow:0 8px 0 #b69517;
+    cursor:pointer;user-select:none;
+    transition:.12s;
+  }
+  .duck:active{transform:translateY(5px);box-shadow:0 3px 0 #b69517}
+  .duck.cooldown{
+    filter:grayscale(.65);opacity:.72;cursor:not-allowed;
+    box-shadow:0 5px 0 #8a7f62;
+  }
+  .duck.cooldown:active{transform:none;box-shadow:0 5px 0 #8a7f62}
+  .duck small{
+    position:absolute;bottom:-28px;background:#fff;border:2px solid var(--ink);border-radius:10px;padding:3px 6px;font-size:11px;font-weight:900;white-space:nowrap;
+  }
+
+  .suspicion{
+    position:absolute;left:50%;top:302px;transform:translateX(-50%);z-index:10;
+    width:240px;padding:8px 11px 10px;
+    display:grid;grid-template-columns:1fr auto;gap:5px 10px;align-items:center;
+    background:rgba(255,255,255,.94);
+    border:3px solid var(--ink);border-radius:18px;
+    box-shadow:0 5px 0 rgba(0,0,0,.13);
+  }
+  .suspicion .sus-title{font-size:10px;font-weight:1000;letter-spacing:.08em}
+  .suspicion .sus-value{font-size:12px;font-weight:1000}
+  .suspicion .bar{
+    grid-column:1 / -1;width:100%;height:20px;
+    border-radius:999px;background:#eee;border:3px solid var(--ink);overflow:hidden;
+  }
+  .suspicion .bar > i{
+    display:block;width:0;height:100%;
+    background:linear-gradient(90deg,#ffd85d 0%,#ff9a55 55%,#ff5b5b 100%);
+    border-radius:999px;transition:width .18s;
+  }
+
+  .tutorial{
+    position:absolute;left:50%;bottom:18px;transform:translateX(-50%);
+    z-index:30;
+    display:flex;gap:10px;align-items:center;
+    background:rgba(255,255,255,.95);border:3px solid var(--ink);
+    border-radius:18px;padding:10px 14px;box-shadow:0 8px 0 rgba(0,0,0,.13);
+    font-weight:900;
+  }
+  .kbd{
+    min-width:54px;text-align:center;background:#f7f7f7;border:2px solid #777;border-radius:9px;
+    padding:7px 10px;box-shadow:0 3px 0 #aaa;
+  }
+  .mic-dot{width:12px;height:12px;border-radius:50%;background:#aaa}
+  .mic-dot.live{background:#2bc56e;box-shadow:0 0 0 6px rgba(43,197,110,.14)}
+  .controls-note{font-size:12px;opacity:.62}
+
+  .overlay{
+    position:fixed;inset:0;z-index:100;
+    display:grid;place-items:center;
+    background:rgba(25,20,18,.78);
+    backdrop-filter:blur(8px);
+  }
+  .card{
+    width:min(920px,94vw);
+    background:#fff8eb;border:5px solid var(--ink);
+    border-radius:28px;padding:30px;text-align:center;
+    box-shadow:0 20px 0 rgba(0,0,0,.2);
+  }
+  .card h1{font-size:48px;margin:0 0 8px}
+  .card p{font-size:18px;line-height:1.45}
+  .btn{
+    appearance:none;border:4px solid var(--ink);background:#ffe25d;color:var(--ink);
+    border-radius:16px;padding:13px 20px;font-size:18px;font-weight:1000;cursor:pointer;
+    box-shadow:0 7px 0 #a98a19;margin-top:10px;
+  }
+  .btn:active{transform:translateY(4px);box-shadow:0 3px 0 #a98a19}
+  .legend{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:20px 0;text-align:left}
+  .legend .step{
+    background:white;border:2px solid #c9bfae;border-radius:16px;padding:16px;
+    display:flex;flex-direction:column;gap:8px;min-height:150px;
+  }
+  .legend .step h3{margin:0;font-size:22px}
+  .legend .step p{margin:0;font-size:14px;line-height:1.4}
+  .tutorial-sus{
+    margin-top:auto;
+    padding-top:12px;
+    border-top:1px solid #c9bfae;
+    display:grid;
+    gap:6px;
+  }
+  .tutorial-cheat-example{
+    margin-top:auto;
+    padding-top:12px;
+    border-top:1px solid #c9bfae;
+  }
+  .tutorial-cheat-keys{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+  }
+  .tutorial-cheat-key-wrap{
+    display:grid;
+    justify-items:center;
+    gap:5px;
+  }
+  .tutorial-cheat-key{
+    width:42px;
+    height:42px;
+    border:2px solid var(--ink);
+    border-radius:10px;
+    display:grid;
+    place-items:center;
+    background:#fff;
+    font-size:22px;
+    font-weight:1000;
+    box-shadow:0 3px 0 #bbb;
+  }
+  .tutorial-cheat-key-label{
+    font-size:10px;
+    font-weight:900;
+    opacity:.65;
+    line-height:1;
+  }
+  .tutorial-distract-example{
+    margin-top:auto;
+    padding-top:12px;
+    border-top:1px solid #c9bfae;
+    display:flex;
+    gap:14px;
+    align-items:center;
+  }
+  .tutorial-meow-btn{
+    width:58px;
+    height:58px;
+    border-radius:50%;
+    border:2px solid var(--ink);
+    background:white;
+    display:grid;
+    place-items:center;
+    font-size:12px;
+    font-weight:1000;
+    box-shadow:0 3px 0 #bbb;
+  }
+  .tutorial-duck-btn{
+    width:58px;
+    height:58px;
+    border-radius:16px;
+    border:2px solid var(--ink);
+    background:#ffe055;
+    display:grid;
+    place-items:center;
+    font-size:30px;
+    box-shadow:0 3px 0 #b69517;
+  }
+  .tutorial-sus-row{
+    display:flex;
+    justify-content:space-between;
+    font-size:11px;
+    font-weight:1000;
+  }
+  .tutorial-sus-bar{
+    height:18px;
+    border:2px solid var(--ink);
+    border-radius:999px;
+    overflow:hidden;
+    background:#eee;
+  }
+  .tutorial-sus-bar i{
+    display:block;
+    width:60%;
+    height:100%;
+    background:linear-gradient(90deg,#ffd85d,#ff5b5b);
+  }
+  .result{display:none}
+  .stats{display:grid;grid-template-columns:1fr auto;gap:8px 18px;text-align:left;margin:18px auto;max-width:390px}
+  .stats b{text-align:right}
+  .result-stars{
+    display:flex;justify-content:center;gap:10px;margin:14px 0 4px;
+    font-size:46px;line-height:1;
+  }
+  .result-stars .star{
+    color:#c8c1b5;
+    text-shadow:0 2px 0 rgba(0,0,0,.10);
+  }
+  .result-stars .star.filled{
+    color:#f5b82e;
+    text-shadow:0 2px 0 #9c6a00;
+  }
+
+  .flash{
+    position:fixed;left:28px;top:160px;
+    z-index:80;padding:14px 20px;border-radius:16px;border:4px solid var(--ink);
+    font-size:22px;font-weight:1000;background:white;opacity:0;pointer-events:none;max-width:280px;
+  }
+  .flash.show{animation:pop 1.05s}
+  @keyframes pop{0%{opacity:0;transform:translateY(12px) scale(.9)}12%,72%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0}}
+  .flash.good{background:#dff8e7}.flash.bad{background:#ffe3e3}.flash.warn{background:#fff0bd}
+
+  .danger-overlay{
+    position:fixed;inset:0;pointer-events:none;z-index:70;opacity:0;
+    transition:opacity .08s ease, background .10s ease, box-shadow .10s ease;
+    background:
+      radial-gradient(circle at center, rgba(255,140,0,0) 38%, rgba(255,150,20,.10) 62%, rgba(230,105,0,.32) 84%, rgba(120,55,0,.55) 100%);
+    box-shadow:
+      inset 0 0 0 0 rgba(255,150,30,0),
+      inset 0 0 0 0 rgba(150,70,0,0);
+  }
+  .danger-overlay.show{
+    opacity:1;
+    animation:dangerPulseOrange .38s infinite alternate ease-in-out;
+  }
+  .danger-overlay.show.cheating{
+    background:
+      radial-gradient(circle at center, rgba(255,0,0,0) 38%, rgba(255,30,30,.12) 62%, rgba(170,0,0,.36) 84%, rgba(90,0,0,.62) 100%);
+    animation:dangerPulseRed .32s infinite alternate ease-in-out;
+  }
+  .danger-overlay.flash-in{
+    animation:dangerFlashOrange .18s ease-out, dangerPulseOrange .38s .18s infinite alternate ease-in-out;
+  }
+  .danger-overlay.flash-in.cheating{
+    animation:dangerFlashRed .18s ease-out, dangerPulseRed .32s .18s infinite alternate ease-in-out;
+  }
+  @keyframes dangerFlashOrange{
+    0%{background-color:rgba(255,135,0,.42)}
+    100%{background-color:rgba(255,135,0,0)}
+  }
+  @keyframes dangerFlashRed{
+    0%{background-color:rgba(255,0,0,.46)}
+    100%{background-color:rgba(255,0,0,0)}
+  }
+  @keyframes dangerPulseOrange{
+    from{
+      box-shadow:
+        inset 0 0 0 10px rgba(255,155,45,.72),
+        inset 0 0 130px 24px rgba(210,95,0,.20);
+    }
+    to{
+      box-shadow:
+        inset 0 0 0 22px rgba(255,125,20,.96),
+        inset 0 0 220px 60px rgba(170,70,0,.36);
+    }
+  }
+  @keyframes dangerPulseRed{
+    from{
+      box-shadow:
+        inset 0 0 0 12px rgba(255,65,65,.78),
+        inset 0 0 150px 28px rgba(150,0,0,.24);
+    }
+    to{
+      box-shadow:
+        inset 0 0 0 24px rgba(255,20,20,.98),
+        inset 0 0 240px 70px rgba(130,0,0,.42);
+    }
+  }
+
+  @media(max-width:850px){
+    .flash{left:14px;top:120px;max-width:220px;font-size:18px}
+  }
+
+  .meow-control{
+    position:absolute;right:25px;top:24px;z-index:12;
+    width:150px;display:flex;flex-direction:column;align-items:center;gap:6px;
+  }
+  .meow-control .meow-button,
+  .meow-control .meow-hint{transition:opacity .16s ease}
+  .meow-control.cooldown .meow-button,
+  .meow-control.cooldown .meow-hint{opacity:.5}
+  .meow-circle-wrap{
+    position:relative;width:118px;height:118px;
+  }
+  .meow-cooldown-ring{
+    position:absolute;inset:-6px;width:130px;height:130px;
+    overflow:visible;pointer-events:none;transform:rotate(-90deg);
+  }
+  .meow-cooldown-ring .track{
+    fill:none;stroke:rgba(34,31,31,.14);stroke-width:5;
+  }
+  .meow-cooldown-ring .progress{
+    fill:none;stroke:#ffad3d;stroke-width:6;stroke-linecap:round;
+    stroke-dasharray:100;stroke-dashoffset:100;
+    transition:stroke-dashoffset .05s linear;
+  }
+  .meow-button{
+    --mic-level:0%;
+    --mic-threshold:40%;
+    position:absolute;inset:0;overflow:hidden;
+    width:118px;height:118px;border-radius:50%;
+    border:4px solid var(--ink);background:#fff;
+    box-shadow:0 7px 0 rgba(0,0,0,.16);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    color:var(--ink);user-select:none;
+  }
+  .meow-button .sound-fill{
+    position:absolute;left:0;right:0;bottom:0;height:var(--mic-level);
+    background:rgba(58,201,111,.72);
+    transition:height .07s linear;pointer-events:none;
+  }
+  .meow-button .threshold-line{
+    position:absolute;left:8px;right:8px;bottom:var(--mic-threshold);
+    height:3px;background:#d94b4b;
+    border-radius:99px;pointer-events:none;z-index:2;
+  }
+  .meow-button .meow-label{
+    position:relative;z-index:3;font-size:24px;font-weight:1000;line-height:1;
+  }
+  .meow-button .meow-state{
+    position:relative;z-index:3;margin-top:7px;font-size:10px;font-weight:1000;
+    background:rgba(255,255,255,.78);border-radius:99px;padding:3px 7px;
+  }
+  .meow-hint{
+    background:rgba(255,255,255,.94);border:2px solid var(--ink);
+    border-radius:10px;padding:4px 8px;font-size:10px;font-weight:1000;
+    white-space:nowrap;
+  }
+
+  @media(max-width:850px){
+    .desk{width:96vw}
+    .paper{width:360px}
+    .teacher-wrap{transform:translateX(-50%) scale(.88)}
+    .suspicion{top:286px;width:210px}
+    .board{height:130px}
+    .board h2{font-size:22px}
+    .legend{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+<div class="game">
+  <div class="hud">
+    <div class="chip title">COPYCAT <small>CHEAT TO WIN!</small></div>
+    <div class="chip" id="progress">ANSWERS 0 / 12</div>
+    <div class="chip timer" id="timer">🔔 01:45</div>
+  </div>
+
+  <main class="stage" id="stage">
+    <div class="board">
+      <h2>FINAL EXAM</h2>
+      <div class="rule">Rule #1: <b>NO CHEATING.</b> Rule #2: <b>NO MEOWING.</b></div>
+    </div>
+
+    <div class="teacher-wrap">
+      <div class="teacher" id="teacher">
+        <div class="ear left"></div><div class="ear right"></div>
+        <div class="head">
+          <div class="eyes"><div class="eye"></div><div class="eye"></div></div>
+          <div class="mouth"></div>
+        </div>
+        <div class="body"></div><div class="tie"></div>
+      </div>
+      <div class="teacher-bubble" id="teacherBubble">Hmm...</div>
+    </div>
+
+    <div class="suspicion">
+      <div class="sus-title">SUSPICION</div>
+      <div class="sus-value" id="susText">0%</div>
+      <div class="bar"><i id="susBar"></i></div>
+    </div>
+
+    <div class="desk">
+      <div class="neighbor left" id="leftSheet">
+        <h3>Neighbor's paper</h3>
+        <div class="combo" id="leftCombo"></div>
+        <div class="catpaw">🐾</div>
+      </div>
+
+      <div class="neighbor right" id="rightSheet">
+        <h3>Neighbor's paper</h3>
+        <div class="combo" id="rightCombo"></div>
+        <div class="catpaw">🐾</div>
+      </div>
+
+      <div class="paper" id="ownPaper">
+        <h1>CAT ACADEMY — EXAM</h1>
+        <div class="meta">Student: Definitely Not Cheating Cat</div>
+        <div class="question" id="question">Q1. What is 7 × 8?</div>
+        <div class="answerline" id="answerLine">Answer: <span class="answer-tip">CHEAT TO FIND OUT</span></div>
+        <div class="scribbles">
+          <div class="scribble" style="width:90%"></div>
+          <div class="scribble"></div>
+          <div class="scribble"></div>
+          <div class="scribble"></div>
+        </div>
+      </div>
+
+      <div class="hands">🐾</div>
+
+      <div class="duck" id="duck" title="Rubber duck — press Q">🐤<small id="duckStatus">[Q] Throw the duck</small></div>
+
+      <div class="meow-control" id="meowControl">
+        <div class="meow-circle-wrap">
+          <svg class="meow-cooldown-ring" viewBox="0 0 100 100" aria-hidden="true">
+            <circle class="track" cx="50" cy="50" r="46"></circle>
+            <circle class="progress" id="meowCooldownRing" cx="50" cy="50" r="46" pathLength="100"></circle>
+          </svg>
+          <div class="meow-button" id="meowButton" aria-label="Microphone meow meter">
+            <i class="sound-fill" id="micLevel"></i>
+            <b class="threshold-line" id="micThresholdMarker"></b>
+            <span class="meow-label">Meow</span>
+            <span class="meow-state" id="meowCooldownText">READY</span>
+          </div>
+        </div>
+        <div class="meow-hint">[M] Meow (or use mic)</div>
+      </div>
+    </div>
+  </main>
+
+  <div class="tutorial">
+    <div class="kbd">SHIFT</div>
+    <div>hold + press WASD / ARROWS to copy</div>
+    <div class="mic-dot" id="micDot"></div>
+    <div>MEOW to distract</div>
+    <div class="controls-note">(M = fallback)</div>
+  </div>
+</div>
+
+<div class="danger-overlay" id="dangerOverlay"></div>
+<div class="flash" id="flash"></div>
+
+<div class="overlay" id="startOverlay">
+  <div class="card">
+    <h1>🐱 COPYCAT</h1>
+    <p>You know <b>nothing</b>. Your neighbors know everything.<br>
+    Copy 12 answers before the bell — and don't get caught.</p>
+    <div class="legend">
+      <div class="step">
+        <h3>Cheat</h3>
+        <p>Hold <b>SHIFT</b> to peek. While holding it, press the shown <b>WASD / ARROW</b> keys to copy the answer.</p>
+        <div class="tutorial-cheat-example">
+          <div class="tutorial-cheat-keys" aria-label="Example direction sequence">
+            <div class="tutorial-cheat-key-wrap">
+              <div class="tutorial-cheat-key">↑</div>
+              <div class="tutorial-cheat-key-label">↑ / W</div>
+            </div>
+            <div class="tutorial-cheat-key-wrap">
+              <div class="tutorial-cheat-key">→</div>
+              <div class="tutorial-cheat-key-label">→ / D</div>
+            </div>
+            <div class="tutorial-cheat-key-wrap">
+              <div class="tutorial-cheat-key">↓</div>
+              <div class="tutorial-cheat-key-label">↓ / S</div>
+            </div>
+            <div class="tutorial-cheat-key-wrap">
+              <div class="tutorial-cheat-key">←</div>
+              <div class="tutorial-cheat-key-label">← / A</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="step">
+        <h3>Suspicion</h3>
+        <p>If the teacher sees you cheating, <b>Suspicion goes up</b>. If it reaches <b>100%</b>, you get caught.</p>
+        <div class="tutorial-sus">
+          <div class="tutorial-sus-row"><span>SUSPICION</span><span>60%</span></div>
+          <div class="tutorial-sus-bar"><i></i></div>
+        </div>
+      </div>
+      <div class="step">
+        <h3>Distract</h3>
+        <p><b>Meow</b> using your mic or <b>M</b> to lower Suspicion and make the teacher turn away.</p>
+        <p><b>Throw the duck</b> to stop the teacher from turning for <b>5 seconds</b>.</p>
+        <p><b>Both have cooldowns.</b></p>
+        <div class="tutorial-distract-example" aria-label="Meow and duck examples">
+          <div class="tutorial-meow-btn">Meow</div>
+          <div class="tutorial-duck-btn" title="Press Q">🐤<small style="font-size:9px;line-height:1;display:block">Q</small></div>
+        </div>
+      </div>
+    </div>
+    <button class="btn" id="startBtn">START EXAM</button>
+    <p style="font-size:12px;opacity:.58">Microphone needs browser permission. If it does not work, press <b>M</b> to simulate a meow.</p>
+  </div>
+</div>
+
+<div class="overlay result" id="resultOverlay">
+  <div class="card">
+    <h1 id="resultTitle">Exam passed!</h1>
+    <p id="resultText">Your result.</p>
+    <div class="result-stars" id="resultStars" aria-label="0 out of 3 stars">
+      <span class="star">★</span><span class="star">★</span><span class="star">★</span>
+    </div>
+    <div class="stats">
+      <span>Copied answers</span><b id="sCopied">0 / 12</b>
+      <span>Time left</span><b id="sTimeLeft">01:30</b>
+      <span>Meows</span><b id="sMeows">0</b>
+      <span>Times almost caught</span><b id="sCaught">0</b>
+      <span>Rubber ducks used</span><b id="sDucks">0</b>
+    </div>
+    <button class="btn" onclick="location.reload()">PLAY AGAIN</button>
+  </div>
+</div>
+
+<script>
+(() => {
+  const TOTAL = 12;
+  const combos = [
+    ["ArrowUp","ArrowRight"],
+    ["ArrowLeft","ArrowUp","ArrowRight"],
+    ["ArrowDown","ArrowRight","ArrowUp"],
+    ["ArrowLeft","ArrowDown","ArrowRight"],
+    ["ArrowUp","ArrowUp","ArrowLeft","ArrowDown"],
+    ["ArrowRight","ArrowDown","ArrowLeft","ArrowUp"],
+    ["ArrowDown","ArrowLeft","ArrowUp","ArrowRight"],
+    ["ArrowLeft","ArrowUp","ArrowRight","ArrowDown","ArrowLeft"],
+    ["ArrowUp","ArrowRight","ArrowDown","ArrowLeft","ArrowUp"],
+    ["ArrowRight","ArrowUp","ArrowLeft","ArrowDown","ArrowRight"],
+    ["ArrowDown","ArrowDown","ArrowLeft","ArrowUp","ArrowRight"],
+    ["ArrowLeft","ArrowRight","ArrowUp","ArrowDown","ArrowLeft","ArrowUp"]
+  ];
+  const questions = [
+    "Q1. How many lives does a cat definitely claim to have?",
+    "Q2. Complete the formula: cat + cardboard box = ?",
+    "Q3. Which famous cat discovered gravity by knocking something off a table?",
+    "Q4. Solve: 3 tuna cans + 2 tuna cans = how many reasons to ignore you?",
+    "Q5. Why is the red laser dot legally impossible to catch?",
+    "Q6. Translate ‘pspspsps’ into formal Cat Latin.",
+    "Q7. State Newton’s First Law of Cat Napping.",
+    "Q8. What is the scientifically correct time for a 3 AM zoomie attack?",
+    "Q9. Calculate the optimal nap-to-chaos ratio for one indoor cat.",
+    "Q10. What is the primary purpose of an expensive cat bed?",
+    "Q11. Define advanced cardboard-box quantum mechanics.",
+    "Q12. Did you CATegorically avoid cheating during this exam?"
+  ];
+  const symbols = {
+    ArrowUp:"↑", ArrowDown:"↓", ArrowLeft:"←", ArrowRight:"→"
+  };
+
+  const teacher = document.querySelector("#teacher");
+  const teacherBubble = document.querySelector("#teacherBubble");
+  const leftSheet = document.querySelector("#leftSheet");
+  const rightSheet = document.querySelector("#rightSheet");
+  const leftCombo = document.querySelector("#leftCombo");
+  const rightCombo = document.querySelector("#rightCombo");
+  const progress = document.querySelector("#progress");
+  const timerEl = document.querySelector("#timer");
+  const susBar = document.querySelector("#susBar");
+  const susText = document.querySelector("#susText");
+  const question = document.querySelector("#question");
+  const answerLine = document.querySelector("#answerLine");
+  const flash = document.querySelector("#flash");
+  const dangerOverlay = document.querySelector("#dangerOverlay");
+  const micDot = document.querySelector("#micDot");
+  const micLevel = document.querySelector("#micLevel");
+  const micThresholdMarker = document.querySelector("#micThresholdMarker");
+  const meowControl = document.querySelector("#meowControl");
+  const meowButton = document.querySelector("#meowButton");
+  const meowCooldownText = document.querySelector("#meowCooldownText");
+  const meowCooldownRing = document.querySelector("#meowCooldownRing");
+  const duck = document.querySelector("#duck");
+  const duckStatus = document.querySelector("#duckStatus");
+  const startOverlay = document.querySelector("#startOverlay");
+  const resultOverlay = document.querySelector("#resultOverlay");
+  const startBtn = document.querySelector("#startBtn");
+  const sCopied = document.querySelector("#sCopied");
+  const sTimeLeft = document.querySelector("#sTimeLeft");
+  const resultStars = [...document.querySelectorAll("#resultStars .star")];
+  const sMeows = document.querySelector("#sMeows");
+  const sCaught = document.querySelector("#sCaught");
+  const sDucks = document.querySelector("#sDucks");
+  const resultTitle = document.querySelector("#resultTitle");
+  const resultText = document.querySelector("#resultText");
+
+  let running = false;
+  let peekHeld = false;
+  let qIndex = 0;
+  let comboPos = 0;
+  let side = "left";
+  let suspicion = 0;
+  let teacherLooking = false;
+  let teacherDistractedUntil = 0;
+  let timeLeft = 105;
+  let meows = 0;
+  let almostCaught = 0;
+  let ducks = 0;
+  let duckCooldownUntil = 0;
+  let duckProtectionUntil = 0;
+  let duckCooldownLoop = null;
+  let currentLookTimeout = null;
+  let teacherTurnBackTimeout = null;
+  let suspicionInterval = null;
+  let audioCtx, analyser, data, stream, micLoop, cooldownLoop;
+  const MIC_THRESHOLD_RMS = 40 / 420;
+  const MIC_LEVEL_SCALE = 420;
+  const MIC_THRESHOLD_LEVEL = Math.min(100, MIC_THRESHOLD_RMS * MIC_LEVEL_SCALE);
+
+  function syncMicThresholdUI(){
+    const pct = Math.max(0, Math.min(100, MIC_THRESHOLD_LEVEL));
+    meowButton.style.setProperty("--mic-threshold", pct + "%");
+  }
+  let micAboveThreshold = false;
+  let meowCooldownUntil = 0;
+  let activeMeowCooldownMs = 0;
+  let nextMeowCooldownMs = 500;
+
+
+  function updateMeowCooldownUI(){
+    const now = performance.now();
+    const remaining = Math.max(0, meowCooldownUntil - now);
+
+    if(remaining > 0 && activeMeowCooldownMs > 0){
+      const pct = Math.max(0, Math.min(100, (remaining / activeMeowCooldownMs) * 100));
+      meowCooldownText.textContent = `${(remaining/1000).toFixed(1)}s`;
+      meowCooldownRing.style.strokeDashoffset = String(100 - pct);
+      meowControl.classList.add("cooldown");
+    }else{
+      meowCooldownText.textContent = "READY";
+      meowCooldownRing.style.strokeDashoffset = "100";
+      meowControl.classList.remove("cooldown");
+    }
+
+    if(running) cooldownLoop = requestAnimationFrame(updateMeowCooldownUI);
+  }
+
+  function setFlash(text, kind="good"){
+    flash.textContent = text;
+    flash.className = "flash "+kind+" show";
+    setTimeout(()=>flash.classList.remove("show"), 1080);
+  }
+  function teacherSay(text, ms=1100){
+    teacherBubble.textContent = text;
+    teacherBubble.classList.add("show");
+    setTimeout(()=>teacherBubble.classList.remove("show"), ms);
+  }
+  function renderCombo(){
+    leftCombo.innerHTML = ""; rightCombo.innerHTML="";
+    const target = side==="left" ? leftCombo : rightCombo;
+    combos[qIndex].forEach((k,i)=>{
+      const el=document.createElement("div");
+      el.className="key"+(i<comboPos?" done":"");
+      el.textContent=symbols[k];
+      target.appendChild(el);
+    });
+  }
+  function flashWrongArrow(){
+    const target = side==="left" ? leftCombo : rightCombo;
+    const keys = target.querySelectorAll(".key");
+    const currentKey = keys[comboPos];
+    if(!currentKey) return;
+    currentKey.classList.remove("wrong");
+    void currentKey.offsetWidth;
+    currentKey.classList.add("wrong");
+    setTimeout(()=>currentKey.classList.remove("wrong"), 650);
+  }
+
+  function renderQuestion(){
+    question.textContent = questions[qIndex];
+    answerLine.innerHTML = 'Answer: <span class="answer-tip">CHEAT TO FIND OUT</span>';
+    comboPos = 0;
+    side = qIndex < 3 ? "left" : (qIndex % 2 ? "right" : "left");
+    renderCombo();
+    updateNeighbor();
+  }
+  function updateNeighbor(){
+    leftSheet.classList.toggle("active", peekHeld && side==="left");
+    rightSheet.classList.toggle("active", peekHeld && side==="right");
+  }
+  function setSuspicion(v){
+    suspicion = Math.max(0, Math.min(100, v));
+    susBar.style.width = suspicion+"%";
+    susText.textContent = Math.round(suspicion)+"%";
+    if(suspicion>=100) endGame(false);
+  }
+  function updateTeacher(){
+    const distracted = performance.now() < teacherDistractedUntil;
+    const facingBoard = !teacherLooking;
+    const dangerActive = teacherLooking && !distracted;
+    teacher.classList.toggle("facing-board", facingBoard);
+    teacher.classList.toggle("distracted", distracted && !facingBoard);
+    teacher.classList.toggle("look-left", teacherLooking && !distracted && qIndex%2===0);
+    teacher.classList.toggle("look-right", teacherLooking && !distracted && qIndex%2===1);
+    const wasDanger = dangerOverlay.classList.contains("show");
+    dangerOverlay.classList.toggle("show", dangerActive);
+    dangerOverlay.classList.toggle("cheating", dangerActive && peekHeld);
+    if(dangerActive && !wasDanger){
+      dangerOverlay.classList.remove("flash-in");
+      void dangerOverlay.offsetWidth;
+      dangerOverlay.classList.add("flash-in");
+      setTimeout(()=>dangerOverlay.classList.remove("flash-in"), 260);
+    }
+  }
+  function finishTeacherLook(){
+    clearTimeout(teacherTurnBackTimeout);
+    teacherTurnBackTimeout = null;
+    if(!running) return;
+
+    // If the teacher catches the player actively cheating, keep staring.
+    // He will only turn back after the player stops cheating.
+    const distracted = performance.now() < teacherDistractedUntil;
+    if(teacherLooking && peekHeld && !distracted){
+      return;
+    }
+
+    teacherLooking = false;
+    updateTeacher();
+    scheduleTeacherLook();
+  }
+
+  function beginTeacherLook(message = null){
+    if(!running) return;
+
+    // The rubber duck blocks every teacher turn for its full 5-second effect,
+    // including turns caused by a wrong input.
+    if(performance.now() < duckProtectionUntil){
+      teacherLooking = false;
+      updateTeacher();
+      return;
+    }
+
+    clearTimeout(currentLookTimeout);
+    currentLookTimeout = null;
+    clearTimeout(teacherTurnBackTimeout);
+
+    teacherLooking = true;
+    updateTeacher();
+    teacherSay(message || (qIndex>=5 ? "I'M WATCHING YOU." : "Hmm..."));
+
+    if(peekHeld){
+      almostCaught++;
+      setFlash("TEACHER IS LOOKING!", "warn");
+    }
+
+    teacherTurnBackTimeout = setTimeout(
+      finishTeacherLook,
+      1000 + Math.random()*1000
+    );
+  }
+
+  function scheduleTeacherLook(){
+    if(!running) return;
+    clearTimeout(currentLookTimeout);
+
+    // Gradually tighten the random look window from Q1 (2.5–4.0s)
+    // to Q12 (1.5–2.0s), interpolating both ends of the range.
+    const progressT = qIndex / (TOTAL - 1);
+    const minDelay = 2500 + (1500 - 2500) * progressT;
+    const maxDelay = 4000 + (2000 - 4000) * progressT;
+    const lookDelay = minDelay + Math.random() * (maxDelay - minDelay);
+
+    currentLookTimeout = setTimeout(()=>{
+      currentLookTimeout = null;
+      if(!running) return;
+      if(performance.now() < teacherDistractedUntil || performance.now() < duckProtectionUntil){
+        scheduleTeacherLook();
+        return;
+      }
+      beginTeacherLook();
+    }, lookDelay);
+  }
+
+  function updateDuckCooldownUI(){
+    if(!running){
+      duck.classList.remove("cooldown");
+      duckStatus.textContent = "[Q] Throw the duck";
+      return;
+    }
+    const remaining = Math.max(0, duckCooldownUntil - performance.now());
+    if(remaining > 0){
+      duck.classList.add("cooldown");
+      duckStatus.textContent = `CD ${(remaining/1000).toFixed(1)}s`;
+      duckCooldownLoop = requestAnimationFrame(updateDuckCooldownUI);
+    }else{
+      duck.classList.remove("cooldown");
+      duckStatus.textContent = "[Q] Throw the duck";
+      duckCooldownLoop = null;
+    }
+  }
+
+  function useDuck(){
+    if(!running) return;
+    const now = performance.now();
+    if(now < duckCooldownUntil){
+      setFlash(`DUCK COOLDOWN ${(Math.ceil((duckCooldownUntil-now)/100)/10).toFixed(1)}s`, "warn");
+      return;
+    }
+
+    ducks++;
+    duckCooldownUntil = now + 30000;
+    duckProtectionUntil = now + 5000;
+
+    clearTimeout(currentLookTimeout);
+    currentLookTimeout = null;
+    clearTimeout(teacherTurnBackTimeout);
+    teacherTurnBackTimeout = null;
+    teacherLooking = false;
+    updateTeacher();
+
+    teacherSay("DUCK?!", 1400);
+    setFlash("DUCK DISTRACTION! SAFE FOR 5s", "good");
+
+    // Do not schedule another teacher check until the full 5-second lockout ends.
+    currentLookTimeout = setTimeout(()=>{
+      currentLookTimeout = null;
+      if(running) scheduleTeacherLook();
+    }, 5000);
+
+    if(duckCooldownLoop) cancelAnimationFrame(duckCooldownLoop);
+    updateDuckCooldownUI();
+  }
+
+  function distract(source="meow"){
+    if(!running) return;
+    const now = performance.now();
+    if(source==="meow"){
+      if(now < meowCooldownUntil) return;
+      meows++;
+
+      // Each successful meow applies the current cooldown, then makes the
+      // next cooldown 0.5s longer, capped at 5s.
+      const appliedCooldownMs = nextMeowCooldownMs;
+      activeMeowCooldownMs = appliedCooldownMs;
+      meowCooldownUntil = now + appliedCooldownMs;
+      nextMeowCooldownMs = Math.min(5000, nextMeowCooldownMs + 500);
+
+      teacherSay("...meow?", 1100);
+      setFlash(`DISTRACTED! +2.5s · MEOW CD ${ (appliedCooldownMs/1000).toFixed(1) }s`, "good");
+      teacherDistractedUntil = now+2500;
+    }
+    clearTimeout(teacherTurnBackTimeout);
+    teacherTurnBackTimeout = null;
+    teacherLooking=false;
+    updateTeacher();
+    scheduleTeacherLook();
+    setSuspicion(suspicion - 12);
+  }
+
+  function handleArrow(key){
+    if(!running || !peekHeld) return;
+    const expected = combos[qIndex][comboPos];
+    if(key===expected){
+      comboPos++;
+      renderCombo();
+      if(comboPos>=combos[qIndex].length){
+        answerLine.textContent = qIndex===TOTAL-1 ? "Answer: NO" : "Answer: COPIED ✓";
+        setFlash("ANSWER COPIED!", "good");
+        setTimeout(()=>{
+          qIndex++;
+          progress.textContent = `ANSWERS ${qIndex} / ${TOTAL}`;
+          if(qIndex>=TOTAL){
+            endGame(true);
+          }else{
+            if(qIndex===3) teacherSay("Stop copying the same cat.");
+            renderQuestion();
+          }
+        }, 700);
+      }
+    }else{
+      setFlash("PENCIL SNAP! 😿", "bad");
+      setSuspicion(suspicion + 9);
+      if(teacherLooking){
+        setSuspicion(suspicion + 8);
+      }else{
+        // A wrong input gives the player away: teacher turns around immediately.
+        teacherDistractedUntil = 0;
+        beginTeacherLook("What was that?!");
+      }
+      renderCombo();
+      flashWrongArrow();
+    }
+  }
+
+  document.addEventListener("keydown", e=>{
+    if(e.key==="Shift"){
+      e.preventDefault();
+      if(!peekHeld && running){
+        peekHeld=true;
+        updateNeighbor();
+        updateTeacher();
+      }
+    }else {
+      // Use physical key codes so WASD works on English, Ukrainian, Russian,
+      // and other keyboard layouts.
+      const codeMap = {
+        KeyW:"ArrowUp",
+        KeyA:"ArrowLeft",
+        KeyS:"ArrowDown",
+        KeyD:"ArrowRight"
+      };
+      const mappedKey = symbols[e.key] ? e.key : codeMap[e.code];
+
+      if(mappedKey){
+        e.preventDefault();
+        handleArrow(mappedKey);
+      }else if(e.code==="KeyM" || e.key.toLowerCase()==="m" || e.key.toLowerCase()==="ь"){
+        e.preventDefault();
+        distract("meow");
+      }else if(e.code==="KeyQ" || e.key.toLowerCase()==="q" || e.key.toLowerCase()==="й"){
+        e.preventDefault();
+        useDuck();
+      }
+    }
+  });
+  document.addEventListener("keyup", e=>{
+    if(e.key==="Shift"){
+      peekHeld=false;
+      updateNeighbor();
+      updateTeacher();
+
+      // If the normal watch duration already expired while the player was
+      // cheating, releasing Shift lets the teacher finally turn back.
+      if(running && teacherLooking && teacherTurnBackTimeout === null){
+        finishTeacherLook();
+      }
+    }
+  });
+
+  duck.addEventListener("click", useDuck);
+
+  async function initMic(){
+    try{
+      stream = await navigator.mediaDevices.getUserMedia({audio:true});
+      audioCtx = new (window.AudioContext||window.webkitAudioContext)();
+      const src = audioCtx.createMediaStreamSource(stream);
+      analyser = audioCtx.createAnalyser();
+      analyser.fftSize=512;
+      data = new Uint8Array(analyser.frequencyBinCount);
+      src.connect(analyser);
+      micDot.classList.add("live");
+
+      // Keep the threshold marker at its true percentage position on the meter.
+      syncMicThresholdUI();
+
+      const tick=()=>{
+        if(!analyser) return;
+        analyser.getByteTimeDomainData(data);
+        let sum=0;
+        for(const x of data){ const v=(x-128)/128; sum += v*v; }
+        const rms=Math.sqrt(sum/data.length);
+        const level=Math.min(100, rms*MIC_LEVEL_SCALE);
+        meowButton.style.setProperty("--mic-level", level+"%");
+
+        // A meow is now simply a loud sound crossing the threshold.
+        // Trigger only on the rising edge; re-arm after volume drops clearly below it.
+        if(running){
+          if(!micAboveThreshold && rms >= MIC_THRESHOLD_RMS){
+            micAboveThreshold = true;
+            distract("meow");
+          }else if(micAboveThreshold && rms < MIC_THRESHOLD_RMS * 0.75){
+            micAboveThreshold = false;
+          }
+        }
+
+        micLoop=requestAnimationFrame(tick);
+      };
+      tick();
+    }catch(err){
+      micDot.classList.remove("live");
+      console.warn("Microphone unavailable:", err);
+    }
+  }
+
+  function startGame(){
+    startOverlay.style.display="none";
+    running=true;
+    renderQuestion();
+    // Apply the correct initial pose immediately: teacher starts facing the board.
+    teacherLooking = false;
+    updateTeacher();
+    scheduleTeacherLook();
+
+    // Suspicion rises continuously while cheating under the teacher's gaze.
+    // 2% every 50ms = about 40% suspicion per second.
+    suspicionInterval = setInterval(()=>{
+      if(!running) return;
+      const distracted = performance.now() < teacherDistractedUntil;
+      if(peekHeld && teacherLooking && !distracted){
+        setSuspicion(suspicion + 2);
+      }
+    }, 50);
+
+    updateMeowCooldownUI();
+    updateDuckCooldownUI();
+    initMic();
+    const timer=setInterval(()=>{
+      if(!running){clearInterval(timer);return;}
+      timeLeft--;
+      const m=Math.floor(timeLeft/60), s=timeLeft%60;
+      timerEl.textContent=`🔔 ${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
+      if(timeLeft<=30) timerEl.classList.add("danger");
+      if(timeLeft<=0) endGame(false);
+    },1000);
+  }
+  function formatTime(seconds){
+    const safe = Math.max(0, Math.floor(seconds));
+    const m = Math.floor(safe/60), s = safe%60;
+    return `${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
+  }
+
+  function getStarRating(win){
+    if(!win) return 0;
+    if(almostCaught === 0 && ducks === 0) return 3;
+    if(almostCaught <= 2) return 2;
+    return 1;
+  }
+
+  function renderStars(count){
+    resultStars.forEach((star, i)=>star.classList.toggle("filled", i < count));
+    const holder = document.querySelector("#resultStars");
+    holder.setAttribute("aria-label", `${count} out of 3 stars`);
+  }
+
+  function endGame(win){
+    if(!running) return;
+    running=false;
+    clearTimeout(currentLookTimeout);
+    clearTimeout(teacherTurnBackTimeout);
+    if(suspicionInterval) clearInterval(suspicionInterval);
+    if(stream) stream.getTracks().forEach(t=>t.stop());
+    if(micLoop) cancelAnimationFrame(micLoop);
+    if(cooldownLoop) cancelAnimationFrame(cooldownLoop);
+    if(duckCooldownLoop) cancelAnimationFrame(duckCooldownLoop);
+    dangerOverlay.classList.remove("show", "cheating", "flash-in");
+    resultOverlay.style.display="grid";
+    sCopied.textContent=`${qIndex} / ${TOTAL}`;
+    sTimeLeft.textContent=formatTime(timeLeft);
+    sMeows.textContent=meows;
+    sCaught.textContent=almostCaught;
+    sDucks.textContent=ducks;
+    const starRating = getStarRating(win);
+    renderStars(starRating);
+
+    const ratingMessages = {
+      0: "Exam failed. The teacher wins this round.",
+      1: "You passed by a whisker. Way too suspicious.",
+      2: "Nice cheating. You left a few paw prints, but got away with it.",
+      3: "Purrfect crime. No close calls, no duck, no evidence."
+    };
+
+    if(win){
+      resultTitle.textContent="Exam passed!";
+    }else{
+      resultTitle.textContent=suspicion>=100 ? "CAUGHT 😾" : "BELL RANG 🔔";
+    }
+    resultText.textContent = ratingMessages[starRating];
+  }
+
+  syncMicThresholdUI();
+  syncMicThresholdUI();
+  updateTeacher();
+  startBtn.addEventListener("click", startGame);
+})();
+</script>
+</body>
+</html>
