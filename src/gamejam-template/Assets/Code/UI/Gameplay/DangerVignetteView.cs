@@ -10,6 +10,7 @@ namespace Code.UI.Gameplay
 
 		private bool _isVisible;
 		private bool _isPulsing;
+		private bool _isCaughtPulsing;
 		private float _pulseSeconds;
 
 		private static readonly Color Warn = new Color32(255, 154, 61, 255);
@@ -19,6 +20,8 @@ namespace Code.UI.Gameplay
 		private const float PulseMinimumAlpha = 0.35f;
 		private const float PulseMaximumAlpha = 0.6f;
 		private const float PulseSeconds = 0.4f;
+		private const float CaughtPulseMaximumAlpha = 0.85f;
+		private const float CaughtPulseSeconds = 0.55f;
 
 		public void Show(bool isPulsing)
 		{
@@ -27,6 +30,16 @@ namespace Code.UI.Gameplay
 
 			_isVisible = true;
 			_isPulsing = isPulsing;
+			_isCaughtPulsing = false;
+			Refresh();
+		}
+
+		public void PulseCaught()
+		{
+			_isVisible = false;
+			_isPulsing = false;
+			_isCaughtPulsing = true;
+			_pulseSeconds = 0f;
 			Refresh();
 		}
 
@@ -34,12 +47,26 @@ namespace Code.UI.Gameplay
 		{
 			_isVisible = false;
 			_isPulsing = false;
+			_isCaughtPulsing = false;
 			_pulseSeconds = 0f;
 			Refresh();
 		}
 
 		private void Update()
 		{
+			if (_isCaughtPulsing)
+			{
+				_pulseSeconds += Time.unscaledDeltaTime;
+				if (_pulseSeconds >= CaughtPulseSeconds)
+				{
+					Hide();
+					return;
+				}
+
+				Refresh();
+				return;
+			}
+
 			if (_isVisible == false || _isPulsing == false)
 				return;
 
@@ -49,13 +76,19 @@ namespace Code.UI.Gameplay
 
 		private void Refresh()
 		{
-			Color color = _isPulsing ? Danger : Warn;
+			Color color = _isPulsing || _isCaughtPulsing ? Danger : Warn;
 			color.a = GetAlpha();
 			image.color = color;
 		}
 
 		private float GetAlpha()
 		{
+			if (_isCaughtPulsing)
+			{
+				float progress = Mathf.Clamp01(_pulseSeconds / CaughtPulseSeconds);
+				return Mathf.Sin(progress * Mathf.PI) * CaughtPulseMaximumAlpha;
+			}
+
 			if (_isVisible == false)
 				return 0f;
 

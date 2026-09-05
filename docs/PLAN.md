@@ -100,7 +100,7 @@
 - [x] **E3** (0.5, P0) `NeighbourView` на обоих префабах: лапа +0.4 units/+70° за 0.25 с OutBack, закрытие 0.35 с, дрожь в последнюю секунду, вздрагивание головы на мяу, реакция на взгляд и кольцо‑таймер через reactive queries. B‑002 закрыт runtime-кадрами обеих поз; проверки: [E3.md](../src/gamejam-template/tools/playtest/E3.md), 6 PASS + 16 gameplay regression PASS.
 - [x] **E4** (0.5, P1) `DuckView` на префабе D11: idle bob 0.06 units/1.2 с; бросок 0.6 с по авторской параболе через три точки, rotation 720° и swap двух кадров каждые 0.1 с; на приземлении — punch, писк и burst из 8 пылинок; в `Carried` утка становится дочерней учительницы и следует за её возвратом, после третьего броска остаётся грустной на её столе. Проверки: [E4.md](../src/gamejam-template/tools/playtest/E4.md), 6 PASS + 16 gameplay regression PASS.
 - [ ] **E5** (1.0, P1) Партиклы: пот котёнка, `!` над учительницей, ноты смеха класса, пыль приземления, мел, звёздочки на COPIED.
-- [ ] **E6** (0.5, P1) Шейк камеры на CAUGHT, пульс виньета, punch‑scale счётчика.
+- [x] **E6** (0.5, P1) Шейк камеры на CAUGHT, пульс виньета, punch‑scale счётчика. Готово: `GameplayWindow` отправляет один `Default` shake request на `Caught`, `DangerVignetteView` даёт красный импульс 0.55 с, счётчик ответов пульсирует до 1.22× за 0.32 с; штамп Report Card появляется отдельным slam + punch. Проверки: [E6.md](../src/gamejam-template/tools/playtest/E6.md), 13 HUD PASS + 8 Report Card PASS + 16 gameplay regression PASS.
 
 ### F. Аудио (Claude) — P0 1.5 ч, P1 1 ч
 - [ ] **F1** (1.0, P0) SFX из `GDD §16` (синтез Python/ffmpeg + `say` для мяу‑фолбэка), нормализация −6 dBFS.

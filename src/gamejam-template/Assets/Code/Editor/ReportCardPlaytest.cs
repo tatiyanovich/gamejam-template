@@ -98,11 +98,18 @@ namespace Code.Editor
 					&& Values(fields)[2].text == "8" && Values(fields)[3].text == "1"
 					&& Values(fields)[4].text == "0", "Stats");
 				Require(Field<Image>(fields, "gradeStamp").sprite.name == "stamp_grade_A+", "A+ stamp");
+				Require(Field<Image>(fields, "gradeStamp").color.a == 0f,
+					"Grade stamp waits for the slam");
+				await UniTask.Delay(TimeSpan.FromSeconds(0.55), DelayType.UnscaledDeltaTime);
+				Require(Field<Image>(fields, "gradeStamp").color.a == 1f
+					&& Field<Image>(fields, "gradeStamp").rectTransform.localScale.x > 0.95f,
+					"Grade stamp slams onto the card");
 				Require(Field<TMP_Text>(fields, "gradeMessage").text == "Purrfect crime. No duck, no evidence.",
 					"Three star message");
 				Require(FilledStars(fields) == 3, "Three stars filled");
 				Require(Field<TMP_Text>(fields, "personalBest").text == "Your best: 11 answers · 1:35", "Personal best");
-				report.AppendLine("PASS passed outcome: title, line, five stats, A+ stamp, stars and personal best");
+				report.AppendLine(
+					"PASS passed outcome: title, line, five stats, A+ stamp slam, stars and personal best");
 
 				Require(Field<TMP_Text>(fields, "leaderboardStatus").text == "Sending your result…", "Sending");
 				Require(Rows(fields)[0].gameObject.activeSelf == false, "Rows hidden while sending");

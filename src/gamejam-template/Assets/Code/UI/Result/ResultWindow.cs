@@ -59,6 +59,10 @@ namespace Code.UI.Result
 
 		private const float FadeInDuration = 0.3f;
 		private const float ScaleDuration = 0.5f;
+		private const float StampDelaySeconds = 0.28f;
+		private const float StampSlamSeconds = 0.2f;
+		private const float StampPunchSeconds = 0.18f;
+		private const float StampStartScale = 2.2f;
 
 		[Inject]
 		public void Construct(
@@ -98,6 +102,8 @@ namespace Code.UI.Result
 			_isLeaving = false;
 			_submitCts = new CancellationTokenSource();
 			content.localScale = Vector3.zero;
+			gradeStamp.rectTransform.localScale = Vector3.one * StampStartScale;
+			SetGradeStampAlpha(0f);
 			retakeButton.interactable = true;
 			menuButton.interactable = true;
 			retakeButton.onClick.AddListener(HandleRetakeClicked);
@@ -131,6 +137,7 @@ namespace Code.UI.Result
 			retakeButton.onClick.RemoveListener(HandleRetakeClicked);
 			menuButton.onClick.RemoveListener(HandleMenuClicked);
 			content.DOKill();
+			gradeStamp.rectTransform.DOKill();
 
 			if (_submitCts == null)
 				return;
@@ -223,6 +230,20 @@ namespace Code.UI.Result
 		private void Appear()
 		{
 			content.DOScale(Vector3.one, ScaleDuration).SetEase(Ease.OutBack).SetUpdate(true);
+			gradeStamp.rectTransform
+				.DOScale(Vector3.one, StampSlamSeconds)
+				.SetDelay(StampDelaySeconds)
+				.SetEase(Ease.InQuad)
+				.SetUpdate(true)
+				.OnStart(HandleGradeStampStarted)
+				.OnComplete(HandleGradeStampLanded);
+		}
+
+		private void SetGradeStampAlpha(float alpha)
+		{
+			Color color = gradeStamp.color;
+			color.a = alpha;
+			gradeStamp.color = color;
 		}
 
 		private void Leave(LoopNodeId loopNodeId)
@@ -313,6 +334,22 @@ namespace Code.UI.Result
 				2 => "Nice cheating. A few close calls.",
 				_ => "Passed by a whisker."
 			};
+		}
+
+		private void HandleGradeStampStarted()
+		{
+			SetGradeStampAlpha(1f);
+		}
+
+		private void HandleGradeStampLanded()
+		{
+			gradeStamp.rectTransform
+				.DOPunchScale(
+					Vector3.one * 0.16f,
+					StampPunchSeconds,
+					vibrato: 5,
+					elasticity: 0.35f)
+				.SetUpdate(true);
 		}
 
 		private void HandleRetakeClicked()

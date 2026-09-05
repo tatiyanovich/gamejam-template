@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Text;
 using Code.Gameplay.Bell.Queries;
+using Code.Gameplay.Camera;
 using Code.Gameplay.Difficulty.Services;
 using Code.Gameplay.Duck;
 using Code.Gameplay.Duck.Queries;
@@ -130,6 +131,7 @@ namespace Code.Editor
 				TeacherQuery teachers = new(game);
 				NeighbourQuery neighbours = fixture.Container.Instantiate<NeighbourQuery>();
 				InputQuery inputs = fixture.Container.Instantiate<InputQuery>();
+				PlaytestCameraFactory camera = new();
 				ring = Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>(
 					"Assets/AddressableResources/Content/Papers/PawTimer.prefab"));
 				ring.transform.position = new Vector3(-1000f, 0f, 0f);
@@ -140,7 +142,7 @@ namespace Code.Editor
 				GameplayWindow window = instance.GetComponent<GameplayWindow>();
 				control = window;
 				window.Construct(exam, bell, suspicion, meow, ducks,
-					fixture.Container.Resolve<IDuckFactory>(), teachers, neighbours, inputs);
+					fixture.Container.Resolve<IDuckFactory>(), teachers, neighbours, inputs, camera);
 				await window.Initialize("Overlay", "hud-playtest");
 				await control.Open(false, default);
 
@@ -232,6 +234,16 @@ namespace Code.Editor
 				exam.ReactToChanges();
 				Require(flashRows[0].Line == "ANSWER COPIED!" && flashRows[1].Line == "DUCK CONFISCATED",
 					"Newest flash on the bottom row");
+				RectTransform answersTransform = Field<TMP_Text>(fields, "answers").rectTransform;
+				float peakCounterScale = answersTransform.localScale.x;
+				float punchStartedAt = Time.realtimeSinceStartup;
+				while (Time.realtimeSinceStartup - punchStartedAt < 0.35f)
+				{
+					await UniTask.NextFrame();
+					peakCounterScale = Mathf.Max(peakCounterScale, answersTransform.localScale.x);
+				}
+				Require(peakCounterScale > 1.05f,
+					$"Answers counter punches on copy: peak {peakCounterScale:F3}");
 				question.isAnswerCopiedChanged = false;
 				fixture.Container.Resolve<IEntityFactory>().Event()
 					.AddWrongInputEvent(0);
@@ -316,6 +328,11 @@ namespace Code.Editor
 				exam.ReactToChanges();
 				teachers.ReactToChanges();
 				Require(Field<TMP_Text>(fields, "speech").text == "CAUGHT. See me after class.", "Outcome wins");
+				await UniTask.Delay(TimeSpan.FromSeconds(0.15), DelayType.UnscaledDeltaTime);
+				Require(camera.ShakeCount == 1 && camera.LastShakeType == CameraShakeTypeId.Default,
+					"Caught requests camera shake once");
+				Require(vignette.color.r > vignette.color.g && vignette.color.a > 0.4f,
+					"Caught pulses the red vignette");
 				await control.Close(false, default);
 				fixture.Run.ReplaceAnswersCopied(9);
 				exam.ReactToChanges();
@@ -323,7 +340,8 @@ namespace Code.Editor
 				await control.Open(false, default);
 				Require(Field<TMP_Text>(fields, "answers").text == "ANSWERS 9 / 12", "Reseed");
 				await control.Close(false, default);
-				report.AppendLine("PASS outcome priority, close unsubscription and reopen seed");
+				report.AppendLine(
+					"PASS caught shake and vignette pulse, outcome priority, close unsubscription and reopen seed");
 				report.AppendLine("DONE");
 			}
 			catch (Exception exception)

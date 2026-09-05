@@ -1,6 +1,8 @@
 using System;
 using System.Threading;
 using Code.Gameplay.Bell.Queries;
+using Code.Gameplay.Camera;
+using Code.Gameplay.Camera.Services;
 using Code.Gameplay.Duck;
 using Code.Gameplay.Duck.Behaviours;
 using Code.Gameplay.Duck.Queries;
@@ -61,6 +63,7 @@ namespace Code.UI.Gameplay
 		private bool _isHot;
 		private float _microphoneLevel;
 		private float _quietSeconds;
+		private float _counterPunchTimeLeft;
 
 		private IExamQuery _exam;
 		private IBellQuery _bell;
@@ -71,6 +74,7 @@ namespace Code.UI.Gameplay
 		private ITeacherQuery _teacher;
 		private INeighbourQuery _neighbours;
 		private IInputQuery _input;
+		private ICameraFactory _cameraFactory;
 
 		private static readonly Color OkTint = new Color32(79, 203, 122, 255);
 		private static readonly Color WarnTint = new Color32(255, 154, 61, 255);
@@ -82,6 +86,8 @@ namespace Code.UI.Gameplay
 		private const float QuietMinimumLevel = 20f;
 		private const float QuietMaximumLevel = 40f;
 		private const float QuietSeconds = 0.5f;
+		private const float CounterPunchScale = 0.22f;
+		private const float CounterPunchSeconds = 0.32f;
 
 		[Inject]
 		public void Construct(
@@ -93,7 +99,8 @@ namespace Code.UI.Gameplay
 			IDuckFactory duckFactory,
 			ITeacherQuery teacher,
 			INeighbourQuery neighbours,
-			IInputQuery input)
+			IInputQuery input,
+			ICameraFactory cameraFactory)
 		{
 			_exam = exam;
 			_bell = bell;
@@ -104,6 +111,7 @@ namespace Code.UI.Gameplay
 			_teacher = teacher;
 			_neighbours = neighbours;
 			_input = input;
+			_cameraFactory = cameraFactory;
 		}
 
 		private void OnRectTransformDimensionsChange()
@@ -130,6 +138,8 @@ namespace Code.UI.Gameplay
 			hintBubble.gameObject.SetActive(false);
 			vignette.Hide();
 			flashes.Clear();
+			_counterPunchTimeLeft = 0f;
+			answers.rectTransform.localScale = Vector3.one;
 			_exam.OnAnswersCopiedChanged += HandleAnswers;
 			_exam.OnAnswerCopied += HandleAnswerCopied;
 			_exam.OnWrongInput += HandleWrongInput;
@@ -194,6 +204,8 @@ namespace Code.UI.Gameplay
 			hintBubble.gameObject.SetActive(false);
 			vignette.Hide();
 			flashes.Clear();
+			_counterPunchTimeLeft = 0f;
+			answers.rectTransform.localScale = Vector3.one;
 		}
 
 		private void BindWorldViews()
@@ -267,11 +279,27 @@ namespace Code.UI.Gameplay
 
 			RefreshVignette();
 			RefreshQuietMicrophone();
+			RefreshCounterPunch();
+		}
+
+		private void RefreshCounterPunch()
+		{
+			if (_counterPunchTimeLeft <= 0f)
+				return;
+
+			float elapsed = Mathf.Min(Time.unscaledDeltaTime, CounterPunchSeconds * 0.25f);
+			_counterPunchTimeLeft = Mathf.Max(0f, _counterPunchTimeLeft - elapsed);
+			float progress = 1f - _counterPunchTimeLeft / CounterPunchSeconds;
+			float scale = 1f + Mathf.Sin(progress * Mathf.PI) * CounterPunchScale;
+			answers.rectTransform.localScale = Vector3.one * scale;
 		}
 
 		private void RefreshVignette()
 		{
-			if (_finished || _teacher.IsFacingClass() == false)
+			if (_finished)
+				return;
+
+			if (_teacher.IsFacingClass() == false)
 			{
 				vignette.Hide();
 				return;
@@ -415,7 +443,12 @@ namespace Code.UI.Gameplay
 			}
 		}
 
-		private void HandleAnswerCopied(int questionIndex) => flashes.Show("ANSWER COPIED!", OkTint);
+		private void HandleAnswerCopied(int questionIndex)
+		{
+			flashes.Show("ANSWER COPIED!", OkTint);
+			answers.rectTransform.localScale = Vector3.one;
+			_counterPunchTimeLeft = CounterPunchSeconds;
+		}
 
 		private void HandleWrongInput(int questionIndex) => flashes.Show("PENCIL SNAP!", DangerTint);
 
@@ -459,8 +492,17 @@ namespace Code.UI.Gameplay
 			});
 			_finished = true;
 			RefreshDuck();
-			vignette.Hide();
 			flashes.Clear();
+
+			if (outcome == ExamOutcome.Caught)
+			{
+				_cameraFactory.CreateShakeRequest(CameraShakeTypeId.Default);
+				vignette.PulseCaught();
+			}
+			else
+			{
+				vignette.Hide();
+			}
 
 			if (_reportCardRequested)
 				return;
