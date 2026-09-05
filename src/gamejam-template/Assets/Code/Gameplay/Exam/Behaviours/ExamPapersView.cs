@@ -114,13 +114,21 @@ namespace Code.Gameplay.Exam.Behaviours
 
 			string answer = visible ? AnswerOf(question) : string.Empty;
 			if (paper.Word != null)
-				paper.Word.text = question.Type == QuestionType.Pick ? string.Empty : answer;
+			{
+				paper.Word.text = question.Type switch
+				{
+					QuestionType.Pick when visible => $"CIRCLED: {question.CorrectOptionIndex + 1}",
+					QuestionType.Pick => string.Empty,
+					_ => answer
+				};
+			}
 
 			for (int index = 0; index < paper.Picks.Length; index++)
 			{
 				if (paper.Picks[index] != null)
 					paper.Picks[index].text = visible && question.Type == QuestionType.Pick
-						? $"{index + 1}. {question.Options[index]}" : string.Empty;
+						? index == question.CorrectOptionIndex ? $"[{question.Options[index]}]" : question.Options[index]
+						: string.Empty;
 			}
 
 			if (paper.PickCircle != null)
@@ -143,10 +151,10 @@ namespace Code.Gameplay.Exam.Behaviours
 
 				_answerBuilder.Append(stroke switch
 				{
-					StrokeDirection.Up => "↑",
-					StrokeDirection.Right => "→",
-					StrokeDirection.Down => "↓",
-					_ => "←"
+					StrokeDirection.Up => "[↑]",
+					StrokeDirection.Right => "[→]",
+					StrokeDirection.Down => "[↓]",
+					_ => "[←]"
 				});
 			}
 
