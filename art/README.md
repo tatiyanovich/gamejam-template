@@ -1,5 +1,15 @@
 # COPYCAT / Art
 
+## D7 — утка
+
+[Состояния и бросок](previews/d7/state_sheet.png) · [Спрайты и pivots](previews/d7/layer_sheet.png) · [На парте](previews/d7/classroom_desk.png) · [Hover](previews/d7/classroom_hover.png) · [Бросок](previews/d7/classroom_throw.png) · [Конфискована](previews/d7/classroom_confiscated.png) · [480×270](previews/d7/classroom_thumbnail.png)
+
+`src/d7/` — 4 SVG утки, шаблон `keycap.svg` и `layout.json`; `exports/d7/` — 5 прозрачных PNG @2x и автономные SVG; `previews/d7/` — 7 проверочных PNG/SVG. `duck.mjs` подключён к общей сборке и использует `neighbourComposer` (класс D2, соседи D5, тестовые позы D1, листы‑заглушки). Кейкапы генерируются из `keycap.svg` подстановкой `{{KEYCAP_LABEL}}` по словарю `layout.keycaps` (`q` → `Q`); буква запечена (Luckiest Guy). Утиные спрайты текста не содержат — сборка это проверяет.
+
+`layout.json` — координаты @1x с Y вниз. `desk.duck` (1650,905) — pivot сидящей утки на своей парте, `desk.keycap` (1650,950) — центр кейкапа, оба sortingOrder 33; `desk.shadow` — эллипс тени на парте (рисуется сценой, не спрайтом); `idleBob` ±6 px / 1.2 с, `hoverScale` 1.1. `throw.points` — три точки дуги (старт, вершина, приземление) с масштабом 1 → 0.42; `arcPoint(t)` в `duck.mjs` строит квадратичную Безье через все три точки; `durationSeconds` 0.6, `rotationDegrees` 720, `frameSwapSeconds` 0.1 между `duck_fly_1`/`duck_fly_2`. `confiscated` — `duck_sad` на учительском столе (815,532), scale 0.55, sortingOrder 11. Normalized pivot = `(px/width, 1-py/height)`, мировая позиция `((x-960)/100, (540-y)/100)`, угол Z = минус SVG‑угол.
+
+Проверено в 1920×1080 и 480×270: утка и `Q` читаются на парте и в миниатюре, не задевают лист и лапы котёнка; кадры полёта различимы под любым углом (state sheet: 7 положений 0–720°); грустная утка на учительском столе читается. Импорт в `Content/Duck/` — D11, твин броска — E4.
+
 ## D6 — листы и ввод
 
 [Состояния](previews/d6/state_sheet.png) · [Спрайты и pivots](previews/d6/layer_sheet.png) · [Strokes](previews/d6/classroom_strokes.png) · [Pick](previews/d6/classroom_pick.png) · [Word](previews/d6/classroom_word.png) · [COPIED](previews/d6/classroom_copied.png) · [Закрыто лапой](previews/d6/classroom_covered.png) · [480×270](previews/d6/classroom_thumbnail.png)

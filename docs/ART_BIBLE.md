@@ -53,6 +53,16 @@
 
 Весь текст листов (шапка `CAT ACADEMY — FINAL EXAM`, `Student: <имя>`, вопрос, `Answer: ____`, имя соседа, варианты Pick, буквы Word) — TextMeshPro Patrick Hand в Unity, в спрайтах текста нет; координаты, размеры шрифта, ряд ответа, ячейки Pick, позиции листов на партах и кольца над головами — `art/src/d6/layout.json`. Штамп — единственный спрайт с запечённым текстом (Luckiest Guy, D‑39). Строки превью взяты из `GDD §13.1` (`exam_samples.json` — только для превью, геймплей читает `ExamConfig`). Лист соседа стоит так, что ряд ответа попадает под лапу D5: `classroom_covered.png` показывает Q9 полностью скрытым. Правильный ввод: глиф `done` на листе соседа и копия на своём листе; ошибка — глиф `wrong` / красная буква; Pick с фазы 3 — круг с alpha 0.35; кольцо — `Image` Filled Radial360 от верха по часовой поверх `ring_timer_track`. Импорт и префабы — D11, привязка к ECS — A5/B3/E3.
 
+## D7 — утка
+
+[Состояния и бросок](../art/previews/d7/state_sheet.png) · [Спрайты и pivots](../art/previews/d7/layer_sheet.png) · [На парте](../art/previews/d7/classroom_desk.png) · [Hover](../art/previews/d7/classroom_hover.png) · [Бросок](../art/previews/d7/classroom_throw.png) · [Конфискована](../art/previews/d7/classroom_confiscated.png) · [480×270](../art/previews/d7/classroom_thumbnail.png).
+
+Готовы 5 спрайтов §5.4: `duck_idle`, `duck_fly_1` (крылья вверх, испуганный глаз), `duck_fly_2` (крылья вниз, открытый клюв — кадр писка), `duck_sad` (опущенное веко, слеза, поникший клюв) — все на общем холсте 140×130 @1x, и `keycap_q` 64×64. Утка смотрит влево, к котёнку и классу; силуэт и тень взяты из принятой утки D1, уменьшены до размера из списка. Pivot сидящих кадров — низ по центру (70,120), кадров полёта — центр (70,72), чтобы код вращал их вокруг себя. Исходники — `art/src/d7/`, PNG @2x и автономные SVG — `art/exports/d7/`, `duck.mjs` в общей сборке. PPU 200, Bilinear, no mipmaps, без trim.
+
+Кейкап собирается из шаблона `keycap.svg` подстановкой токена `{{KEYCAP_LABEL}}` — буква запечена в спрайт (Luckiest Guy, D‑42); тем же шаблоном D8 делает `keycap_space`, `keycap_m`, `keycap_1..4`. Позиции в `art/src/d7/layout.json`: утка на парте — pivot (1650,905), кейкап под ней (1650,950), sortingOrder 33 (над листом, под котёнком); тень на парте — эллипс INK 0.12 из §1.8, в спрайт не запечена. Idle bob ±6 px / 1.2 с и hover ×1.1 — из §7. Бросок: три точки дуги (1650,855) → (1150,210) → (600,440) со scale 1 → 0.42, 0.6 с, 720°, смена кадра каждые 0.1 с — утка летит через весь класс над учительницей и падает у доски слева, где её видно между Whiskerstein и учительским столом. Конфискованная `duck_sad` стоит на учительском столе в (815,532), scale 0.55, между столом (10) и учительницей спереди (12).
+
+Проверено в 1920×1080 и 480×270: утка и кейкап `Q` читаются на парте и в миниатюре, не перекрывают лист и лапы котёнка; кадры полёта различимы при любом угле поворота (лист состояний показывает 7 положений 0–720°); грустная утка на учительском столе читается как утка, а не пятно. Превью используют класс D2, соседей D5, тестовые позы D1 и листы‑заглушки. Импорт в `Content/Duck/` — D11, твин броска и возврат в руках учительницы — E4, логика — `Gameplay/Duck`.
+
 ## 1. Стиль: «Chunky Vector Cartoon»
 
 Референс‑ощущение: флэт‑мультяшность уровня Adventure Time / Cartoon Network shorts, кооп‑симуляторные коты с огромными глазами.
@@ -156,8 +166,9 @@ art/
 `glyph_pick_circle.png` 220×100, `stamp_copied.png` 300×120, `ring_timer.png` + `ring_timer_track.png` 160×160 (radial fill в UI поверх трека), `scribble_1..4.png` 240×40.
 Все 22 готовы в D6 (`art/exports/d6/`), текст листов — TMP по `art/src/d6/layout.json`.
 
-### 5.4 Утка (`Content/Duck/`)
-`duck_idle.png` 140×130, `duck_fly_1.png`, `duck_fly_2.png`, `duck_sad.png`, `keycap_q.png` 64×64.
+### 5.4 Утка (`Content/Duck/`) — группа `Copycat_Duck`
+`duck_idle.png` 140×130, `duck_fly_1.png`, `duck_fly_2.png`, `duck_sad.png` (все 140×130), `keycap_q.png` 64×64.
+Все 5 готовы в D7 (`art/exports/d7/`), позиции, дуга броска и место конфискации — `art/src/d7/layout.json`. Кейкапы D8 собираются из того же шаблона `art/src/d7/keycap.svg`.
 
 ### 5.5 UI (`Content/UI/Copycat/`) — группа `Copycat_UI`
 `panel_paper_9slice.png` 128×128 (borders 32), `button_yellow_9slice.png` (normal/hover/pressed), `bar_frame.png`, `bar_fill.png`, `meow_circle.png` 240×240,

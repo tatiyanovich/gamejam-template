@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <g stroke="{{INK}}" stroke-width="6" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M12 10 L52 8 Q58 8 58 14 L58 54 Q58 60 52 60 L12 61 Q6 61 6 55 L5 16 Q5 10 12 10Z" fill="{{PAPER_SHADE}}"/>
+    <path d="M13 7 L51 5 Q57 5 57 11 L57 43 Q57 49 51 49 L13 50 Q7 50 7 44 L6 13 Q6 7 13 7Z" fill="{{PAPER}}"/>
+  </g>
+  <text x="32" y="41" font-family="Luckiest Guy" font-size="34" fill="{{INK}}" text-anchor="middle">{{KEYCAP_LABEL}}</text>
+</svg>

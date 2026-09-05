@@ -1,0 +1,21 @@
+<svg width="140" height="130" viewBox="0 0 140 130" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <clipPath id="duck-clip">
+            <path fill="#000000" stroke="none" d="M 86 66 Q 110 78 129 54 Q 142 96 110 110 Q 76 126 31 108 Q 11 96 19 71 Q 6 59 14 36 Q 23 12 47 17 Q 75 21 72 47 Q 71 62 86 66 Z"/>
+        </clipPath>
+    </defs>
+    <g>
+        <path fill="#ffd83d" stroke="#2a1f1a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" d="M 62 82 Q 38 96 34 126 Q 60 118 84 100 Z"/>
+        <path fill="#ffd83d" stroke="#2a1f1a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" d="M 104 86 Q 120 100 136 122 Q 132 96 122 78 Z"/>
+        <g>
+            <path fill="#ffd83d" stroke="#2a1f1a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" d="M 86 66 Q 110 78 129 54 Q 142 96 110 110 Q 76 126 31 108 Q 11 96 19 71 Q 6 59 14 36 Q 23 12 47 17 Q 75 21 72 47 Q 71 62 86 66 Z"/>
+        </g>
+        <g clip-path="url(#duck-clip)">
+            <path fill="#d1b132" stroke="none" d="M 126 68 Q 132 114 27 99 L 23 130 L 146 132 L 147 65 Z"/>
+        </g>
+        <path fill="#ff8a3d" stroke="#2a1f1a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" d="M 28 48 Q 4 40 6 54 Q 16 60 30 56 Z"/>
+        <path fill="#ff8a3d" stroke="#2a1f1a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" d="M 28 58 Q 4 66 8 78 Q 18 84 32 70 Z"/>
+        <path fill="#fff6e3" stroke="#2a1f1a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" d="M 51 39 C 51 45.075127 46.970562 50 42 50 C 37.029438 50 33 45.075127 33 39 C 33 32.92487 37.029438 28 42 28 C 46.970562 28 51 32.92487 51 39 Z"/>
+        <path fill="#2a1f1a" stroke="none" d="M 47 37 C 47 39.20914 45.656853 41 44 41 C 42.343147 41 41 39.20914 41 37 C 41 34.79086 42.343147 33 44 33 C 45.656853 33 47 34.79086 47 37 Z"/>
+    </g>
+</svg>

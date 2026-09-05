@@ -1,0 +1,51 @@
+[
+  {
+    "name": "state_sheet",
+    "width": 1920,
+    "height": 1000,
+    "scale": 1,
+    "sha256": "ef6c8d4815cc0d3eef9e8432bae3bfabd8a705cd6f88ca4891108d7f059edace"
+  },
+  {
+    "name": "layer_sheet",
+    "width": 1300,
+    "height": 420,
+    "scale": 1,
+    "sha256": "c0d52ba14899b6089d5c2097ba1c4cd72660bce5c03f21aa5a274a04ca355010"
+  },
+  {
+    "name": "classroom_desk",
+    "width": 1920,
+    "height": 1080,
+    "scale": 1,
+    "sha256": "b41796c89988c9dde940c0b3e42745266d6dee588a82676f35e9ed41ffa18806"
+  },
+  {
+    "name": "classroom_hover",
+    "width": 1920,
+    "height": 1080,
+    "scale": 1,
+    "sha256": "85d006695a05fdb4fd3c75a888550671e13a927b6b27bbce0423bd4f4eeb989c"
+  },
+  {
+    "name": "classroom_throw",
+    "width": 1920,
+    "height": 1080,
+    "scale": 1,
+    "sha256": "73ed00a53014fce1ff11fe450c84821c7a3c8bd4af3731aeed086f08f7aa17db"
+  },
+  {
+    "name": "classroom_confiscated",
+    "width": 1920,
+    "height": 1080,
+    "scale": 1,
+    "sha256": "fa41190d4869f530b2b63f3d0245f56553f8a3a708fddfb9578637a44885adc2"
+  },
+  {
+    "name": "classroom_thumbnail",
+    "width": 480,
+    "height": 270,
+    "scale": 0.25,
+    "sha256": "a2b993c592f894172734facceecaa1c49e7844cf3bb54855ea76a04da1eb3723"
+  }
+]

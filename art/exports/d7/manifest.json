@@ -1,0 +1,37 @@
+[
+  {
+    "name": "duck_idle",
+    "width": 280,
+    "height": 260,
+    "scale": 2,
+    "sha256": "f9bbdd82c265f3069bbe15eb565a1290800ad792b1ed2951e223be49211075d5"
+  },
+  {
+    "name": "duck_fly_1",
+    "width": 280,
+    "height": 260,
+    "scale": 2,
+    "sha256": "aa03545a6b978d2fab25c0cbde34a13d3d0d7d1a459fbd8b81a0598bea688a4a"
+  },
+  {
+    "name": "duck_fly_2",
+    "width": 280,
+    "height": 260,
+    "scale": 2,
+    "sha256": "e536258876958ef8605aa7d8eb906fccfbcedded5ecf720890af8edb55394ae9"
+  },
+  {
+    "name": "duck_sad",
+    "width": 280,
+    "height": 260,
+    "scale": 2,
+    "sha256": "9a7bebe7f4ef9818cda7e34bcbf24687a620bcc13570b78c6bca02efbdbb1c7f"
+  },
+  {
+    "name": "keycap_q",
+    "width": 128,
+    "height": 128,
+    "scale": 2,
+    "sha256": "c46addb3cf27a57f95a09cc0e77a95ceec4c77231c290aca6855af04b99066f5"
+  }
+]

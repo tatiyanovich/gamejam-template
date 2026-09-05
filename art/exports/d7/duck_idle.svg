@@ -1,0 +1,18 @@
+<svg width="140" height="130" viewBox="0 0 140 130" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <clipPath id="duck-clip">
+            <path fill="#000000" stroke="none" d="M 86 70 Q 110 82 129 58 Q 142 100 110 114 Q 76 132 31 112 Q 11 100 19 75 Q 6 63 14 40 Q 23 16 47 21 Q 75 25 72 51 Q 71 66 86 70 Z"/>
+        </clipPath>
+    </defs>
+    <g>
+        <g>
+            <path fill="#ffd83d" stroke="#2a1f1a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" d="M 86 70 Q 110 82 129 58 Q 142 100 110 114 Q 76 132 31 112 Q 11 100 19 75 Q 6 63 14 40 Q 23 16 47 21 Q 75 25 72 51 Q 71 66 86 70 Z"/>
+        </g>
+        <g clip-path="url(#duck-clip)">
+            <path fill="#d1b132" stroke="none" d="M 126 72 Q 132 118 27 103 L 23 134 L 146 136 L 147 69 Z"/>
+        </g>
+        <path fill="#ff8a3d" stroke="#2a1f1a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" d="M 27 56 Q 3 54 4 68 Q 11 80 35 73 Z"/>
+        <path fill="#2a1f1a" stroke="none" d="M 47 45 C 47 48.865993 44.761425 52 42 52 C 39.238575 52 37 48.865993 37 45 C 37 41.134007 39.238575 38 42 38 C 44.761425 38 47 41.134007 47 45 Z"/>
+        <path fill="none" stroke="#2a1f1a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" d="M 58 88 Q 82 74 100 87 Q 85 106 63 99"/>
+    </g>
+</svg>
