@@ -1,5 +1,6 @@
 using Code.Gameplay.Camera.Services;
 using Code.Gameplay.Debugging.Services;
+using Code.Gameplay.Exam.Services;
 using Code.Gameplay.Movement.Services;
 using Code.Gameplay.Vfx.Services;
 using Framework.Instantiation;
@@ -27,6 +28,7 @@ namespace Code.Infrastructure.Installers
 		{
 			Container.BindInterfacesTo<CameraFactory>().AsSingle();
 			Container.BindInterfacesTo<VfxFactory>().AsSingle();
+			Container.BindInterfacesTo<ExamFactory>().AsSingle();
 		}
 
 		private void BindDebugServices()

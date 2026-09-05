@@ -70,6 +70,10 @@
 - **D‑21 · 05.09** · Камеру экзамена создаёт `InitializeExamCameraSystem` через `ICameraFactory.CreateStaticCamera` в начале `GameplayCoreFeature`. · Раньше камера спавнилась вместе с игроком в `InitializePlayerSystem`; камера класса статична, ей не за кем следить.
 - **D‑22 · 05.09** · Один сервис конфигов на экзамен: `IExamConfigsService` грузит и `exam_config`, и `difficulty_config`. `IDifficultyService` (A12) берёт фазы у него, своего конфиг‑сервиса не имеет. · Два сервиса на два ассета одной фичи — лишний файл; фазы и вопросы всегда нужны вместе.
 - **D‑23 · 05.09** · Длина Strokes/Word и набор типов вопросов — только в `ExamConfig` (контент), в `DifficultyConfig` их нет. Фаза 1 без проверок задана флагом `teacherChecks: false`, а не нулевым `CheckDelay`. · Колонки `GDD §11` «Strokes / Word» и «Типы» — ограничение для автора контента, рантайм их не читает; флаг читается однозначно, ноль — нет.
+- **D‑24 · 05.09** · Одна фабрика `IExamFactory` на обе сущности экзамена (`CreateRun`, `CreateQuestion`) вместо двух отдельных фабрик. · Та же логика, что в D‑22: две фабрики на одну фичу — лишний файл, обе читают `IExamConfigsService`.
+- **D‑25 · 05.09** · Сущность вопроса получает только payload‑компоненты своего типа (`AnswerStrokes` / `AnswerOptions`+`CorrectOptionIndex` / `AnswerWord`), а завершённость ответа — единая пара `AnswerProgress` >= `AnswerLength`. · Валидация ввода (A5) отбирает вопросы матчером по payload, без `if` по типу внутри цикла; `MarkAnswerCopiedSystem` один на все три типа.
+- **D‑26 · 05.09** · Пауза после штампа `COPIED` — `LifetimeLeft` на сущности вопроса (её уничтожает `LifetimeFeature`), число — `questionPauseSeconds` в `ExamConfig` (0.6 с). `SpawnNextQuestionSystem` спавнит следующий вопрос, когда сущности вопроса нет. · Не нужен ни свой таймер, ни своя система очистки; «нет вопроса → спавним» читается однозначно.
+- **D‑27 · 05.09** · В скриптах Unity MCP `RunCommand` не пишем `using System.Reflection` — тулза падает с `UNEXPECTED_ERROR`; рефлексия работает через полные имена (`System.Reflection.BindingFlags.…`). · Проверено на A3; правило записано в `.claude/rules/Unity MCP Editor Work.md`.
 
 ## 5. Маппинг дизайна на код шаблона
 
@@ -91,6 +95,10 @@
 | Аудио | `Infrastructure/Audio/` `IAudioService` (SFX по enum `SfxId`, музыка, авто‑дакинг под микрофон) |
 | Input | `Gameplay/Input` расширяем: `LeanHeld`, `StrokeInput`, `PickInput`, `LetterInput`, `MeowKeyPressed`, `DuckKeyPressed` в Input‑контексте |
 | Камера экзамена | `InitializeExamCameraSystem` (`Gameplay/Camera/Systems`) — статичная камера из `ICameraFactory.CreateStaticCamera`, префаб `camera_prefab`, регистрируется на узел `Exam` через `BranchCameraRegistrar` |
+| Прогресс экзамена | сущность `ExamRun` (`CurrentQuestionIndex`, `AnswersCopied`, `ExamElapsedSeconds`, `ExamFinished`, `ExamOutcomeComponent`) и сущность `Question` — компоненты в `Gameplay/Exam/ExamComponents.cs`, фича `ExamFeature` в `GameplayCoreFeature` |
+| Создание сущностей экзамена | `IExamFactory` (`Gameplay/Exam/Services`): `CreateRun` / `CreateQuestion`, биндится в `GameplayInstaller.BindFactories` |
+| Исход попытки | enum `ExamOutcome` (`None`/`Passed`/`Caught`/`BellRang`), компонент `ExamOutcomeComponent` на `ExamRun` |
+| Событие «ответ списан» | `AnswerCopiedEvent` (поле `QuestionIndex`), потребитель — `AdvanceExamRunOnAnswerCopiedSystem` |
 
 Сцены: `Boot` (как есть), `Launch` (меню, фон — пустой класс), `Gameplay` (класс с партами; всё, что не UI, — SpriteRenderer‑ы в мире, камера ортографическая, 1920×1080 → размер 19.2×10.8 юнита при PPU 100).
 
@@ -164,3 +172,9 @@ Unity: `UnityWebRequest.Post(url, json, "application/json")`, редиректы
 - 2026‑09‑05 11:05 · Claude · A2: через MCP созданы ассеты `ExamConfig.asset` (20 вопросов из `GDD §13.1`) и `DifficultyConfig.asset` (5 фаз из `GDD §11`), оба в Addressables‑группе `Configs` как `exam_config` / `difficulty_config` · `Assets/AddressableResources/Configs/{Exam,Difficulty}`
 - 2026‑09‑05 11:05 · Claude · A2: в `GDD §13.1` заменил неразрывные дефисы на обычные в `nap-to-chaos` и `cardboard-box` — строки в игре именно такие · `docs/GDD.md`
 - 2026‑09‑05 11:05 · Claude · A2: проверка — компиляция чистая, Play Mode доходит до `StartLaunch`, `PrepareAssetsState` грузит оба конфига без ошибок · Unity 6000.3.22f1
+- 2026‑09‑05 11:40 · Claude · A3: компоненты экзамена (`ExamRun`, `Question`, `AnswerProgress`/`AnswerLength`, `AnswerCopiedEvent`), enum `ExamOutcome` · `Assets/Code/Gameplay/Exam/ExamComponents.cs`, `ExamOutcome.cs`
+- 2026‑09‑05 11:40 · Claude · A3: `IExamFactory`/`ExamFactory` (`CreateRun`, `CreateQuestion` с payload по типу вопроса), биндинг в `GameplayInstaller` · D‑24, D‑25
+- 2026‑09‑05 11:40 · Claude · A3: системы `InitializeExamRunSystem`, `SpawnNextQuestionSystem`, `AccumulateExamTimeSystem`, `MarkAnswerCopiedSystem`, `AdvanceExamRunOnAnswerCopiedSystem`, `FinishExamOnLastAnswerSystem`; `ExamFeature` добавлена в `GameplayCoreFeature` перед `MovementUpdateFeature` · `Assets/Code/Gameplay/Exam`
+- 2026‑09‑05 11:40 · Claude · A3: в `ExamConfig` добавлено `questionPauseSeconds` = 0.6, значение записано в `ExamConfig.asset` через MCP · D‑26
+- 2026‑09‑05 11:40 · Claude · A3: Jenny‑Gen (240 файлов), компиляция чистая; Play Mode — Q1 «How many lives does a cat claim to have?» (Strokes, Left, Up|Right), ответ → счётчик 1 и спавн Q2, на 20‑м ответе `ExamFinished` + `Passed`, elapsed замирает, ошибок в консоли нет · Unity 6000.3.22f1
+- 2026‑09‑05 11:40 · Claude · Дополнил правило Unity MCP: `using System.Reflection` роняет `RunCommand`, добавлен рецепт чтения ECS‑состояния в Play Mode · `.claude/rules/Unity MCP Editor Work.md`, D‑27

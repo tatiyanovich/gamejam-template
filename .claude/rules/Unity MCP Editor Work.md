@@ -108,6 +108,41 @@ entry.address = "human_readable_address";
 settings.SetDirty(AddressableAssetSettings.ModificationEvent.EntryMoved, entry, true);
 ```
 
+### Never write `using System.Reflection`
+
+`RunCommand` dies with `UNEXPECTED_ERROR: Object reference not set to an instance of an object` — before compiling —
+whenever the script contains a `using System.Reflection;` directive. Reflection itself works fine; only the directive is fatal.
+Spell the types out instead:
+
+```csharp
+entityType.GetMethod("HandleStart",
+    System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+
+foreach (System.Reflection.FieldInfo field in component.GetType().GetFields())
+```
+
+### Reading live ECS state in Play Mode
+
+The sandbox references `Assembly-CSharp` and Zenject but **not** the Entitas assembly, so a `GameContext`/`GameEntity`
+typed variable fails with `CS0012`. Resolve into `object` and go through reflection:
+
+```csharp
+Zenject.SceneContext[] contexts = UnityEngine.Object.FindObjectsByType<Zenject.SceneContext>(FindObjectsSortMode.None);
+object game = contexts[0].Container.TryResolve<GameContext>();
+
+IEnumerable entities = (IEnumerable)game.GetType().GetMethod("GetEntities", Type.EmptyTypes).Invoke(game, null);
+
+foreach (object entity in entities)
+{
+    Type entityType = entity.GetType();
+    bool isExamRun = (bool)entityType.GetProperty("isExamRun").GetValue(entity);
+    entityType.GetMethod("ReplaceAnswerProgress").Invoke(entity, new object[] { 3 });
+}
+```
+
+To drive gameplay over several frames, subscribe a static method to `EditorApplication.update` and unsubscribe it from
+inside on a terminal condition. It ticks slowly while the Editor is unfocused — budget a few seconds per tick.
+
 ### Resolve a project type by name (when the MCP-compiled CommandScript can't `using` your assembly)
 
 ```csharp

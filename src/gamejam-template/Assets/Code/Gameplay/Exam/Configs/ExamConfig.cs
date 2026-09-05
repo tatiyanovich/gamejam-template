@@ -9,7 +9,9 @@ namespace Code.Gameplay.Exam.Configs
 	public class ExamConfig : ScriptableObject
 	{
 		[SF] private List<QuestionDefinition> questions = new();
+		[SF] private float questionPauseSeconds = 0.6f;
 
 		public IReadOnlyList<QuestionDefinition> Questions => questions;
+		public float QuestionPauseSeconds => questionPauseSeconds;
 	}
 }

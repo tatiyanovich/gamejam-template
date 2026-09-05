@@ -173,3 +173,4 @@ MonoBehaviour:
     options: []
     correctOptionIndex: 0
     word: 
+  questionPauseSeconds: 0.6
