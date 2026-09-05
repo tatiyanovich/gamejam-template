@@ -22,7 +22,7 @@ MonoBehaviour:
     word: 
   - text: 'Complete: cat + empty cardboard box = ?'
     type: 1
-    neighbour: 1
+    neighbour: 2
     strokes: 040000000100000002000000
     options: []
     correctOptionIndex: 0

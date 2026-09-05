@@ -8,6 +8,7 @@ using Code.Gameplay.Duck.Behaviours;
 using Code.Gameplay.Duck.Queries;
 using Code.Gameplay.Duck.Services;
 using Code.Gameplay.Exam;
+using Code.Gameplay.Exam.Behaviours;
 using Code.Gameplay.Exam.Queries;
 using Code.Gameplay.Input.Behaviours;
 using Code.Gameplay.Input.Queries;
@@ -53,6 +54,7 @@ namespace Code.UI.Gameplay
 		private DuckView _duckView;
 		private TeacherView _teacherView;
 		private KittenView _kittenView;
+		private ExamPapersView _papersView;
 		private bool _worldViewsBound;
 		private float _speechSeconds;
 		private int _watchingLine;
@@ -215,8 +217,15 @@ namespace Code.UI.Gameplay
 			_duckView = FindFirstObjectByType<DuckView>(FindObjectsInactive.Include);
 			_teacherView = FindFirstObjectByType<TeacherView>(FindObjectsInactive.Include);
 			_kittenView = FindFirstObjectByType<KittenView>(FindObjectsInactive.Include);
+			_papersView = FindFirstObjectByType<ExamPapersView>(FindObjectsInactive.Include);
+			if (_papersView == null)
+			{
+				GameObject artRoot = GameObject.Find("CopycatArt");
+				if (artRoot != null)
+					_papersView = artRoot.AddComponent<ExamPapersView>();
+			}
 			if (_pawTimers.Length < 2 || _neighbourViews.Length < 2 || _duckView == null
-				|| _teacherView == null || _kittenView == null)
+				|| _teacherView == null || _kittenView == null || _papersView == null)
 				return;
 
 			foreach (PawTimerView timer in _pawTimers)
@@ -228,6 +237,7 @@ namespace Code.UI.Gameplay
 			_duckView.Bind(_duck, _teacherView.transform);
 			_teacherView.Bind(_teacher);
 			_kittenView.Bind(_input, _exam, _teacher);
+			_papersView.Bind(_exam);
 			_worldViewsBound = true;
 		}
 
@@ -254,11 +264,15 @@ namespace Code.UI.Gameplay
 			if (_kittenView != null)
 				_kittenView.Unbind();
 
+			if (_papersView != null)
+				_papersView.Unbind();
+
 			_pawTimers = Array.Empty<PawTimerView>();
 			_neighbourViews = Array.Empty<NeighbourView>();
 			_duckView = null;
 			_teacherView = null;
 			_kittenView = null;
+			_papersView = null;
 			_worldViewsBound = false;
 		}
 
