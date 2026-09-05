@@ -132,6 +132,7 @@ namespace Code.UI.Attendance
 		private void StartExam()
 		{
 			_cameraSwitcher.SwitchTo(LoopNodeId.Exam);
+			_coreLoopRequestFactory.CreateCloseBranchRequest(LoopNodeId.Exam);
 			_coreLoopRequestFactory.CreateGoToBranchRequest(LoopNodeId.Exam);
 		}
 

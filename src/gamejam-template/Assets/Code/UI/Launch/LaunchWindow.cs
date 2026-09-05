@@ -75,6 +75,7 @@ namespace Code.UI.Launch
 			_isStarting = true;
 			SetInteractable(false);
 			_cameraSwitch.SwitchTo(LoopNodeId.Exam);
+			_coreLoopRequestFactory.CreateCloseBranchRequest(LoopNodeId.Exam);
 			_coreLoopRequestFactory.CreateGoToBranchRequest(LoopNodeId.Exam);
 		}
 
