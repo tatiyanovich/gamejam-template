@@ -15,6 +15,11 @@ MonoBehaviour:
   m_GroupName: Configs
   m_GUID: 413413c0cf0f3413987ae5fb219c38cf
   m_SerializeEntries:
+  - m_GUID: 4b8e0220591e44f10992dd8f6460601d
+    m_Address: meow_config
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 583d21e91a8b94f42ac6b1eec8c3b336
     m_Address: exam_config
     m_ReadOnly: 0

@@ -2,11 +2,13 @@ using Code.Gameplay.Camera.Services;
 using Code.Gameplay.CoreLoop;
 using Code.Gameplay.Exam.Services;
 using Code.Gameplay.Lifetime;
+using Code.Gameplay.Meow.Services;
 using Code.Infrastructure.EntityComponentSystem.Destruct.Services;
 using Code.Infrastructure.EntityComponentSystem.Installers;
 using Code.Infrastructure.ErrorHandler;
 using Code.Infrastructure.Health;
 using Code.Infrastructure.Input;
+using Code.Infrastructure.Microphone;
 using Code.Infrastructure.Randomization;
 using Code.Infrastructure.Satellite;
 using Code.Infrastructure.Settings.Services;
@@ -47,6 +49,7 @@ namespace Code.Infrastructure.Installers
 		{
 			Container.BindInterfacesTo<CameraConfigsService>().AsSingle();
 			Container.BindInterfacesTo<ExamConfigsService>().AsSingle();
+			Container.BindInterfacesTo<MeowConfigsService>().AsSingle();
 		}
 
 		private void BindInfrastructureServices()
@@ -110,6 +113,7 @@ namespace Code.Infrastructure.Installers
 		private void BindInputServices()
 		{
 			Container.BindInterfacesTo<KeyboardInputService>().AsSingle();
+			Container.BindInterfacesTo<MicrophoneService>().AsSingle();
 		}
 	}
 }

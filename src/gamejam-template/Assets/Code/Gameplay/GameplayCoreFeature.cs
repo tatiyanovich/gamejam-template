@@ -1,5 +1,6 @@
 using Code.Gameplay.Camera.Systems;
 using Code.Gameplay.Exam;
+using Code.Gameplay.Meow;
 using Code.Gameplay.Movement;
 using Code.Gameplay.Teardown;
 using Code.Gameplay.UI;
@@ -15,6 +16,8 @@ namespace Code.Gameplay
 			Add(systemFactory.Create<InitializeSceneEntitiesByRequestSystem>());
 
 			Add(systemFactory.Create<InitializeExamCameraSystem>());
+
+			Add(systemFactory.Create<MeowFeature>());
 
 			Add(systemFactory.Create<ExamFeature>());
 
