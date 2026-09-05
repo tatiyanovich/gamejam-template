@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Code.Gameplay.Duck.Behaviours;
 using Code.Gameplay.Input.Behaviours;
 using Code.Gameplay.Neighbours.Behaviours;
 using Code.Gameplay.Teacher;
@@ -74,6 +75,28 @@ namespace Code.Editor.Art
 			ConfigureNeighbourPrefab("Fluffy", "fluffy_head");
 			AssetDatabase.SaveAssets();
 			Debug.Log("E3: configured both neighbour views.");
+		}
+
+		[MenuItem("COPYCAT/Art/Build E4 Duck View")]
+		public static void BuildDuckView()
+		{
+			if (EditorApplication.isPlaying)
+				throw new InvalidOperationException("Stop Play Mode before building the duck view.");
+
+			string path = Content + "Duck/Duck.prefab";
+			GameObject root = PrefabUtility.LoadPrefabContents(path);
+			try
+			{
+				ConfigureDuckView(root.transform);
+				PrefabUtility.SaveAsPrefabAsset(root, path);
+			}
+			finally
+			{
+				PrefabUtility.UnloadPrefabContents(root);
+			}
+
+			AssetDatabase.SaveAssets();
+			Debug.Log("E4: configured the duck view, landing dust and squeak source.");
 		}
 
 		private static JObject Read(int day)
@@ -512,10 +535,74 @@ namespace Code.Editor.Art
 			Transform root = Node(null, "Duck", Vector3.zero);
 			foreach (string name in new[] { "duck_idle", "duck_fly_1", "duck_fly_2", "duck_sad" })
 			{
-				SpriteRenderer frame = Layer(root, "Duck", (name, Vector3.zero, 33));
+				int sortingOrder = name == "duck_sad" ? 11 : 33;
+				SpriteRenderer frame = Layer(root, "Duck", (name, Vector3.zero, sortingOrder));
 				frame.gameObject.SetActive(name == "duck_idle");
 			}
+			ConfigureDuckView(root);
 			Save(root, "Duck");
+		}
+
+		private static void ConfigureDuckView(Transform root)
+		{
+			Transform[] frames =
+			{
+				root.Find("duck_idle"),
+				root.Find("duck_fly_1"),
+				root.Find("duck_fly_2"),
+				root.Find("duck_sad")
+			};
+			frames[3].GetComponent<SpriteRenderer>().sortingOrder = 11;
+
+			Transform dustNode = root.Find("LandingDust");
+			if (dustNode == null)
+				dustNode = Node(root, "LandingDust", Vector3.zero);
+
+			ParticleSystem dust = dustNode.GetComponent<ParticleSystem>();
+			if (dust == null)
+				dust = dustNode.gameObject.AddComponent<ParticleSystem>();
+
+			ParticleSystem.MainModule main = dust.main;
+			main.duration = 0.4f;
+			main.loop = false;
+			main.playOnAwake = false;
+			main.startLifetime = 0.4f;
+			main.startSpeed = new ParticleSystem.MinMaxCurve(0.8f, 1.6f);
+			main.startSize = new ParticleSystem.MinMaxCurve(0.18f, 0.32f);
+			main.startColor = new ParticleSystem.MinMaxGradient(
+				new Color32(174, 160, 139, 180), new Color32(220, 207, 180, 220));
+			main.gravityModifier = 0.15f;
+			main.simulationSpace = ParticleSystemSimulationSpace.World;
+			main.scalingMode = ParticleSystemScalingMode.Shape;
+			main.maxParticles = 8;
+			ParticleSystem.EmissionModule emission = dust.emission;
+			emission.rateOverTime = 0f;
+			emission.SetBursts(new[] { new ParticleSystem.Burst(0f, 8) });
+			ParticleSystem.ShapeModule shape = dust.shape;
+			shape.enabled = true;
+			shape.shapeType = ParticleSystemShapeType.Cone;
+			shape.angle = 65f;
+			shape.radius = 0.08f;
+			ParticleSystemRenderer renderer = dust.GetComponent<ParticleSystemRenderer>();
+			renderer.sortingOrder = 34;
+			renderer.sharedMaterial = AssetDatabase.GetBuiltinExtraResource<Material>("Default-ParticleSystem.mat");
+			dust.Stop(
+				withChildren: true,
+				stopBehavior: ParticleSystemStopBehavior.StopEmittingAndClear);
+
+			AudioSource audioSource = root.GetComponent<AudioSource>();
+			if (audioSource == null)
+				audioSource = root.gameObject.AddComponent<AudioSource>();
+
+			audioSource.playOnAwake = false;
+			audioSource.loop = false;
+			audioSource.spatialBlend = 0f;
+
+			DuckView view = root.GetComponent<DuckView>();
+			if (view == null)
+				view = root.gameObject.AddComponent<DuckView>();
+
+			view.Configure(frames, dust, audioSource);
 		}
 
 		private static RectTransform Rectangle(Transform parent, string name, Rect rectangle)

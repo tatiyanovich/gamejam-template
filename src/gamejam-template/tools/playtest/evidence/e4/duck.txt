@@ -1,0 +1,7 @@
+PASS idle: duck bobs on the desk using the authored idle frame
+PASS flight: 0.6-second parabola crosses the authored apex with rotating frames
+PASS landing: floor impact emits eight dust particles and plays the squeak
+PASS carry: duck attaches to the teacher's paw and follows her return walk
+PASS return: teacher carries the duck back to its original desk position
+PASS confiscation: third throw leaves the sad duck on the teacher's desk
+DONE

@@ -1,0 +1,18 @@
+H4 isolated production pipeline tests
+PASS duck plus meow is safe
+PASS staring retains meow extension
+PASS keyboard meow disarms microphone
+PASS last accepted answer beats bell
+PASS accepted answer counted at bell
+PASS finished exam ignores meow
+PASS stroke gate, mistake and pause
+PASS pick mistake and correct option
+PASS word mistake retains progress and alerts teacher
+PASS paw refresh and expiration
+PASS three throws, cooldown and confiscation
+PASS phase one safe and later checks
+PASS suspicion gain, decay and caught
+PASS bell announcement and freeze
+PASS tutorial hints follow the first meow, lean and answer
+PASS tutorial hints for the turn and the duck never return
+DONE

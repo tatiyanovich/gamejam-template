@@ -63,6 +63,8 @@ namespace Code.Gameplay.Duck.Queries
 			return 0;
 		}
 
+		public float GetFlightSeconds() => _duckConfigsService.DuckConfig.FlightSeconds;
+
 		public float GetDistractionSeconds() => _duckConfigsService.DuckConfig.DistractionSeconds;
 
 		public bool CanThrow() => GetState() == DuckState.OnDesk;

@@ -2,6 +2,7 @@ using System;
 using System.Threading;
 using Code.Gameplay.Bell.Queries;
 using Code.Gameplay.Duck;
+using Code.Gameplay.Duck.Behaviours;
 using Code.Gameplay.Duck.Queries;
 using Code.Gameplay.Duck.Services;
 using Code.Gameplay.Exam;
@@ -47,6 +48,7 @@ namespace Code.UI.Gameplay
 
 		private PawTimerView[] _pawTimers;
 		private NeighbourView[] _neighbourViews;
+		private DuckView _duckView;
 		private TeacherView _teacherView;
 		private KittenView _kittenView;
 		private bool _worldViewsBound;
@@ -198,9 +200,11 @@ namespace Code.UI.Gameplay
 		{
 			_pawTimers = FindObjectsByType<PawTimerView>(FindObjectsInactive.Include, FindObjectsSortMode.None);
 			_neighbourViews = FindObjectsByType<NeighbourView>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+			_duckView = FindFirstObjectByType<DuckView>(FindObjectsInactive.Include);
 			_teacherView = FindFirstObjectByType<TeacherView>(FindObjectsInactive.Include);
 			_kittenView = FindFirstObjectByType<KittenView>(FindObjectsInactive.Include);
-			if (_pawTimers.Length < 2 || _neighbourViews.Length < 2 || _teacherView == null || _kittenView == null)
+			if (_pawTimers.Length < 2 || _neighbourViews.Length < 2 || _duckView == null
+				|| _teacherView == null || _kittenView == null)
 				return;
 
 			foreach (PawTimerView timer in _pawTimers)
@@ -209,6 +213,7 @@ namespace Code.UI.Gameplay
 			foreach (NeighbourView neighbour in _neighbourViews)
 				neighbour.Bind(_neighbours, _teacher);
 
+			_duckView.Bind(_duck, _teacherView.transform);
 			_teacherView.Bind(_teacher);
 			_kittenView.Bind(_input, _exam, _teacher);
 			_worldViewsBound = true;
@@ -228,6 +233,9 @@ namespace Code.UI.Gameplay
 					neighbour.Unbind();
 			}
 
+			if (_duckView != null)
+				_duckView.Unbind();
+
 			if (_teacherView != null)
 				_teacherView.Unbind();
 
@@ -236,6 +244,7 @@ namespace Code.UI.Gameplay
 
 			_pawTimers = Array.Empty<PawTimerView>();
 			_neighbourViews = Array.Empty<NeighbourView>();
+			_duckView = null;
 			_teacherView = null;
 			_kittenView = null;
 			_worldViewsBound = false;
