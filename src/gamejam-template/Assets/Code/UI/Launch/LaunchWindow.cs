@@ -70,10 +70,11 @@ namespace Code.UI.Launch
 			quitButton.interactable = interactable;
 		}
 
-		private void StartExam()
+		private async UniTask StartExam()
 		{
 			_isStarting = true;
 			SetInteractable(false);
+			await _uiService.CloseWindow<LaunchWindow>(withAnimation: false);
 			_cameraSwitch.SwitchTo(LoopNodeId.Exam);
 			_coreLoopRequestFactory.CreateCloseBranchRequest(LoopNodeId.Exam);
 			_coreLoopRequestFactory.CreateGoToBranchRequest(LoopNodeId.Exam);
@@ -98,7 +99,7 @@ namespace Code.UI.Launch
 				return;
 			}
 
-			StartExam();
+			StartExam().Forget();
 		}
 
 		private void HandleQuit()

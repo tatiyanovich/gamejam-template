@@ -42,7 +42,6 @@ namespace Code.Infrastructure.Installers
 		private void BindDebugServices()
 		{
 			Container.BindInterfacesTo<TriggerCameraShakeDebugAction>().AsSingle();
-			Container.BindInterfacesTo<ExamSessionChangeDebugAction>().AsSingle();
 		}
 	}
 }

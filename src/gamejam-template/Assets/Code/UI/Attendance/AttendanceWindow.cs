@@ -129,8 +129,9 @@ namespace Code.UI.Attendance
 				: _quietSeconds >= 0.5f ? "LOUDER!" : "Meow to test your mic";
 		}
 
-		private void StartExam()
+		private async UniTask StartExam()
 		{
+			await _uiService.CloseWindow<AttendanceWindow>(withAnimation: false);
 			_cameraSwitcher.SwitchTo(LoopNodeId.Exam);
 			_coreLoopRequestFactory.CreateCloseBranchRequest(LoopNodeId.Exam);
 			_coreLoopRequestFactory.CreateGoToBranchRequest(LoopNodeId.Exam);
@@ -167,7 +168,7 @@ namespace Code.UI.Attendance
 			studentName.interactable = false;
 			string playerName = string.IsNullOrWhiteSpace(studentName.text) ? "Nameless Kitten" : studentName.text;
 			_progressFactory.CreateSetPlayerNameRequest(playerName);
-			StartExam();
+			StartExam().Forget();
 		}
 	}
 }

@@ -12,7 +12,7 @@ it is excluded from player builds. No production config is changed by the tools.
    M still uses the actual game's input pipeline. `Use microphone` restores capture.
 4. `Use diagnostic view` temporarily hides `CopycatArt` and enables the existing greybox.
    `Use game art` restores the art and original camera size, including after scene reloads.
-5. Play using Space (hold to lean), M, Q, arrows/WASD, 1–4 and letters. Esc restarts.
+5. Play using Space (hold to lean), M, Q, arrows/WASD, 1–4 and letters.
 6. `Capture Game View` captures the full Game View including overlay canvases.
    Automatic `frame-*.png` images capture only the gameplay camera, paired with `frame-*.txt`.
    `states.txt` records ECS/input snapshots approximately every 0.2 seconds.
