@@ -1,0 +1,79 @@
+[2026-09-03T09:37:44.422Z][INFO] Command-line: /Applications/Unity/Hub/Editor/6000.6.0f1/Unity.app/Contents/Helpers/PackageManager/Server/UnityPackageManager server -s 61011 --ipc-path /tmp/Unity-Upm-61011.sock -l 2 --log-file /Users/zack/gamejam-template/Logs/upm.log
+[2026-09-03T09:37:44.437Z][INFO] IPC server started (IPC path=/tmp/Unity-Upm-61011.sock).
+[2026-09-03T09:37:44.437Z][INFO] Hint: To connect to this UPM instance, launch Unity with the command-line parameter -upmIpcPath Upm-61011.
+[2026-09-03T09:38:38.541Z][INFO] project:list-packages <-- Request received
+params: {}
+[2026-09-03T09:38:38.544Z][INFO] project:list-packages --> 404 (3 ms)
+[2026-09-03T09:38:38.963Z][INFO] config:project:get-registries <-- Request received
+params: {}
+[2026-09-03T09:38:38.964Z][INFO] config:project:get-registries --> 404 (1 ms)
+[2026-09-03T09:38:38.974Z][INFO] project:list-packages <-- Request received
+params: {}
+[2026-09-03T09:38:38.974Z][INFO] project:list-packages --> 404 (0 ms)
+[2026-09-03T09:38:39.042Z][INFO] project:update-dependencies <-- Request received
+params: {}
+[2026-09-03T09:38:39.070Z][INFO] project:update-dependencies --> 200 (29 ms)
+[2026-09-03T09:38:39.097Z][INFO] project:resolve-packages <-- Request received
+params: {}
+[2026-09-03T09:38:40.785Z][INFO] project:resolve-packages --> 200 (1688 ms)
+[2026-09-03T09:38:45.170Z][INFO] project:list-packages <-- Request received
+params: {}
+[2026-09-03T09:38:45.216Z][INFO] project:list-packages <-- Request received
+params: {}
+[2026-09-03T09:38:45.236Z][INFO] project:list-packages --> 200 (66 ms)
+[2026-09-03T09:38:45.255Z][INFO] config:project:get-registries <-- Request received
+params: {}
+[2026-09-03T09:38:45.259Z][INFO] config:project:get-registries --> 200 (4 ms)
+[2026-09-03T09:38:45.263Z][INFO] project:list-packages --> 200 (47 ms)
+[2026-09-03T09:38:47.494Z][INFO] project:list-packages <-- Request received
+params: {}
+[2026-09-03T09:38:47.538Z][INFO] project:list-packages <-- Request received
+params: {}
+[2026-09-03T09:38:47.554Z][INFO] project:list-packages --> 200 (60 ms)
+[2026-09-03T09:38:47.586Z][INFO] project:list-packages --> 200 (48 ms)
+[2026-09-03T09:38:47.593Z][INFO] packages:get-all-packageinfo <-- Request received
+params: {}
+[2026-09-03T09:38:47.608Z][INFO] packages:get-all-packageinfo <-- Request received
+params: {}
+[2026-09-03T09:38:47.916Z][INFO] packages:get-all-packageinfo --> 200 (308 ms)
+[2026-09-03T09:38:48.879Z][INFO] packages:get-packageinfo <-- Request received
+params: {
+  "packageId": "com.unity.addressables@2.11.2"
+}
+[2026-09-03T09:38:48.926Z][INFO] packages:get-packageinfo <-- Request received
+params: {
+  "packageId": "com.unity.ads.ios-support@1.0.1"
+}
+[2026-09-03T09:38:48.927Z][INFO] packages:get-packageinfo <-- Request received
+params: {
+  "packageId": "com.unity.project-auditor-rules@1.0.3"
+}
+[2026-09-03T09:38:48.927Z][INFO] packages:get-packageinfo <-- Request received
+params: {
+  "packageId": "com.unity.scriptablebuildpipeline@3.0.3"
+}
+[2026-09-03T09:38:48.927Z][INFO] packages:get-packageinfo <-- Request received
+params: {
+  "packageId": "com.unity.services.friends@1.1.1"
+}
+[2026-09-03T09:38:48.943Z][INFO] packages:get-packageinfo <-- Request received
+params: {
+  "packageId": "com.unity.services.moderation@1.0.2"
+}
+[2026-09-03T09:38:49.329Z][INFO] packages:get-packageinfo --> 200 (402 ms)
+[2026-09-03T09:38:49.429Z][INFO] project:list-packages <-- Request received
+params: {}
+[2026-09-03T09:38:49.475Z][INFO] project:list-packages --> 200 (46 ms)
+[2026-09-03T09:38:49.865Z][INFO] packages:get-packageinfo --> 200 (939 ms)
+[2026-09-03T09:38:49.880Z][INFO] packages:get-packageinfo --> 200 (937 ms)
+[2026-09-03T09:38:50.401Z][INFO] packages:get-packageinfo --> 200 (1522 ms)
+[2026-09-03T09:38:50.560Z][INFO] packages:get-packageinfo --> 200 (1633 ms)
+[2026-09-03T09:38:50.711Z][INFO] packages:get-packageinfo --> 200 (1784 ms)
+[2026-09-03T09:38:50.890Z][INFO] packages:get-all-packageinfo --> 200 (3297 ms)
+[2026-09-03T09:39:07.289Z][INFO] project:list-packages <-- Request received
+params: {}
+[2026-09-03T09:39:07.344Z][INFO] project:list-packages --> 200 (55 ms)
+[2026-09-03T09:39:07.354Z][INFO] config:project:get-registries <-- Request received
+params: {}
+[2026-09-03T09:39:07.356Z][INFO] config:project:get-registries --> 200 (2 ms)
+[2026-09-03T09:40:33.903Z][INFO] Received shutdown request (SIGTERM), shutting down Unity Package Manager
