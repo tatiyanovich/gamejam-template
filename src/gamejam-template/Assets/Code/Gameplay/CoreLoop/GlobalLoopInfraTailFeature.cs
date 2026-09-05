@@ -46,6 +46,7 @@ namespace Code.Gameplay.CoreLoop
 			Add(systemFactory.Create<NotifyQueryChangesSystem>());
 			Add(systemFactory.Create<ProcessDestructedFeature>());
 			Add(systemFactory.Create<GameWatchedCleanupSystems>());
+			Add(systemFactory.Create<InputWatchedCleanupSystems>());
 			Add(systemFactory.Create<EventsCleanupSystem>());
 		}
 	}

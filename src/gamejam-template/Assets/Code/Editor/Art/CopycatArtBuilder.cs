@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Code.Gameplay.Input.Behaviours;
 using Code.Gameplay.Teacher;
 using Code.Gameplay.Teacher.Behaviours;
 using Newtonsoft.Json.Linq;
@@ -263,9 +264,11 @@ namespace Code.Editor.Art
 			Transform root = Node(null, "Kitten", Vector3.zero);
 			root.gameObject.AddComponent<SortingGroup>().sortingOrder = 34;
 			Vector2 pivot = Point(rig["rootPivot"]);
+			List<Transform> poses = new();
 			foreach (JProperty pose in ((JObject)rig["poses"]).Properties())
 			{
 				Transform state = Node(root, pose.Name, Local(new Vector2((float)pose.Value["x"], 0f)));
+				poses.Add(state);
 				state.localEulerAngles = new Vector3(0f, 0f, -(float)pose.Value["rotation"]);
 				JToken profile = rig["headProfiles"][(string)pose.Value["profile"]];
 				JToken expression = rig["expressions"][(string)pose.Value["expression"]];
@@ -298,6 +301,7 @@ namespace Code.Editor.Art
 				}
 				state.gameObject.SetActive(pose.Name == "idle");
 			}
+			root.gameObject.AddComponent<KittenView>().Configure(poses.ToArray());
 			Save(root, "Characters/Kitten");
 		}
 

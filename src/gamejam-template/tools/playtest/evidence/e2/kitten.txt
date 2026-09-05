@@ -1,0 +1,7 @@
+PASS idle: body breathes and tail sways on the authored loop
+PASS lean left: profile shifts 0.6 units and rotates to the neighbour
+PASS panic: Watching swaps the active lean to wide eyes and small pupils
+PASS typing: every correct progress step taps the right paw and returns it
+PASS lean right: the current question selects the matching neighbour profile
+PASS release: letting go of SPACE restores the back-facing idle pose
+DONE

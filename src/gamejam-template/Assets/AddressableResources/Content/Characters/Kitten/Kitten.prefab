@@ -2697,6 +2697,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8190485771783434377}
   - component: {fileID: 5513485296263527154}
+  - component: {fileID: 7309000000000000001}
   m_Layer: 0
   m_Name: Kitten
   m_TagString: Untagged
@@ -2739,6 +2740,26 @@ SortingGroup:
   m_SortingOrder: 34
   m_SortAtRoot: 0
   m_Sort3DAs2D: 0
+--- !u!114 &7309000000000000001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2859750533262700383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90ff14dbce8a4f52bae7402c1019d544, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Gameplay.Input.Behaviours.KittenView
+  poses:
+  - {fileID: 8936254609970296480}
+  - {fileID: 2555455334924648726}
+  - {fileID: 4171233286202528650}
+  - {fileID: 5344764694815558362}
+  - {fileID: 7224404327145140963}
+  - {fileID: 7489832911887341573}
+  - {fileID: 5194417923753628702}
 --- !u!1 &2948958510998595079
 GameObject:
   m_ObjectHideFlags: 0

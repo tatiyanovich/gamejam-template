@@ -212,9 +212,9 @@ art/
 | | Staring | swap на позу `staring` (head_angry); наклон 6° и scale 1.05 не берутся из кода, а доезжают до авторских значений позы за 0.25 с (OutBack); виньет красный — B7 |
 | | Distracted | E1: весь риг едет по X на 4.5 units влево (место падения утки из `art/src/d7/layout.json`) за 1.0 с с покачиванием ±0.06 units и возвращается на место при выходе из состояния. Утка в руке и плюх на парту — E4 |
 | | Alerted | E1: панч rotation ±14° и scale ±0.08 за 0.3 с — резкий разворот `What was that?!` |
-| Котёнок | Idle | дыхание scale 1↔1.02, 1.6 с; хвост rotation ±10° |
-| | Lean | тело rotation −12°/+12°, сдвиг X ±60 px, swap head_back→head_profile; глаза‑паника при Watching |
-| | Typing | лапа rotation 0→−15→0 за 0.12 с на каждый верный ввод |
+| Котёнок | Idle | E2: дыхание scale 1↔1.02, 1.6 с; хвост rotation −10↔+10° |
+| | Lean | E2: swap back→profile по стороне текущего вопроса, тело доезжает до авторских rotation −12°/+12° и X ±60 px за 0.2 с; при Watching включается соответствующая panic-поза |
+| | Typing | E2: правая лапа rotation 0→−15→0 за 0.12 с на каждый рост верного answer progress во время наклона |
 | Сосед | Paw lift | лапа rotation −70° + Y +40 за 0.25 с (OutBack); голова вздрагивает на мяу |
 | | Cover | обратное за 0.35 с, за 1 с до конца — «дрожит» |
 | Утка | Idle | bob Y ±6 px, 1.2 с; hover scale 1.1 |

@@ -8,24 +8,24 @@
 //------------------------------------------------------------------------------
 public partial class InputEntity {
 
-    static readonly Code.Gameplay.Input.LeanHeld leanHeldComponent = new Code.Gameplay.Input.LeanHeld();
+    static readonly LeanHeldChanged leanHeldChangedComponent = new LeanHeldChanged();
 
-    public bool isLeanHeld {
-        get { return HasComponent(InputComponentsLookup.LeanHeld); }
+    public bool isLeanHeldChanged {
+        get { return HasComponent(InputComponentsLookup.LeanHeldChanged); }
         set {
-            if (value != isLeanHeld) {
-                var index = InputComponentsLookup.LeanHeld;
+            if (value != isLeanHeldChanged) {
+                var index = InputComponentsLookup.LeanHeldChanged;
                 if (value) {
                     var componentPool = GetComponentPool(index);
                     var component = componentPool.Count > 0
                             ? componentPool.Pop()
-                            : leanHeldComponent;
+                            : leanHeldChangedComponent;
 
                     AddComponent(index, component);
-					isLeanHeldChanged = true;
+
                 } else {
                     RemoveComponent(index);
-					isLeanHeldChanged = true;
+
                 }
             }
         }
@@ -42,17 +42,17 @@ public partial class InputEntity {
 //------------------------------------------------------------------------------
 public sealed partial class InputMatcher {
 
-    static Entitas.IMatcher<InputEntity> _matcherLeanHeld;
+    static Entitas.IMatcher<InputEntity> _matcherLeanHeldChanged;
 
-    public static Entitas.IMatcher<InputEntity> LeanHeld {
+    public static Entitas.IMatcher<InputEntity> LeanHeldChanged {
         get {
-            if (_matcherLeanHeld == null) {
-                var matcher = (Entitas.Matcher<InputEntity>)Entitas.Matcher<InputEntity>.AllOf(InputComponentsLookup.LeanHeld);
+            if (_matcherLeanHeldChanged == null) {
+                var matcher = (Entitas.Matcher<InputEntity>)Entitas.Matcher<InputEntity>.AllOf(InputComponentsLookup.LeanHeldChanged);
                 matcher.componentNames = InputComponentsLookup.componentNames;
-                _matcherLeanHeld = matcher;
+                _matcherLeanHeldChanged = matcher;
             }
 
-            return _matcherLeanHeld;
+            return _matcherLeanHeldChanged;
         }
     }
 }

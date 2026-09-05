@@ -6,6 +6,7 @@ using Code.Gameplay.Duck.Queries;
 using Code.Gameplay.Duck.Services;
 using Code.Gameplay.Exam;
 using Code.Gameplay.Exam.Queries;
+using Code.Gameplay.Input.Behaviours;
 using Code.Gameplay.Input.Queries;
 using Code.Gameplay.Meow.Queries;
 using Code.Gameplay.Neighbours.Queries;
@@ -45,6 +46,7 @@ namespace Code.UI.Gameplay
 
 		private PawTimerView[] _pawTimers;
 		private TeacherView _teacherView;
+		private KittenView _kittenView;
 		private bool _worldViewsBound;
 		private float _speechSeconds;
 		private int _watchingLine;
@@ -194,13 +196,15 @@ namespace Code.UI.Gameplay
 		{
 			_pawTimers = FindObjectsByType<PawTimerView>(FindObjectsInactive.Include, FindObjectsSortMode.None);
 			_teacherView = FindFirstObjectByType<TeacherView>(FindObjectsInactive.Include);
-			if (_pawTimers.Length == 0 || _teacherView == null)
+			_kittenView = FindFirstObjectByType<KittenView>(FindObjectsInactive.Include);
+			if (_pawTimers.Length == 0 || _teacherView == null || _kittenView == null)
 				return;
 
 			foreach (PawTimerView timer in _pawTimers)
 				timer.Bind(_neighbours);
 
 			_teacherView.Bind(_teacher);
+			_kittenView.Bind(_input, _exam, _teacher);
 			_worldViewsBound = true;
 		}
 
@@ -215,8 +219,12 @@ namespace Code.UI.Gameplay
 			if (_teacherView != null)
 				_teacherView.Unbind();
 
+			if (_kittenView != null)
+				_kittenView.Unbind();
+
 			_pawTimers = Array.Empty<PawTimerView>();
 			_teacherView = null;
+			_kittenView = null;
 			_worldViewsBound = false;
 		}
 
