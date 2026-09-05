@@ -24,7 +24,7 @@ namespace Code.Gameplay.Progress.Services
 				.AddId(_identifierService.Next())
 				.With(x => x.isExamProgress = true)
 				.With(x => x.isPersistAcrossLoopNodes = true)
-				.AddPlayerName(saveFile.PlayerName)
+				.AddPlayerName(saveFile.PlayerName ?? string.Empty)
 				.AddBestAnswers(saveFile.BestAnswers)
 				.AddBestTimeSeconds(saveFile.BestTimeSeconds)
 				.With(x => x.isIntroSeen = true, saveFile.IntroSeen);
@@ -34,6 +34,9 @@ namespace Code.Gameplay.Progress.Services
 		{
 			_entityFactory.Request()
 				.AddSetPlayerNameRequest(playerName);
+
+			_entityFactory.Request()
+				.With(x => x.isSaveProgressRequest = true);
 		}
 
 		public void CreateMarkIntroSeenRequest()

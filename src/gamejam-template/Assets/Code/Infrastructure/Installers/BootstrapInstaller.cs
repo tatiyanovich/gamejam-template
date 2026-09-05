@@ -12,6 +12,7 @@ using Code.Gameplay.Lifetime;
 using Code.Gameplay.Meow.Queries;
 using Code.Gameplay.Meow.Services;
 using Code.Gameplay.Neighbours.Queries;
+using Code.Gameplay.Progress.Queries;
 using Code.Gameplay.Suspicion.Queries;
 using Code.Gameplay.Suspicion.Services;
 using Code.Gameplay.Teacher.Queries;
@@ -127,6 +128,7 @@ namespace Code.Infrastructure.Installers
 			new CoreLoopInstaller(Container).InstallBindings();
 			new LifetimeInstaller(Container).InstallBindings();
 			Container.BindInterfacesTo<CameraQuery>().AsSingle();
+			Container.BindInterfacesTo<ProgressQuery>().AsSingle();
 			Container.BindInterfacesTo<ExamQuery>().AsSingle();
 			Container.BindInterfacesTo<SuspicionQuery>().AsSingle();
 			Container.BindInterfacesTo<TeacherQuery>().AsSingle();

@@ -68,7 +68,7 @@
 - [x] **A15** (0.5) Reactive queries для HUD: `IExamQuery`, `ISuspicionQuery`, `ITeacherQuery`, `IMeowQuery`, `IDuckQuery`, `IBellQuery`, `INeighbourQuery`. Готово: события и getters покрывают прогресс/вопрос/исход, подозрение, состояние учительницы, уровень/порог/кулдаун микрофона, утку, остаток до звонка и окно лапы; `MicrophoneLevel` и `PawWindowTimeLeft` стали `Watched`, все query зарегистрированы в bootstrap и исполняются через `NotifyQueryChangesSystem`; Jenny‑Gen 319 файлов, компиляция чистая · D‑74. Зав.: A3–A11.
 
 ### B. UI (Егор + Claude, скилл `ui-writer`) — P0 5.5 ч, P1 2 ч
-- [ ] **B1** (0.5, P0) `LaunchWindow`: `PLAY`, `QUIT`; Play → Attendance, если имени нет, иначе Exam.
+- [x] **B1** (0.5, P0) `LaunchWindow`: меню D8, `PLAY`, `QUIT`; Play → Attendance при пустом имени, иначе Exam; защита от повторного старта, сохранение имени через ECS. Базовый AttendanceSheet внутри LaunchWindow даёт ввод имени и `START EXAM`; отдельный AttendanceWindow и проверка микрофона остаются B2. Проверки и повторная сборка — `src/gamejam-template/tools/playtest/B1.md`.
 - [ ] **B2** (1.0, P0) `AttendanceWindow`: поле имени (≤12, фильтр), метр мика с порогом, галочка `LOUD ENOUGH!`, `START EXAM`. Зав.: A7, A13.
 - [ ] **B3** (2.0, P0) HUD в `GameplayWindow`: счётчик, часы, шкала подозрения, метр MEOW (заливка + порог + кулдаун), кейкап Q, кольцо‑таймер лапы (world‑space), пузырь учительницы. Зав.: A15.
 - [ ] **B4** (0.5, P0) Контекстные подсказки фазы 1 (пять штук из `GDD §11`), скрываются по выполнению. Зав.: B3.

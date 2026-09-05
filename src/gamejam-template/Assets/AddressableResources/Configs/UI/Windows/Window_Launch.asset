@@ -21,6 +21,6 @@ MonoBehaviour:
     m_EditorAssetChanged: 1
   layerId: Overlay
   closeOnCover: 0
-  ignoreBack: 0
-  requiresCursor: 0
+  ignoreBack: 1
+  requiresCursor: 1
   pausesGame: 0
