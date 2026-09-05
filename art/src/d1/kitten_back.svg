@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="470" height="450" viewBox="0 0 470 450">
+  <defs>
+    <path id="kitten-back-head" d="M107 150 L95 40 Q91 14 110 25 L184 81 Q229 67 274 82 L344 31 Q365 16 363 44 L355 150 Q384 195 348 234 Q321 268 235 267 Q141 264 113 232 Q76 194 107 150Z"/>
+    <clipPath id="kitten-back-clip"><use href="#kitten-back-head"/></clipPath>
+  </defs>
+  <g stroke="{{INK}}" stroke-width="10" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M308 391 Q386 424 404 355 Q408 335 426 342 Q449 357 423 395 Q388 439 313 423" fill="{{KITTEN}}"/>
+    <path d="M170 241 Q131 310 139 427 Q228 449 336 426 Q345 298 287 241Z" fill="{{KITTEN}}"/>
+    <path d="M287 253 Q320 338 310 429 L336 426 Q345 302 287 253" fill="#C7853D" stroke="none"/>
+    <path d="M163 277 Q130 256 96 278 Q77 294 97 309 Q118 319 151 309 M311 277 Q346 253 375 277 Q395 296 378 309 Q352 322 319 308" fill="{{KITTEN}}"/>
+    <path d="M107 284 L108 300 M124 282 L125 298 M353 283 L352 300 M371 286 L368 302" fill="none" stroke-width="6"/>
+    <use href="#kitten-back-head" fill="{{KITTEN}}"/>
+    <path d="M338 58 Q380 258 119 224 L126 299 L397 297 L390 56Z" fill="#C7853D" clip-path="url(#kitten-back-clip)" stroke="none"/>
+    <path d="M114 45 L126 115 L157 88 M344 50 L307 90 L342 116" fill="#F2B2A0" stroke="none"/>
+    <path d="M198 79 L201 121 M235 74 L235 112 M269 83 L263 121 M116 170 L148 180 M111 198 L147 199 M342 173 L316 182 M350 203 L318 205 M142 330 L174 337 M143 357 L171 362" fill="none" stroke="#A66B37" stroke-width="12"/>
+    <path d="M183 232 Q230 242 282 231" fill="none" stroke="#A66B37" stroke-width="6"/>
+    <path d="M109 209 L73 202 M112 222 L70 225 M350 208 L389 199 M352 223 L393 226" fill="none" stroke-width="6"/>
+  </g>
+</svg>

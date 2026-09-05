@@ -75,6 +75,8 @@
 - **D‑26 · 05.09** · Пауза после штампа `COPIED` — `LifetimeLeft` на сущности вопроса (её уничтожает `LifetimeFeature`), число — `questionPauseSeconds` в `ExamConfig` (0.6 с). `SpawnNextQuestionSystem` спавнит следующий вопрос, когда сущности вопроса нет. · Не нужен ни свой таймер, ни своя система очистки; «нет вопроса → спавним» читается однозначно.
 - **D‑27 · 05.09** · В скриптах Unity MCP `RunCommand` не пишем `using System.Reflection` — тулза падает с `UNEXPECTED_ERROR`; рефлексия работает через полные имена (`System.Reflection.BindingFlags.…`). · Проверено на A3; правило записано в `.claude/rules/Unity MCP Editor Work.md`.
 
+- **D‑28 · 05.09** · D1 собирается `art/build.mjs` через закреплённый `@resvg/resvg-js` 2.6.2: SVG‑исходники + JSON‑палитра → PNG и автономные SVG с текстом в кривых; локальные шрифты, проверка повторной сборки. · Тот же SVG/resvg‑подход D‑09, воспроизводимый без системных шрифтов; отдельные тестовые объекты @2x, без trim до разделения слоёв. Уточнение D‑16: Luckiest Guy — Apache 2.0; Patrick Hand/Nunito — OFL, лицензии приложены в `art/fonts/`.
+
 ## 5. Маппинг дизайна на код шаблона
 
 | Дизайн | Код |
@@ -150,7 +152,7 @@ Unity: `UnityWebRequest.Post(url, json, "application/json")`, редиректы
 
 ## 8. Пайплайн арта/аудио (кратко, детали — `ART_BIBLE.md`)
 
-`art/src/*.svg` → `art/build.sh` (resvg → PNG @2x, Pillow trim/sheet) → `Assets/AddressableResources/Content/<Feature>/...` → импорт и префабы через Unity MCP `RunCommand` → Addressables группы по фичам (`Copycat_Classroom`, `Copycat_Characters`, `Copycat_UI`, `Copycat_Intro`, `Copycat_Vfx`, `Copycat_Audio`).
+Текущий D1: `art/src/d1/*.svg` + `art/palette.json` → `art/build.mjs` (resvg, PNG + SVG с текстом в кривых) → `art/previews/d1/`. Стиль‑лист, две композиции класса и тестовые позы проверены; визуальное утверждение Коли ещё не зафиксировано. Дальнейшая интеграция D11: PNG @2x, trim/pivot и слои → `Assets/AddressableResources/Content/<Feature>/...` → импорт и префабы через Unity MCP `RunCommand` → Addressables группы по фичам (`Copycat_Classroom`, `Copycat_Characters`, `Copycat_UI`, `Copycat_Intro`, `Copycat_Vfx`, `Copycat_Audio`).
 Аудио: `art/audio/*.py` (синтез через Python/ffmpeg) и `say` → WAV 44.1 kHz → `Content/Audio/`.
 
 ## 9. Work Log (append‑only, одна строка на действие)
@@ -178,3 +180,5 @@ Unity: `UnityWebRequest.Post(url, json, "application/json")`, редиректы
 - 2026‑09‑05 11:40 · Claude · A3: в `ExamConfig` добавлено `questionPauseSeconds` = 0.6, значение записано в `ExamConfig.asset` через MCP · D‑26
 - 2026‑09‑05 11:40 · Claude · A3: Jenny‑Gen (240 файлов), компиляция чистая; Play Mode — Q1 «How many lives does a cat claim to have?» (Strokes, Left, Up|Right), ответ → счётчик 1 и спавн Q2, на 20‑м ответе `ExamFinished` + `Passed`, elapsed замирает, ошибок в консоли нет · Unity 6000.3.22f1
 - 2026‑09‑05 11:40 · Claude · Дополнил правило Unity MCP: `using System.Reflection` роняет `RunCommand`, добавлен рецепт чтения ECS‑состояния в Play Mode · `.claude/rules/Unity MCP Editor Work.md`, D‑27
+- 2026-09-05 11:12 · Codex · D1: подготовил стиль‑лист, спокойный/опасный кадры класса, тестовые позы котёнка и учительницы, парту/утку, 25 цветов палитры, SVG‑исходники и 10 PNG‑превью; шрифты и лицензии приложены · `art/`, D‑28; художественное утверждение Коли ожидается
+- 2026-09-05 11:12 · Codex · D1: визуально проверил кадры в 1920×1080 и 480×270, исправил перекрытие лица/ответа партами; `npm run build` и `npm run check` прошли, PNG/SVG/manifest совпадают · `art/previews/d1/`, `docs/ART_BIBLE.md`, `docs/PLAN.md`; Unity‑сцены и код не менялись

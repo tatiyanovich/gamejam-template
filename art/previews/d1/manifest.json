@@ -1,0 +1,72 @@
+[
+  {
+    "name": "kitten_back",
+    "width": 940,
+    "height": 900,
+    "scale": 2,
+    "sha256": "d07917c20d8883a667187d57bc7333ab84a2b6a36966c6845ad4277b980cb3ac"
+  },
+  {
+    "name": "kitten_lean",
+    "width": 940,
+    "height": 900,
+    "scale": 2,
+    "sha256": "87cd54bae466b96cd295cf0d779bacbb89fe1b27d849d5a8a40337cdaff0e331"
+  },
+  {
+    "name": "teacher_writing",
+    "width": 760,
+    "height": 1200,
+    "scale": 2,
+    "sha256": "0f9ab3f597c0022762dcf0777eb9a55acfb80a7fd06d8ad8d58616eba04133f1"
+  },
+  {
+    "name": "teacher_watching",
+    "width": 760,
+    "height": 1200,
+    "scale": 2,
+    "sha256": "bf99106aa2f9d4d2f5bca2ffdd09c4a8dc8172f9228d5628530d205fe6bdd737"
+  },
+  {
+    "name": "desk",
+    "width": 3840,
+    "height": 720,
+    "scale": 2,
+    "sha256": "76233bfa8623c2008b5858f73b6a9e0a83bfd735dd7cddf250fa1efaddf63d69"
+  },
+  {
+    "name": "duck",
+    "width": 300,
+    "height": 280,
+    "scale": 2,
+    "sha256": "4dbc3f8762e853e4b83576d03ad12e77417b5c8bac0ceee68605603c3c0a4c2d"
+  },
+  {
+    "name": "classroom_calm",
+    "width": 1920,
+    "height": 1080,
+    "scale": 1,
+    "sha256": "2bd1f033844c9dcef0cca06dd42d10ed927a3607116ed404363855f433ae8f84"
+  },
+  {
+    "name": "classroom_risk",
+    "width": 1920,
+    "height": 1080,
+    "scale": 1,
+    "sha256": "9538f50e81cc709f4851b7bf1782b3861ab7f9ad981788c98d93a10b35553199"
+  },
+  {
+    "name": "classroom_thumbnail",
+    "width": 480,
+    "height": 270,
+    "scale": 0.25,
+    "sha256": "a1c9e85f7c38563c75759ffe5999c21a4a92b2241b66d2329f0e0608d835f9f4"
+  },
+  {
+    "name": "style_sheet",
+    "width": 1920,
+    "height": 1500,
+    "scale": 1,
+    "sha256": "f82f8b3c0b7f6fbc46a8575359e61b6edff3ab5d6603f4817a0f96e9af2bc948"
+  }
+]

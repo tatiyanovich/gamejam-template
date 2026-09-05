@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="470" height="450" viewBox="0 0 470 450">
+  <defs>
+    <path id="kitten-head" d="M73 138 Q38 103 45 24 Q49 9 64 21 L144 83 Q187 65 228 84 L293 37 Q308 27 312 47 L321 153 Q349 183 328 222 Q306 254 249 260 L102 242 Q45 231 34 195 Q23 162 73 138Z"/>
+    <clipPath id="kitten-head-clip"><use href="#kitten-head"/></clipPath>
+  </defs>
+  <g stroke="{{INK}}" stroke-width="10" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M349 377 Q423 395 423 326 Q420 299 442 303 Q467 312 451 362 Q433 418 362 411" fill="{{KITTEN}}"/>
+    <path d="M239 222 Q300 215 335 268 Q374 323 378 423 Q311 450 204 427 Q192 380 196 321 L165 270Z" fill="{{KITTEN}}"/>
+    <path d="M325 271 Q354 345 349 416 L369 419 Q366 322 325 271" fill="#C7853D" stroke="none"/>
+    <path d="M187 263 Q142 267 129 301 Q132 326 157 326 Q187 317 224 291" fill="{{KITTEN}}"/>
+    <path d="M163 300 L158 312 M179 295 L176 307" fill="none" stroke-width="6"/>
+    <use href="#kitten-head" fill="{{KITTEN}}"/>
+    <path d="M285 78 Q309 190 257 223 Q178 254 56 215 L68 272 L346 283 L351 77Z" clip-path="url(#kitten-head-clip)" fill="#C7853D" stroke="none"/>
+    <path d="M60 45 L71 117 L112 91Z M286 61 L249 93 L298 131Z" fill="#F2B2A0" stroke="none"/>
+    <path d="M138 83 L152 111 M175 78 L178 104 M211 82 L207 109" fill="none" stroke="#A66B37" stroke-width="12"/>
+    <path d="M84 189 Q46 182 49 208 Q58 239 108 237 L225 248 Q263 245 254 217 Q248 202 219 204Z" fill="{{KITTEN_LIGHT}}" stroke="none"/>
+    <ellipse cx="105" cy="155" rx="49" ry="56" fill="{{PAPER}}"/>
+    <ellipse cx="208" cy="162" rx="54" ry="60" fill="{{PAPER}}"/>
+    <ellipse cx="79" cy="157" rx="6" ry="8" fill="{{INK}}" stroke="none"/>
+    <ellipse cx="180" cy="163" rx="7" ry="8" fill="{{INK}}" stroke="none"/>
+    <path d="M136 204 L153 207 L143 217Z" fill="{{INK}}" stroke-width="4"/>
+    <path d="M143 217 Q133 232 119 220 M143 217 Q151 235 166 222" fill="none" stroke-width="6"/>
+    <path d="M67 208 L14 193 M64 220 L8 216 M68 231 L22 240 M242 219 L293 208 M246 231 L298 232 M240 241 L281 255" fill="none" stroke-width="6"/>
+    <path d="M280 140 Q284 157 298 164" fill="none" stroke-width="6"/>
+    <path d="M311 131 Q332 155 319 169 Q299 176 302 151Z" fill="{{WALL_LIGHT}}" stroke-width="6"/>
+    <path d="M268 296 Q271 336 237 347 L169 335 Q146 335 140 352 Q135 373 162 382 L249 397 Q317 377 320 327" fill="{{KITTEN}}"/>
+    <path d="M163 351 L157 367 M180 357 L175 374" fill="none" stroke-width="6"/>
+    <path d="M314 296 L339 291 M327 318 L350 314 M209 397 L240 408" fill="none" stroke="#A66B37" stroke-width="12"/>
+  </g>
+</svg>

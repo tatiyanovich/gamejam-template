@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="150" height="140" viewBox="0 0 150 140">
+  <defs>
+    <path id="duck-shape" d="M93 76 Q119 88 140 63 Q153 107 119 122 Q82 141 33 120 Q12 107 21 80 Q7 67 16 42 Q25 17 50 23 Q80 27 77 54 Q76 70 93 76Z"/>
+    <clipPath id="duck-clip"><use href="#duck-shape"/></clipPath>
+  </defs>
+  <g stroke="{{INK}}" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <use href="#duck-shape" fill="{{DUCK}}"/>
+    <path d="M135 77 Q142 126 29 111 L25 143 L155 146 L156 74Z" clip-path="url(#duck-clip)" fill="#D1B132" stroke="none"/>
+    <path d="M29 60 Q4 58 5 72 Q12 84 37 77Z" fill="{{DUCK_BEAK}}"/>
+    <ellipse cx="45" cy="48" rx="5" ry="7" fill="{{INK}}" stroke="none"/>
+    <path d="M63 94 Q87 80 106 93 Q90 114 68 106" fill="none"/>
+  </g>
+</svg>

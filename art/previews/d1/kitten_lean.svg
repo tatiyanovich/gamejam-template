@@ -1,0 +1,35 @@
+<svg width="470" height="450" viewBox="0 0 470 450" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <clipPath id="kitten-head-clip">
+            <path fill="#000000" stroke="none" d="M 73 138 Q 38 103 45 24 Q 49 9 64 21 L 144 83 Q 187 65 228 84 L 293 37 Q 308 27 312 47 L 321 153 Q 349 183 328 222 Q 306 254 249 260 L 102 242 Q 45 231 34 195 Q 23 162 73 138 Z"/>
+        </clipPath>
+    </defs>
+    <g>
+        <path fill="#f3a24a" stroke="#2a1f1a" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" d="M 349 377 Q 423 395 423 326 Q 420 299 442 303 Q 467 312 451 362 Q 433 418 362 411"/>
+        <path fill="#f3a24a" stroke="#2a1f1a" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" d="M 239 222 Q 300 215 335 268 Q 374 323 378 423 Q 311 450 204 427 Q 192 380 196 321 L 165 270 Z"/>
+        <path fill="#c7853d" stroke="none" d="M 325 271 Q 354 345 349 416 L 369 419 Q 366 322 325 271"/>
+        <path fill="#f3a24a" stroke="#2a1f1a" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" d="M 187 263 Q 142 267 129 301 Q 132 326 157 326 Q 187 317 224 291"/>
+        <path fill="none" stroke="#2a1f1a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" d="M 163 300 L 158 312 M 179 295 L 176 307"/>
+        <g>
+            <path fill="#f3a24a" stroke="#2a1f1a" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" d="M 73 138 Q 38 103 45 24 Q 49 9 64 21 L 144 83 Q 187 65 228 84 L 293 37 Q 308 27 312 47 L 321 153 Q 349 183 328 222 Q 306 254 249 260 L 102 242 Q 45 231 34 195 Q 23 162 73 138 Z"/>
+        </g>
+        <g clip-path="url(#kitten-head-clip)">
+            <path fill="#c7853d" stroke="none" d="M 285 78 Q 309 190 257 223 Q 178 254 56 215 L 68 272 L 346 283 L 351 77 Z"/>
+        </g>
+        <path fill="#f2b2a0" stroke="none" d="M 60 45 L 71 117 L 112 91 Z M 286 61 L 249 93 L 298 131 Z"/>
+        <path fill="none" stroke="#a66b37" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" d="M 138 83 L 152 111 M 175 78 L 178 104 M 211 82 L 207 109"/>
+        <path fill="#ffe7c2" stroke="none" d="M 84 189 Q 46 182 49 208 Q 58 239 108 237 L 225 248 Q 263 245 254 217 Q 248 202 219 204 Z"/>
+        <path fill="#fff6e3" stroke="#2a1f1a" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" d="M 154 155 C 154 185.92795 132.06195 211 105 211 C 77.93805 211 56 185.92795 56 155 C 56 124.07205 77.93805 99 105 99 C 132.06195 99 154 124.07205 154 155 Z"/>
+        <path fill="#fff6e3" stroke="#2a1f1a" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" d="M 262 162 C 262 195.13708 237.82338 222 208 222 C 178.17662 222 154 195.13708 154 162 C 154 128.86292 178.17662 102 208 102 C 237.82338 102 262 128.86292 262 162 Z"/>
+        <path fill="#2a1f1a" stroke="none" d="M 85 157 C 85 161.41827 82.313705 165 79 165 C 75.686295 165 73 161.41827 73 157 C 73 152.58173 75.686295 149 79 149 C 82.313705 149 85 152.58173 85 157 Z"/>
+        <path fill="#2a1f1a" stroke="none" d="M 187 163 C 187 167.41827 183.866 171 180 171 C 176.134 171 173 167.41827 173 163 C 173 158.58173 176.134 155 180 155 C 183.866 155 187 158.58173 187 163 Z"/>
+        <path fill="#2a1f1a" stroke="#2a1f1a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" d="M 136 204 L 153 207 L 143 217 Z"/>
+        <path fill="none" stroke="#2a1f1a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" d="M 143 217 Q 133 232 119 220 M 143 217 Q 151 235 166 222"/>
+        <path fill="none" stroke="#2a1f1a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" d="M 67 208 L 14 193 M 64 220 L 8 216 M 68 231 L 22 240 M 242 219 L 293 208 M 246 231 L 298 232 M 240 241 L 281 255"/>
+        <path fill="none" stroke="#2a1f1a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" d="M 280 140 Q 284 157 298 164"/>
+        <path fill="#dcebe7" stroke="#2a1f1a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" d="M 311 131 Q 332 155 319 169 Q 299 176 302 151 Z"/>
+        <path fill="#f3a24a" stroke="#2a1f1a" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" d="M 268 296 Q 271 336 237 347 L 169 335 Q 146 335 140 352 Q 135 373 162 382 L 249 397 Q 317 377 320 327"/>
+        <path fill="none" stroke="#2a1f1a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" d="M 163 351 L 157 367 M 180 357 L 175 374"/>
+        <path fill="none" stroke="#a66b37" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" d="M 314 296 L 339 291 M 327 318 L 350 314 M 209 397 L 240 408"/>
+    </g>
+</svg>

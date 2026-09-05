@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <g stroke="{{INK}}" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M-5 -5 H1925 V708 H-5Z" fill="{{WALL}}" stroke="none"/>
+    <path d="M0 412 L960 410 L1920 416 V1080 H0Z" fill="{{FLOOR}}" stroke="none"/>
+    <path d="M0 414 L960 410 L1920 414" fill="none" stroke="{{BOARD_FRAME}}" stroke-width="10"/>
+    <g fill="none" stroke="{{WOOD}}" stroke-width="5">
+      <path d="M960 410 L-640 1080 M960 410 L20 1080 M960 410 L495 1080 M960 410 L960 1080 M960 410 L1425 1080 M960 410 L1900 1080 M960 410 L2560 1080"/>
+      <path d="M0 466 H1920 M0 547 H1920 M0 672 H1920 M0 865 H1920"/>
+    </g>
+    <path d="M0 412 V0 H357 V413Z" fill="{{WALL_LIGHT}}" stroke="none"/>
+    <path d="M81 76 L337 68 L331 341 L80 348Z" fill="{{PAPER_SHADE}}" stroke-width="10"/>
+    <path d="M96 90 L318 84 L315 326 L96 331Z" fill="{{WALL_LIGHT}}" stroke-width="6"/>
+    <path d="M206 90 L204 328 M96 207 L316 203" fill="none" stroke="{{BOARD_FRAME}}" stroke-width="9"/>
+    <path d="M114 116 L171 106 M115 138 L151 131 M232 244 L291 234" fill="none" stroke="{{PAPER}}" stroke-width="9"/>
+    <path d="M68 350 L345 344 L357 358 L67 366Z" fill="{{WOOD}}" stroke-width="6"/>
+    <path d="M443 76 Q953 66 1399 79 L1405 350 Q951 361 440 349Z" fill="{{WOOD_SHADE}}" stroke-width="10"/>
+    <path d="M458 90 Q953 80 1385 93 L1390 333 Q951 345 455 334Z" fill="{{BOARD}}" stroke-width="6"/>
+    <path d="M441 350 L1407 348 L1420 367 L427 370Z" fill="{{WOOD}}" stroke-width="6"/>
+    <path d="M482 349 L519 349 M529 349 L552 349" fill="none" stroke="{{PAPER}}" stroke-width="8"/>
+    <g fill="{{PAPER}}" stroke="none" text-anchor="middle">
+      <text x="921" y="146" font-family="Luckiest Guy" font-size="52">FINAL EXAM</text>
+      <text x="921" y="204" font-family="Patrick Hand" font-size="39">Rule #1: NO CHEATING.</text>
+      <text x="921" y="254" font-family="Patrick Hand" font-size="39">Rule #2: NO MEOWING.</text>
+      <text x="921" y="310" font-family="Patrick Hand" font-size="26">Emotional support ducks permitted.</text>
+    </g>
+    <path d="M754 266 Q927 270 1130 264" fill="none" stroke="{{PAPER}}" stroke-width="3"/>
+    <g transform="translate(1676 161) rotate(3)">
+      <ellipse rx="84" ry="88" fill="{{WOOD}}" stroke-width="9"/>
+      <ellipse rx="69" ry=" 70" fill="{{PAPER}}" stroke-width="6"/>
+      <path d="M0 -54 V-44 M54 0 H44 M0 54 V44 M-54 0 H-44 M0 -36 V0 L28 17" fill="none" stroke-width="7"/>
+      <circle r="5" fill="{{INK}}" stroke="none"/>
+    </g>
+    <g transform="translate(1594 298) rotate(-5)">
+      <path d="M0 0 L177 5 L170 160 L-4 153Z" fill="{{PAPER}}" stroke-width="6"/>
+      <path d="M66 -8 L116 -5 L112 18 L62 16Z" fill="{{PAPER_SHADE}}" stroke="none"/>
+      <text x="85" y=" 40" text-anchor="middle" font-family="Patrick Hand" font-size="25" fill="{{INK}}" stroke="none">CAT ACADEMY</text>
+      <path d="M36 89 Q75 47 121 90 Q 70 126 36 89Z M119 90 L146 68 L146 113Z" fill="{{TEACHER}}" stroke-width="5"/>
+      <circle cx="54" cy="86" r="4" fill="{{INK}}" stroke="none"/>
+      <path d="M59 135 L119 135" fill="none" stroke="{{PENCIL_INK}}" stroke-width="4"/>
+    </g>
+    {{SLOT_TEACHER_SHADOW}}
+  </g>
+  {{SLOT_TEACHER_BACK}}
+  <g stroke="{{INK}}" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M698 509 L757 509 L751 653 L718 653Z M1196 509 L1244 509 L1224 655 L1192 655Z" fill="{{WOOD_SHADE}}" stroke-width="8"/>
+    <path d="M705 461 L1222 460 L1260 506 L680 508Z" fill="{{WOOD}}" stroke-width="8"/>
+    <path d="M680 509 L1260 507 L1254 550 L686 552Z" fill="{{WOOD_SHADE}}" stroke-width="8"/>
+    <path d="M1136 445 L1203 444 L1202 461 L1136 462Z" fill="{{PAPER}}" stroke-width="5"/>
+  </g>
+  {{SLOT_TEACHER_FRONT}}
+  <g stroke="{{INK}}" stroke-linecap="round" stroke-linejoin="round">
+    <g fill="{{NERD}}" stroke-width="9">
+      <path d="M327 423 Q382 405 430 449 L470 565 L305 574Z"/>
+      <path d="M285 364 L281 305 Q281 287 296 296 L344 327 Q373 315 404 328 L448 296 Q461 286 462 302 L457 361 Q483 410 449 437 Q390 472 314 441 Q269 416 285 364Z"/>
+      <path d="M345 330 L353 352 M375 325 L377 349 M410 334 L402 355" fill="none" stroke="{{INK}}" stroke-width="7"/>
+      <path d="M279 378 L267 388 M460 377 L474 386" fill="none" stroke-width="8"/>
+    </g>
+    <g fill="{{FLUFFY}}" stroke-width="9">
+      <path d="M1505 442 Q1560 408 1614 438 L1668 563 L1478 569Z"/>
+      <path d="M1478 360 L1472 313 Q1470 294 1487 302 L1537 334 Q1570 323 1600 332 L1641 302 Q1658 292 1659 309 L1661 362 L1679 382 L1664 394 L1680 409 L1662 420 Q1611 478 1522 451 L1502 453 L1503 434 L1480 433 L1485 416 L1467 408 L1478 391 L1469 374Z"/>
+    </g>
+    <g transform="translate(44 495) rotate(-12 310 130)">
+      <path d="M77 38 L541 43 L614 225 L5 218Z" fill="{{WOOD}}" stroke-width="9"/>
+      <path d="M5 218 L614 225 L608 252 L11 246Z" fill="{{WOOD_SHADE}}" stroke-width="8"/>
+      <path d="M94 95 L332 89 L356 200 L79 202Z" fill="{{PAPER}}" stroke-width="6"/>
+      <text x="110" y="121" font-family="Patrick Hand" font-size="24" fill="{{PENCIL_INK}}" stroke="none">Whiskerstein</text>
+      <path d="M107 137 Q159 133 203 139 M109 147 L188 146" fill="none" stroke="#8C8C8C" stroke-width="3"/>
+      <path d="M141 184 V163 M129 173 L141 161 L153 173 M194 171 H222 M211 160 L223 171 L211 183" fill="none" stroke="{{PENCIL_INK}}" stroke-width="7"/>
+      <path d="M435 -34 Q400 -11 383 26 L352 102 Q351 126 377 129 Q405 126 410 103 L443 36" fill="{{NERD}}" stroke-width="8"/>
+      <path d="M368 105 L365 117 M383 107 L381 120" fill="none" stroke-width="5"/>
+    </g>
+    <g transform="translate(1294 496) rotate(12 310 130)">
+      <path d="M77 38 L541 43 L614 225 L5 218Z" fill="{{WOOD}}" stroke-width="9"/>
+      <path d="M5 218 L614 225 L608 252 L11 246Z" fill="{{WOOD_SHADE}}" stroke-width="8"/>
+      <path d="M231  80 L467 87 L492 200 L206 197Z" fill="{{PAPER}}" stroke-width="6"/>
+      <text x="254" y="114" font-family="Patrick Hand" font-size="24" fill="{{PENCIL_INK}}" stroke="none">Fluffy</text>
+      <path d="M352 2 L353 110 Q396 122 389 158 Q370 179 334 159 L286 133 Q273 107 293 79 L305 3" fill="{{FLUFFY}}" stroke-width="8"/>
+      <path d="M354 133 L348 147 M370 139 L365 154" fill="none" stroke-width="5"/>
+    </g>
+  </g>
+  {{SLOT_DESK}}
+  <g stroke="{{INK}}" stroke-linecap="round" stroke-linejoin="round">
+    <ellipse cx="1178" cy="930" rx="250" ry="50" fill="{{INK}}" opacity=".12" stroke="none"/>
+    <g transform="translate(1040 770) rotate(4)">
+      <path d="M8 14 L379 8 L415 243 L-20 244Z" fill="{{PAPER_SHADE}}" stroke-width="7"/>
+      <path d="M0 0 L372 -5 L401 230 L-28 229Z" fill="{{PAPER}}" stroke-width="7"/>
+      <path d="M337 -5 L342 31 L376 27Z" fill="{{PAPER_SHADE}}" stroke-width="4"/>
+      <g font-family="Patrick Hand" fill="{{PENCIL_INK}}" stroke="none">
+        <text x="15" y="36" font-size="25">CAT ACADEMY — FINAL EXAM</text>
+        <text x="16" y="70" font-size="24">Student: __________</text>
+        <text x="14" y="114" font-size="26">How many lives does a cat</text>
+        <text x="14" y="145" font-size="26">claim to have?</text>
+        <text x="14" y="194" font-size="30">Answer: ____</text>
+      </g>
+      <path d="M13 80 L336 80 M11 215 Q153 210 319 216" fill="none" stroke="#8C8C8C" stroke-width="3"/>
+    </g>
+    <g transform="translate(1480 946) rotate(-18)">
+      <path d="M0 0 L115 0 L115 18 L0 18 L-25 9Z" fill="{{UI_ACCENT}}" stroke-width="5"/>
+      <path d="M-25 9 L0 0 V18Z" fill="{{KITTEN_LIGHT}}" stroke-width="4"/>
+      <path d="M-25 9 L-15 5 L-15 13Z" fill="{{INK}}" stroke="none"/>
+      <path d="M97 0 H115 V18 H97Z" fill="{{GLASSES_RED}}" stroke-width="4"/>
+    </g>
+    <ellipse cx="1652" cy="900" rx="83" ry="18" fill="{{INK}}" opacity=".12" stroke="none"/>
+  </g>
+  {{SLOT_DUCK}}
+  {{SLOT_KITTEN}}
+</svg>
