@@ -80,6 +80,8 @@
 - **D‑29 · 05.09** · `IInputService` остаётся механическим (`IsKeyHeld`/`IsKeyPressed`/`GetPointerScreenPosition`), вся раскладка COPYCAT лежит в `InputKeyMap` (`Gameplay/Input/Data`); `M` и `Q` исключены из букв `Word`. · Раскладка — геймплейное знание, ей не место в `Infrastructure`; исключение `M`/`Q` не даёт мяу и утке засчитываться как ошибочный ввод (`GDD §6.3`). Мёртвые `HorizontalAxis`/`VerticalAxis`/`IsRestartInputStarted` из сэмпла бура удалены — `R` на Report Card читается через `IsKeyPressed`.
 - **D‑30 · 05.09** · `InputFeature` перенесена из `GlobalLoopInfraTailFeature` в `GlobalLoopInfraHeadFeature`. · `StrokeInput`/`PickInput`/`LetterInput` живут один кадр; в хвосте геймплей читал бы их кадром позже, а в голове ввод виден в том же кадре, в котором нажата клавиша.
 
+- **D‑31 · 05.09** · D1 принят Колей через Егора; замечание к креплению лап соседей из макета закреплено в D5 и E3 (B‑002). · D1 определяет стиль и композицию; полноценные тела/лапы создаются в D5, соединение и перекрытия дополнительно проверяются в движении в E3.
+
 ## 5. Маппинг дизайна на код шаблона
 
 | Дизайн | Код |
@@ -155,7 +157,7 @@ Unity: `UnityWebRequest.Post(url, json, "application/json")`, редиректы
 
 ## 8. Пайплайн арта/аудио (кратко, детали — `ART_BIBLE.md`)
 
-Текущий D1: `art/src/d1/*.svg` + `art/palette.json` → `art/build.mjs` (resvg, PNG + SVG с текстом в кривых) → `art/previews/d1/`. Стиль‑лист, две композиции класса и тестовые позы проверены; визуальное утверждение Коли ещё не зафиксировано. Дальнейшая интеграция D11: PNG @2x, trim/pivot и слои → `Assets/AddressableResources/Content/<Feature>/...` → импорт и префабы через Unity MCP `RunCommand` → Addressables группы по фичам (`Copycat_Classroom`, `Copycat_Characters`, `Copycat_UI`, `Copycat_Intro`, `Copycat_Vfx`, `Copycat_Audio`).
+Текущий D1: `art/src/d1/*.svg` + `art/palette.json` → `art/build.mjs` (resvg, PNG + SVG с текстом в кривых) → `art/previews/d1/`. Стиль‑лист, две композиции класса и тестовые позы проверены; D1 принят Колей через Егора 05.09. Замечание B‑002 к креплению лап соседей закреплено в D5/E3. Дальнейшая интеграция D11: PNG @2x, trim/pivot и слои → `Assets/AddressableResources/Content/<Feature>/...` → импорт и префабы через Unity MCP `RunCommand` → Addressables группы по фичам (`Copycat_Classroom`, `Copycat_Characters`, `Copycat_UI`, `Copycat_Intro`, `Copycat_Vfx`, `Copycat_Audio`).
 Аудио: `art/audio/*.py` (синтез через Python/ffmpeg) и `say` → WAV 44.1 kHz → `Content/Audio/`.
 
 ## 9. Work Log (append‑only, одна строка на действие)
@@ -189,3 +191,4 @@ Unity: `UnityWebRequest.Post(url, json, "application/json")`, редиректы
 - 2026‑09‑05 11:20 · Claude · A4: раскладка вынесена в `InputKeyMap` + `KeyBinding<T>` (Space, `M`, `Q`, стрелки/WASD, `1–4`, 24 буквы без `M`/`Q`), `EmitInputSystem` пишет флаги и однокадровые компоненты · `Assets/Code/Gameplay/Input/Data`, D‑29
 - 2026‑09‑05 11:20 · Claude · A4: `IInputService`/`KeyboardInputService` сведены к `IsKeyHeld`/`IsKeyPressed`/`GetPointerScreenPosition`; `InputFeature` перенесена в `GlobalLoopInfraHeadFeature` · D‑29, D‑30
 - 2026‑09‑05 11:20 · Claude · A4: Jenny‑Gen (244 файла), компиляция чистая; в Play Mode `EmitInputSystem` прогнан с подменённым `IInputService` — Space+`M`+`Q`+`↑`+`3`+`T` дают lean/meow/duck/stroke=Up/pick=2/letter=T, одиночный `M` буквы не даёт, `A` даёт stroke=Left и letter=A, отпускание всё снимает; ошибок в консоли нет · Unity 6000.3.22f1
+- 2026-09-05 11:40 · Codex · Зафиксировал переданное Егором одобрение Коли: D1 закрыт, замечание к креплению лап соседей занесено в B‑002 и критерии D5/E3; статусы синхронизированы в docs и art/README · D‑31, `docs/PLAN.md`, `docs/ART_BIBLE.md`, `docs/BUGS.md`

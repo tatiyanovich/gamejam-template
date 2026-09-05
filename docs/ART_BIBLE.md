@@ -7,7 +7,7 @@
 
 [Стиль‑лист 1920×1500](../art/previews/d1/style_sheet.png) · [спокойный кадр](../art/previews/d1/classroom_calm.png) · [опасный кадр](../art/previews/d1/classroom_risk.png) · [миниатюра 480×270](../art/previews/d1/classroom_thumbnail.png) · [исходники и инструкция](../art/README.md).
 
-Подготовлены две тестовые позы котёнка (затылок / наклон с мордой в три четверти), две позы учительницы (спина с мелом / взгляд поверх красных очков), парта и утка. Соседи в кадре — силуэты для проверки композиции; полные слои и состояния остаются задачами D2–D11. Это SVG‑макеты, не скриншоты Unity. Материалы готовы; утверждение Коли пока не зафиксировано.
+Подготовлены две тестовые позы котёнка (затылок / наклон с мордой в три четверти), две позы учительницы (спина с мелом / взгляд поверх красных очков), парта и утка. Соседи в кадре — силуэты для проверки композиции; полные слои и состояния остаются задачами D2–D11. Это SVG‑макеты, не скриншоты Unity. D1 принят Колей через Егора 05.09. Замечание B‑002: в макете лапы соседей неестественно крепятся к телам; исправить в D5, проверить в движении в E3.
 
 В `art/palette.json` закреплены все 25 цветов §2. Исходники — `art/src/d1/*.svg`, генератор — `art/build.mjs` с `@resvg/resvg-js` 2.6.2 и lockfile. `npm ci --ignore-scripts`, затем `npm run build` / `npm run check` из `art/`. D1 выдаёт 10 PNG + 10 автономных SVG (текст в кривых) в `art/previews/d1/`; фоновые кадры @1x, отдельные объекты @2x, прозрачные поля поз сохранены. Импорт в Unity, trim, pivot и префабы — D11; общий пайплайн ниже описывает следующие задачи.
 
@@ -108,6 +108,8 @@ art/
 Учительница: `teacher_body_back.png`, `teacher_body_turn.png`, `teacher_body_front.png`, `teacher_head_back.png`, `teacher_head_turn.png`,
 `teacher_head_front.png`, `teacher_head_angry.png`, `teacher_eye_white.png`, `teacher_pupil.png`, `teacher_glasses.png`, `teacher_pointer.png`, `teacher_arm_chalk.png`.
 Соседи: `nerd_body.png`, `nerd_head.png`, `nerd_paw_cover.png`, `fluffy_body.png`, `fluffy_head.png`, `fluffy_paw_cover.png`, общие `eye_white.png`, `pupil.png`.
+
+Критерий приёмки D5/E3 (B‑002, замечание Коли к D1): лапа естественно выходит из плеча и сохраняет непрерывный силуэт с телом в закрытой и поднятой позах; pivot у плеча, стык слоёв скрыт перекрытием, парта не перерезает лапу. Проверить обе позы и весь переход между ними.
 
 ### 5.3 Листы и ввод (`Content/Papers/`) — группа `Copycat_Papers`
 `paper_player.png` 640×460, `paper_neighbour.png` 480×360, `glyph_arrow_up/down/left/right.png` 84×84 (3 состояния каждый: normal/done/wrong → 12 файлов),
