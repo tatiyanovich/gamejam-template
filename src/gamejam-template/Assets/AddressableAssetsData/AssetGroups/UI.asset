@@ -51,6 +51,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - ui
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fda0a0f85fc194e50a1579e9bc64876a
+    m_Address: attendance_window_prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 93b346209c333447f9df9a22fceba535, type: 2}
   m_SchemaSet:

@@ -7,5 +7,5 @@ namespace Code.Gameplay.Meow
 	[Game, Watched] public class MicrophoneLevel : IComponent { public float Value; }
 	[Game] public class MeowArmed : IComponent { }
 
-	[Game] public class MeowEvent : IComponent { }
+	[Game] public class MeowEvent : IComponent { public bool FromMicrophone; }
 }

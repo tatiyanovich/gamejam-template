@@ -1,0 +1,7 @@
+PASS name limit and ASCII filter
+PASS meter, config threshold and LOUDER after 0.5 seconds
+PASS keyboard meow does not pass microphone check
+PASS threshold pulse survives next-frame silence and latches success
+PASS reopen resets success; missing microphone keeps START EXAM enabled
+PASS closed window unsubscribes from query
+DONE

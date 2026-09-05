@@ -1,6 +1,7 @@
 using System;
 using Code.Infrastructure.CoreLoop;
 using Code.UI;
+using Code.UI.Attendance;
 using Code.UI.Gameplay;
 using Code.UI.Launch;
 using Code.UI.Result;
@@ -44,6 +45,7 @@ namespace Code.Infrastructure.StateManagement.Sessions
 		{
 			await UniTask.WhenAll(
 				_uiService.CloseWindow<LaunchWindow>(withAnimation: false),
+				_uiService.CloseWindow<AttendanceWindow>(withAnimation: false),
 				_uiService.CloseWindow<ResultWindow>(withAnimation: false));
 
 			await UniTask.WhenAll(

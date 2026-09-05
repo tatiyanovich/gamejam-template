@@ -69,7 +69,7 @@
 
 ### B. UI (Егор + Claude, скилл `ui-writer`) — P0 5.5 ч, P1 2 ч
 - [x] **B1** (0.5, P0) `LaunchWindow`: меню D8, `PLAY`, `QUIT`; Play → Attendance при пустом имени, иначе Exam; защита от повторного старта, сохранение имени через ECS. Базовый AttendanceSheet внутри LaunchWindow даёт ввод имени и `START EXAM`; отдельный AttendanceWindow и проверка микрофона остаются B2. Проверки и повторная сборка — `src/gamejam-template/tools/playtest/B1.md`.
-- [ ] **B2** (1.0, P0) `AttendanceWindow`: поле имени (≤12, фильтр), метр мика с порогом, галочка `LOUD ENOUGH!`, `START EXAM`. Зав.: A7, A13.
+- [x] **B2** (1.0, P0) `AttendanceWindow`: отдельное окно, имя ≤12 (латиница/цифры), метр и порог MeowConfig, `LOUDER!`, галочка `LOUD ENOUGH!` по микрофонному MeowEvent, fallback на M; START EXAM доступен без мика, имя сохраняется через ECS. Проверки и сборка: `src/gamejam-template/tools/playtest/B2.md`. Зав.: A7, A13.
 - [ ] **B3** (2.0, P0) HUD в `GameplayWindow`: счётчик, часы, шкала подозрения, метр MEOW (заливка + порог + кулдаун), кейкап Q, кольцо‑таймер лапы (world‑space), пузырь учительницы. Зав.: A15.
 - [ ] **B4** (0.5, P0) Контекстные подсказки фазы 1 (пять штук из `GDD §11`), скрываются по выполнению. Зав.: B3.
 - [ ] **B5** (1.5, P0) `ResultWindow` → Report Card: заголовок по исходу, статы, штамп grade, звёзды при 12/12, лидерборд топ‑10 + свой ранг, `RETAKE EXAM`/`MAIN MENU`, `R`. Зав.: A13, C2.

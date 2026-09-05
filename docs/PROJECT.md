@@ -140,6 +140,8 @@
 - **D‑73 · 05.09** · Сохранить `COPYCAT/QA` и `tools/playtest` для повторного прогона с анимациями: запись ECS+кадры, переключение art/greybox, отключение микрофона на Play Mode и macOS-клавиши. · Требование Егора; автоплеер читает состояние как oracle, поэтому визуальная проверка анимаций остаётся отдельным обязательным проходом.
 - **D‑74 · 05.09** · Семь reactive queries A15 живут в bootstrap scope и входят в общий `List<IReactiveQuery>` хвоста цикла; `DifficultyService` перенесён туда же, чтобы `INeighbourQuery` отдавал нормализованное окно лапы через тот же расчёт фазы. · `GameplayWindow` создаётся project-контейнером и не видит scene-only bindings, а отдельный расчёт длительности в HUD стал бы вторым источником правил сложности.
 
+- **D‑75 · 05.09** · `MeowEvent.FromMicrophone` отличает звук от M; `MeowQuery.OnMicrophoneTestPassed` обрабатывает готовое событие, Attendance сохраняет галочку до закрытия окна. · События читаются следующим кадром: повторная проверка текущей громкости теряла короткий импульс, а клавиша M не доказывает работоспособность микрофона.
+
 ## 5. Маппинг дизайна на код шаблона
 
 Editor QA: `Assets/Code/Editor/{GameplayPlaytest,GameplayRegression,LeaderboardPlaytest,ErrorWindowPlaytest}.cs`; помощники и инструкция `src/gamejam-template/tools/playtest/`; отчёт [C3_H4.md](C3_H4.md). Автоматические снимки — только камера, полный Game View снимается отдельной командой.
@@ -159,7 +161,7 @@ D8: `art/src/d8/` → `art/ui.mjs` → `art/exports/d8/` (27 UI-спрайтов
 | Дизайн | Код |
 |---|---|
 | Меню | `LoopNodeId.StartLaunch`, сцена `Launch`, `LaunchWindow` (Play → Attendance или сразу Exam; Quit → `Application.Quit`) |
-| Attendance Sheet | B1: базовая форма `AttendanceSheet` внутри `LaunchWindow`, имя читается через `IProgressQuery` (`Gameplay/Progress/Queries`) и записывается запросом `IProgressFactory`; B2: выделить `AttendanceWindow` (`Assets/Code/UI/Attendance/`) и добавить MIC CHECK |
+| Attendance Sheet | B2: отдельный `AttendanceWindow` (`Assets/Code/UI/Attendance/`), `Window_Attendance` на Overlay, префаб в UI Addressables; имя через `IProgressFactory`, метр/порог/успех через `IMeowQuery`, доступность устройства через `IMicrophoneService`; сборщик `AttendanceWindowBuilder` |
 | Intro | новое окно `IntroWindow` (`UI/Intro/`), открывается при входе в Exam, если `IntroSeen == false`; по завершении создаёт `StartExamRequest` |
 | Exam | `LoopNodeId.Exam` (переименованный `Battle`), сцена `Gameplay`, фичи в `GameplayCoreFeature` |
 | Фичи геймплея | `Gameplay/Exam` (вопросы, прогресс, ответы), `Gameplay/Neighbours` (лапа/окно), `Gameplay/Teacher` (внимание), `Gameplay/Suspicion`, `Gameplay/Meow` (микрофон), `Gameplay/Duck`, `Gameplay/Bell` (таймер), `Gameplay/Difficulty` (фазы) |
@@ -334,3 +336,4 @@ Apps Script `UnityWebRequest` отрабатывает сам. Логика бе
 
 - 2026-09-05 19:29 · Codex · B1: LaunchWindow собран на D8/D2, PLAY/QUIT и маршрутизация по IProgressQuery; базовая форма AttendanceSheet внутри LaunchWindow пишет имя через ProgressFactory и snapshot-save, блокирует повторный старт; отдельное окно и MIC CHECK остаются B2; LaunchWindowBuilder воспроизводит префаб · `UI/Launch`, `UI/Animations/ButtonLabelOffset`, `Gameplay/Progress/Queries`; исправлена загрузка null-имени до ECS, добавлен LaunchProgressPlaytest; проверки: `src/gamejam-template/tools/playtest/B1.md`
 - 2026-09-05 19:30 · Codex · A15: семь bootstrap reactive queries дают HUD события и текущее состояние экзамена, подозрения, учительницы, микрофона, утки, звонка и лап соседей; `MicrophoneLevel`/`PawWindowTimeLeft` стали `Watched`, Jenny‑Gen 319 файлов, `Assembly-CSharp` собирается без ошибок · `Assets/Code/Gameplay/*/Queries`, D‑74; A15 закрыт
+- 2026-09-05 20:02 · Codex · B2: отдельное AttendanceWindow, фильтр имени, MIC CHECK с порогом и LOUDER/LOUD ENOUGH, fallback M, сохранение и защита повторного старта; MeowEvent хранит FromMicrophone, Jenny перегенерирован; 6 проверок Attendance, 4 progress и 14 gameplay PASS, переход в Exam и повторный запуск проверены в Unity, C# без ошибок · `UI/Attendance`, `Editor/Art/AttendanceWindowBuilder`, `tools/playtest/B2.md`; B2 закрыт

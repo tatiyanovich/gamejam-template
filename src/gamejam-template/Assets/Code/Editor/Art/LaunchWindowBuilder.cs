@@ -62,24 +62,11 @@ namespace Code.Editor.Art
 				footer.fontSize = 32f;
 				footer.color = Paper;
 
-				RectTransform attendance = Rectangle(layout, "AttendanceSheet", new Rect(0f, 0f, 1920f, 1080f));
-				Picture(attendance, "UI/Copycat/panel_paper_9slice", new Rect(460f, 200f, 1000f, 680f));
-				Label(attendance, "ATTENDANCE SHEET", new Rect(520f, 260f, 880f, 80f)).fontSize = 56f;
-				Label(attendance, "Sign in before the exam.", new Rect(520f, 345f, 880f, 60f));
-				Label(attendance, "Student name", new Rect(610f, 440f, 700f, 50f));
-				TMP_InputField input = NameInput(attendance);
-				Label(attendance, "12 characters max.", new Rect(610f, 600f, 700f, 50f)).fontSize = 28f;
-				Button start = Button(attendance, "START EXAM", new Rect(730f, 710f, 460f, 100f));
-				attendance.gameObject.SetActive(false);
-
 				SerializedObject window = new SerializedObject(root.GetComponent<LaunchWindow>());
 				Assign(window, "layout", layout);
 				Assign(window, "menu", menu.gameObject);
-				Assign(window, "attendanceSheet", attendance.gameObject);
 				Assign(window, "playButton", play);
 				Assign(window, "quitButton", quit);
-				Assign(window, "startExamButton", start);
-				Assign(window, "studentName", input);
 				window.ApplyModifiedPropertiesWithoutUndo();
 				PrefabUtility.SaveAsPrefabAsset(root, Prefab);
 			}
@@ -91,7 +78,7 @@ namespace Code.Editor.Art
 			AssetDatabase.SaveAssets();
 		}
 
-		private static RectTransform Rectangle(Transform parent, string name, Rect rectangle)
+		internal static RectTransform Rectangle(Transform parent, string name, Rect rectangle)
 		{
 			RectTransform result = new GameObject(name, typeof(RectTransform)).GetComponent<RectTransform>();
 			result.gameObject.layer = 5;
@@ -102,7 +89,7 @@ namespace Code.Editor.Art
 			return result;
 		}
 
-		private static Image Picture(Transform parent, string path, Rect rectangle)
+		internal static Image Picture(Transform parent, string path, Rect rectangle)
 		{
 			Image image = Rectangle(parent, path.Substring(path.LastIndexOf('/') + 1), rectangle)
 				.gameObject.AddComponent<Image>();
@@ -117,7 +104,7 @@ namespace Code.Editor.Art
 			return AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(Content + "CopycatShared/Fonts/" + name + "-SDF.asset");
 		}
 
-		private static TextMeshProUGUI Label(Transform parent, string text, Rect rectangle)
+		internal static TextMeshProUGUI Label(Transform parent, string text, Rect rectangle)
 		{
 			TextMeshProUGUI label = Rectangle(parent, "Label", rectangle).gameObject.AddComponent<TextMeshProUGUI>();
 			label.font = Font("Nunito-Bold");
@@ -130,7 +117,7 @@ namespace Code.Editor.Art
 			return label;
 		}
 
-		private static Button Button(Transform parent, string text, Rect rectangle)
+		internal static Button Button(Transform parent, string text, Rect rectangle)
 		{
 			Image image = Picture(parent, "UI/Copycat/button_yellow_9slice", rectangle);
 			image.name = text;
@@ -160,7 +147,7 @@ namespace Code.Editor.Art
 			return AssetDatabase.LoadAssetAtPath<Sprite>(Content + "UI/Copycat/" + name + ".png");
 		}
 
-		private static TMP_InputField NameInput(Transform parent)
+		internal static TMP_InputField NameInput(Transform parent)
 		{
 			Image image = Picture(parent, "UI/Copycat/panel_paper_9slice", new Rect(610f, 500f, 700f, 95f));
 			image.name = "StudentName";
@@ -181,7 +168,7 @@ namespace Code.Editor.Art
 			return input;
 		}
 
-		private static void Assign(SerializedObject target, string property, Object value)
+		internal static void Assign(SerializedObject target, string property, Object value)
 		{
 			target.FindProperty(property).objectReferenceValue = value;
 		}

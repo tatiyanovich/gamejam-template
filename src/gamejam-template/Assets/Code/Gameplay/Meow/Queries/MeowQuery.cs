@@ -1,6 +1,7 @@
 using System;
 using Code.Gameplay.Meow.Services;
 using Code.Infrastructure.EntityComponentSystem;
+using Code.Infrastructure.EntityComponentSystem.Events.Extensions;
 using Code.Infrastructure.Microphone;
 using Entitas;
 
@@ -14,8 +15,10 @@ namespace Code.Gameplay.Meow.Queries
 		private readonly IGroup<GameEntity> _meowSources;
 		private readonly IGroup<GameEntity> _coolingMeowSources;
 		private readonly IGroup<GameEntity> _changedMeowSources;
+		private readonly IGroup<GameEntity> _meowEvents;
 
 		public event Action<float> OnMicrophoneLevelChanged;
+		public event Action OnMicrophoneTestPassed;
 
 		public MeowQuery(
 			GameContext game,
@@ -24,6 +27,10 @@ namespace Code.Gameplay.Meow.Queries
 		{
 			_meowConfigsService = meowConfigsService;
 			_microphoneService = microphoneService;
+
+			_meowEvents = game.GetEvents(GameMatcher
+				.AllOf(
+					GameMatcher.MeowEvent));
 
 			_meowSources = game.GetGroup(GameMatcher
 				.AllOf(
@@ -46,6 +53,12 @@ namespace Code.Gameplay.Meow.Queries
 		{
 			foreach (GameEntity meowSource in _changedMeowSources)
 				OnMicrophoneLevelChanged?.Invoke(meowSource.MicrophoneLevel);
+
+			foreach (GameEntity meowEvent in _meowEvents)
+			{
+				if (meowEvent.meowEvent.FromMicrophone)
+					OnMicrophoneTestPassed?.Invoke();
+			}
 		}
 
 		public float GetMicrophoneLevel()

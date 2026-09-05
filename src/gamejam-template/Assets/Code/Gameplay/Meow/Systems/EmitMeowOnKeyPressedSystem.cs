@@ -49,7 +49,7 @@ namespace Code.Gameplay.Meow.Systems
 				meowSource.PutOnCooldown(_meowConfigsService.MeowConfig.CooldownSeconds);
 
 				_entityFactory.Event()
-					.With(x => x.isMeowEvent = true);
+					.AddMeowEvent(false);
 			}
 		}
 	}

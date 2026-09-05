@@ -5,6 +5,7 @@ namespace Code.Gameplay.Meow.Queries
 	public interface IMeowQuery
 	{
 		event Action<float> OnMicrophoneLevelChanged;
+		event Action OnMicrophoneTestPassed;
 
 		float GetMicrophoneLevel();
 		float GetThresholdLevel();

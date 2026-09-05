@@ -3,6 +3,7 @@ using Code.Common.Extensions;
 using Code.Infrastructure.ConfigsManagement;
 using Code.Infrastructure.UiManagement.Services;
 using Code.UI;
+using Code.UI.Attendance;
 using Code.UI.Error;
 using Code.UI.Fade;
 using Code.UI.Gameplay;
@@ -84,6 +85,7 @@ namespace Code.Infrastructure.StateManagement.States
 				.AddDefinition(new WindowDefinition(typeof(LoadingWindow), Addresses.UI.LoadingWindow))
 				.AddDefinition(new WindowDefinition(typeof(FadeWindow), Addresses.UI.FadeWindow))
 				.AddDefinition(new WindowDefinition(typeof(LaunchWindow), Addresses.UI.LaunchWindow))
+				.AddDefinition(new WindowDefinition(typeof(AttendanceWindow), Addresses.UI.AttendanceWindow))
 				.AddDefinition(new WindowDefinition(typeof(GameplayWindow), Addresses.UI.GameplayWindow))
 				.AddDefinition(new WindowDefinition(typeof(WorldOverlayWindow), Addresses.UI.WorldOverlayWindow))
 				.AddDefinition(new WindowDefinition(typeof(ResultWindow), Addresses.UI.ResultWindow))

@@ -79,7 +79,7 @@ namespace Code.Editor
 			GameEntity meow = fixture.Game.CreateEntity();
 			meow.isEvent = true;
 			meow.isReady = true;
-			meow.isMeowEvent = true;
+			meow.AddMeowEvent(false);
 		}
 
 		private static void DuckMeow(GameplayPlaytestFixture fixture)

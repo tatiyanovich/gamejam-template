@@ -8,27 +8,53 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    static readonly Code.Gameplay.Meow.MeowEvent meowEventComponent = new Code.Gameplay.Meow.MeowEvent();
+    public Code.Gameplay.Meow.MeowEvent meowEvent { get { return (Code.Gameplay.Meow.MeowEvent)GetComponent(GameComponentsLookup.MeowEvent); } }
+    public bool hasMeowEvent { get { return HasComponent(GameComponentsLookup.MeowEvent); } }
 
-    public bool isMeowEvent {
-        get { return HasComponent(GameComponentsLookup.MeowEvent); }
-        set {
-            if (value != isMeowEvent) {
-                var index = GameComponentsLookup.MeowEvent;
-                if (value) {
-                    var componentPool = GetComponentPool(index);
-                    var component = componentPool.Count > 0
-                            ? componentPool.Pop()
-                            : meowEventComponent;
+    public GameEntity AddMeowEvent(bool newFromMicrophone) {
+        var index = GameComponentsLookup.MeowEvent;
+        var componentPool = GetComponentPool(index);
+        var component = componentPool.Count > 0
+            ? (Code.Gameplay.Meow.MeowEvent)componentPool.Pop()
+            : new Code.Gameplay.Meow.MeowEvent();
+        component.FromMicrophone = newFromMicrophone;
+        AddComponent(index, component);
 
-                    AddComponent(index, component);
-					
-                } else {
-                    RemoveComponent(index);
-					
-                }
-            }
+		
+
+        return this;
+    }
+
+    public GameEntity ReplaceMeowEvent(bool newFromMicrophone) {
+        var index = GameComponentsLookup.MeowEvent;
+        var componentPool = GetComponentPool(index);
+        var component = componentPool.Count > 0
+            ? (Code.Gameplay.Meow.MeowEvent)componentPool.Pop()
+            : new Code.Gameplay.Meow.MeowEvent();
+        component.FromMicrophone = newFromMicrophone;
+        ReplaceComponent(index, component);
+
+		
+
+        return this;
+    }
+
+    public GameEntity RemoveMeowEvent() {
+        RemoveComponent(GameComponentsLookup.MeowEvent);
+
+		
+
+        return this;
+    }
+
+    public GameEntity SafeRemoveMeowEvent() {
+        if (hasMeowEvent) 
+        {
+            RemoveComponent(GameComponentsLookup.MeowEvent);
+			
         }
+
+        return this;
     }
 }
 
