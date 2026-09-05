@@ -35,3 +35,4 @@ description: C# code style rules enforced across the project
 - **One class/interface per file** (exception: generic overloads with same name).
 - **Namespaces** mirror folder paths: `namespace Code.Gameplay.Effects.Systems`.
 - **Don't null-check configs** — assume ScriptableObject configs and their fields (loaded via `IConfigsService`/Addressables) are set up; skip defensive null-checks and warning logs. A `NullReferenceException` is the intended signal that a config is missing or mislabeled.
+- **No comments in code.** Never write `//`, `/* */` or XML doc comments in project C#. Names carry the meaning; if a piece of code needs an explanation, rename it or split it. Explanations belong in `docs/`, not in source. (Generated code under `Assets/Code/Generated/` is exempt — it is not hand-written.)
