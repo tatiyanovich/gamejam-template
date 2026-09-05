@@ -5,6 +5,7 @@ using Code.Gameplay.Duck.Services;
 using Code.Gameplay.Exam.Services;
 using Code.Gameplay.Movement.Services;
 using Code.Gameplay.Neighbours.Services;
+using Code.Gameplay.Progress.Services;
 using Code.Gameplay.Teacher.Services;
 using Code.Gameplay.Vfx.Services;
 using Framework.Instantiation;
@@ -37,6 +38,7 @@ namespace Code.Infrastructure.Installers
 			Container.BindInterfacesTo<NeighbourFactory>().AsSingle();
 			Container.BindInterfacesTo<TeacherFactory>().AsSingle();
 			Container.BindInterfacesTo<DuckFactory>().AsSingle();
+			Container.BindInterfacesTo<ProgressFactory>().AsSingle();
 		}
 
 		private void BindDebugServices()

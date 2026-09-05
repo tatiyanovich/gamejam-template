@@ -1,4 +1,5 @@
 using Code.Gameplay.Meow;
+using Code.Gameplay.Progress;
 using Code.Gameplay.Teardown;
 using Code.Infrastructure.EntityComponentSystem.Factories;
 
@@ -16,6 +17,8 @@ namespace Code.Gameplay
         protected override void AddOverloadSystems(ISystemFactory systemFactory)
         {
             Add(systemFactory.Create<MeowFeature>());
+
+            Add(systemFactory.Create<ProgressFeature>());
 
             Add(systemFactory.Create<LaunchTeardownSystem>());
         }

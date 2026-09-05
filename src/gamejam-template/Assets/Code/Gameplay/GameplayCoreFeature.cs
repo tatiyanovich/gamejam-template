@@ -5,6 +5,7 @@ using Code.Gameplay.Exam;
 using Code.Gameplay.Meow;
 using Code.Gameplay.Movement;
 using Code.Gameplay.Neighbours;
+using Code.Gameplay.Progress;
 using Code.Gameplay.Suspicion;
 using Code.Gameplay.Teacher;
 using Code.Gameplay.Teardown;
@@ -35,6 +36,8 @@ namespace Code.Gameplay
 			Add(systemFactory.Create<ExamFeature>());
 
 			Add(systemFactory.Create<BellFeature>());
+
+			Add(systemFactory.Create<ProgressFeature>());
 
 			Add(systemFactory.Create<MovementUpdateFeature>());
 

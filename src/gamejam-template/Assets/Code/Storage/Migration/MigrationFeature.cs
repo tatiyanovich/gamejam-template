@@ -7,6 +7,7 @@ namespace Code.Storage.Migration
 		public MigrationFeature(ISystemFactory systemFactory)
 		{
 			Add(systemFactory.Create<Migrate0InitializeSessionLoopStateSystem>());
+			Add(systemFactory.Create<Migrate1InitializeExamProgressSystem>());
 		}
 	}
 }

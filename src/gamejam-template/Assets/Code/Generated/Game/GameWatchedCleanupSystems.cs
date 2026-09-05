@@ -17,6 +17,8 @@ public sealed class GameWatchedCleanupSystems : Feature {
         Add(new RemoveAnswerReadableChangedGameSystem(contexts));
         Add(new RemoveAnswersCopiedChangedGameSystem(contexts));
         Add(new RemoveBellAnnouncedChangedGameSystem(contexts));
+        Add(new RemoveBestAnswersChangedGameSystem(contexts));
+        Add(new RemoveBestTimeSecondsChangedGameSystem(contexts));
         Add(new RemoveCompletedChangedGameSystem(contexts));
         Add(new RemoveCurrentHPChangedGameSystem(contexts));
         Add(new RemoveCurrentQuestionIndexChangedGameSystem(contexts));
@@ -27,6 +29,7 @@ public sealed class GameWatchedCleanupSystems : Feature {
         Add(new RemoveExamOutcomeChangedGameSystem(contexts));
         Add(new RemoveHiddenChangedGameSystem(contexts));
         Add(new RemoveIdChangedGameSystem(contexts));
+        Add(new RemoveIntroSeenChangedGameSystem(contexts));
         Add(new RemoveLocalPositionChangedGameSystem(contexts));
         Add(new RemoveLocalRotationChangedGameSystem(contexts));
         Add(new RemoveLookDirectionChangedGameSystem(contexts));
@@ -35,6 +38,7 @@ public sealed class GameWatchedCleanupSystems : Feature {
         Add(new RemoveNameChangedGameSystem(contexts));
         Add(new RemoveOnCooldownChangedGameSystem(contexts));
         Add(new RemovePawLiftedChangedGameSystem(contexts));
+        Add(new RemovePlayerNameChangedGameSystem(contexts));
         Add(new RemoveProcessedChangedGameSystem(contexts));
         Add(new RemoveReadyChangedGameSystem(contexts));
         Add(new RemoveStartedChangedGameSystem(contexts));

@@ -11,6 +11,10 @@ namespace Code.Storage.SaveFiles
 		public int SchemeVersion;
 		public AppMetadataSnapshot AppMetadata;
 		public SessionLoopSnapshot SessionLoop;
+		public string PlayerName;
+		public bool IntroSeen;
+		public int BestAnswers;
+		public float BestTimeSeconds;
 		public List<SceneEntitySnapshot> SceneEntities = new();
 	}
 }

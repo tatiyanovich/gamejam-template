@@ -13,7 +13,7 @@ namespace Code.Infrastructure.StateManagement.States
 {
 	public class LoadProgressState : IState, IEnter
 	{
-		private const int CurrentSaveSchemeVersion = 1;
+		private const int CurrentSaveSchemeVersion = 2;
 
 		private readonly IGameStateMachine _gameStateMachine;
 		private readonly ISaveLoadService _saveLoadService;
@@ -63,6 +63,10 @@ namespace Code.Infrastructure.StateManagement.States
 			generalSaveFile.SchemeVersion = CurrentSaveSchemeVersion;
 			generalSaveFile.AppMetadata = appMetadataSnapshot;
 			generalSaveFile.SessionLoop = SessionLoopSnapshot.CreateForNewProgress();
+			generalSaveFile.PlayerName = string.Empty;
+			generalSaveFile.IntroSeen = false;
+			generalSaveFile.BestAnswers = 0;
+			generalSaveFile.BestTimeSeconds = 0f;
 
 			_saveLoadService.SaveProgress();
 
