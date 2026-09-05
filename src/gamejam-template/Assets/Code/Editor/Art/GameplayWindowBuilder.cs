@@ -21,12 +21,15 @@ namespace Code.Editor.Art
 			if (EditorApplication.isPlaying)
 				throw new InvalidOperationException("Stop Play Mode before building the gameplay window.");
 
+			BuildDangerVignette();
+
 			GameObject root = PrefabUtility.LoadPrefabContents(Prefab);
 			try
 			{
 				while (root.transform.childCount > 0)
 					Object.DestroyImmediate(root.transform.GetChild(0).gameObject);
 
+				DangerVignetteView vignette = Vignette(root.transform);
 				RectTransform layout = Rectangle(root.transform, "Layout", new Rect(0f, 0f, 1920f, 1080f));
 				layout.anchorMin = layout.anchorMax = layout.pivot = Vector2.one * 0.5f;
 				layout.anchoredPosition = Vector2.zero;
@@ -75,6 +78,7 @@ namespace Code.Editor.Art
 				Picture(hintStrokes, "Papers/glyph_arrow_left_normal", new Rect(178f, 0f, 44f, 44f));
 				Picture(hintStrokes, "Papers/glyph_arrow_up_normal", new Rect(234f, 0f, 44f, 44f));
 				Picture(hintStrokes, "Papers/glyph_arrow_right_normal", new Rect(290f, 0f, 44f, 44f));
+				FlashStackView flashes = FlashStack(layout);
 				SerializedObject window = new(root.GetComponent<GameplayWindow>());
 				Assign(window, "layout", layout);
 				Assign(window, "answers", answers);
@@ -90,6 +94,8 @@ namespace Code.Editor.Art
 				Assign(window, "hintBubble", hintBubble);
 				Assign(window, "hint", hintText);
 				Assign(window, "hintStrokes", hintStrokes.gameObject);
+				Assign(window, "vignette", vignette);
+				Assign(window, "flashes", flashes);
 				window.ApplyModifiedPropertiesWithoutUndo();
 				PrefabUtility.SaveAsPrefabAsset(root, Prefab);
 			}
@@ -102,6 +108,70 @@ namespace Code.Editor.Art
 			RemoveStaticKeycap();
 			RemoveClockHands();
 			AssetDatabase.SaveAssets();
+		}
+
+		private static DangerVignetteView Vignette(Transform parent)
+		{
+			GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(Content + "UI/Copycat/DangerVignette.prefab");
+			GameObject instance = (GameObject)PrefabUtility.InstantiatePrefab(prefab, parent);
+			RectTransform rectangle = (RectTransform)instance.transform;
+			rectangle.anchorMin = Vector2.zero;
+			rectangle.anchorMax = Vector2.one;
+			rectangle.offsetMin = Vector2.zero;
+			rectangle.offsetMax = Vector2.zero;
+			return instance.GetComponent<DangerVignetteView>();
+		}
+
+		private static FlashStackView FlashStack(Transform parent)
+		{
+			RectTransform stack = Rectangle(parent, "FlashStack", new Rect(40f, 530f, 420f, 176f));
+			FlashRowView[] flashRows = new FlashRowView[3];
+			for (int index = 0; index < flashRows.Length; index++)
+				flashRows[index] = FlashRow(stack, index);
+
+			FlashStackView view = stack.gameObject.AddComponent<FlashStackView>();
+			SerializedObject serialized = new(view);
+			SerializedProperty rows = serialized.FindProperty("rows");
+			rows.arraySize = flashRows.Length;
+			for (int index = 0; index < flashRows.Length; index++)
+				rows.GetArrayElementAtIndex(index).objectReferenceValue = flashRows[index];
+			serialized.ApplyModifiedPropertiesWithoutUndo();
+			return view;
+		}
+
+		private static FlashRowView FlashRow(Transform parent, int index)
+		{
+			RectTransform row = Rectangle(parent, "FlashRow", new Rect(0f, 120f - index * 60f, 420f, 52f));
+			Picture(row, "UI/Copycat/chip_hud", new Rect(0f, 0f, 420f, 52f)).pixelsPerUnitMultiplier = 1.5f;
+			TMP_Text label = Label(row, "", new Rect(20f, 0f, 380f, 52f));
+			label.fontSize = 30f;
+			label.alignment = TextAlignmentOptions.Left;
+			FlashRowView view = row.gameObject.AddComponent<FlashRowView>();
+			SerializedObject serialized = new(view);
+			Assign(serialized, "label", label);
+			serialized.ApplyModifiedPropertiesWithoutUndo();
+			row.gameObject.SetActive(false);
+			return view;
+		}
+
+		private static void BuildDangerVignette()
+		{
+			string path = Content + "UI/Copycat/DangerVignette.prefab";
+			GameObject root = PrefabUtility.LoadPrefabContents(path);
+			try
+			{
+				DangerVignetteView view = root.GetComponent<DangerVignetteView>();
+				if (view == null)
+					view = root.AddComponent<DangerVignetteView>();
+				SerializedObject serialized = new(view);
+				Assign(serialized, "image", root.GetComponent<Image>());
+				serialized.ApplyModifiedPropertiesWithoutUndo();
+				PrefabUtility.SaveAsPrefabAsset(root, path);
+			}
+			finally
+			{
+				PrefabUtility.UnloadPrefabContents(root);
+			}
 		}
 
 		internal static void ConfigurePawTimer(GameObject root)

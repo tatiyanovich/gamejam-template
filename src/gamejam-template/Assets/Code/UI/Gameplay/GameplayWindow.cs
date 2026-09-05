@@ -6,6 +6,7 @@ using Code.Gameplay.Duck.Queries;
 using Code.Gameplay.Duck.Services;
 using Code.Gameplay.Exam;
 using Code.Gameplay.Exam.Queries;
+using Code.Gameplay.Input.Queries;
 using Code.Gameplay.Meow.Queries;
 using Code.Gameplay.Neighbours.Queries;
 using Code.Gameplay.Suspicion.Queries;
@@ -38,6 +39,8 @@ namespace Code.UI.Gameplay
 		[SF] private RectTransform hintBubble;
 		[SF] private TMP_Text hint;
 		[SF] private GameObject hintStrokes;
+		[SF] private DangerVignetteView vignette;
+		[SF] private FlashStackView flashes;
 
 		private PawTimerView[] _pawTimers;
 		private float _speechSeconds;
@@ -46,6 +49,9 @@ namespace Code.UI.Gameplay
 		private bool _finished;
 		private bool _announced;
 		private bool _reportCardRequested;
+		private bool _isHot;
+		private float _microphoneLevel;
+		private float _quietSeconds;
 
 		private IExamQuery _exam;
 		private IBellQuery _bell;
@@ -55,8 +61,18 @@ namespace Code.UI.Gameplay
 		private IDuckFactory _duckFactory;
 		private ITeacherQuery _teacher;
 		private INeighbourQuery _neighbours;
+		private IInputQuery _input;
+
+		private static readonly Color OkTint = new Color32(79, 203, 122, 255);
+		private static readonly Color WarnTint = new Color32(255, 154, 61, 255);
+		private static readonly Color DangerTint = new Color32(232, 76, 76, 255);
+		private static readonly Color DuckTint = new Color32(255, 216, 61, 255);
 
 		private const float ReportCardDelaySeconds = 1.6f;
+		private const float HotSuspicionShare = 0.8f;
+		private const float QuietMinimumLevel = 20f;
+		private const float QuietMaximumLevel = 40f;
+		private const float QuietSeconds = 0.5f;
 
 		[Inject]
 		public void Construct(
@@ -67,7 +83,8 @@ namespace Code.UI.Gameplay
 			IDuckQuery duck,
 			IDuckFactory duckFactory,
 			ITeacherQuery teacher,
-			INeighbourQuery neighbours)
+			INeighbourQuery neighbours,
+			IInputQuery input)
 		{
 			_exam = exam;
 			_bell = bell;
@@ -77,6 +94,7 @@ namespace Code.UI.Gameplay
 			_duckFactory = duckFactory;
 			_teacher = teacher;
 			_neighbours = neighbours;
+			_input = input;
 		}
 
 		private void OnRectTransformDimensionsChange()
@@ -96,9 +114,16 @@ namespace Code.UI.Gameplay
 			_announced = _bell.IsAnnounced();
 			_watchingLine = 0;
 			_speechSeconds = 0f;
+			_isHot = _suspicion.GetLevel() >= _suspicion.GetMaximumLevel() * HotSuspicionShare;
+			_microphoneLevel = _meow.GetMicrophoneLevel();
+			_quietSeconds = 0f;
 			bubble.SetActive(false);
 			hintBubble.gameObject.SetActive(false);
+			vignette.Hide();
+			flashes.Clear();
 			_exam.OnAnswersCopiedChanged += HandleAnswers;
+			_exam.OnAnswerCopied += HandleAnswerCopied;
+			_exam.OnWrongInput += HandleWrongInput;
 			_exam.OnExamFinished += HandleFinished;
 			_exam.OnTutorialHintChanged += HandleHint;
 			_bell.OnTimeLeftChanged += HandleTime;
@@ -145,6 +170,8 @@ namespace Code.UI.Gameplay
 
 			_isOpen = false;
 			_exam.OnAnswersCopiedChanged -= HandleAnswers;
+			_exam.OnAnswerCopied -= HandleAnswerCopied;
+			_exam.OnWrongInput -= HandleWrongInput;
 			_exam.OnExamFinished -= HandleFinished;
 			_exam.OnTutorialHintChanged -= HandleHint;
 			_bell.OnTimeLeftChanged -= HandleTime;
@@ -162,16 +189,52 @@ namespace Code.UI.Gameplay
 			}
 			bubble.SetActive(false);
 			hintBubble.gameObject.SetActive(false);
+			vignette.Hide();
+			flashes.Clear();
 		}
 
 		protected override void OnUpdate()
 		{
-			if (_isOpen == false || _speechSeconds <= 0f)
+			if (_isOpen == false)
 				return;
 
-			_speechSeconds -= Time.deltaTime;
-			if (_speechSeconds <= 0f)
-				bubble.SetActive(false);
+			if (_speechSeconds > 0f)
+			{
+				_speechSeconds -= Time.deltaTime;
+				if (_speechSeconds <= 0f)
+					bubble.SetActive(false);
+			}
+
+			RefreshVignette();
+			RefreshQuietMicrophone();
+		}
+
+		private void RefreshVignette()
+		{
+			if (_finished || _teacher.IsFacingClass() == false)
+			{
+				vignette.Hide();
+				return;
+			}
+
+			vignette.Show(_input.IsLeaning());
+		}
+
+		private void RefreshQuietMicrophone()
+		{
+			if (_finished || _meow.IsMicrophoneAvailable() == false
+				|| _microphoneLevel < QuietMinimumLevel || _microphoneLevel > QuietMaximumLevel)
+			{
+				_quietSeconds = 0f;
+				return;
+			}
+
+			_quietSeconds += Time.deltaTime;
+			if (_quietSeconds < QuietSeconds)
+				return;
+
+			_quietSeconds = 0f;
+			flashes.Show("LOUDER!", WarnTint);
 		}
 
 		private void ShowSpeech(string line)
@@ -226,10 +289,19 @@ namespace Code.UI.Gameplay
 			suspicionFill.fillAmount = progress;
 			suspicionFill.color = progress >= 0.8f ? new Color32(194, 54, 43, 255)
 				: progress >= 0.5f ? new Color32(238, 153, 53, 255) : new Color32(80, 150, 76, 255);
+
+			if (progress < HotSuspicionShare)
+				return;
+
+			if (_isHot == false)
+				flashes.Show("TOO HOT!", DangerTint);
+
+			_isHot = true;
 		}
 
 		private void HandleMicrophone(float level)
 		{
+			_microphoneLevel = level;
 			bool available = _meow.IsMicrophoneAvailable();
 			microphoneFill.fillAmount = available ? Mathf.Clamp01(level / 100f) : 0f;
 			microphoneFill.color = available && _meow.IsArmed() && _meow.IsOnCooldown() == false
@@ -253,7 +325,10 @@ namespace Code.UI.Gameplay
 					if (_duck.GetThrowCount() > 0)
 						ShowSpeech("Keep. It. Quiet.");
 					break;
-				case DuckState.Confiscated: ShowSpeech("That's it. The duck is MINE."); break;
+				case DuckState.Confiscated:
+					flashes.Show("DUCK CONFISCATED", WarnTint);
+					ShowSpeech("That's it. The duck is MINE.");
+					break;
 			}
 		}
 
@@ -263,7 +338,13 @@ namespace Code.UI.Gameplay
 			{
 				case TeacherAttention.Turning: ShowSpeech("Hmm?"); break;
 				case TeacherAttention.Staring: ShowSpeech("MRS. HISSKINS SEES YOU."); break;
+				case TeacherAttention.Distracted:
+					flashes.Show($"DUCK AWAY! {Mathf.RoundToInt(_duck.GetDistractionSeconds())}s", DuckTint);
+					break;
 				case TeacherAttention.Watching:
+					if (_input.IsLeaning())
+						flashes.Show("SHE'S LOOKING!", DangerTint);
+
 					ShowSpeech((_watchingLine++ % 3) switch
 					{
 						0 => "I'm watching you.",
@@ -273,6 +354,10 @@ namespace Code.UI.Gameplay
 					break;
 			}
 		}
+
+		private void HandleAnswerCopied(int questionIndex) => flashes.Show("ANSWER COPIED!", OkTint);
+
+		private void HandleWrongInput(int questionIndex) => flashes.Show("PENCIL SNAP!", DangerTint);
 
 		private void HandleHint(TutorialHint tutorialHint)
 		{
@@ -314,6 +399,8 @@ namespace Code.UI.Gameplay
 			});
 			_finished = true;
 			RefreshDuck();
+			vignette.Hide();
+			flashes.Clear();
 
 			if (_reportCardRequested)
 				return;

@@ -9,6 +9,7 @@ namespace Code.Gameplay.Duck.Queries
 
 		DuckState GetState();
 		int GetThrowCount();
+		float GetDistractionSeconds();
 		bool CanThrow();
 	}
 }

@@ -1,4 +1,5 @@
 using System;
+using Code.Gameplay.Duck.Services;
 using Code.Infrastructure.EntityComponentSystem;
 using Entitas;
 
@@ -6,14 +7,18 @@ namespace Code.Gameplay.Duck.Queries
 {
 	public sealed class DuckQuery : IDuckQuery, IReactiveQuery
 	{
+		private readonly IDuckConfigsService _duckConfigsService;
+
 		private readonly IGroup<GameEntity> _ducks;
 		private readonly IGroup<GameEntity> _changedDucks;
 
 		public event Action<DuckState> OnStateChanged;
 		public event Action<int> OnThrowCountChanged;
 
-		public DuckQuery(GameContext game)
+		public DuckQuery(GameContext game, IDuckConfigsService duckConfigsService)
 		{
+			_duckConfigsService = duckConfigsService;
+
 			_ducks = game.GetGroup(GameMatcher
 				.AllOf(
 					GameMatcher.Duck,
@@ -57,6 +62,8 @@ namespace Code.Gameplay.Duck.Queries
 
 			return 0;
 		}
+
+		public float GetDistractionSeconds() => _duckConfigsService.DuckConfig.DistractionSeconds;
 
 		public bool CanThrow() => GetState() == DuckState.OnDesk;
 	}

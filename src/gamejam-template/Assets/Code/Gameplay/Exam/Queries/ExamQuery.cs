@@ -2,6 +2,7 @@ using System;
 using Code.Gameplay.Exam.Data;
 using Code.Gameplay.Exam.Services;
 using Code.Infrastructure.EntityComponentSystem;
+using Code.Infrastructure.EntityComponentSystem.Events.Extensions;
 using Entitas;
 
 namespace Code.Gameplay.Exam.Queries
@@ -14,6 +15,7 @@ namespace Code.Gameplay.Exam.Queries
 		private readonly IGroup<GameEntity> _changedRuns;
 		private readonly IGroup<GameEntity> _questions;
 		private readonly IGroup<GameEntity> _changedQuestions;
+		private readonly IGroup<GameEntity> _wrongInputs;
 
 		public event Action<int> OnAnswersCopiedChanged;
 		public event Action<float> OnElapsedSecondsChanged;
@@ -21,6 +23,7 @@ namespace Code.Gameplay.Exam.Queries
 		public event Action<int, int, int> OnAnswerProgressChanged;
 		public event Action<int, bool> OnAnswerReadableChanged;
 		public event Action<int> OnAnswerCopied;
+		public event Action<int> OnWrongInput;
 		public event Action<ExamOutcome> OnExamFinished;
 		public event Action<TutorialHint> OnTutorialHintChanged;
 
@@ -70,6 +73,10 @@ namespace Code.Gameplay.Exam.Queries
 					GameMatcher.AnswerProgressChanged,
 					GameMatcher.AnswerReadableChanged,
 					GameMatcher.AnswerCopiedChanged));
+
+			_wrongInputs = game.GetEvents(GameMatcher
+				.AllOf(
+					GameMatcher.WrongInputEvent));
 		}
 
 		public void ReactToChanges()
@@ -108,6 +115,9 @@ namespace Code.Gameplay.Exam.Queries
 				if (question.isAnswerCopiedChanged && question.isAnswerCopied)
 					OnAnswerCopied?.Invoke(question.QuestionIndex);
 			}
+
+			foreach (GameEntity wrongInput in _wrongInputs)
+				OnWrongInput?.Invoke(wrongInput.wrongInputEvent.QuestionIndex);
 		}
 
 		public int GetAnswersCopied()

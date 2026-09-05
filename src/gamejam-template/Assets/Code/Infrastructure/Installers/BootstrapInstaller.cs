@@ -7,6 +7,7 @@ using Code.Gameplay.Duck.Queries;
 using Code.Gameplay.Duck.Services;
 using Code.Gameplay.Exam.Queries;
 using Code.Gameplay.Exam.Services;
+using Code.Gameplay.Input.Queries;
 using Code.Gameplay.Leaderboard.Services;
 using Code.Gameplay.Lifetime;
 using Code.Gameplay.Meow.Queries;
@@ -137,6 +138,7 @@ namespace Code.Infrastructure.Installers
 			Container.BindInterfacesTo<DuckQuery>().AsSingle();
 			Container.BindInterfacesTo<BellQuery>().AsSingle();
 			Container.BindInterfacesTo<NeighbourQuery>().AsSingle();
+			Container.BindInterfacesTo<InputQuery>().AsSingle();
 			Container.BindInterfacesTo<CameraSwitcher>().AsSingle();
 		}
 

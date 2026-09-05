@@ -73,7 +73,7 @@ namespace Code.Editor
 
 				ExamQuery exam = fixture.Container.Instantiate<ExamQuery>();
 				TeacherQuery teachers = new(fixture.Game);
-				DuckQuery ducks = new(fixture.Game);
+				DuckQuery ducks = fixture.Container.Instantiate<DuckQuery>();
 				ProgressQuery progress = new(fixture.Game);
 				PlaytestLeaderboard leaderboard = new() { IsPending = true };
 				PlaytestCoreLoop coreLoop = new();

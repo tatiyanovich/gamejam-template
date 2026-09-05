@@ -8,6 +8,7 @@ using Code.Gameplay.Duck.Queries;
 using Code.Gameplay.Duck.Services;
 using Code.Gameplay.Exam;
 using Code.Gameplay.Exam.Queries;
+using Code.Gameplay.Input.Queries;
 using Code.Gameplay.Meow.Queries;
 using Code.Gameplay.Meow.Services;
 using Code.Gameplay.Meow.Systems;
@@ -125,9 +126,10 @@ namespace Code.Editor
 				BellQuery bell = fixture.Container.Instantiate<BellQuery>();
 				SuspicionQuery suspicion = fixture.Container.Instantiate<SuspicionQuery>();
 				MeowQuery meow = new(game, microphone, microphone);
-				DuckQuery ducks = new(game);
+				DuckQuery ducks = fixture.Container.Instantiate<DuckQuery>();
 				TeacherQuery teachers = new(game);
 				NeighbourQuery neighbours = fixture.Container.Instantiate<NeighbourQuery>();
+				InputQuery inputs = fixture.Container.Instantiate<InputQuery>();
 				ring = Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>(
 					"Assets/AddressableResources/Content/Papers/PawTimer.prefab"));
 				ring.transform.position = new Vector3(-1000f, 0f, 0f);
@@ -138,7 +140,7 @@ namespace Code.Editor
 				GameplayWindow window = instance.GetComponent<GameplayWindow>();
 				control = window;
 				window.Construct(exam, bell, suspicion, meow, ducks,
-					fixture.Container.Resolve<IDuckFactory>(), teachers, neighbours);
+					fixture.Container.Resolve<IDuckFactory>(), teachers, neighbours, inputs);
 				await window.Initialize("Overlay", "hud-playtest");
 				await control.Open(false, default);
 
@@ -220,6 +222,83 @@ namespace Code.Editor
 				neighbours.ReactToChanges();
 				Require(canvas.enabled == false && fill.fillAmount == 0f, "Expired ring");
 				report.AppendLine("PASS world-space paw ring at half window and expiration");
+				FlashStackView stack = Field<FlashStackView>(fields, "flashes");
+				FlashRowView[] flashRows = FlashRows(stack);
+				Require(flashRows.Length == 3, "Flash stack rows");
+				Require(flashRows[0].gameObject.activeSelf && flashRows[0].Line == "DUCK CONFISCATED",
+					"Confiscation flash");
+				GameEntity question = fixture.Exams.CreateQuestion(0);
+				question.isAnswerCopied = true;
+				exam.ReactToChanges();
+				Require(flashRows[0].Line == "ANSWER COPIED!" && flashRows[1].Line == "DUCK CONFISCATED",
+					"Newest flash on the bottom row");
+				question.isAnswerCopiedChanged = false;
+				fixture.Container.Resolve<IEntityFactory>().Event()
+					.AddWrongInputEvent(0);
+				new EventsReadySystem(game).Execute();
+				exam.ReactToChanges();
+				Require(flashRows[0].Line == "PENCIL SNAP!" && flashRows[1].Line == "ANSWER COPIED!"
+					&& flashRows[2].Line == "DUCK CONFISCATED", "Wrong input flash shifts the whole stack");
+				report.AppendLine("PASS flash stack: confiscation, copied answer, pencil snap and shifting rows");
+				await control.Close(false, default);
+				fixture.Run.ReplaceSuspicionLevel(10f);
+				await control.Open(false, default);
+				Require(flashRows[0].gameObject.activeSelf == false, "Reopened HUD starts with an empty flash stack");
+				fixture.Run.ReplaceSuspicionLevel(85f);
+				suspicion.ReactToChanges();
+				Require(flashRows[0].Line == "TOO HOT!", "Hot suspicion flash");
+				fixture.Run.ReplaceSuspicionLevel(90f);
+				suspicion.ReactToChanges();
+				Require(flashRows[1].gameObject.activeSelf == false, "Hot flash fires once per attempt");
+				teacher.ReplaceTeacherAttention(TeacherAttention.Distracted);
+				teachers.ReactToChanges();
+				Require(flashRows[0].Line == "DUCK AWAY! 4s", "Duck distraction flash carries the config duration");
+				fixture.Keyboard.isLeanHeld = true;
+				teacher.ReplaceTeacherAttention(TeacherAttention.Watching);
+				teachers.ReactToChanges();
+				Require(flashRows[0].Line == "SHE'S LOOKING!", "Watched while leaning flash");
+				report.AppendLine("PASS single hot warning, duck distraction and watched-while-leaning flashes");
+				fixture.Keyboard.isLeanHeld = false;
+				teacher.ReplaceTeacherAttention(TeacherAttention.Writing);
+				teachers.ReactToChanges();
+				await UniTask.Delay(TimeSpan.FromSeconds(0.7));
+				Require(flashRows[0].gameObject.activeSelf == false, "Flash rows expire after 0.6 seconds");
+				teacher.ReplaceTeacherAttention(TeacherAttention.Watching);
+				teachers.ReactToChanges();
+				Require(flashRows[0].gameObject.activeSelf == false, "No flash when watched without leaning");
+				microphone.IsAvailable = true;
+				source.ReplaceMicrophoneLevel(30f);
+				meow.ReactToChanges();
+				await UniTask.Delay(TimeSpan.FromSeconds(0.7));
+				Require(flashRows[0].Line == "LOUDER!", "Quiet microphone flash after half a second");
+				source.ReplaceMicrophoneLevel(70f);
+				meow.ReactToChanges();
+				report.AppendLine("PASS expiring rows, silent watch without leaning and the quiet-microphone flash");
+				Image vignette = Field<DangerVignetteView>(fields, "vignette").GetComponent<Image>();
+				teacher.isTeacherFacingClass = false;
+				await UniTask.NextFrame();
+				Require(vignette.color.a == 0f, "Vignette hidden while she writes");
+				teacher.isTeacherFacingClass = true;
+				await UniTask.NextFrame();
+				Require(Mathf.Approximately(vignette.color.a, 0.35f) && vignette.color.g > 0.5f,
+					"Orange vignette at rest while she watches");
+				fixture.Keyboard.isLeanHeld = true;
+				await UniTask.NextFrame();
+				Require(vignette.color.g < 0.4f, "Red vignette while leaning under her eyes");
+				float peakAlpha = 0f;
+				float sampleStart = Time.realtimeSinceStartup;
+				while (Time.realtimeSinceStartup - sampleStart < 1f)
+				{
+					await UniTask.NextFrame();
+					Require(vignette.color.a >= 0.34f && vignette.color.a <= 0.61f, "Vignette alpha band");
+					peakAlpha = Mathf.Max(peakAlpha, vignette.color.a);
+				}
+				Require(peakAlpha > 0.45f, "Vignette pulses between 0.35 and 0.6");
+				fixture.Keyboard.isLeanHeld = false;
+				teacher.isTeacherFacingClass = false;
+				await UniTask.NextFrame();
+				Require(vignette.color.a == 0f, "Vignette hides when she turns back");
+				report.AppendLine("PASS danger vignette: hidden, orange under watch, red pulse while leaning");
 				teacher.ReplaceTeacherAttention(TeacherAttention.Turning);
 				teachers.ReactToChanges();
 				Require(Field<TMP_Text>(fields, "speech").text == "Hmm?", "Telegraph");
@@ -272,6 +351,16 @@ namespace Code.Editor
 				}
 				File.WriteAllText(PlaytestPaths.Get("hud.txt"), report.ToString());
 			}
+		}
+
+		private static FlashRowView[] FlashRows(FlashStackView stack)
+		{
+			SerializedProperty rows = new SerializedObject(stack).FindProperty("rows");
+			FlashRowView[] result = new FlashRowView[rows.arraySize];
+			for (int index = 0; index < result.Length; index++)
+				result[index] = (FlashRowView)rows.GetArrayElementAtIndex(index).objectReferenceValue;
+
+			return result;
 		}
 
 		private static T Field<T>(SerializedObject fields, string name) where T : Object

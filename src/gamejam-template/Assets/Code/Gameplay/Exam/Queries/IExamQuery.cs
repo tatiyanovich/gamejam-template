@@ -11,6 +11,7 @@ namespace Code.Gameplay.Exam.Queries
 		event Action<int, int, int> OnAnswerProgressChanged;
 		event Action<int, bool> OnAnswerReadableChanged;
 		event Action<int> OnAnswerCopied;
+		event Action<int> OnWrongInput;
 		event Action<ExamOutcome> OnExamFinished;
 		event Action<TutorialHint> OnTutorialHintChanged;
 

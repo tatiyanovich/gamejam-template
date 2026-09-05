@@ -229,7 +229,7 @@ art/
 | Пыль | Приземление утки | burst 8, серые круги, lifetime 0.4 |
 | Мел | Writing | 2/с, мелкие белые точки, lifetime 0.3 |
 | Звёздочки | COPIED | burst 10 звёзд от штампа, lifetime 0.6, + punch‑scale счётчика |
-| Виньет | Watching/Staring | UI Image `vignette_radial`, цвет WARN/DANGER, alpha пульс 0.35↔0.6, период 0.4 с |
+| Виньет | учительница смотрит | UI Image `vignette_radial` под корнем HUD: WARN alpha 0.35 ровно; DANGER alpha пульс 0.35↔0.6 с периодом 0.4 с, когда смотрит и держишь SPACE (`GDD §15`, B7) |
 | Шейк камеры | CAUGHT | `CameraShakeTypeId` из шаблона, амплитуда 0.4, 0.5 с |
 
 ### B3: компоновка HUD
