@@ -11,7 +11,9 @@ namespace Code.Gameplay.Progress.Queries
 			_progresses = game.GetGroup(GameMatcher
 				.AllOf(
 					GameMatcher.ExamProgress,
-					GameMatcher.PlayerName));
+					GameMatcher.PlayerName,
+					GameMatcher.BestAnswers,
+					GameMatcher.BestTimeSeconds));
 		}
 
 		public string GetPlayerName()
@@ -20,6 +22,22 @@ namespace Code.Gameplay.Progress.Queries
 				return progress.PlayerName;
 
 			return string.Empty;
+		}
+
+		public int GetBestAnswers()
+		{
+			foreach (GameEntity progress in _progresses)
+				return progress.BestAnswers;
+
+			return 0;
+		}
+
+		public float GetBestTimeSeconds()
+		{
+			foreach (GameEntity progress in _progresses)
+				return progress.BestTimeSeconds;
+
+			return 0f;
 		}
 	}
 }

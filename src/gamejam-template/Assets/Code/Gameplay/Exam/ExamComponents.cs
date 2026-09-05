@@ -9,6 +9,7 @@ namespace Code.Gameplay.Exam
 	[Game, Watched] public class CurrentQuestionIndex : IComponent { public int Value; }
 	[Game, Watched] public class AnswersCopied : IComponent { public int Value; }
 	[Game, Watched] public class ExamElapsedSeconds : IComponent { public float Value; }
+	[Game] public class MeowCount : IComponent { public int Value; }
 	[Game, Watched] public class ExamFinished : IComponent { }
 	[Game, Watched] public class ExamOutcomeComponent : IComponent { public ExamOutcome Value; }
 	[Game] public class TutorialMeowed : IComponent { }

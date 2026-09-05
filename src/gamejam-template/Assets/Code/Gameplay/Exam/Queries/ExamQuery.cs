@@ -34,6 +34,7 @@ namespace Code.Gameplay.Exam.Queries
 					GameMatcher.CurrentQuestionIndex,
 					GameMatcher.AnswersCopied,
 					GameMatcher.ExamElapsedSeconds,
+					GameMatcher.MeowCount,
 					GameMatcher.ExamOutcome,
 					GameMatcher.TutorialHint));
 
@@ -125,6 +126,14 @@ namespace Code.Gameplay.Exam.Queries
 				return run.ExamElapsedSeconds;
 
 			return 0f;
+		}
+
+		public int GetMeowCount()
+		{
+			foreach (GameEntity run in _runs)
+				return run.MeowCount;
+
+			return 0;
 		}
 
 		public int GetCurrentQuestionIndex()

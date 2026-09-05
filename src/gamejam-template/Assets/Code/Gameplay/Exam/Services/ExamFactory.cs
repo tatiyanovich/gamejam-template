@@ -29,6 +29,7 @@ namespace Code.Gameplay.Exam.Services
 				.AddCurrentQuestionIndex(0)
 				.AddAnswersCopied(0)
 				.AddExamElapsedSeconds(0f)
+				.AddMeowCount(0)
 				.AddSuspicionLevel(0f)
 				.AddTutorialHint(TutorialHint.Meow)
 				.AddExamOutcome(ExamOutcome.None);

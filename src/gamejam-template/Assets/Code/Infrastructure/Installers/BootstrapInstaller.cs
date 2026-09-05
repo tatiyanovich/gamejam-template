@@ -108,6 +108,7 @@ namespace Code.Infrastructure.Installers
 			Container.BindInterfacesTo<FallbackBaseCameraService>().AsSingle();
 			Container.BindInterfacesTo<SettingsService>().AsSingle();
 			Container.BindInterfacesTo<SatelliteService>().AsSingle();
+			Container.BindInterfacesTo<ExamGradeService>().AsSingle();
 			Container.BindInterfacesTo<LeaderboardService>().AsSingle();
 
 			new SaveManagementInstaller(Container, new()

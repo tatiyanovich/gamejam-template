@@ -11,6 +11,7 @@ namespace Code.Gameplay.Exam
 			Add(systemFactory.Create<SpawnNextQuestionSystem>());
 
 			Add(systemFactory.Create<AccumulateExamTimeSystem>());
+			Add(systemFactory.Create<CountMeowsSystem>());
 
 			Add(systemFactory.Create<MarkAnswerReadableSystem>());
 			Add(systemFactory.Create<ValidateStrokeInputSystem>());

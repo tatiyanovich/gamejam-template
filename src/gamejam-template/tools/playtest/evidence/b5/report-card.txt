@@ -1,0 +1,9 @@
+PASS grade table for 0-12 answers and the three star tiers
+PASS passed outcome: title, line, five stats, A+ stamp, stars and personal best
+PASS submitted entry, ten rows, highlighted own rank and hidden rank line
+PASS rank outside the top ten shows the own line
+PASS offline response keeps rows hidden behind the offline caption
+PASS caught and bell headers, C stamp, its message and hidden stars
+PASS R key, MAIN MENU node request and RETAKE EXAM branch restart
+PASS exactly one leaderboard submit per report card
+DONE

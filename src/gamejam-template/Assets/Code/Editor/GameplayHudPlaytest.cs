@@ -23,6 +23,7 @@ using Code.Infrastructure.EntityComponentSystem.Factories;
 using Code.UI.Gameplay;
 using Cysharp.Threading.Tasks;
 using Framework.UI.UiManagement.Elements.Windows;
+using Framework.UI.UiManagement.Services;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
@@ -133,6 +134,7 @@ namespace Code.Editor
 				instance = Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>(
 					"Assets/AddressableResources/Content/UI/Gameplay/GameplayWindow.prefab"));
 				instance.transform.SetParent(live.transform.parent, false);
+				scene.Container.InjectGameObject(instance);
 				GameplayWindow window = instance.GetComponent<GameplayWindow>();
 				control = window;
 				window.Construct(exam, bell, suspicion, meow, ducks,
@@ -259,6 +261,9 @@ namespace Code.Editor
 				if (ring != null)
 					Object.Destroy(ring);
 				await UniTask.NextFrame();
+				if (EditorApplication.isPlaying)
+					await ProjectContext.Instance.Container.Resolve<IUiService>()
+						.CloseWindow<Code.UI.Result.ResultWindow>(withAnimation: false);
 				if (live != null)
 				{
 					live.Canvas.enabled = true;

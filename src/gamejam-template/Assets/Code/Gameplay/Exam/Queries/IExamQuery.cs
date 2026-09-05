@@ -17,6 +17,7 @@ namespace Code.Gameplay.Exam.Queries
 		int GetAnswersCopied();
 		int GetTotalQuestions();
 		float GetElapsedSeconds();
+		int GetMeowCount();
 		int GetCurrentQuestionIndex();
 		QuestionDefinition GetCurrentQuestion();
 		int GetAnswerProgress();

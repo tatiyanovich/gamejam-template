@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using Code.Gameplay.Bell.Queries;
 using Code.Gameplay.Duck;
@@ -10,6 +11,7 @@ using Code.Gameplay.Neighbours.Queries;
 using Code.Gameplay.Suspicion.Queries;
 using Code.Gameplay.Teacher;
 using Code.Gameplay.Teacher.Queries;
+using Code.UI.Result;
 using Cysharp.Threading.Tasks;
 using Framework.UI.UiManagement.Elements.Windows;
 using TMPro;
@@ -43,6 +45,7 @@ namespace Code.UI.Gameplay
 		private bool _isOpen;
 		private bool _finished;
 		private bool _announced;
+		private bool _reportCardRequested;
 
 		private IExamQuery _exam;
 		private IBellQuery _bell;
@@ -52,6 +55,8 @@ namespace Code.UI.Gameplay
 		private IDuckFactory _duckFactory;
 		private ITeacherQuery _teacher;
 		private INeighbourQuery _neighbours;
+
+		private const float ReportCardDelaySeconds = 1.6f;
 
 		[Inject]
 		public void Construct(
@@ -86,6 +91,7 @@ namespace Code.UI.Gameplay
 		protected override UniTask OnOpen(CancellationToken cancellationToken = default)
 		{
 			_isOpen = true;
+			_reportCardRequested = false;
 			_finished = _exam.IsFinished();
 			_announced = _bell.IsAnnounced();
 			_watchingLine = 0;
@@ -181,6 +187,20 @@ namespace Code.UI.Gameplay
 		private void RefreshDuck()
 		{
 			duckButton.interactable = _finished == false && _duck.CanThrow();
+		}
+
+		private async UniTaskVoid OpenReportCard()
+		{
+			bool isCanceled = await UniTask
+				.Delay(TimeSpan.FromSeconds(ReportCardDelaySeconds), DelayType.UnscaledDeltaTime,
+					cancellationToken: Cts.Token)
+				.SuppressCancellationThrow();
+
+			if (isCanceled || _isOpen == false)
+				return;
+
+			await _uiService.OpenWindow<ResultWindow>();
+			await _uiService.CloseWindow<GameplayWindow>(withAnimation: false);
 		}
 
 		private void HandleAnswers(int count) => answers.text = $"ANSWERS {count} / {_exam.GetTotalQuestions()}";
@@ -294,6 +314,12 @@ namespace Code.UI.Gameplay
 			});
 			_finished = true;
 			RefreshDuck();
+
+			if (_reportCardRequested)
+				return;
+
+			_reportCardRequested = true;
+			OpenReportCard().Forget();
 		}
 
 		private void HandleThrowDuck()
