@@ -15,7 +15,7 @@ namespace Code.Gameplay.Suspicion.Systems
 		private readonly ITimeService _timeService;
 
 		private readonly IGroup<GameEntity> _runningExams;
-		private readonly IGroup<GameEntity> _watchingTeachers;
+		private readonly IGroup<GameEntity> _distractedTeachers;
 		private readonly IGroup<InputEntity> _leaningInputs;
 
 		private readonly List<GameEntity> _buffer = new(1);
@@ -32,14 +32,15 @@ namespace Code.Gameplay.Suspicion.Systems
 			_runningExams = game.GetGroup(GameMatcher
 				.AllOf(
 					GameMatcher.ExamRun,
-					GameMatcher.SuspicionLevel)
+					GameMatcher.SuspicionLevel,
+					GameMatcher.CurrentQuestionIndex)
 				.NoneOf(
 					GameMatcher.ExamFinished));
 
-			_watchingTeachers = game.GetGroup(GameMatcher
+			_distractedTeachers = game.GetGroup(GameMatcher
 				.AllOf(
 					GameMatcher.Teacher,
-					GameMatcher.TeacherFacingClass));
+					GameMatcher.TeacherAttention));
 
 			_leaningInputs = input.GetGroup(InputMatcher
 				.AllOf(
@@ -49,15 +50,27 @@ namespace Code.Gameplay.Suspicion.Systems
 
 		public void Execute()
 		{
-			if (_leaningInputs.count == 0 || _watchingTeachers.count == 0)
+			if (_leaningInputs.count == 0 || IsTeacherDistracted())
 				return;
 
 			SuspicionConfig config = _suspicionConfigsService.SuspicionConfig;
 
 			foreach (GameEntity run in _runningExams.GetEntities(_buffer))
 			{
-				run.ChangeSuspicion(config.WatchedGainPerSecond * _timeService.DeltaTime, config.MaximumLevel);
+				float gainMultiplier = 1f + run.CurrentQuestionIndex * config.LeanGainIncreasePerQuestion;
+				run.ChangeSuspicion(config.LeanGainPerSecond * gainMultiplier * _timeService.DeltaTime, config.MaximumLevel);
 			}
+		}
+
+		private bool IsTeacherDistracted()
+		{
+			foreach (GameEntity teacher in _distractedTeachers)
+			{
+				if (teacher.TeacherAttention == TeacherAttention.Distracted)
+					return true;
+			}
+
+			return false;
 		}
 	}
 }

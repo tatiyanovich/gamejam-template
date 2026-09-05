@@ -3,7 +3,6 @@ using Code.Gameplay.Exam;
 using Code.Gameplay.Input;
 using Code.Gameplay.Suspicion.Configs;
 using Code.Gameplay.Suspicion.Services;
-using Code.Gameplay.Teacher;
 using Entitas;
 using Framework.Essentials.TimeManagement;
 
@@ -15,7 +14,6 @@ namespace Code.Gameplay.Suspicion.Systems
 		private readonly ITimeService _timeService;
 
 		private readonly IGroup<GameEntity> _runningExams;
-		private readonly IGroup<GameEntity> _watchingTeachers;
 		private readonly IGroup<InputEntity> _leaningInputs;
 
 		private readonly List<GameEntity> _buffer = new(1);
@@ -36,11 +34,6 @@ namespace Code.Gameplay.Suspicion.Systems
 				.NoneOf(
 					GameMatcher.ExamFinished));
 
-			_watchingTeachers = game.GetGroup(GameMatcher
-				.AllOf(
-					GameMatcher.Teacher,
-					GameMatcher.TeacherFacingClass));
-
 			_leaningInputs = input.GetGroup(InputMatcher
 				.AllOf(
 					InputMatcher.Input,
@@ -49,7 +42,7 @@ namespace Code.Gameplay.Suspicion.Systems
 
 		public void Execute()
 		{
-			if (_leaningInputs.count > 0 || _watchingTeachers.count > 0)
+			if (_leaningInputs.count > 0)
 				return;
 
 			SuspicionConfig config = _suspicionConfigsService.SuspicionConfig;

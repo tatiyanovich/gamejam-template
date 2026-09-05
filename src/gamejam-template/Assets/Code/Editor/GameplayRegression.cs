@@ -42,6 +42,7 @@ namespace Code.Editor
 			Check(scene.Container, "accepted answer counted at bell", AnswerAtBell);
 			Check(scene.Container, "finished exam ignores meow", FinishedMeow);
 			Check(scene.Container, "stroke gate, mistake and pause", StrokeGate);
+			Check(scene.Container, "next question spawns after copied answer", NextQuestion);
 			Check(scene.Container, "pick mistake and correct option", PickAnswer);
 			Check(scene.Container, "word mistake retains progress and alerts teacher", WordAnswer);
 			Check(scene.Container, "paw refresh and expiration", PawWindow);
@@ -220,6 +221,25 @@ namespace Code.Editor
 			Assert(question.isAnswerCopied && fixture.Run.AnswersCopied == 1, "Correct pick rejected");
 		}
 
+		private static void NextQuestion(GameplayPlaytestFixture fixture)
+		{
+			GameEntity question = OpenQuestion(fixture, 0);
+			foreach (StrokeDirection stroke in question.AnswerStrokes)
+			{
+				fixture.Keyboard.ReplaceStrokeInput(stroke);
+				fixture.Tick(0f);
+			}
+
+			GameEntity nextQuestion = fixture.Game.GetGroup(GameMatcher
+				.AllOf(
+					GameMatcher.Question,
+					GameMatcher.QuestionIndex)
+				.NoneOf(GameMatcher.AnswerCopied))
+				.GetSingleEntity();
+			Assert(nextQuestion.QuestionIndex == 1 && fixture.Run.CurrentQuestionIndex == 1,
+				"Next question did not appear when the answer was copied");
+		}
+
 		private static void WordAnswer(GameplayPlaytestFixture fixture)
 		{
 			GameEntity question = OpenQuestion(fixture, 5);
@@ -326,16 +346,19 @@ namespace Code.Editor
 			teacher.ReplaceTeacherAttentionTimeLeft(10f);
 			fixture.Keyboard.isLeanHeld = true;
 			fixture.Tick(1f);
-			Assert(fixture.Run.SuspicionLevel == 35f, "Watching rate is not 35 per second");
+			Assert(fixture.Run.SuspicionLevel == 12f, "First-question lean rate is not 12 per second");
+			fixture.Run.ReplaceCurrentQuestionIndex(5);
+			fixture.Tick(1f);
+			Assert(fixture.Run.SuspicionLevel == 30f, "Lean rate does not rise with questions");
 			fixture.Keyboard.isLeanHeld = false;
 			fixture.Tick(1f);
-			Assert(fixture.Run.SuspicionLevel == 35f, "Suspicion decays under watch");
-			teacher.ReturnToWriting();
-			fixture.Tick(1f);
-			Assert(fixture.Run.SuspicionLevel == 30f, "Decay is not 5 per second");
-			teacher.SwitchAttention(TeacherAttention.Watching, 10f);
+			Assert(fixture.Run.SuspicionLevel == 25f, "Suspicion does not decay while upright");
 			fixture.Keyboard.isLeanHeld = true;
-			fixture.Tick(2f);
+			teacher.SwitchAttention(TeacherAttention.Distracted, 10f);
+			fixture.Tick(1f);
+			Assert(fixture.Run.SuspicionLevel == 25f, "Duck distraction does not protect a lean");
+			teacher.SwitchAttention(TeacherAttention.Watching, 10f);
+			fixture.Tick(5f);
 			Assert(fixture.Run.ExamOutcome == ExamOutcome.Caught && fixture.Run.SuspicionLevel == 100f,
 				"Maximum suspicion did not finish attempt");
 		}

@@ -8,7 +8,6 @@ namespace Code.Gameplay.Exam
 		public ExamFeature(ISystemFactory systemFactory)
 		{
 			Add(systemFactory.Create<InitializeExamRunSystem>());
-			Add(systemFactory.Create<SpawnNextQuestionSystem>());
 
 			Add(systemFactory.Create<AccumulateExamTimeSystem>());
 			Add(systemFactory.Create<CountMeowsSystem>());
@@ -20,6 +19,7 @@ namespace Code.Gameplay.Exam
 
 			Add(systemFactory.Create<MarkAnswerCopiedSystem>());
 			Add(systemFactory.Create<AdvanceExamRunSystem>());
+			Add(systemFactory.Create<SpawnNextQuestionSystem>());
 			Add(systemFactory.Create<FinishExamOnLastAnswerSystem>());
 
 			Add(systemFactory.Create<MarkTutorialMeowedSystem>());

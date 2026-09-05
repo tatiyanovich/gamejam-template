@@ -27,8 +27,8 @@ namespace Code.Gameplay.Exam.Systems
 					GameMatcher.ExamFinished));
 
 			_questions = game.GetGroup(GameMatcher
-				.AllOf(
-					GameMatcher.Question));
+				.AllOf(GameMatcher.Question)
+				.NoneOf(GameMatcher.AnswerCopied));
 		}
 
 		public void Execute()

@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: SuspicionConfig
   m_EditorClassIdentifier: Assembly-CSharp::Code.Gameplay.Suspicion.Configs.SuspicionConfig
   maximumLevel: 100
-  watchedGainPerSecond: 35
+  leanGainPerSecond: 12
+  leanGainIncreasePerQuestion: 0.1
   decayPerSecond: 5
   wrongInputPenalty: 8
   meowWhileWatchedPenalty: 15
