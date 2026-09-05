@@ -4,6 +4,6 @@ namespace Code.Infrastructure.CoreLoop
 	{
 		Unknown = 0,
 		StartLaunch = 1,
-		Battle = 2
+		Exam = 2
 	}
 }

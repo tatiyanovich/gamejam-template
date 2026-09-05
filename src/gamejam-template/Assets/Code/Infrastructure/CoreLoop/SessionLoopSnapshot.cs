@@ -26,7 +26,7 @@ namespace Code.Gameplay.CoreLoop
 		{
 			return new SessionLoopSnapshot(
 				hasCompletedFirstLaunch: true,
-				currentNode: LoopNodeId.Battle);
+				currentNode: LoopNodeId.Exam);
 		}
 	}
 }

@@ -4,8 +4,6 @@ namespace Code
 {
 	public static class Addresses
 	{
-		public const string PlayerCharacterKey = "player_character_prefab";
-
 		public const string CameraPrefab = "camera_prefab";
 
 		public static class Labels
@@ -22,7 +20,6 @@ namespace Code
 			public const string WorldOverlayWindow = "ffb30672-1a48-4c1a-a8f6-fbeaa607f3cf";
 			public const string ResultWindow = "d42e63dc-a28d-43ca-9042-4c10d2bc25a5";
 			public const string ErrorWindow = "c600db1d-870e-4976-ade5-812c93188d53";
-			public const string JoystickWindow = "2a4b6c8e-1f3d-4e5a-9b7c-8d9e0f1a2b3c";
 		}
 
 		public static class SceneNames
@@ -37,7 +34,7 @@ namespace Code
 				return loopNodeId switch
 				{
 					LoopNodeId.StartLaunch => LaunchScene,
-					LoopNodeId.Battle => GameplayScene,
+					LoopNodeId.Exam => GameplayScene,
 					_ => GameplayScene
 				};
 			}

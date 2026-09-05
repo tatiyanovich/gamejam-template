@@ -101,6 +101,6 @@ namespace Code.Infrastructure.StateManagement.States
 		}
 
 		private bool RunsAsSession(LoopNodeId nodeId) =>
-			nodeId is LoopNodeId.Battle;
+			nodeId is LoopNodeId.Exam;
 	}
 }

@@ -12,6 +12,5 @@ namespace Code.Storage.SaveFiles
 		public AppMetadataSnapshot AppMetadata;
 		public SessionLoopSnapshot SessionLoop;
 		public List<SceneEntitySnapshot> SceneEntities = new();
-		public float BestDrilledDistance;
 	}
 }

@@ -48,9 +48,9 @@ namespace Code.UI.Launch
             FadeWindow fadeWindow = await _uiService.OpenWindow<FadeWindow>(withAnimation: false);
             await fadeWindow.FadeIn(FadeInDuration);
             
-            _cameraSwitch.SwitchTo(LoopNodeId.Battle);
+            _cameraSwitch.SwitchTo(LoopNodeId.Exam);
 
-            _coreLoopRequestFactory.CreateGoToBranchRequest(LoopNodeId.Battle);
+            _coreLoopRequestFactory.CreateGoToBranchRequest(LoopNodeId.Exam);
         }
     }
 }

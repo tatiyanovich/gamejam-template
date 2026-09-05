@@ -35,12 +35,13 @@
 Проект — форк game‑jam шаблона (`CLAUDE.md`, `README.md`). Используем из него как есть:
 - Boot‑флоу и стейт‑машину, загрузочный экран, Fade, окно ошибки, авто‑сейв в JSON, миграции сейва.
 - UI‑сервис окон (`WindowBase`, `IUiService`, `WindowDefinition`), кнопки с анимацией, `ProgressBar`.
-- Core loop из узлов: `LoopNodeId.StartLaunch` (меню) и `LoopNodeId.Battle` (геймплей, **переименуем в `Exam`**).
+- Core loop из узлов: `LoopNodeId.StartLaunch` (меню) и `LoopNodeId.Exam` (геймплей, переименован из `Battle` в A1).
 - Entitas‑инфраструктуру: фабрики, events, requests, reactive queries, `RefreshSnapshotsFeature`.
 - VFX‑пайплайн (`VfxFactory`, `PlayVfxByRequestSystem`), камеру, таймеры, кулдауны (`Common/Cooldown`).
 
-Удаляем (сэмпл про бур): `Gameplay/Drilling`, `Gameplay/Fuel`, `Storage/Systems/RefreshDrillRunSystem.cs`, `UI/Joystick`,
-поле `BestDrilledDistance` в `GeneralSaveFile`, `PlayerCharacterKey`, префаб `Player`, окно Joystick из `BootstrapState`.
+Удалено в A1 (сэмпл про бур): `Gameplay/Drilling`, `Gameplay/Fuel`, `Gameplay/Player`, `Gameplay/Environment`,
+`Storage/Systems/RefreshDrillRunSystem.cs`, `UI/Joystick`, поле `BestDrilledDistance` в `GeneralSaveFile`,
+`PlayerCharacterKey`, префаб `Player`, окно Joystick из `BootstrapState`, ассеты бесконечного поля и Addressables‑группа `Player`.
 
 ## 4. Decisions (журнал решений)
 
@@ -64,6 +65,9 @@
 - **D‑16 · 05.09** · Шрифты: Luckiest Guy (уже в проекте, заголовки), Patrick Hand (рукописный, листы), Nunito (UI‑текст). Все OFL, качаем с Google Fonts. · Системные шрифты мака нельзя распространять с билдом.
 - **D‑17 · 05.09** · Остаёмся на Unity 6000.3.22f1, откат на 6000.3.6f1 не нужен (подтверждение D‑12). · A0: проект открывается без ошибок, компиляция чистая, Jenny‑Gen генерит 223 файла без расхождений с git.
 - **D‑18 · 05.09** · Комментариев в коде не пишем вообще (правило в `.claude/rules/code-style.md`). · Имена несут смысл; объяснения живут в `docs/`, а не в исходниках.
+- **D‑19 · 05.09** · Фичу `Gameplay/Player` (кинематическое движение, коллизии тела, спавн‑поинт) и `Gameplay/Environment` (бесконечный пол с шейдером) удаляем целиком, а не адаптируем. · Котёнок — статичный cut‑out за партой, он никуда не ходит; `Movement`/`Collisions` остаются как инфраструктура для утки и вьюх.
+- **D‑20 · 05.09** · `JoystickInputService` → `KeyboardInputService` (единственная реализация `IInputService`), окно джойстика удалено. · Управление только клавиатура + микрофон (D‑14), тач не поддерживаем.
+- **D‑21 · 05.09** · Камеру экзамена создаёт `InitializeExamCameraSystem` через `ICameraFactory.CreateStaticCamera` в начале `GameplayCoreFeature`. · Раньше камера спавнилась вместе с игроком в `InitializePlayerSystem`; камера класса статична, ей не за кем следить.
 
 ## 5. Маппинг дизайна на код шаблона
 
@@ -81,6 +85,7 @@
 | Сейв | `GeneralSaveFile`: `PlayerName`, `IntroSeen`, `BestAnswers`, `BestTimeSeconds`. Снапшот обновляет `RefreshExamProgressSystem` в `RefreshSnapshotsFeature` |
 | Аудио | `Infrastructure/Audio/` `IAudioService` (SFX по enum `SfxId`, музыка, авто‑дакинг под микрофон) |
 | Input | `Gameplay/Input` расширяем: `LeanHeld`, `StrokeInput`, `PickInput`, `LetterInput`, `MeowKeyPressed`, `DuckKeyPressed` в Input‑контексте |
+| Камера экзамена | `InitializeExamCameraSystem` (`Gameplay/Camera/Systems`) — статичная камера из `ICameraFactory.CreateStaticCamera`, префаб `camera_prefab`, регистрируется на узел `Exam` через `BranchCameraRegistrar` |
 
 Сцены: `Boot` (как есть), `Launch` (меню, фон — пустой класс), `Gameplay` (класс с партами; всё, что не UI, — SpriteRenderer‑ы в мире, камера ортографическая, 1920×1080 → размер 19.2×10.8 юнита при PPU 100).
 
@@ -143,3 +148,9 @@ Unity: `UnityWebRequest.Post(url, json, "application/json")`, редиректы
 - 2026‑09‑04 23:45 · Claude · Написал GDD v1.0, PROJECT.md, PLAN.md, ART_BIBLE.md, BUGS.md, правило `docs-maintenance` · `docs/`, `.claude/rules/`
 - 2026‑09‑05 10:25 · Claude · A0: проект открыт в Unity 6000.3.22f1, компиляция без ошибок, Jenny‑Gen отработал (223 файла, git clean) · D‑17, `docs/PLAN.md` A0
 - 2026‑09‑05 10:26 · Claude · Добавил правило «не писать комментарии в коде» · `.claude/rules/code-style.md`, D‑18
+- 2026‑09‑05 10:45 · Claude · A1: удалил сэмпл бура — код `Gameplay/Drilling`, `Gameplay/Fuel`, `Gameplay/Player`, `Gameplay/Environment`, `UI/Joystick`, `RefreshDrillRunSystem`, `IJoystickInputService`; поле `BestDrilledDistance` из `GeneralSaveFile` · `Assets/Code`
+- 2026‑09‑05 10:45 · Claude · A1: удалил ассеты сэмпла (префаб `Player`, спрайты, физматериал, окно джойстика и его `WindowConfig`, конфиги Fuel/Player, шейдер `DesertFloor` с материалом поля, `noise_2`), почистил Addressables — группа `Player` и запись `fuel_config` · `Assets/AddressableResources`, `Assets/AddressableAssetsData`
+- 2026‑09‑05 10:45 · Claude · A1: `LoopNodeId.Battle` → `Exam` во всём коде, `BattleSessionChangeDebugAction` → `ExamSessionChangeDebugAction`, `JoystickInputService` → `KeyboardInputService` · D‑20
+- 2026‑09‑05 10:45 · Claude · A1: `GameplayCoreFeature` пересобран (scene entities → камера → Movement → UI → teardown), добавлен `InitializeExamCameraSystem`; `GameplayWindow` и `ResultWindow` очищены до заготовок под B3/B5 (из префабов убраны `FuelBar`, `DistanceText`, `BestDistanceText`) · D‑21
+- 2026‑09‑05 10:45 · Claude · A1: из сцены `Gameplay` удалены `SpawnPoint` и оба объекта `Ground`; product name = `COPYCAT` · `Assets/Scenes/Gameplay.unity`, `ProjectSettings`
+- 2026‑09‑05 10:45 · Claude · A1: Jenny‑Gen после удаления компонентов (200 файлов, минус 23 сгенерированных), компиляция чистая, Play Mode доходит до узла `Exam` без ошибок — камера и HUD‑окно поднимаются · `Assets/Code/Generated`

@@ -15,11 +15,6 @@ MonoBehaviour:
   m_GroupName: Configs
   m_GUID: 413413c0cf0f3413987ae5fb219c38cf
   m_SerializeEntries:
-  - m_GUID: 3287747a06ae04e1cba115fbfd274f46
-    m_Address: fuel_config
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 84a2eaba3ef44471883b373c6fb4ceca
     m_Address: configs_folder
     m_ReadOnly: 0

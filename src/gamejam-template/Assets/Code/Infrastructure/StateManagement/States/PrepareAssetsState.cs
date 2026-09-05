@@ -32,7 +32,6 @@ namespace Code.Infrastructure.StateManagement.States
 
 		private void PreparePrefabs()
 		{
-			_assets.Load<GameObject>(Addresses.PlayerCharacterKey);
 			_assets.Load<GameObject>(Addresses.CameraPrefab);
 		}
 	}

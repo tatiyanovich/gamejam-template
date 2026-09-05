@@ -71,7 +71,7 @@ namespace Code.Infrastructure.StateManagement.Sessions.SessionStates
 			{
 				switch (loopScenePayload.LoopNodeId)
 				{
-					case LoopNodeId.Battle:
+					case LoopNodeId.Exam:
 						return _systemFactory.Create<GameplayCoreFeature>();
 					default:
 						throw new NotImplementedException(

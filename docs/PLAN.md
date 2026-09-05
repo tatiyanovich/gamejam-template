@@ -51,7 +51,7 @@
 
 ### A. Foundation / Gameplay ECS (Егор + Claude) — P0, ~14 ч
 - [x] **A0** (0.5) Открыть в 6000.3.22f1, убедиться, что компилируется, Jenny‑Gen работает. Если нет — 6000.3.6f1 (D‑12).
-- [ ] **A1** (1.0) Снести Drilling/Fuel/Joystick/RefreshDrillRunSystem, `BestDrilledDistance`, `Player` префаб; `Battle` → `Exam`; product name `COPYCAT`.
+- [x] **A1** (1.0) Снести Drilling/Fuel/Joystick/RefreshDrillRunSystem, `BestDrilledDistance`, `Player` префаб; `Battle` → `Exam`; product name `COPYCAT`.
 - [ ] **A2** (1.0) `ExamConfig` (20 вопросов: текст, тип, сосед, payload), `DifficultyConfig` (5 фаз, поля из `GDD §11`), `QuestionType` enum. Зав.: A1.
 - [ ] **A3** (1.5) Сущность `ExamRun` (индекс вопроса, счётчик ответов, elapsed), `Question` сущность, системы: `SpawnNextQuestionSystem`, `MarkAnswerCopiedSystem`, `FinishExamOnLastAnswerSystem`, событие `AnswerCopiedEvent`. Зав.: A2.
 - [ ] **A4** (1.0) Input‑контекст: `LeanHeld`, `StrokePressed(dir)`, `PickPressed(1–4)`, `LetterPressed(char)`, `MeowKeyPressed`, `DuckKeyPressed`; `EmitInputSystem` по `KeyCode`. Зав.: A1.

@@ -1,7 +1,5 @@
-using Code.Gameplay.Drilling;
-using Code.Gameplay.Fuel;
+using Code.Gameplay.Camera.Systems;
 using Code.Gameplay.Movement;
-using Code.Gameplay.Player;
 using Code.Gameplay.Teardown;
 using Code.Gameplay.UI;
 using Code.Infrastructure.EntityComponentSystem.Factories;
@@ -15,12 +13,9 @@ namespace Code.Gameplay
 		{
 			Add(systemFactory.Create<InitializeSceneEntitiesByRequestSystem>());
 
-			Add(systemFactory.Create<PlayerFeature>());
+			Add(systemFactory.Create<InitializeExamCameraSystem>());
 
 			Add(systemFactory.Create<MovementUpdateFeature>());
-
-			Add(systemFactory.Create<FuelFeature>());
-			Add(systemFactory.Create<DrillingFeature>());
 
 			Add(systemFactory.Create<UIFeature>());
 

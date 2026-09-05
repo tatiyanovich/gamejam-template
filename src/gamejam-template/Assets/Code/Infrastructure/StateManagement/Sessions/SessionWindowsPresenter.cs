@@ -2,7 +2,6 @@ using System;
 using Code.Infrastructure.CoreLoop;
 using Code.UI;
 using Code.UI.Gameplay;
-using Code.UI.Joystick;
 using Code.UI.Launch;
 using Code.UI.Result;
 using Cysharp.Threading.Tasks;
@@ -23,8 +22,8 @@ namespace Code.Infrastructure.StateManagement.Sessions
 		{
 			switch (nodeId)
 			{
-				case LoopNodeId.Battle:
-					return PresentBattle();
+				case LoopNodeId.Exam:
+					return PresentExam();
 				default:
 					throw new ArgumentOutOfRangeException(nameof(nodeId), nodeId, null);
 			}
@@ -34,14 +33,14 @@ namespace Code.Infrastructure.StateManagement.Sessions
 		{
 			switch (nodeId)
 			{
-				case LoopNodeId.Battle:
-					return DismissBattle();
+				case LoopNodeId.Exam:
+					return DismissExam();
 				default:
 					throw new ArgumentOutOfRangeException(nameof(nodeId), nodeId, null);
 			}
 		}
 
-		private async UniTask PresentBattle()
+		private async UniTask PresentExam()
 		{
 			await UniTask.WhenAll(
 				_uiService.CloseWindow<LaunchWindow>(withAnimation: false),
@@ -49,15 +48,13 @@ namespace Code.Infrastructure.StateManagement.Sessions
 
 			await UniTask.WhenAll(
 				_uiService.OpenWindow<WorldOverlayWindow>(),
-				_uiService.OpenWindow<GameplayWindow>(),
-				_uiService.OpenWindow<JoystickWindow>());
+				_uiService.OpenWindow<GameplayWindow>());
 		}
 
-		private UniTask DismissBattle()
+		private UniTask DismissExam()
 		{
 			return UniTask.WhenAll(
 				_uiService.CloseWindow<ResultWindow>(withAnimation: false),
-				_uiService.CloseWindow<JoystickWindow>(withAnimation: false),
 				_uiService.CloseWindow<GameplayWindow>(withAnimation: false),
 				_uiService.CloseWindow<WorldOverlayWindow>(withAnimation: false));
 		}

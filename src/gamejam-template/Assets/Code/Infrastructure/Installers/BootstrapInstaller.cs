@@ -1,11 +1,6 @@
 using Code.Gameplay.Camera.Services;
 using Code.Gameplay.CoreLoop;
-using Code.Gameplay.Fuel;
-using Code.Gameplay.Fuel.Services;
 using Code.Gameplay.Lifetime;
-using Code.Gameplay.Drilling;
-using Code.Gameplay.Player;
-using Code.Gameplay.Player.Services;
 using Code.Infrastructure.EntityComponentSystem.Destruct.Services;
 using Code.Infrastructure.EntityComponentSystem.Installers;
 using Code.Infrastructure.ErrorHandler;
@@ -50,8 +45,6 @@ namespace Code.Infrastructure.Installers
 		private void BindConfigServices()
 		{
 			Container.BindInterfacesTo<CameraConfigsService>().AsSingle();
-			Container.BindInterfacesTo<PlayerConfigsService>().AsSingle();
-			Container.BindInterfacesTo<FuelConfigsService>().AsSingle();
 		}
 
 		private void BindInfrastructureServices()
@@ -108,17 +101,13 @@ namespace Code.Infrastructure.Installers
 		{
 			new CoreLoopInstaller(Container).InstallBindings();
 			new LifetimeInstaller(Container).InstallBindings();
-			new PlayerInstaller(Container).InstallBindings();
-			new DrillingInstaller(Container).InstallBindings();
-			new FuelInstaller(Container).InstallBindings();
-
 			Container.BindInterfacesTo<CameraQuery>().AsSingle();
 			Container.BindInterfacesTo<CameraSwitcher>().AsSingle();
 		}
 
 		private void BindInputServices()
 		{
-			Container.BindInterfacesTo<JoystickInputService>().AsSingle();
+			Container.BindInterfacesTo<KeyboardInputService>().AsSingle();
 		}
 	}
 }

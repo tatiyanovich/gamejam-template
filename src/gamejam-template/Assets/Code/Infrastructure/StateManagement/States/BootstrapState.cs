@@ -6,7 +6,6 @@ using Code.UI;
 using Code.UI.Error;
 using Code.UI.Fade;
 using Code.UI.Gameplay;
-using Code.UI.Joystick;
 using Code.UI.Launch;
 using Code.UI.Loading;
 using Code.UI.Result;
@@ -87,7 +86,6 @@ namespace Code.Infrastructure.StateManagement.States
 				.AddDefinition(new WindowDefinition(typeof(LaunchWindow), Addresses.UI.LaunchWindow))
 				.AddDefinition(new WindowDefinition(typeof(GameplayWindow), Addresses.UI.GameplayWindow))
 				.AddDefinition(new WindowDefinition(typeof(WorldOverlayWindow), Addresses.UI.WorldOverlayWindow))
-				.AddDefinition(new WindowDefinition(typeof(JoystickWindow), Addresses.UI.JoystickWindow))
 				.AddDefinition(new WindowDefinition(typeof(ResultWindow), Addresses.UI.ResultWindow))
 				.AddDefinition(new WindowDefinition(typeof(ErrorWindow), Addresses.UI.ErrorWindow));
 		}

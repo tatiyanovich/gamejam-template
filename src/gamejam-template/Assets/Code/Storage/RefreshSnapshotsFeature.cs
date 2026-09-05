@@ -8,7 +8,6 @@ namespace Code.Storage
 		public RefreshSnapshotsFeature(ISystemFactory systems)
 		{
 			Add(systems.Create<RefreshAppMetadataSystem>());
-			Add(systems.Create<RefreshDrillRunSystem>());
 		}
 	}
 }

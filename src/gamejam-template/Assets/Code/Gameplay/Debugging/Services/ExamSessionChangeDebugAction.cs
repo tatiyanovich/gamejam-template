@@ -5,12 +5,12 @@ using UnityEngine;
 
 namespace Code.Gameplay.Debugging.Services
 {
-    public class BattleSessionChangeDebugAction : IGameplayDebugInputAction
+    public class ExamSessionChangeDebugAction : IGameplayDebugInputAction
     {
         private readonly ICoreLoopRequestFactory _coreLoopRequestFactory;
         private readonly ICameraSwitcher _cameraSwitcher;
 
-        public BattleSessionChangeDebugAction(
+        public ExamSessionChangeDebugAction(
             ICoreLoopRequestFactory coreLoopRequestFactory, 
             ICameraSwitcher cameraSwitcher)
         {
@@ -22,9 +22,9 @@ namespace Code.Gameplay.Debugging.Services
 
         public void Execute(Vector3 pointerWorldPosition)
         {
-            _coreLoopRequestFactory.CreateCloseBranchRequest(LoopNodeId.Battle);
-            _coreLoopRequestFactory.CreateGoToBranchRequest(LoopNodeId.Battle);
-            _cameraSwitcher.SwitchTo(LoopNodeId.Battle);
+            _coreLoopRequestFactory.CreateCloseBranchRequest(LoopNodeId.Exam);
+            _coreLoopRequestFactory.CreateGoToBranchRequest(LoopNodeId.Exam);
+            _cameraSwitcher.SwitchTo(LoopNodeId.Exam);
         }
     }
 }
