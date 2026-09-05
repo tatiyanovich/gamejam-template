@@ -1,10 +1,10 @@
 /**
  * COPYCAT leaderboard — Google Apps Script web app.
- * Spreadsheet: https://docs.google.com/spreadsheets/d/1a9t4uwVDtyPE-O1zC9yAPIs1J1wGLTzbJEE7Zz-PF6o/edit
+ * Spreadsheet: https://docs.google.com/spreadsheets/d/16S1OR1MXPm18jIZbqPbqVxVEikHrkhA_pou0qC3AXH0/edit
  * Deploy steps and smoke test: tools/leaderboard/README.md
  */
 
-const SPREADSHEET_ID = '1a9t4uwVDtyPE-O1zC9yAPIs1J1wGLTzbJEE7Zz-PF6o';
+const SPREADSHEET_ID = '16S1OR1MXPm18jIZbqPbqVxVEikHrkhA_pou0qC3AXH0';
 const SHEET_NAME = 'scores';
 const HEADER = ['name', 'answers', 'timeSeconds', 'grade', 'dateUtc'];
 

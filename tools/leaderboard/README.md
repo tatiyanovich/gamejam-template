@@ -5,22 +5,32 @@
 
 | | |
 |---|---|
-| Таблица | https://docs.google.com/spreadsheets/d/1a9t4uwVDtyPE-O1zC9yAPIs1J1wGLTzbJEE7Zz-PF6o/edit |
+| Таблица | https://docs.google.com/spreadsheets/d/16S1OR1MXPm18jIZbqPbqVxVEikHrkhA_pou0qC3AXH0/edit |
 | Лист | `scores`, шапка `name \| answers \| timeSeconds \| grade \| dateUtc` |
 | Скрипт | [`Code.gs`](Code.gs) — единственный источник правды, правим здесь и копируем в Apps Script |
-| URL деплоя | **TODO: вписать сюда `/exec`‑URL после деплоя** (нужен для `LeaderboardConfig` в C2) |
+| URL деплоя (`/exec`) | `https://script.google.com/macros/s/AKfycbwRgAcaRgD7gI5p3p-bDdFPsn-8oS_dW3dwgXE7-Gg9KY1W2mzS1H2L8_oy1zEPzJli/exec` — проверено `smoke.sh`, для `LeaderboardConfig` в C2 |
 
-## Деплой (делает владелец таблицы: Коля или Егор)
+> Таблица пересоздана (D‑37 отменяет первоначальную ссылку на `1a9t4uwVDtyPE-...`): исходная таблица принадлежала корпоративному
+> Google‑аккаунту, и Apps Script систематически возвращал 403/редирект на логин анонимным запросам, даже с манифестом
+> `access: ANYONE_ANONYMOUS` и после смены деплоящего аккаунта. Новая таблица создана личным аккаунтом — тот же `Code.gs`,
+> анонимный доступ подтверждён.
+
+## Деплой (делает владелец таблицы)
 
 1. Открыть таблицу → **Extensions → Apps Script**.
 2. Удалить содержимое `Code.gs` в редакторе, вставить целиком содержимое [`Code.gs`](Code.gs) из репозитория. Сохранить.
-3. Выбрать в выпадающем списке функцию `setup`, нажать **Run**, выдать разрешения. Появится лист `scores` с шапкой.
-4. **Deploy → New deployment → Web app**:
+3. Выбрать в выпадающем списке функцию `setup`, нажать **Run**, выдать разрешения. Появится лист `scores` с шапкой
+   (если его ещё нет — `sheet()` в скрипте создаёт его и сам, при первом `doGet`/`doPost`).
+4. **Deploy → New deployment** → шестерёнка ⚙️ рядом с "Select type" → **Web app**:
    - *Execute as* — **Me**;
    - *Who has access* — **Anyone** (именно `Anyone`, не `Anyone with Google account` — иначе игра получит HTML логина вместо JSON).
-5. Скопировать URL вида `https://script.google.com/macros/s/<id>/exec` — вписать в таблицу выше, в `docs/PROJECT.md §6.1` и скинуть в чат для C2.
-6. Проверить: `./smoke.sh "<url>"` — четыре запроса, ответом всегда JSON. Строки `smoke test` потом удалить из листа.
+5. Скопировать URL вида `https://script.google.com/macros/s/<id>/exec` — вписать в таблицу выше, в `docs/PROJECT.md §6.1`.
+6. Проверить: `./smoke.sh "<url>"` — четыре запроса, ответом всегда JSON. Строки `smoke test`/`Anonymous` потом удалить из листа `scores`.
 
+> **Важно:** этот финальный шаг (Deploy → New deployment → Web app) обязательно делать вручную через веб‑интерфейс
+> Apps Script. `clasp deploy` (Apps Script REST API `projects.deployments.create`) технически создаёт деплой и принимает
+> манифест с `access: ANYONE_ANONYMOUS`, но реально не активирует анонимный HTTP‑доступ — проверено на двух разных
+> Google‑аккаунтах и двух таблицах, оба раза `/exec` отдавал 403/логин, пока тот же деплой не пересоздали кликом в UI.
 > Правки скрипта после деплоя требуют **Deploy → Manage deployments → Edit → Version: New version**,
 > иначе `/exec` продолжит отдавать старый код по тому же URL.
 

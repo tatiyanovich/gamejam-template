@@ -89,6 +89,7 @@
 
 - **D‑36 · 05.09** · Экзамен — **12 вопросов** (по фазам 3/2/3/2/2), звонок **120 с** с объявлением на **45 с**, сетка оценок и звёзды пересчитаны под 12 (отменяет числа D‑05, параметры самих фаз не тронуты). · Коля не уверен в 20 вопросах: идеальный проход занимал 161 с из 180, полный экзамен видели бы единицы, а обучающая фаза съедала четверть контента. На 12 вопросах идеал ≈ 91 с из 120 с, попытка укладывается в 1–2 минуты (`GDD §2`, столп 4), `12/12` остаётся мастерским, но достижимым. Выброшены 8 вопросов, ramp длин сохранён: Strokes 2/3/3 → 3 → 4 → 5 → 6, Word `BIRD`/`PURRS`/`CATNIP` (4/5/6), Pick на Q4 и Q8.
 - **D‑37 · 05.09** · Скрипт лидерборда живёт в репозитории (`tools/leaderboard/Code.gs`) и правится там, а не в веб‑редакторе; к нему приложены `test.js` (запуск логики под заглушками Apps Script) и `smoke.sh`. Черновик из §6.1 переписан: явный `SPREADSHEET_ID` вместо `getActiveSpreadsheet`, автосоздание листа с шапкой, `LockService` на запись, whitelist оценок `F D C B A A+`, клампы `answers 0–12` / `timeSeconds 0–999`, пустое после фильтра имя → `Anonymous`, любое исключение → JSON с полем `error` вместо HTML. · Черновик падал HTML‑страницей на любой ошибке (клиент C2 не смог бы распарсить ответ), ломался на отсутствующем листе и терял записи при одновременных попытках; без `test.js` каждая правка стоила бы редеплоя. Числа приведены к D‑36 и `GDD §12`.
+- **D‑38 · 05.09** · Таблица лидерборда пересоздана под личным Google‑аккаунтом по новой ссылке (`16S1OR1MXPm18jIZbqPbqVxVEikHrkhA_pou0qC3AXH0`), первая таблица (`1a9t4uwVDtyPE-...`) больше не используется. Финальный `Deploy → New deployment → Web app` для Apps Script делается только вручную через веб‑UI, не через `clasp deploy`. · Исходная таблица была создана корпоративным Google‑аккаунтом; анонимный `/exec` систематически возвращал 403 или редирект на логин, даже с манифестом `access: ANYONE_ANONYMOUS`, на двух разных аккаунтах‑деплоерах. Проблема исчезла только после ручного клика Deploy в Apps Script UI на таблице, созданной личным аккаунтом — `clasp deploy` (REST API `projects.deployments.create`) создаёт версию и деплой, но не активирует реальный анонимный HTTP‑доступ веб‑приложения.
 
 ## 5. Маппинг дизайна на код шаблона
 
@@ -130,14 +131,20 @@ D4: `art/src/d4/` → `art/teacher.mjs` → `art/exports/d4/` (12 слоёв у�
 | | |
 |---|---|
 | Таблица | `COPYCAT Leaderboard`, лист `scores`, шапка `name \| answers \| timeSeconds \| grade \| dateUtc` |
-| Ссылка | https://docs.google.com/spreadsheets/d/1a9t4uwVDtyPE-O1zC9yAPIs1J1wGLTzbJEE7Zz-PF6o/edit |
+| Ссылка | https://docs.google.com/spreadsheets/d/16S1OR1MXPm18jIZbqPbqVxVEikHrkhA_pou0qC3AXH0/edit |
 | Скрипт | `tools/leaderboard/Code.gs` — источник правды; в Apps Script копируем оттуда |
 | Инструкция деплоя, API, санитизация | `tools/leaderboard/README.md` |
-| URL `/exec` | **не задеплоен**, вписать в `tools/leaderboard/README.md` и в `LeaderboardConfig` (C2) |
+| URL `/exec` | `https://script.google.com/macros/s/AKfycbwRgAcaRgD7gI5p3p-bDdFPsn-8oS_dW3dwgXE7-Gg9KY1W2mzS1H2L8_oy1zEPzJli/exec` — задеплоен и проверен `smoke.sh`, готов для `LeaderboardConfig` (C2) |
 
 Деплой: Extensions → Apps Script → вставить `Code.gs` → запустить `setup()` → Deploy → Web app,
 *Execute as* **Me**, *Who has access* **Anyone**. Проверка — `tools/leaderboard/smoke.sh "<url>"`.
 Правка после деплоя требует **New version** в Manage deployments, иначе `/exec` отдаёт старый код.
+Финальный **Deploy → New deployment → Web app** обязателен вручную через веб‑UI Apps Script — `clasp deploy`
+(REST API) создаёт версию и деплой, но не активирует анонимный HTTP‑доступ, даже с манифестом
+`access: ANYONE_ANONYMOUS` (проверено на двух аккаунтах и двух таблицах, оба раза `/exec` отдавал 403 или
+логин, пока тот же деплой не пересоздали кликом в UI). Таблица пересоздана личным аккаунтом (см. D‑37) —
+исходная (`1a9t4uwVDtyPE-...`) принадлежала корпоративному Google‑аккаунту и систематически не давала
+анонимный доступ к веб‑приложению.
 
 Ответ на `POST` и `GET` одинаковый: `{ top: [{name, answers, timeSeconds, grade}], rank, total }`,
 сортировка `answers` ↓ + `timeSeconds` ↑ (`GDD §12`), `rank == 0` — «не найдено».
@@ -207,3 +214,4 @@ Apps Script `UnityWebRequest` отрабатывает сам. Логика бе
 - 2026-09-05 13:28 · Codex · D4: 12 слоёв учительницы SVG/PNG @2x, rig с pivots и шестью позами, 8 превью; проверены полуоборот, злой взгляд, рука ±8° и зрачки ±6 px, 1920×1080/480×270; build/check прошли, D1–D3 совпадают побайтно · `art/src/d4`, `art/exports/d4`, `art/previews/d4`; D4 закрыт, импорт — D11, анимация — E1
 - 2026-09-05 14:05 · Claude · G1: финализировал формулировки 12 вопросов (7 из 12 переписаны), структура тип/сосед/длина payload не менялась; тексты синхронизированы в GDD и конфиге · `docs/GDD.md §13.1`, `Assets/AddressableResources/Configs/Exam/ExamConfig.asset`; G1 закрыт
 - 2026‑09‑05 13:40 · Claude · C1: скрипт лидерборда, инструкция деплоя, локальные тесты и smoke‑скрипт · `tools/leaderboard/`, D‑37; деплой и `/exec`‑URL — за владельцем таблицы
+- 2026‑09‑05 14:10 · Claude + Егор · C1: таблица лидерборда пересоздана личным аккаунтом (исходная корпоративная блокировала анонимный `/exec`), скрипт задеплоен вручную через Apps Script UI, `smoke.sh` пройден (GET/POST/rank/санитизация), тестовые строки удалены · `tools/leaderboard/`, D‑38, `docs/PROJECT.md §6.1`; C1 закрыт, `/exec`‑URL готов для C2
