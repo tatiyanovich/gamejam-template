@@ -12,6 +12,11 @@ namespace Code.Gameplay.Exam
 
 			Add(systemFactory.Create<AccumulateExamTimeSystem>());
 
+			Add(systemFactory.Create<MarkAnswerReadableSystem>());
+			Add(systemFactory.Create<ValidateStrokeInputSystem>());
+			Add(systemFactory.Create<ValidatePickInputSystem>());
+			Add(systemFactory.Create<ValidateWordInputSystem>());
+
 			Add(systemFactory.Create<MarkAnswerCopiedSystem>());
 			Add(systemFactory.Create<AdvanceExamRunOnAnswerCopiedSystem>());
 			Add(systemFactory.Create<FinishExamOnLastAnswerSystem>());

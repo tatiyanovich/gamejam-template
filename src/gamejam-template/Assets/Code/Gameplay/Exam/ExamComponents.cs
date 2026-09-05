@@ -24,9 +24,16 @@ namespace Code.Gameplay.Exam
 	[Game] public class AnswerLength : IComponent { public int Value; }
 	[Game, Watched] public class AnswerProgress : IComponent { public int Value; }
 	[Game, Watched] public class AnswerCopied : IComponent { }
+	[Game, Watched] public class AnswerReadable : IComponent { }
 
 	[Game]
 	public class AnswerCopiedEvent : IComponent
+	{
+		public int QuestionIndex;
+	}
+
+	[Game]
+	public class WrongInputEvent : IComponent
 	{
 		public int QuestionIndex;
 	}

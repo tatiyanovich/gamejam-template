@@ -55,8 +55,8 @@
 - [x] **A2** (1.0) `ExamConfig` (20 вопросов: текст, тип, сосед, payload), `DifficultyConfig` (5 фаз, поля из `GDD §11`), `QuestionType` enum. Зав.: A1.
 - [x] **A3** (1.5) Сущность `ExamRun` (индекс вопроса, счётчик ответов, elapsed), `Question` сущность, системы: `SpawnNextQuestionSystem`, `MarkAnswerCopiedSystem`, `FinishExamOnLastAnswerSystem`, событие `AnswerCopiedEvent`. Зав.: A2.
 - [x] **A4** (1.0) Input‑контекст: `LeanHeld`, `StrokePressed(dir)`, `PickPressed(1–4)`, `LetterPressed(char)`, `MeowKeyPressed`, `DuckKeyPressed`; `EmitInputSystem` по `KeyCode`. Зав.: A1.
-- [ ] **A5** (1.5) Валидация ввода: `ValidateStrokeInputSystem`, `ValidatePickInputSystem`, `ValidateWordInputSystem` — только при `LeanHeld` и открытой лапе; событие `WrongInputEvent`. Зав.: A3, A4.
-- [ ] **A6** (0.5) Сосед: `PawLifted` + таймер `PawWindow` по фазе; `LiftPawOnMeowSystem`, `CoverPawOnTimerSystem`. Зав.: A12.
+- [x] **A5** (1.5) Валидация ввода: `ValidateStrokeInputSystem`, `ValidatePickInputSystem`, `ValidateWordInputSystem` — только при `LeanHeld` и открытой лапе; событие `WrongInputEvent`. Зав.: A3, A4.
+- [ ] **A6** (0.5) Сосед: `PawLifted` + таймер `PawWindow` по фазе; `LiftPawOnMeowSystem`, `CoverPawOnTimerSystem`; добавить условие `PawLifted` в `MarkAnswerReadableSystem` (D‑33). Зав.: A12.
 - [ ] **A7** (1.5) `MicrophoneService`: `Microphone.Start` (loop clip 1 с), RMS последних 1024 сэмплов, порог/масштаб из `MeowConfig`, rising edge, перевзвод, кулдаун 0.7 с, событие `MeowEvent`; фолбэк `M`; состояние «нет микрофона». Зав.: A4.
 - [ ] **A8** (2.0) Учительница: `TeacherAttention` компонент‑состояние (Writing/Turning/Watching/Staring/Alerted/Distracted) + таймер; системы `ScheduleTeacherCheckSystem`, `TelegraphTeacherTurnSystem`, `WatchClassSystem`, `KeepStaringWhileLeaningSystem`, `AlertTeacherOnMeowSystem` (шанс по фазе), `AlertTeacherOnPencilSnapSystem`, `DistractTeacherByDuckSystem`; счётчик `AlmostCaught`. Зав.: A12, A7.
 - [ ] **A9** (0.5) Подозрение: `AccumulateSuspicionWhileWatchedSystem`, `DecaySuspicionSystem`, `AddSuspicionOnWrongInputSystem`, `AddSuspicionOnMeowWhileWatchedSystem`, `FinishExamOnMaxSuspicionSystem`. Зав.: A8.

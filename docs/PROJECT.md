@@ -81,6 +81,9 @@
 - **D‑30 · 05.09** · `InputFeature` перенесена из `GlobalLoopInfraTailFeature` в `GlobalLoopInfraHeadFeature`. · `StrokeInput`/`PickInput`/`LetterInput` живут один кадр; в хвосте геймплей читал бы их кадром позже, а в голове ввод виден в том же кадре, в котором нажата клавиша.
 
 - **D‑31 · 05.09** · D1 принят Колей через Егора; замечание к креплению лап соседей из макета закреплено в D5 и E3 (B‑002). · D1 определяет стиль и композицию; полноценные тела/лапы создаются в D5, соединение и перекрытия дополнительно проверяются в движении в E3.
+- **D‑32 · 05.09** · Гейт ввода — маркер `AnswerReadable` на сущности вопроса, который каждый кадр ставит `MarkAnswerReadableSystem`; три системы валидации отличаются только матчером payload. · Общее условие «ответ соседа читаем» живёт в одном месте, а не троится по системам (правило `ecs-conventions`: различия — в матчерах, маркер плюс `Mark*`-система); флаг `Watched`, чтобы HUD (B3) и подсветка листа читали его реактивно.
+- **D‑33 · 05.09** · В A5 гейт = `LeanHeld` + незавершённый экзамен; условие «лапа соседа поднята» добавляется в `MarkAnswerReadableSystem` вместе с A6. · `PawLifted` и сами соседи создаются в A6 (зависит от A12); поставить условие на несуществующие сущности значило бы заблокировать весь ввод и плейтест до A6. Место врезки — одна строка в `MarkAnswerReadableSystem.Execute`.
+- **D‑34 · 05.09** · `WrongInputEvent` несёт только `QuestionIndex` (как `AnswerCopiedEvent`), прогресс ответа при ошибке не сбрасывается. · `GDD §6`: ошибка — штраф подозрения (A9) и треск карандаша (A8), а не потеря набранного; потребители находят текущий вопрос по индексу.
 
 ## 5. Маппинг дизайна на код шаблона
 
@@ -106,6 +109,8 @@
 | Создание сущностей экзамена | `IExamFactory` (`Gameplay/Exam/Services`): `CreateRun` / `CreateQuestion`, биндится в `GameplayInstaller.BindFactories` |
 | Исход попытки | enum `ExamOutcome` (`None`/`Passed`/`Caught`/`BellRang`), компонент `ExamOutcomeComponent` на `ExamRun` |
 | Событие «ответ списан» | `AnswerCopiedEvent` (поле `QuestionIndex`), потребитель — `AdvanceExamRunOnAnswerCopiedSystem` |
+| Валидация ввода | `MarkAnswerReadableSystem` ставит `AnswerReadable`; `ValidateStrokeInputSystem` / `ValidatePickInputSystem` / `ValidateWordInputSystem` (`Gameplay/Exam/Systems`) — отличаются только матчером payload и компонентом ввода |
+| Событие «ошибка ввода» | `WrongInputEvent` (поле `QuestionIndex`), потребители — A8 (треск карандаша) и A9 (`+8` подозрения) |
 
 Сцены: `Boot` (как есть), `Launch` (меню, фон — пустой класс), `Gameplay` (класс с партами; всё, что не UI, — SpriteRenderer‑ы в мире, камера ортографическая, 1920×1080 → размер 19.2×10.8 юнита при PPU 100).
 
@@ -192,3 +197,6 @@ Unity: `UnityWebRequest.Post(url, json, "application/json")`, редиректы
 - 2026‑09‑05 11:20 · Claude · A4: `IInputService`/`KeyboardInputService` сведены к `IsKeyHeld`/`IsKeyPressed`/`GetPointerScreenPosition`; `InputFeature` перенесена в `GlobalLoopInfraHeadFeature` · D‑29, D‑30
 - 2026‑09‑05 11:20 · Claude · A4: Jenny‑Gen (244 файла), компиляция чистая; в Play Mode `EmitInputSystem` прогнан с подменённым `IInputService` — Space+`M`+`Q`+`↑`+`3`+`T` дают lean/meow/duck/stroke=Up/pick=2/letter=T, одиночный `M` буквы не даёт, `A` даёт stroke=Left и letter=A, отпускание всё снимает; ошибок в консоли нет · Unity 6000.3.22f1
 - 2026-09-05 11:40 · Codex · Зафиксировал переданное Егором одобрение Коли: D1 закрыт, замечание к креплению лап соседей занесено в B‑002 и критерии D5/E3; статусы синхронизированы в docs и art/README · D‑31, `docs/PLAN.md`, `docs/ART_BIBLE.md`, `docs/BUGS.md`
+- 2026‑09‑05 12:05 · Claude · A5: компоненты `AnswerReadable` и `WrongInputEvent`, системы `MarkAnswerReadableSystem`, `ValidateStrokeInputSystem`, `ValidatePickInputSystem`, `ValidateWordInputSystem`; все четыре добавлены в `ExamFeature` перед `MarkAnswerCopiedSystem` · `Assets/Code/Gameplay/Exam`, D‑32, D‑34
+- 2026‑09‑05 12:05 · Claude · A5: гейт ввода пока без лапы соседа — условие `PawLifted` добавляется в A6 одной строкой в `MarkAnswerReadableSystem` · D‑33, `docs/PLAN.md` A6
+- 2026‑09‑05 12:05 · Claude · A5: Jenny‑Gen (249 файлов), компиляция чистая; Play Mode с подменённым `IInputService` — Q1–Q8 пройдены: без наклона прогресс не растёт для всех трёх типов, ошибка даёт `WrongInputEvent` без сброса прогресса, верный ввод доводит до COPIED (8/8), ошибок в консоли нет · Unity 6000.3.22f1
