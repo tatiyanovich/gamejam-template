@@ -108,6 +108,15 @@ namespace Code.Editor
 			fixture.Core.Execute();
 			Assert(Mathf.Approximately(teacher.TeacherAttentionTimeLeft, 1.5f),
 				$"Stare duration={teacher.TeacherAttentionTimeLeft}");
+			AssertRemark(fixture, TeacherRemark.MeowWhileWatching);
+		}
+
+		private static void AssertRemark(GameplayPlaytestFixture fixture, TeacherRemark expected)
+		{
+			GameEntity remark = fixture.Game.GetGroup(GameMatcher
+				.AllOf(
+					GameMatcher.TeacherRemarkEvent)).GetSingleEntity();
+			Assert(remark.TeacherRemarkEvent == expected, $"Teacher remark={remark.TeacherRemarkEvent}");
 		}
 
 		private static void KeyboardMeow(GameplayPlaytestFixture fixture)
@@ -221,6 +230,7 @@ namespace Code.Editor
 			fixture.Tick(0f);
 			Assert(question.AnswerProgress == 1 && fixture.Run.SuspicionLevel == 8f, "Wrong word penalty");
 			Assert(teacher.TeacherAttention == TeacherAttention.Alerted, "Pencil snap did not alert phase three");
+			AssertRemark(fixture, TeacherRemark.PencilAlert);
 			foreach (char letter in "IRD")
 			{
 				fixture.Keyboard.ReplaceLetterInput(letter);

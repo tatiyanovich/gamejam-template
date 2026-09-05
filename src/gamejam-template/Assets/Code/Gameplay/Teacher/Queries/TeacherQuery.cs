@@ -1,19 +1,26 @@
 using System;
 using Code.Infrastructure.EntityComponentSystem;
+using Code.Infrastructure.EntityComponentSystem.Events.Extensions;
 using Entitas;
 
 namespace Code.Gameplay.Teacher.Queries
 {
 	public sealed class TeacherQuery : ITeacherQuery, IReactiveQuery
 	{
+		private readonly IGroup<GameEntity> _remarks;
 		private readonly IGroup<GameEntity> _teachers;
 		private readonly IGroup<GameEntity> _changedTeachers;
 
+		public event Action<TeacherRemark> OnRemark;
 		public event Action<TeacherAttention> OnAttentionChanged;
 		public event Action<int> OnAlmostCaughtCountChanged;
 
 		public TeacherQuery(GameContext game)
 		{
+			_remarks = game.GetEvents(GameMatcher
+				.AllOf(
+					GameMatcher.TeacherRemarkEvent));
+
 			_teachers = game.GetGroup(GameMatcher
 				.AllOf(
 					GameMatcher.Teacher,
@@ -40,6 +47,9 @@ namespace Code.Gameplay.Teacher.Queries
 				if (teacher.isAlmostCaughtCountChanged)
 					OnAlmostCaughtCountChanged?.Invoke(teacher.AlmostCaughtCount);
 			}
+
+			foreach (GameEntity remark in _remarks)
+				OnRemark?.Invoke(remark.TeacherRemarkEvent);
 		}
 
 		public TeacherAttention GetAttention()

@@ -142,6 +142,9 @@
 
 - **D‑75 · 05.09** · `MeowEvent.FromMicrophone` отличает звук от M; `MeowQuery.OnMicrophoneTestPassed` обрабатывает готовое событие, Attendance сохраняет галочку до закрытия окна. · События читаются следующим кадром: повторная проверка текущей громкости теряла короткий импульс, а клавиша M не доказывает работоспособность микрофона.
 
+- **D‑76 · 05.09** · B3: причины реплик передаются через `TeacherRemarkEvent` из систем учительницы; HUD читает `ITeacherQuery.OnRemark`, без угадывания по текущему состоянию. · Мяу и треск карандаша могут вести к одному Alerted, но требуют разных строк.
+- **D‑77 · 05.09** · По правке пользователя B3 использует электронные настенные часы и свободные зоны сцены для HUD: верхние плашки не заходят на окно/доску, подозрение вынесено слева от учительницы, пузырь ограничен до правого соседа. · HUD не перекрывает котёнка и лица соседей.
+
 ## 5. Маппинг дизайна на код шаблона
 
 Editor QA: `Assets/Code/Editor/{GameplayPlaytest,GameplayRegression,LeaderboardPlaytest,ErrorWindowPlaytest}.cs`; помощники и инструкция `src/gamejam-template/tools/playtest/`; отчёт [C3_H4.md](C3_H4.md). Автоматические снимки — только камера, полный Game View снимается отдельной командой.
@@ -169,7 +172,7 @@ D8: `art/src/d8/` → `art/ui.mjs` → `art/exports/d8/` (27 UI-спрайтов
 | Загрузка конфигов экзамена | `IExamConfigsService` (`Gameplay/Exam/Services`) — грузит `ExamConfig` и `DifficultyConfig`, регистрируется в `BootstrapInstaller.BindConfigServices` |
 | Данные вопроса | `QuestionDefinition` (`Gameplay/Exam/Data`), enum‑ы `QuestionType`, `StrokeDirection` (`Gameplay/Exam`), `NeighbourSide` (`Gameplay/Neighbours`) |
 | Данные фазы | `DifficultyPhase` (`Gameplay/Difficulty/Data`): `QuestionCount`, `TeacherChecks`, `CheckDelayMinimum/Maximum`, `LookDurationMinimum/Maximum`, `MeowAlertChance`, `PencilSnapAlerts`, `StaringEnabled`, `PawWindow` |
-| HUD | `GameplayWindow` переписываем под HUD; bootstrap reactive queries в `Gameplay/<Feature>/Queries`: `IExamQuery`, `ISuspicionQuery`, `ITeacherQuery`, `IMeowQuery`, `IDuckQuery`, `IBellQuery`, `INeighbourQuery` |
+| HUD | B3: `GameplayWindow` (счётчик, электронные часы, подозрение, MEOW, клик по утке/Q, реплики), `PawTimerView` на world-space кольцах; builder `GameplayWindowBuilder`; bootstrap reactive queries в `Gameplay/<Feature>/Queries`: `IExamQuery`, `ISuspicionQuery`, `ITeacherQuery`, `IMeowQuery`, `IDuckQuery`, `IBellQuery`, `INeighbourQuery` |
 | Report Card | `ResultWindow` переписываем: grade, статы, лидерборд, Retake/Menu |
 | Лидерборд | `Infrastructure/Leaderboard/` сервис `ILeaderboardService` (UnityWebRequest), конфиг с URL Apps Script. Серверная часть — `tools/leaderboard/` (`Code.gs`, `test.js`, `smoke.sh`), см. §6.1 |
 | Сейв | `GeneralSaveFile`: `PlayerName`, `IntroSeen`, `BestAnswers`, `BestTimeSeconds`. Снапшот обновляет `RefreshExamProgressSystem` в `RefreshSnapshotsFeature` |
@@ -337,3 +340,5 @@ Apps Script `UnityWebRequest` отрабатывает сам. Логика бе
 - 2026-09-05 19:29 · Codex · B1: LaunchWindow собран на D8/D2, PLAY/QUIT и маршрутизация по IProgressQuery; базовая форма AttendanceSheet внутри LaunchWindow пишет имя через ProgressFactory и snapshot-save, блокирует повторный старт; отдельное окно и MIC CHECK остаются B2; LaunchWindowBuilder воспроизводит префаб · `UI/Launch`, `UI/Animations/ButtonLabelOffset`, `Gameplay/Progress/Queries`; исправлена загрузка null-имени до ECS, добавлен LaunchProgressPlaytest; проверки: `src/gamejam-template/tools/playtest/B1.md`
 - 2026-09-05 19:30 · Codex · A15: семь bootstrap reactive queries дают HUD события и текущее состояние экзамена, подозрения, учительницы, микрофона, утки, звонка и лап соседей; `MicrophoneLevel`/`PawWindowTimeLeft` стали `Watched`, Jenny‑Gen 319 файлов, `Assembly-CSharp` собирается без ошибок · `Assets/Code/Gameplay/*/Queries`, D‑74; A15 закрыт
 - 2026-09-05 20:02 · Codex · B2: отдельное AttendanceWindow, фильтр имени, MIC CHECK с порогом и LOUDER/LOUD ENOUGH, fallback M, сохранение и защита повторного старта; MeowEvent хранит FromMicrophone, Jenny перегенерирован; 6 проверок Attendance, 4 progress и 14 gameplay PASS, переход в Exam и повторный запуск проверены в Unity, C# без ошибок · `UI/Attendance`, `Editor/Art/AttendanceWindowBuilder`, `tools/playtest/B2.md`; B2 закрыт
+
+- 2026-09-05 20:47 · Codex · B3: HUD на A15 queries, события причин реплик, world-space кольца, клик по утке/Q; по правке пользователя электронные часы D2 и компоновка без перекрытия котёнка/соседей; исходники и зависимые art-превью пересобраны; проверки и кадр — `src/gamejam-template/tools/playtest/B3.md`; B3 закрыт

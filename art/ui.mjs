@@ -101,10 +101,10 @@ export function uiOutputs(root) {
     const { hud, suspicion: bar, meow: mic } = layout;
     let content = classroom();
     if (risk) content += `<g opacity=".45">${sprite('vignette_radial', 0, 0, 1920, 1080).replaceAll('#FFFFFF', '{{DANGER}}')}</g>`;
-    content += sliced('chip_hud', ...hud.logo) + title(182, 88, 'COPYCAT', 43);
-    content += sliced('chip_hud', ...hud.answers) + title(960, 88, 'ANSWERS 7 / 12', 43);
-    content += title(...hud.clockText, '2:14', 30);
-    content += suspicion(bar.rect[0], bar.rect[1], risk ? .88 : .18);
+    content += `<g transform="translate(${hud.logo[0]} ${hud.logo[1]}) scale(${1 / 1.5})">${sliced('chip_hud', 0, 0, hud.logo[2] * 1.5, hud.logo[3] * 1.5)}</g>` + title(182, 48, 'COPYCAT', 28);
+    content += `<g transform="translate(${hud.answers[0]} ${hud.answers[1]}) scale(${1 / 1.5})">${sliced('chip_hud', 0, 0, hud.answers[2] * 1.5, hud.answers[3] * 1.5)}</g>` + title(960, 48, 'ANSWERS 7 / 12', 28);
+    content += title(...hud.clockText, '0:44', 48, risk ? '{{DANGER}}' : '#C4EFAB');
+    content += `<g transform="translate(${bar.rect[0]} ${bar.rect[1]}) scale(${bar.hudScale})">${suspicion(0, 0, risk ? .88 : .18)}</g>`;
     content += meow(mic.rect[0], mic.rect[1], risk ? .86 : .22);
     content += text(...mic.fallback, '[M] if no mic', 27, 'Nunito', '{{INK}}', 'middle');
     return frame(1920, 1080, content);

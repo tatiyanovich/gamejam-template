@@ -15,11 +15,12 @@
     <path d="M68 350 L345 344 L357 358 L67 366Z" fill="{{WOOD}}" stroke-width="6"/>
     <path d="M73 360 L349 353 L357 358 L67 366Z" fill="{{WOOD_SHADE}}" stroke="none"/>
     <g transform="translate(1676 161)">
-      <ellipse cx="6" cy="7" rx="85" ry="88" fill="{{INK}}" opacity=".12" stroke="none"/>
-      <path d="M-84 0 C-87 -48 -48 -89 0 -88 C48 -88 85 -49 84 0 C86 51 45 88 -1 88 C-49 88 -86 47 -84 0Z" fill="{{WOOD}}" stroke-width="9"/>
-      <ellipse rx="69" ry="70" fill="{{PAPER}}" stroke-width="6"/>
-      <path d="M0 -56 V-46 M56 0 H46 M0 56 V46 M-56 0 H-46" fill="none" stroke-width="7"/>
-      <path d="M27 -48 L24 -42 M48 -28 L42 -24 M48 28 L42 24 M28 48 L24 42 M-28 48 L-24 42 M-48 28 L-42 24 M-48 -28 L-42 -24 M-28 -48 L-24 -42" fill="none" stroke-width="4"/>
+      <rect x="-122" y="-54" width="252" height="120" rx="16" fill="{{INK}}" opacity=".12" stroke="none"/>
+      <path d="M-112 -58 H111 Q125 -58 125 -43 V43 Q125 58 110 58 H-111 Q-125 58 -125 43 V-43 Q-125 -58 -112 -58Z" fill="{{WOOD_SHADE}}" stroke-width="8"/>
+      <rect x="-108" y="-41" width="216" height="82" rx="5" fill="#263B35" stroke-width="5"/>
+      <path d="M-99 -32 H97" fill="none" stroke="#537060" stroke-width="3"/>
+      <circle cx="-114" cy="-48" r="2" fill="{{PAPER_SHADE}}" stroke="none"/>
+      <circle cx="114" cy="48" r="2" fill="{{PAPER_SHADE}}" stroke="none"/>
     </g>
   </g>
 </svg>

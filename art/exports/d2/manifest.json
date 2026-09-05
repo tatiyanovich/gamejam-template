@@ -4,7 +4,7 @@
     "width": 3840,
     "height": 1400,
     "scale": 2,
-    "sha256": "c2772afd7547d79f4903fefe5f1b84beb5955032f267ed879a88a3991b0a9e41"
+    "sha256": "8d3063ece12c6a2129208dd5d79bd5feec3f4b969a804e19d2530f98a2b4e8fe"
   },
   {
     "name": "classroom_floor",
@@ -19,20 +19,6 @@
     "height": 600,
     "scale": 2,
     "sha256": "e2166d4b1f8f49c35168b614cd282ae42b5590e86cc30d7b89b687b6b1dc129f"
-  },
-  {
-    "name": "clock_hand_minute",
-    "width": 24,
-    "height": 180,
-    "scale": 2,
-    "sha256": "78ac282d74e5491fb84ed327ca56d1d663422b2a859ba2f3fa083afe5f516a31"
-  },
-  {
-    "name": "clock_hand_hour",
-    "width": 24,
-    "height": 180,
-    "scale": 2,
-    "sha256": "d34efcb0fd084304d86814a3b5b5f5c47bd847f64802984c8f599a34c37d7a47"
   },
   {
     "name": "teacher_desk",

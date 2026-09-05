@@ -25,34 +25,34 @@
     "width": 1920,
     "height": 1080,
     "scale": 1,
-    "sha256": "5fb980e7c25dd3296eb403d02044548c34ddaf41bda90fedd652b3df95a538d3"
+    "sha256": "ca7f8e85e7c6529d8c4e6523bbac5ffafc913b6a5437e2e29fa37c4170336bcc"
   },
   {
     "name": "classroom_turning",
     "width": 1920,
     "height": 1080,
     "scale": 1,
-    "sha256": "d43af9d6e1b7f175bac3cb82998f08179b9d305f36c8cb001c21cd063698f6f1"
+    "sha256": "cf9608be5de07f294162482077b565099c11b8b32b20fa313db65ec634cf624c"
   },
   {
     "name": "classroom_watching",
     "width": 1920,
     "height": 1080,
     "scale": 1,
-    "sha256": "7d9d7740f31e2e0a79ca71216208a3b32d15eaf0e495dae5b7f4ec7d344a67b9"
+    "sha256": "7c9a515bb91477f820d77860792f678efd7ca35fa13129d2dcf8de05142e3e0a"
   },
   {
     "name": "classroom_staring",
     "width": 1920,
     "height": 1080,
     "scale": 1,
-    "sha256": "bc9eded2d5f6bb1226a66850ab5df953ccad7731c48c04c3f2e8425963e0b289"
+    "sha256": "b475e169366aa78abb342862a1fa8c9ac87fa559f3ab44d959e09d55d63c3d54"
   },
   {
     "name": "classroom_thumbnail",
     "width": 480,
     "height": 270,
     "scale": 0.25,
-    "sha256": "0b0e8babc771bcdfd06376fa758a1aa761a83e5d77c9cfc6783f9ef512220b8c"
+    "sha256": "cbe9fc860223d128ecbd1a1eade0a4e6b1da5a6989eb726f1db7ba65cff4b0cd"
   }
 ]

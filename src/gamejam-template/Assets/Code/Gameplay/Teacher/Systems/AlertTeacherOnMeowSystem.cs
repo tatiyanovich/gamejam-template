@@ -6,6 +6,7 @@ using Code.Gameplay.Teacher.Configs;
 using Code.Gameplay.Teacher.Services;
 using Code.Infrastructure.EntityComponentSystem.Events.Extensions;
 using Code.Infrastructure.Randomization;
+using Code.Infrastructure.EntityComponentSystem.Factories;
 using Entitas;
 
 namespace Code.Gameplay.Teacher.Systems
@@ -14,6 +15,7 @@ namespace Code.Gameplay.Teacher.Systems
 	{
 		private readonly IDifficultyService _difficultyService;
 		private readonly ITeacherConfigsService _teacherConfigsService;
+		private readonly IEntityFactory _entityFactory;
 		private readonly IRandomService _randomService;
 
 		private readonly IGroup<GameEntity> _meowEvents;
@@ -27,10 +29,12 @@ namespace Code.Gameplay.Teacher.Systems
 			GameContext game,
 			IDifficultyService difficultyService,
 			ITeacherConfigsService teacherConfigsService,
-			IRandomService randomService)
+			IRandomService randomService,
+			IEntityFactory entityFactory)
 		{
 			_difficultyService = difficultyService;
 			_teacherConfigsService = teacherConfigsService;
+			_entityFactory = entityFactory;
 			_randomService = randomService;
 
 			_meowEvents = game.GetEvents(GameMatcher
@@ -78,6 +82,9 @@ namespace Code.Gameplay.Teacher.Systems
 				teacher.SwitchAttention(
 					TeacherAttention.Alerted,
 					_randomService.Range(config.AlertDelayMinimum, config.AlertDelayMaximum));
+
+				_entityFactory.Event()
+					.AddTeacherRemarkEvent(TeacherRemark.MeowAlert);
 			}
 		}
 	}

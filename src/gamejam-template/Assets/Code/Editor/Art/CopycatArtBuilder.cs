@@ -443,6 +443,7 @@ namespace Code.Editor.Art
 			fill.fillOrigin = (int)Image.Origin360.Top;
 			fill.fillClockwise = true;
 			fill.fillAmount = 0f;
+			GameplayWindowBuilder.ConfigurePawTimer(ringRoot.gameObject);
 			Save(ringRoot, "Papers");
 		}
 
@@ -636,8 +637,6 @@ namespace Code.Editor.Art
 			JObject duck = Read(7);
 			JToken duckPlacement = duck["desk"]["duck"];
 			Instantiate(root, "Duck/Duck", World(new Vector2((float)duckPlacement["x"], (float)duckPlacement["y"])));
-			JToken key = duck["desk"]["keycap"];
-			Layer(root, "Duck", ("keycap_q", World(new Vector2((float)key["x"], (float)key["y"])), 33));
 			PrefabUtility.RecordPrefabInstancePropertyModifications(teacherInstance);
 			foreach (Transform transform in root.GetComponentsInChildren<Transform>(true))
 			{

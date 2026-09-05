@@ -17,12 +17,6 @@
             <path fill="#000000" stroke="none" d="M 30 28 Q 447 18 869 29 L 874 259 Q 450 270 27 260 Z"/>
         </clipPath>
         <clipPath id="clipPath4">
-            <path fill="#000000" stroke="none" d="M 0 0 L 12 0 L 12 90 L 0 90 Z"/>
-        </clipPath>
-        <clipPath id="clipPath5">
-            <path fill="#000000" stroke="none" d="M 0 0 L 12 0 L 12 90 L 0 90 Z"/>
-        </clipPath>
-        <clipPath id="clipPath6">
             <path fill="#000000" stroke="none" d="M 0 0 L 520 0 L 520 160 L 0 160 Z"/>
         </clipPath>
         <clipPath id="d5-64-shade">
@@ -31,16 +25,16 @@
         <clipPath id="d5-71-shade">
             <path fill="#000000" stroke="none" d="M 148 260 Q 240 222 359 272 L 388 314 L 407 308 L 403 354 Q 443 407 434 476 L 457 494 L 440 519 Q 466 577 443 635 Q 269 695 68 636 L 83 595 L 62 578 L 83 544 Q 64 456 93 394 L 75 373 L 103 357 L 103 314 L 127 320 Z"/>
         </clipPath>
-        <clipPath id="clipPath7">
+        <clipPath id="clipPath5">
             <path fill="#000000" stroke="none" d="M 0 0 L 620 0 L 620 260 L 0 260 Z"/>
         </clipPath>
-        <clipPath id="d5-62-d2-6-desk-clip">
+        <clipPath id="d5-62-d2-4-desk-clip">
             <path fill="#000000" stroke="none" d="M 78 11 Q 311 5 541 16 L 614 221 Q 313 232 6 219 Z"/>
         </clipPath>
-        <clipPath id="clipPath8">
+        <clipPath id="clipPath6">
             <path fill="#000000" stroke="none" d="M 0 0 L 620 0 L 620 260 L 0 260 Z"/>
         </clipPath>
-        <clipPath id="d5-62-d2-7-desk-clip">
+        <clipPath id="d5-62-d2-5-desk-clip">
             <path fill="#000000" stroke="none" d="M 79 16 Q 309 5 542 11 L 614 219 Q 307 232 6 221 Z"/>
         </clipPath>
         <clipPath id="d6-110-sheet-clip">
@@ -55,10 +49,10 @@
         <clipPath id="d5-87-shade">
             <path fill="#000000" stroke="none" d="M 106 119 L 80 40 Q 78 21 98 30 L 173 74 Q 248 43 324 73 L 404 30 Q 423 19 418 41 L 400 120 L 426 141 L 416 156 L 443 177 L 421 194 L 436 212 L 410 222 Q 393 280 259 294 Q 123 290 96 245 L 68 231 L 87 210 L 64 191 L 86 173 L 73 153 Z"/>
         </clipPath>
-        <clipPath id="clipPath9">
+        <clipPath id="clipPath7">
             <path fill="#000000" stroke="none" d="M 0 0 L 1920 0 L 1920 360 L 0 360 Z"/>
         </clipPath>
-        <clipPath id="d5-62-d2-8-desk-clip">
+        <clipPath id="d5-62-d2-6-desk-clip">
             <path fill="#000000" stroke="none" d="M 145 12 Q 954 0 1772 14 L 1958 321 Q 961 350 -40 319 Z"/>
         </clipPath>
         <clipPath id="d6-117-sheet-clip">
@@ -86,12 +80,13 @@
                 <path fill="#9e6a3f" stroke="none" d="M 73 360 L 349 353 L 357 358 L 67 366 Z"/>
                 <g transform="matrix(1 0 0 1 1676 161)">
                     <g opacity="0.12">
-                        <path fill="#2a1f1a" stroke="none" d="M 91 7 C 91 55.60106 52.944206 95 6 95 C -40.944202 95 -79 55.60106 -79 7 C -79 -41.60106 -40.944202 -81 6 -81 C 52.944206 -81 91 -41.60106 91 7 Z"/>
+                        <path fill="#2a1f1a" stroke="none" d="M -106 -54 L 114 -54 C 122.836555 -54 130 -46.836555 130 -38 L 130 50 C 130 58.836555 122.836555 66 114 66 L -106 66 C -114.836555 66 -122 58.836555 -122 50 L -122 -38 C -122 -46.836555 -114.836555 -54 -106 -54 Z"/>
                     </g>
-                    <path fill="#c48a5a" stroke="#2a1f1a" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" d="M -84 0 C -87 -48 -48 -89 0 -88 C 48 -88 85 -49 84 0 C 86 51 45 88 -1 88 C -49 88 -86 47 -84 0 Z"/>
-                    <path fill="#fff6e3" stroke="#2a1f1a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" d="M 69 0 C 69 38.65993 38.107647 70 0 70 C -38.107647 70 -69 38.65993 -69 0 C -69 -38.65993 -38.107647 -70 -0 -70 C 38.107647 -70 69 -38.65993 69 0 Z"/>
-                    <path fill="none" stroke="#2a1f1a" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" d="M 0 -56 L 0 -46 M 56 0 L 46 0 M 0 56 L 0 46 M -56 0 L -46 0"/>
-                    <path fill="none" stroke="#2a1f1a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" d="M 27 -48 L 24 -42 M 48 -28 L 42 -24 M 48 28 L 42 24 M 28 48 L 24 42 M -28 48 L -24 42 M -48 28 L -42 24 M -48 -28 L -42 -24 M -28 -48 L -24 -42"/>
+                    <path fill="#9e6a3f" stroke="#2a1f1a" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" d="M -112 -58 L 111 -58 Q 125 -58 125 -43 L 125 43 Q 125 58 110 58 L -111 58 Q -125 58 -125 43 L -125 -43 Q -125 -58 -112 -58 Z"/>
+                    <path fill="#263b35" stroke="#2a1f1a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" d="M -103 -41 L 103 -41 C 105.76142 -41 108 -38.761425 108 -36 L 108 36 C 108 38.761425 105.76142 41 103 41 L -103 41 C -105.76142 41 -108 38.761425 -108 36 L -108 -36 C -108 -38.761425 -105.76142 -41 -103 -41 Z"/>
+                    <path fill="none" stroke="#537060" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M -99 -32 L 97 -32"/>
+                    <path fill="#eadfc6" stroke="none" d="M -112 -48 C -112 -46.89543 -112.895424 -46 -114 -46 C -115.104576 -46 -116 -46.89543 -116 -48 C -116 -49.10457 -115.104576 -50 -114 -50 C -112.895424 -50 -112 -49.10457 -112 -48 Z"/>
+                    <path fill="#eadfc6" stroke="none" d="M 116 48 C 116 49.10457 115.104576 50 114 50 C 112.895424 50 112 49.10457 112 48 C 112 46.89543 112.895424 46 114 46 C 115.104576 46 116 46.89543 116 48 Z"/>
                 </g>
             </g>
         </g>
@@ -139,16 +134,6 @@
         </g>
         <path fill="none" stroke="#fff6e3" stroke-width="3" stroke-linecap="round" d="M 278 198 Q 456 202 630 197"/>
     </g>
-    <g transform="matrix(0.6 0 0 0.6 1672.4 113)">
-        <g clip-path="url(#clipPath4)">
-            <path fill="#2a1f1a" stroke="none" d="M 6 4 Q 9 4 9 8 L 10 80 Q 10 86 6 86 Q 2 86 2 80 L 3 8 Q 3 4 6 4 Z"/>
-        </g>
-    </g>
-    <g transform="matrix(-0.3 0.51961523 -0.51961523 -0.3 1719.3693 181.88231)">
-        <g clip-path="url(#clipPath5)">
-            <path fill="#2a1f1a" stroke="none" d="M 6 28 Q 10 28 10 32 L 11 80 Q 11 86 6 86 Q 1 86 1 80 L 2 32 Q 2 28 6 28 Z"/>
-        </g>
-    </g>
     <g transform="matrix(0.4 0 0 0.4 976 235)">
         <g>
             <path fill="#2a1f1a" stroke="#2a1f1a" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" d="M 128 524 L 121 578 L 175 578 L 173 523 M 227 524 L 232 578 L 283 578 L 266 521"/>
@@ -168,7 +153,7 @@
         </g>
     </g>
     <g transform="matrix(1 0 0 1 700 470)">
-        <g clip-path="url(#clipPath6)">
+        <g clip-path="url(#clipPath4)">
             <g>
                 <path fill="#9e6a3f" stroke="#2a1f1a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" d="M 29 59 L 67 59 L 62 154 L 39 154 Z M 455 59 L 491 59 L 480 154 L 455 154 Z"/>
                 <path fill="#c48a5a" stroke="#2a1f1a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" d="M 29 12 Q 260 7 490 13 L 516 48 Q 260 56 4 49 Z"/>
@@ -209,16 +194,16 @@
         </g>
     </g>
     <g transform="matrix(0.9781476 -0.20791169 0.20791169 0.9781476 23.745724 587.29346)">
-        <g clip-path="url(#clipPath7)">
+        <g clip-path="url(#clipPath5)">
             <g>
                 <path fill="#9e6a3f" stroke="#2a1f1a" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" d="M 6 219 Q 313 232 614 221 L 608 253 Q 309 259 12 247 Z"/>
                 <g>
                     <path fill="#c48a5a" stroke="#2a1f1a" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" d="M 78 11 Q 311 5 541 16 L 614 221 Q 313 232 6 219 Z"/>
                 </g>
-                <g clip-path="url(#d5-62-d2-6-desk-clip)">
+                <g clip-path="url(#d5-62-d2-4-desk-clip)">
                     <path fill="#9e6a3f" stroke="none" d="M 542 0 L 627 233 L 0 247 L 0 208 Q 289 220 582 209 Z"/>
                 </g>
-                <g clip-path="url(#d5-62-d2-6-desk-clip)">
+                <g clip-path="url(#d5-62-d2-4-desk-clip)">
                     <path fill="none" stroke="#8b5a34" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M 133 53 Q 184 48 226 55 M 455 184 Q 499 177 553 183 M 255 17 L 240 225"/>
                 </g>
                 <g>
@@ -231,16 +216,16 @@
         </g>
     </g>
     <g transform="matrix(0.9781476 0.20791169 -0.20791169 0.9781476 1289.8027 458.38818)">
-        <g clip-path="url(#clipPath8)">
+        <g clip-path="url(#clipPath6)">
             <g>
                 <path fill="#9e6a3f" stroke="#2a1f1a" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" d="M 6 221 Q 307 232 614 219 L 608 247 Q 311 259 12 253 Z"/>
                 <g>
                     <path fill="#c48a5a" stroke="#2a1f1a" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" d="M 79 16 Q 309 5 542 11 L 614 219 Q 307 232 6 221 Z"/>
                 </g>
-                <g clip-path="url(#d5-62-d2-7-desk-clip)">
+                <g clip-path="url(#d5-62-d2-5-desk-clip)">
                     <path fill="#9e6a3f" stroke="none" d="M 545 0 L 627 233 L 0 247 L 0 210 Q 311 220 583 207 Z"/>
                 </g>
-                <g clip-path="url(#d5-62-d2-7-desk-clip)">
+                <g clip-path="url(#d5-62-d2-5-desk-clip)">
                     <path fill="none" stroke="#8b5a34" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M 384 56 Q 433 48 478 53 M 65 183 Q 117 177 162 184 M 365 17 L 380 225"/>
                 </g>
                 <g>
@@ -412,16 +397,16 @@
         </g>
     </g>
     <g transform="matrix(1 0 0 1 0 733)">
-        <g clip-path="url(#clipPath9)">
+        <g clip-path="url(#clipPath7)">
             <g>
                 <path fill="#9e6a3f" stroke="#2a1f1a" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" d="M -20 300 L 1940 300 L 1940 365 L -20 365 Z"/>
                 <g>
                     <path fill="#c48a5a" stroke="#2a1f1a" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" d="M 145 12 Q 954 0 1772 14 L 1958 321 Q 961 350 -40 319 Z"/>
                 </g>
-                <g clip-path="url(#d5-62-d2-8-desk-clip)">
+                <g clip-path="url(#d5-62-d2-6-desk-clip)">
                     <path fill="#9e6a3f" stroke="none" d="M 1777 0 L 1975 325 Q 961 366 -40 332 L -40 298 Q 919 326 1870 303 Z"/>
                 </g>
-                <g clip-path="url(#d5-62-d2-8-desk-clip)">
+                <g clip-path="url(#d5-62-d2-6-desk-clip)">
                     <path fill="none" stroke="#8b5a34" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" d="M 85 116 Q 457 107 732 121 M 1260 115 Q 1539 118 1852 109 M -1 255 Q 197 245 322 252 M 1393 280 Q 1659 264 1921 272 M 289 55 Q 368 45 438 56 M 300 68 Q 387 57 420 66"/>
                     <path fill="none" stroke="#8b5a34" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" d="M 502 2 L 450 320 M 1404 4 L 1460 327"/>
                 </g>

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Code.Gameplay.Meow;
 using Code.Gameplay.Teacher.Services;
 using Code.Infrastructure.EntityComponentSystem.Events.Extensions;
+using Code.Infrastructure.EntityComponentSystem.Factories;
 using Entitas;
 
 namespace Code.Gameplay.Teacher.Systems
@@ -9,6 +10,7 @@ namespace Code.Gameplay.Teacher.Systems
 	public class ExtendTeacherLookOnMeowSystem : IExecuteSystem
 	{
 		private readonly ITeacherConfigsService _teacherConfigsService;
+		private readonly IEntityFactory _entityFactory;
 
 		private readonly IGroup<GameEntity> _meowEvents;
 		private readonly IGroup<GameEntity> _runningExams;
@@ -16,9 +18,13 @@ namespace Code.Gameplay.Teacher.Systems
 
 		private readonly List<GameEntity> _buffer = new(1);
 
-		public ExtendTeacherLookOnMeowSystem(GameContext game, ITeacherConfigsService teacherConfigsService)
+		public ExtendTeacherLookOnMeowSystem(
+			GameContext game,
+			ITeacherConfigsService teacherConfigsService,
+			IEntityFactory entityFactory)
 		{
 			_teacherConfigsService = teacherConfigsService;
+			_entityFactory = entityFactory;
 
 			_runningExams = game.GetGroup(GameMatcher
 				.AllOf(
@@ -50,6 +56,9 @@ namespace Code.Gameplay.Teacher.Systems
 					continue;
 
 				teacher.ReplaceTeacherAttentionTimeLeft(teacher.TeacherAttentionTimeLeft + lookExtensionSeconds);
+
+				_entityFactory.Event()
+					.AddTeacherRemarkEvent(TeacherRemark.MeowWhileWatching);
 			}
 		}
 	}

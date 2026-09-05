@@ -18,48 +18,48 @@
     "width": 1920,
     "height": 1080,
     "scale": 1,
-    "sha256": "7feb630aadb97de42c75de333b1f228d8cddaf4f537becb0a5ff5e1f589c9038"
+    "sha256": "9e246c268774cec8085988a9592c75ed02ff162828044930253f9bc23d51c0cf"
   },
   {
     "name": "hud_calm",
     "width": 1920,
     "height": 1080,
     "scale": 1,
-    "sha256": "f8a55f29f3a447eb5a80c4fc1ac7d30f13a3c1a4cc777e232e802beba111afc7"
+    "sha256": "9d754d34352e5e0371d9adcebef79d9e51de7a23a2e5a28b46adc6a5e82182f1"
   },
   {
     "name": "hud_risk",
     "width": 1920,
     "height": 1080,
     "scale": 1,
-    "sha256": "57615417dce0c7b6ffafcc874c07d096578c53beef2fed98a84affe6dbccca43"
+    "sha256": "349cde219734c105b637a4b89df015c617c5c263a005b4dfaabd6d0f89442c07"
   },
   {
     "name": "report_card",
     "width": 1920,
     "height": 1080,
     "scale": 1,
-    "sha256": "beb8981e8de435c101a2dc863e7ebacc90db17ba1a60fdb0fae1c5b879b66c40"
+    "sha256": "b2960d13634e37d3cc246a2cd26324573f2c396963aa0223c2bdfb2c2ccf260e"
   },
   {
     "name": "menu_thumbnail",
     "width": 480,
     "height": 270,
     "scale": 0.25,
-    "sha256": "cf37a1f53e38935e1b2a9ee5ff80830e77bce3e78763225a5403d55280f07b24"
+    "sha256": "689e47cc137a59db2014018bfccbb54aac128bb8c292d9a4be0e2afa1cf778c6"
   },
   {
     "name": "hud_thumbnail",
     "width": 480,
     "height": 270,
     "scale": 0.25,
-    "sha256": "4bf7734674e4e6dd47e8f0261e573bdc6a9ded9d449845bf4c56a9ef1622df25"
+    "sha256": "c65a5d7e9ad161aa12efe6733412d0a2d0ccdf3b078ff337e6ac67ce239ad27a"
   },
   {
     "name": "report_thumbnail",
     "width": 480,
     "height": 270,
     "scale": 0.25,
-    "sha256": "8db8a808d18034e7fd5897e90618f044a5c56ff2ab6db9480e81ff375de98b0d"
+    "sha256": "6da90df2f31fa3cf738da6862e3eb96b452cebc144ba2dd42fedcd6abf11dff3"
   }
 ]

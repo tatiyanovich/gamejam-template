@@ -25,27 +25,27 @@
     "width": 1920,
     "height": 1080,
     "scale": 1,
-    "sha256": "c9f945c078661854d01181c1c7a33ac714ba5d62ac0c3105a9c2e32b8af0a808"
+    "sha256": "43ef8133a388d06968c9700da369a108c093e7d133917b326bb372d668b3a14b"
   },
   {
     "name": "classroom_panic_left",
     "width": 1920,
     "height": 1080,
     "scale": 1,
-    "sha256": "9545191124121c261a4303350e1b06823a4bff6a4c16b5e41b6009c3a08a691d"
+    "sha256": "174b76d8652e49509475056035ca3aa584f2bf4a1130b3733f2bf8f1bc030835"
   },
   {
     "name": "classroom_panic_right",
     "width": 1920,
     "height": 1080,
     "scale": 1,
-    "sha256": "70950af2043337e00c55d7ac8083f358aac919c2f18e22e570f8c054c9eb8f86"
+    "sha256": "16868208662a391b4bce513a61df03c6fd84c8a35cfae15c5976be355285d738"
   },
   {
     "name": "classroom_thumbnail",
     "width": 480,
     "height": 270,
     "scale": 0.25,
-    "sha256": "e3753fc758e0f42e56d331d14aac31123c7c200685f6f37308a8a98c59e7998c"
+    "sha256": "1163484ffd0aa40adfb2843a5280b024b74df51f8bed003a2f9fd54c96260268"
   }
 ]

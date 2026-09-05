@@ -1,0 +1,9 @@
+PASS duck area receives pointer raycast
+PASS mid-session seed: answers, timer, announced color and suspicion
+PASS reactive answers and clock at zero
+PASS microphone fill, config threshold, cooldown, missing-device fallback
+PASS Q click request, unavailable duck and confiscation line
+PASS world-space paw ring at half window and expiration
+PASS teacher telegraph, event cause and 1.2-second bubble lifetime
+PASS outcome priority, close unsubscription and reopen seed
+DONE

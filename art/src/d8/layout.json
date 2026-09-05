@@ -520,14 +520,14 @@
   },
   "suspicion": {
     "rect": [
-      750,
-      570,
-      420,
-      64
+      650,
+      415,
+      315,
+      48
     ],
     "label": [
-      960,
-      559
+      807.5,
+      407
     ],
     "trackColor": "PAPER_SHADE",
     "fillInset": [
@@ -545,14 +545,15 @@
     "imageType": "Filled",
     "fillMethod": "Horizontal",
     "fillOrigin": "Left",
-    "note": "Keep full gradient width; clip via fillAmount, never resize the fill sprite. Frame overlays fill. Label is TMP.",
+    "note": "Keep full gradient width; clip via fillAmount, never resize the fill sprite. Frame overlays fill. Label is TMP. HUD occupies the gap left of the teacher, above neighbour desks and all kitten poses.",
     "labelStyle": {
       "font": "Luckiest Guy",
       "size": 28,
       "color": "INK",
       "outlineColor": "PAPER",
       "outlineReferencePixels": 2
-    }
+    },
+    "hudScale": 0.75
   },
   "meow": {
     "rect": [
@@ -591,19 +592,19 @@
   "hud": {
     "logo": [
       42,
-      28,
+      8,
       280,
-      88
+      60
     ],
     "answers": [
       732,
-      28,
+      8,
       456,
-      88
+      60
     ],
     "clockText": [
       1676,
-      203
+      178
     ]
   },
   "menu": {

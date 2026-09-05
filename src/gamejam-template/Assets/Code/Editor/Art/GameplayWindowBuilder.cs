@@ -1,0 +1,175 @@
+using System;
+using Code.UI.Gameplay;
+using TMPro;
+using UnityEditor;
+using UnityEditor.SceneManagement;
+using UnityEngine;
+using UnityEngine.UI;
+using static Code.Editor.Art.LaunchWindowBuilder;
+using Object = UnityEngine.Object;
+
+namespace Code.Editor.Art
+{
+	public static class GameplayWindowBuilder
+	{
+		private const string Content = "Assets/AddressableResources/Content/";
+		private const string Prefab = Content + "UI/Gameplay/GameplayWindow.prefab";
+
+		[MenuItem("COPYCAT/Art/Build B3 Gameplay Window")]
+		public static void Build()
+		{
+			if (EditorApplication.isPlaying)
+				throw new InvalidOperationException("Stop Play Mode before building the gameplay window.");
+
+			GameObject root = PrefabUtility.LoadPrefabContents(Prefab);
+			try
+			{
+				while (root.transform.childCount > 0)
+					Object.DestroyImmediate(root.transform.GetChild(0).gameObject);
+
+				RectTransform layout = Rectangle(root.transform, "Layout", new Rect(0f, 0f, 1920f, 1080f));
+				layout.anchorMin = layout.anchorMax = layout.pivot = Vector2.one * 0.5f;
+				layout.anchoredPosition = Vector2.zero;
+				Picture(layout, "UI/Copycat/chip_hud", new Rect(42f, 8f, 280f, 60f)).pixelsPerUnitMultiplier = 1.5f;
+				Label(layout, "COPYCAT", new Rect(42f, 8f, 280f, 60f)).fontSize = 28f;
+				Picture(layout, "UI/Copycat/chip_hud", new Rect(732f, 8f, 456f, 60f)).pixelsPerUnitMultiplier = 1.5f;
+				TMP_Text answers = Label(layout, "", new Rect(732f, 8f, 456f, 60f));
+				answers.fontSize = 28f;
+				TMP_Text clock = Label(layout, "", new Rect(1580f, 130f, 192f, 62f));
+				clock.fontSize = 48f;
+				clock.characterSpacing = 4f;
+				RectTransform suspicion = Widget(layout, "SuspicionMeter", new Vector2(650f, -388f));
+				suspicion.localScale = Vector3.one * 0.75f;
+				RectTransform meow = Widget(layout, "MeowMeter", new Vector2(80f, -760f));
+				TMP_Text hint = Label(layout, "", new Rect(25f, 1008f, 350f, 56f));
+				hint.fontSize = 24f;
+				Image cooldown = Picture(meow, "Papers/ring_timer", new Rect(0f, 0f, 240f, 240f));
+				cooldown.name = "Cooldown";
+				cooldown.type = Image.Type.Filled;
+				cooldown.fillMethod = Image.FillMethod.Radial360;
+				cooldown.fillOrigin = (int)Image.Origin360.Top;
+				cooldown.color = new Color32(150, 150, 150, 255);
+				RectTransform threshold = (RectTransform)meow.Find("meow_threshold_line");
+				threshold.pivot = Vector2.one * 0.5f;
+				Image duck = Picture(layout, "Duck/keycap_q", new Rect(1618f, 918f, 64f, 64f));
+				Image duckHitArea = Rectangle(layout, "DuckButton", new Rect(1560f, 780f, 200f, 210f))
+					.gameObject.AddComponent<Image>();
+				duckHitArea.color = Color.clear;
+				duckHitArea.raycastTarget = true;
+				Button duckButton = duckHitArea.gameObject.AddComponent<Button>();
+				duckButton.targetGraphic = duck;
+				RectTransform bubble = Rectangle(layout, "TeacherBubble", new Rect(1140f, 378f, 260f, 112f));
+				Picture(bubble, "UI/Copycat/panel_paper_9slice", new Rect(0f, 0f, 260f, 112f));
+				TMP_Text speech = Label(bubble, "", new Rect(16f, 10f, 228f, 92f));
+				speech.fontSize = 24f;
+				SerializedObject window = new(root.GetComponent<GameplayWindow>());
+				Assign(window, "layout", layout);
+				Assign(window, "answers", answers);
+				Assign(window, "clock", clock);
+				Assign(window, "suspicionFill", suspicion.Find("bar_fill").GetComponent<Image>());
+				Assign(window, "microphoneFill", meow.Find("meow_fill").GetComponent<Image>());
+				Assign(window, "microphoneThreshold", threshold);
+				Assign(window, "microphoneHint", hint);
+				Assign(window, "cooldownFill", cooldown);
+				Assign(window, "duckButton", duckButton);
+				Assign(window, "bubble", bubble.gameObject);
+				Assign(window, "speech", speech);
+				window.ApplyModifiedPropertiesWithoutUndo();
+				PrefabUtility.SaveAsPrefabAsset(root, Prefab);
+			}
+			finally
+			{
+				PrefabUtility.UnloadPrefabContents(root);
+			}
+
+			BuildPawTimer();
+			RemoveStaticKeycap();
+			RemoveClockHands();
+			AssetDatabase.SaveAssets();
+		}
+
+		internal static void ConfigurePawTimer(GameObject root)
+		{
+			PawTimerView view = root.GetComponent<PawTimerView>();
+			if (view == null)
+				view = root.AddComponent<PawTimerView>();
+			Canvas canvas = root.GetComponentInChildren<Canvas>();
+			SerializedObject serialized = new(view);
+			Assign(serialized, "canvas", canvas);
+			Assign(serialized, "fill", canvas.transform.Find("ring_timer").GetComponent<Image>());
+			serialized.ApplyModifiedPropertiesWithoutUndo();
+			canvas.enabled = false;
+		}
+
+		private static void RemoveClockHands()
+		{
+			string path = Content + "Classroom/Classroom.prefab";
+			GameObject root = PrefabUtility.LoadPrefabContents(path);
+			try
+			{
+				foreach (string name in new[] { "clock_hand_hour", "clock_hand_minute" })
+				{
+					Transform hand = root.transform.Find(name);
+					if (hand != null)
+						Object.DestroyImmediate(hand.gameObject);
+				}
+				PrefabUtility.SaveAsPrefabAsset(root, path);
+			}
+			finally
+			{
+				PrefabUtility.UnloadPrefabContents(root);
+			}
+		}
+
+		private static void RemoveStaticKeycap()
+		{
+			UnityEngine.SceneManagement.Scene scene =
+				UnityEngine.SceneManagement.SceneManager.GetSceneByPath("Assets/Scenes/Gameplay.unity");
+			bool wasLoaded = scene.isLoaded;
+			if (wasLoaded == false)
+				scene = EditorSceneManager.OpenScene("Assets/Scenes/Gameplay.unity", OpenSceneMode.Additive);
+			try
+			{
+				foreach (GameObject root in scene.GetRootGameObjects())
+				{
+					if (root.name != "CopycatArt")
+						continue;
+					Transform keycap = root.transform.Find("keycap_q");
+					if (keycap != null)
+						Object.DestroyImmediate(keycap.gameObject);
+				}
+				EditorSceneManager.SaveScene(scene);
+			}
+			finally
+			{
+				if (wasLoaded == false)
+					EditorSceneManager.CloseScene(scene, true);
+			}
+		}
+
+		private static void BuildPawTimer()
+		{
+			string path = Content + "Papers/PawTimer.prefab";
+			GameObject root = PrefabUtility.LoadPrefabContents(path);
+			try
+			{
+				ConfigurePawTimer(root);
+				PrefabUtility.SaveAsPrefabAsset(root, path);
+			}
+			finally
+			{
+				PrefabUtility.UnloadPrefabContents(root);
+			}
+		}
+
+		private static RectTransform Widget(Transform parent, string name, Vector2 position)
+		{
+			GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(Content + "UI/Copycat/" + name + ".prefab");
+			GameObject instance = (GameObject)PrefabUtility.InstantiatePrefab(prefab, parent);
+			RectTransform widget = (RectTransform)instance.transform;
+			widget.anchorMin = widget.anchorMax = widget.pivot = new Vector2(0f, 1f);
+			widget.anchoredPosition = position;
+			return widget;
+		}
+	}
+}

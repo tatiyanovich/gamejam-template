@@ -1,6 +1,12 @@
 {
-  "canvas": [1920, 1080],
-  "vanishingPoint": [960, 410],
+  "canvas": [
+    1920,
+    1080
+  ],
+  "vanishingPoint": [
+    960,
+    410
+  ],
   "coordinates": "Screen pixels at 1x; origin top-left, x right, y down; positive rotation clockwise. Layer x/y place the unrotated top-left; rotate about pivotPixels, then scale about it.",
   "textureScale": 2,
   "pixelsPerUnit": 200,
@@ -8,40 +14,275 @@
   "mipmaps": false,
   "trim": false,
   "layers": [
-    { "name": "classroom_wall", "size": [1920, 700], "x": 0, "y": 0, "pivotPixels": [960, 350], "rotation": 0, "scale": 1, "sortingOrder": 0 },
-    { "name": "classroom_floor", "size": [1920, 670], "x": 0, "y": 410, "pivotPixels": [960, 335], "rotation": 0, "scale": 1, "sortingOrder": 1 },
-    { "name": "blackboard", "size": [900, 300], "x": 510, "y": 76, "pivotPixels": [450, 150], "rotation": 0, "scale": 1, "sortingOrder": 2 },
-    { "name": "clock_hand_minute", "size": [12, 90], "x": 1670, "y": 81, "pivotPixels": [6, 80], "rotation": 0, "scale": 0.6, "sortingOrder": 3 },
-    { "name": "clock_hand_hour", "size": [12, 90], "x": 1670, "y": 81, "pivotPixels": [6, 80], "rotation": 120, "scale": 0.6, "sortingOrder": 4 },
-    { "name": "teacher_desk", "size": [520, 160], "x": 700, "y": 470, "pivotPixels": [260, 80], "rotation": 0, "scale": 1, "sortingOrder": 10 },
-    { "name": "desk_neighbour_left", "size": [620, 260], "x": 44, "y": 520, "pivotPixels": [310, 130], "rotation": -12, "scale": 1, "sortingOrder": 20 },
-    { "name": "desk_neighbour_right", "size": [620, 260], "x": 1256, "y": 520, "pivotPixels": [310, 130], "rotation": 12, "scale": 1, "sortingOrder": 20 },
-    { "name": "desk_player", "size": [1920, 360], "x": 0, "y": 733, "pivotPixels": [960, 180], "rotation": 0, "scale": 1, "sortingOrder": 30 }
+    {
+      "name": "classroom_wall",
+      "size": [
+        1920,
+        700
+      ],
+      "x": 0,
+      "y": 0,
+      "pivotPixels": [
+        960,
+        350
+      ],
+      "rotation": 0,
+      "scale": 1,
+      "sortingOrder": 0
+    },
+    {
+      "name": "classroom_floor",
+      "size": [
+        1920,
+        670
+      ],
+      "x": 0,
+      "y": 410,
+      "pivotPixels": [
+        960,
+        335
+      ],
+      "rotation": 0,
+      "scale": 1,
+      "sortingOrder": 1
+    },
+    {
+      "name": "blackboard",
+      "size": [
+        900,
+        300
+      ],
+      "x": 510,
+      "y": 76,
+      "pivotPixels": [
+        450,
+        150
+      ],
+      "rotation": 0,
+      "scale": 1,
+      "sortingOrder": 2
+    },
+    {
+      "name": "teacher_desk",
+      "size": [
+        520,
+        160
+      ],
+      "x": 700,
+      "y": 470,
+      "pivotPixels": [
+        260,
+        80
+      ],
+      "rotation": 0,
+      "scale": 1,
+      "sortingOrder": 10
+    },
+    {
+      "name": "desk_neighbour_left",
+      "size": [
+        620,
+        260
+      ],
+      "x": 44,
+      "y": 520,
+      "pivotPixels": [
+        310,
+        130
+      ],
+      "rotation": -12,
+      "scale": 1,
+      "sortingOrder": 20
+    },
+    {
+      "name": "desk_neighbour_right",
+      "size": [
+        620,
+        260
+      ],
+      "x": 1256,
+      "y": 520,
+      "pivotPixels": [
+        310,
+        130
+      ],
+      "rotation": 12,
+      "scale": 1,
+      "sortingOrder": 20
+    },
+    {
+      "name": "desk_player",
+      "size": [
+        1920,
+        360
+      ],
+      "x": 0,
+      "y": 733,
+      "pivotPixels": [
+        960,
+        180
+      ],
+      "rotation": 0,
+      "scale": 1,
+      "sortingOrder": 30
+    }
   ],
   "boardText": {
-    "origin": [510, 76],
-    "bounds": [45, 40, 810, 216],
+    "origin": [
+      510,
+      76
+    ],
+    "bounds": [
+      45,
+      40,
+      810,
+      216
+    ],
     "sortingOrder": 5,
     "alignment": "center",
     "color": "PAPER",
     "lines": [
-      { "text": "FINAL EXAM", "x": 450, "baseline": 83, "font": "Luckiest Guy", "fontSize": 48 },
-      { "text": "Rule #1: NO CHEATING.", "x": 450, "baseline": 137, "font": "Patrick Hand", "fontSize": 37 },
-      { "text": "Rule #2: NO MEOWING.", "x": 450, "baseline": 186, "font": "Patrick Hand", "fontSize": 37 },
-      { "text": "Emotional support ducks permitted.", "x": 450, "baseline": 238, "font": "Patrick Hand", "fontSize": 25 }
+      {
+        "text": "FINAL EXAM",
+        "x": 450,
+        "baseline": 83,
+        "font": "Luckiest Guy",
+        "fontSize": 48
+      },
+      {
+        "text": "Rule #1: NO CHEATING.",
+        "x": 450,
+        "baseline": 137,
+        "font": "Patrick Hand",
+        "fontSize": 37
+      },
+      {
+        "text": "Rule #2: NO MEOWING.",
+        "x": 450,
+        "baseline": 186,
+        "font": "Patrick Hand",
+        "fontSize": 37
+      },
+      {
+        "text": "Emotional support ducks permitted.",
+        "x": 450,
+        "baseline": 238,
+        "font": "Patrick Hand",
+        "fontSize": 25
+      }
     ]
   },
   "slots": [
-    { "name": "Teacher writing (D4)", "bounds": [976, 235, 152, 240], "sortingOrder": 8 },
-    { "name": "Teacher watching (D4)", "bounds": [976, 354, 152, 240], "sortingOrder": 12 },
-    { "name": "Whiskerstein (D5)", "bounds": [275, 290, 210, 285], "sortingOrder": 18 },
-    { "name": "Fluffy (D5)", "bounds": [1435, 290, 240, 285], "sortingOrder": 18 },
-    { "name": "Player paper (D6)", "bounds": [1040, 770, 415, 244], "sortingOrder": 32 },
-    { "name": "Duck (D7)", "bounds": [1575, 769, 150, 140], "sortingOrder": 33 },
-    { "name": "Kitten (D3)", "bounds": [593, 628, 470, 450], "sortingOrder": 34 }
+    {
+      "name": "Teacher writing (D4)",
+      "bounds": [
+        976,
+        235,
+        152,
+        240
+      ],
+      "sortingOrder": 8
+    },
+    {
+      "name": "Teacher watching (D4)",
+      "bounds": [
+        976,
+        354,
+        152,
+        240
+      ],
+      "sortingOrder": 12
+    },
+    {
+      "name": "Whiskerstein (D5)",
+      "bounds": [
+        275,
+        290,
+        210,
+        285
+      ],
+      "sortingOrder": 18
+    },
+    {
+      "name": "Fluffy (D5)",
+      "bounds": [
+        1435,
+        290,
+        240,
+        285
+      ],
+      "sortingOrder": 18
+    },
+    {
+      "name": "Player paper (D6)",
+      "bounds": [
+        1040,
+        770,
+        415,
+        244
+      ],
+      "sortingOrder": 32
+    },
+    {
+      "name": "Duck (D7)",
+      "bounds": [
+        1575,
+        769,
+        150,
+        140
+      ],
+      "sortingOrder": 33
+    },
+    {
+      "name": "Kitten (D3)",
+      "bounds": [
+        593,
+        628,
+        470,
+        450
+      ],
+      "sortingOrder": 34
+    }
   ],
   "neighbourPaperSlots": [
-    { "desk": "desk_neighbour_left", "bounds": [88, 82, 272, 124], "sortingOrder": 22 },
-    { "desk": "desk_neighbour_right", "bounds": [230, 82, 272, 124], "sortingOrder": 22 }
-  ]
+    {
+      "desk": "desk_neighbour_left",
+      "bounds": [
+        88,
+        82,
+        272,
+        124
+      ],
+      "sortingOrder": 22
+    },
+    {
+      "desk": "desk_neighbour_right",
+      "bounds": [
+        230,
+        82,
+        272,
+        124
+      ],
+      "sortingOrder": 22
+    }
+  ],
+  "digitalClock": {
+    "caseBounds": [
+      1551,
+      103,
+      250,
+      116
+    ],
+    "displayBounds": [
+      1568,
+      120,
+      216,
+      82
+    ],
+    "textCenter": [
+      1676,
+      161
+    ],
+    "note": "B3 wall-mounted electronic countdown. Live digits in Unity; legacy clock-hand exports are unused."
+  }
 }

@@ -18,12 +18,13 @@
         <path fill="#9e6a3f" stroke="none" d="M 73 360 L 349 353 L 357 358 L 67 366 Z"/>
         <g transform="matrix(1 0 0 1 1676 161)">
             <g opacity="0.12">
-                <path fill="#2a1f1a" stroke="none" d="M 91 7 C 91 55.60106 52.944206 95 6 95 C -40.944202 95 -79 55.60106 -79 7 C -79 -41.60106 -40.944202 -81 6 -81 C 52.944206 -81 91 -41.60106 91 7 Z"/>
+                <path fill="#2a1f1a" stroke="none" d="M -106 -54 L 114 -54 C 122.836555 -54 130 -46.836555 130 -38 L 130 50 C 130 58.836555 122.836555 66 114 66 L -106 66 C -114.836555 66 -122 58.836555 -122 50 L -122 -38 C -122 -46.836555 -114.836555 -54 -106 -54 Z"/>
             </g>
-            <path fill="#c48a5a" stroke="#2a1f1a" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" d="M -84 0 C -87 -48 -48 -89 0 -88 C 48 -88 85 -49 84 0 C 86 51 45 88 -1 88 C -49 88 -86 47 -84 0 Z"/>
-            <path fill="#fff6e3" stroke="#2a1f1a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" d="M 69 0 C 69 38.65993 38.107647 70 0 70 C -38.107647 70 -69 38.65993 -69 0 C -69 -38.65993 -38.107647 -70 -0 -70 C 38.107647 -70 69 -38.65993 69 0 Z"/>
-            <path fill="none" stroke="#2a1f1a" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" d="M 0 -56 L 0 -46 M 56 0 L 46 0 M 0 56 L 0 46 M -56 0 L -46 0"/>
-            <path fill="none" stroke="#2a1f1a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" d="M 27 -48 L 24 -42 M 48 -28 L 42 -24 M 48 28 L 42 24 M 28 48 L 24 42 M -28 48 L -24 42 M -48 28 L -42 24 M -48 -28 L -42 -24 M -28 -48 L -24 -42"/>
+            <path fill="#9e6a3f" stroke="#2a1f1a" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" d="M -112 -58 L 111 -58 Q 125 -58 125 -43 L 125 43 Q 125 58 110 58 L -111 58 Q -125 58 -125 43 L -125 -43 Q -125 -58 -112 -58 Z"/>
+            <path fill="#263b35" stroke="#2a1f1a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" d="M -103 -41 L 103 -41 C 105.76142 -41 108 -38.761425 108 -36 L 108 36 C 108 38.761425 105.76142 41 103 41 L -103 41 C -105.76142 41 -108 38.761425 -108 36 L -108 -36 C -108 -38.761425 -105.76142 -41 -103 -41 Z"/>
+            <path fill="none" stroke="#537060" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M -99 -32 L 97 -32"/>
+            <path fill="#eadfc6" stroke="none" d="M -112 -48 C -112 -46.89543 -112.895424 -46 -114 -46 C -115.104576 -46 -116 -46.89543 -116 -48 C -116 -49.10457 -115.104576 -50 -114 -50 C -112.895424 -50 -112 -49.10457 -112 -48 Z"/>
+            <path fill="#eadfc6" stroke="none" d="M 116 48 C 116 49.10457 115.104576 50 114 50 C 112.895424 50 112 49.10457 112 48 C 112 46.89543 112.895424 46 114 46 C 115.104576 46 116 46.89543 116 48 Z"/>
         </g>
     </g>
 </svg>

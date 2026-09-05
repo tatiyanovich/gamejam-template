@@ -8,4 +8,5 @@ namespace Code.Gameplay.Teacher
 	[Game] public class TeacherAttentionTimeLeft : IComponent { public float Value; }
 	[Game] public class TeacherFacingClass : IComponent { }
 	[Game, Watched] public class AlmostCaughtCount : IComponent { public int Value; }
+	[Game] public class TeacherRemarkEvent : IComponent { public Code.Gameplay.Teacher.TeacherRemark Value; }
 }
