@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Text;
+using Code.Gameplay.Duck;
 using Code.Gameplay.Exam;
 using Code.Gameplay.Greybox.Data;
 using Code.Gameplay.Neighbours;
@@ -28,6 +29,9 @@ namespace Code.Gameplay.Greybox.Behaviours
 		private readonly SpriteRenderer[] _paws = new SpriteRenderer[2];
 		private readonly SpriteRenderer[] _pawWindows = new SpriteRenderer[2];
 		private readonly TextMeshPro[] _rows = new TextMeshPro[2];
+
+		private SpriteRenderer _duck;
+		private TextMeshPro _duckLabel;
 
 		private SpriteRenderer _kitten;
 		private TextMeshPro _questionLabel;
@@ -58,6 +62,8 @@ namespace Code.Gameplay.Greybox.Behaviours
 		private const float MeowWidth = 1f;
 		private const float OwnPaperY = -4f;
 		private const float KittenY = -5.8f;
+		private const float DuckX = 5.8f;
+		private const float DuckSize = 0.9f;
 		private const float LeanOffsetX = 2.6f;
 		private const float BackdropDepth = 5f;
 		private const float PaperDepth = -1f;
@@ -184,6 +190,15 @@ namespace Code.Gameplay.Greybox.Behaviours
 			_copiedLabel.color = GreyboxColors.SuspicionHigh;
 
 			_kitten = CreateBlock(new Vector3(0f, KittenY, 0f), new Vector2(1.6f, 1.4f), GreyboxColors.Kitten);
+
+			_duck = CreateBlock(
+				new Vector3(DuckX, OwnPaperY, PawDepth),
+				new Vector2(DuckSize, DuckSize),
+				GreyboxColors.Duck);
+
+			_duckLabel = CreateLabel(new Vector3(DuckX, OwnPaperY - 0.9f, OverlayDepth), 5f, TextAlignmentOptions.Center);
+			_duckLabel.color = GreyboxColors.Chalk;
+			_duckLabel.rectTransform.sizeDelta = new Vector2(6f, 1f);
 		}
 
 		private void BuildOverlay()
@@ -203,7 +218,7 @@ namespace Code.Gameplay.Greybox.Behaviours
 			TextMeshPro controlsLabel = CreateLabel(new Vector3(0f, -6.75f, OverlayDepth), 4.5f, TextAlignmentOptions.Center);
 			controlsLabel.color = GreyboxColors.Chalk;
 			controlsLabel.rectTransform.sizeDelta = new Vector2(24f, 1f);
-			controlsLabel.text = "SPACE lean - M meow - arrows/WASD strokes - 1-4 pick - A-Z word - ESC retake";
+			controlsLabel.text = "SPACE lean - M meow - Q duck - arrows/WASD strokes - 1-4 pick - A-Z word - ESC retake";
 		}
 
 		public void SetTeacher(TeacherAttention attention, bool facingClass, int almostCaught)
@@ -241,6 +256,13 @@ namespace Code.Gameplay.Greybox.Behaviours
 
 			_paws[index].transform.localPosition = new Vector3(x, lifted ? PawLiftedY : NeighbourPaperY, PawDepth);
 			_pawWindows[index].transform.localScale = new Vector3(RowWidth * Mathf.Clamp01(windowRatio), 0.25f, 1f);
+		}
+
+		public void SetDuck(DuckState state, float timeLeft, int throwCount)
+		{
+			_duck.transform.localPosition = DuckPositionOf(state);
+			_duck.color = state == DuckState.OnDesk ? GreyboxColors.Duck : GreyboxColors.DuckAway;
+			_duckLabel.text = DuckTextOf(state, timeLeft, throwCount);
 		}
 
 		public void SetProgress(int answersCopied, int totalQuestions, float elapsedSeconds)
@@ -395,6 +417,29 @@ namespace Code.Gameplay.Greybox.Behaviours
 			texture.Apply();
 
 			return Sprite.Create(texture, new Rect(0f, 0f, 1f, 1f), pivot, 1f);
+		}
+
+		private static Vector3 DuckPositionOf(DuckState state)
+		{
+			return state switch
+			{
+				DuckState.Flying => new Vector3(3f, 0.6f, PawDepth),
+				DuckState.OnFloor => new Vector3(-3.6f, 3.7f, PawDepth),
+				DuckState.Carried => new Vector3(-1.3f, 4.6f, PawDepth),
+				DuckState.Confiscated => new Vector3(3.4f, 5.2f, PawDepth),
+				_ => new Vector3(DuckX, OwnPaperY, PawDepth)
+			};
+		}
+
+		private static string DuckTextOf(DuckState state, float timeLeft, int throwCount)
+		{
+			if (state == DuckState.OnDesk)
+				return $"DUCK [Q] - THROWN {throwCount}";
+
+			if (state == DuckState.Confiscated)
+				return $"DUCK CONFISCATED - THROWN {throwCount}";
+
+			return $"DUCK {state} {timeLeft:0.0} - THROWN {throwCount}".ToUpperInvariant();
 		}
 
 		private static string GlyphOf(StrokeDirection direction)

@@ -17,6 +17,8 @@ namespace Code.Gameplay.Greybox.Data
 		public static readonly Color MeowArmed = new(0.4f, 0.85f, 0.95f);
 		public static readonly Color MeowSpent = new(0.35f, 0.4f, 0.45f);
 		public static readonly Color Threshold = new(0.9f, 0.25f, 0.25f);
+		public static readonly Color Duck = new(0.98f, 0.85f, 0.2f);
+		public static readonly Color DuckAway = new(0.55f, 0.5f, 0.25f);
 		public static readonly Color Ink = new(0.12f, 0.12f, 0.14f);
 		public static readonly Color Chalk = new(0.92f, 0.92f, 0.95f);
 

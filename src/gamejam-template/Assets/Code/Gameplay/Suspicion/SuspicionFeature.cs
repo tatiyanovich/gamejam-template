@@ -12,6 +12,7 @@ namespace Code.Gameplay.Suspicion
 
 			Add(systemFactory.Create<AddSuspicionOnWrongInputSystem>());
 			Add(systemFactory.Create<AddSuspicionOnMeowWhileWatchedSystem>());
+			Add(systemFactory.Create<ReduceSuspicionOnDuckThrowSystem>());
 
 			Add(systemFactory.Create<FinishExamOnMaxSuspicionSystem>());
 		}

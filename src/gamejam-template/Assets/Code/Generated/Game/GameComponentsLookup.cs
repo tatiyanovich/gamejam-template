@@ -55,152 +55,160 @@ public static class GameComponentsLookup {
     public const int CloseBranchRequest = 44;
     public const int GoToBranchRequest = 45;
     public const int GoToLoopNodeRequest = 46;
-    public const int AnswerCopied = 47;
-    public const int AnswerCopiedEvent = 48;
-    public const int AnswerLength = 49;
-    public const int AnswerNeighbourSide = 50;
-    public const int AnswerOptions = 51;
-    public const int AnswerProgress = 52;
-    public const int AnswerReadable = 53;
-    public const int AnswersCopied = 54;
-    public const int AnswerStrokes = 55;
-    public const int AnswerWord = 56;
-    public const int CorrectOptionIndex = 57;
-    public const int CurrentQuestionIndex = 58;
-    public const int ExamElapsedSeconds = 59;
-    public const int ExamFinished = 60;
-    public const int ExamOutcome = 61;
-    public const int ExamRun = 62;
-    public const int Question = 63;
-    public const int QuestionIndex = 64;
-    public const int QuestionText = 65;
-    public const int QuestionType = 66;
-    public const int WrongInputEvent = 67;
-    public const int GreyboxBoard = 68;
-    public const int Alive = 69;
-    public const int CurrentHP = 70;
-    public const int Damageable = 71;
-    public const int Damaged = 72;
-    public const int DamageEvent = 73;
-    public const int Dead = 74;
-    public const int DeathEvent = 75;
-    public const int DestructOnDeath = 76;
-    public const int HideOnDeath = 77;
-    public const int LifetimeLeft = 78;
-    public const int MaxHP = 79;
-    public const int MeowArmed = 80;
-    public const int MeowEvent = 81;
-    public const int MeowSource = 82;
-    public const int MicrophoneLevel = 83;
-    public const int CanMove = 84;
-    public const int FollowOffset = 85;
-    public const int FollowSmoothSpeed = 86;
-    public const int Heading = 87;
-    public const int Impulse = 88;
-    public const int KinematicMovement = 89;
-    public const int LookDirection = 90;
-    public const int MaxMovementSpeed = 91;
-    public const int MaxTurnRate = 92;
-    public const int MinMovementSpeed = 93;
-    public const int MinTurnFactor = 94;
-    public const int MovementAcceleration = 95;
-    public const int MovementDirection = 96;
-    public const int MovementSlowDownModifier = 97;
-    public const int MovementSpeed = 98;
-    public const int MovementSpeedMultiplier = 99;
-    public const int MovementSpeedUpModifier = 100;
-    public const int MovementStep = 101;
-    public const int Moving = 102;
-    public const int RigidbodyInterpolatedMovement = 103;
-    public const int RigidbodyPositionMovement = 104;
-    public const int RigidbodyVelocity2DMovement = 105;
-    public const int RigidbodyVelocityMovement = 106;
-    public const int RotationSpeed = 107;
-    public const int RotationSpeedMultiplier = 108;
-    public const int SmoothFollowMovement = 109;
-    public const int TargetVelocity = 110;
-    public const int TransformLateMovement = 111;
-    public const int TransformMovement = 112;
-    public const int TurnAcceleration = 113;
-    public const int TurnSpeed = 114;
-    public const int TurnSpeedReference = 115;
-    public const int Velocity = 116;
-    public const int Neighbour = 117;
-    public const int NeighbourSide = 118;
-    public const int PawLifted = 119;
-    public const int PawWindowTimeLeft = 120;
-    public const int Parent = 121;
-    public const int ParentAttached = 122;
-    public const int ParentId = 123;
-    public const int SuspicionLevel = 124;
-    public const int AlmostCaughtCount = 125;
-    public const int Teacher = 126;
-    public const int TeacherAttention = 127;
-    public const int TeacherAttentionTimeLeft = 128;
-    public const int TeacherFacingClass = 129;
-    public const int Cooldown = 130;
-    public const int Interval = 131;
-    public const int IntervalUp = 132;
-    public const int Ticking = 133;
-    public const int TimeIsUp = 134;
-    public const int TimeLeft = 135;
-    public const int Timer = 136;
-    public const int PlayVfxRequest = 137;
-    public const int Vfx = 138;
-    public const int VfxAnimator = 139;
-    public const int VfxTargetRadius = 140;
-    public const int Destructed = 141;
-    public const int InactiveSceneEntity = 142;
-    public const int LoopNodeScope = 143;
-    public const int PersistAcrossLoopNodes = 144;
-    public const int Event = 145;
-    public const int Id = 146;
-    public const int LocalPosition = 147;
-    public const int LocalRotation = 148;
-    public const int LossyScale = 149;
-    public const int Name = 150;
-    public const int Ready = 151;
-    public const int Request = 152;
-    public const int InitializeSceneEntityRequest = 153;
-    public const int StaleRequest = 154;
-    public const int BecameHiddenEvent = 155;
-    public const int LoadingView = 156;
-    public const int View = 157;
-    public const int ViewAddressableKey = 158;
-    public const int ViewAssetReference = 159;
-    public const int ViewPath = 160;
-    public const int ViewPrefab = 161;
-    public const int WorldPosition = 162;
-    public const int WorldRotation = 163;
-    public const int AutoSaveTimer = 164;
-    public const int SaveProgressRequest = 165;
-    public const int CompletedChanged = 166;
-    public const int CurrentHPChanged = 167;
-    public const int CurrentQuestionIndexChanged = 168;
-    public const int ExamElapsedSecondsChanged = 169;
-    public const int ExamFinishedChanged = 170;
-    public const int ExamOutcomeChanged = 171;
-    public const int HiddenChanged = 172;
-    public const int IdChanged = 173;
-    public const int LocalPositionChanged = 174;
-    public const int LocalRotationChanged = 175;
-    public const int LookDirectionChanged = 176;
-    public const int LossyScaleChanged = 177;
-    public const int MovementSpeedChanged = 178;
-    public const int NameChanged = 179;
-    public const int OnCooldownChanged = 180;
-    public const int PawLiftedChanged = 181;
-    public const int ProcessedChanged = 182;
-    public const int ReadyChanged = 183;
-    public const int StartedChanged = 184;
-    public const int SuspicionLevelChanged = 185;
-    public const int TeacherAttentionChanged = 186;
-    public const int VelocityChanged = 187;
-    public const int ViewChanged = 188;
-    public const int WorldPositionChanged = 189;
-    public const int WorldRotationChanged = 190;
+    public const int Duck = 47;
+    public const int DuckState = 48;
+    public const int DuckStateTimeLeft = 49;
+    public const int DuckThrowCount = 50;
+    public const int DuckThrownEvent = 51;
+    public const int ThrowDuckRequest = 52;
+    public const int AnswerCopied = 53;
+    public const int AnswerCopiedEvent = 54;
+    public const int AnswerLength = 55;
+    public const int AnswerNeighbourSide = 56;
+    public const int AnswerOptions = 57;
+    public const int AnswerProgress = 58;
+    public const int AnswerReadable = 59;
+    public const int AnswersCopied = 60;
+    public const int AnswerStrokes = 61;
+    public const int AnswerWord = 62;
+    public const int CorrectOptionIndex = 63;
+    public const int CurrentQuestionIndex = 64;
+    public const int ExamElapsedSeconds = 65;
+    public const int ExamFinished = 66;
+    public const int ExamOutcome = 67;
+    public const int ExamRun = 68;
+    public const int Question = 69;
+    public const int QuestionIndex = 70;
+    public const int QuestionText = 71;
+    public const int QuestionType = 72;
+    public const int WrongInputEvent = 73;
+    public const int GreyboxBoard = 74;
+    public const int Alive = 75;
+    public const int CurrentHP = 76;
+    public const int Damageable = 77;
+    public const int Damaged = 78;
+    public const int DamageEvent = 79;
+    public const int Dead = 80;
+    public const int DeathEvent = 81;
+    public const int DestructOnDeath = 82;
+    public const int HideOnDeath = 83;
+    public const int LifetimeLeft = 84;
+    public const int MaxHP = 85;
+    public const int MeowArmed = 86;
+    public const int MeowEvent = 87;
+    public const int MeowSource = 88;
+    public const int MicrophoneLevel = 89;
+    public const int CanMove = 90;
+    public const int FollowOffset = 91;
+    public const int FollowSmoothSpeed = 92;
+    public const int Heading = 93;
+    public const int Impulse = 94;
+    public const int KinematicMovement = 95;
+    public const int LookDirection = 96;
+    public const int MaxMovementSpeed = 97;
+    public const int MaxTurnRate = 98;
+    public const int MinMovementSpeed = 99;
+    public const int MinTurnFactor = 100;
+    public const int MovementAcceleration = 101;
+    public const int MovementDirection = 102;
+    public const int MovementSlowDownModifier = 103;
+    public const int MovementSpeed = 104;
+    public const int MovementSpeedMultiplier = 105;
+    public const int MovementSpeedUpModifier = 106;
+    public const int MovementStep = 107;
+    public const int Moving = 108;
+    public const int RigidbodyInterpolatedMovement = 109;
+    public const int RigidbodyPositionMovement = 110;
+    public const int RigidbodyVelocity2DMovement = 111;
+    public const int RigidbodyVelocityMovement = 112;
+    public const int RotationSpeed = 113;
+    public const int RotationSpeedMultiplier = 114;
+    public const int SmoothFollowMovement = 115;
+    public const int TargetVelocity = 116;
+    public const int TransformLateMovement = 117;
+    public const int TransformMovement = 118;
+    public const int TurnAcceleration = 119;
+    public const int TurnSpeed = 120;
+    public const int TurnSpeedReference = 121;
+    public const int Velocity = 122;
+    public const int Neighbour = 123;
+    public const int NeighbourSide = 124;
+    public const int PawLifted = 125;
+    public const int PawWindowTimeLeft = 126;
+    public const int Parent = 127;
+    public const int ParentAttached = 128;
+    public const int ParentId = 129;
+    public const int SuspicionLevel = 130;
+    public const int AlmostCaughtCount = 131;
+    public const int Teacher = 132;
+    public const int TeacherAttention = 133;
+    public const int TeacherAttentionTimeLeft = 134;
+    public const int TeacherFacingClass = 135;
+    public const int Cooldown = 136;
+    public const int Interval = 137;
+    public const int IntervalUp = 138;
+    public const int Ticking = 139;
+    public const int TimeIsUp = 140;
+    public const int TimeLeft = 141;
+    public const int Timer = 142;
+    public const int PlayVfxRequest = 143;
+    public const int Vfx = 144;
+    public const int VfxAnimator = 145;
+    public const int VfxTargetRadius = 146;
+    public const int Destructed = 147;
+    public const int InactiveSceneEntity = 148;
+    public const int LoopNodeScope = 149;
+    public const int PersistAcrossLoopNodes = 150;
+    public const int Event = 151;
+    public const int Id = 152;
+    public const int LocalPosition = 153;
+    public const int LocalRotation = 154;
+    public const int LossyScale = 155;
+    public const int Name = 156;
+    public const int Ready = 157;
+    public const int Request = 158;
+    public const int InitializeSceneEntityRequest = 159;
+    public const int StaleRequest = 160;
+    public const int BecameHiddenEvent = 161;
+    public const int LoadingView = 162;
+    public const int View = 163;
+    public const int ViewAddressableKey = 164;
+    public const int ViewAssetReference = 165;
+    public const int ViewPath = 166;
+    public const int ViewPrefab = 167;
+    public const int WorldPosition = 168;
+    public const int WorldRotation = 169;
+    public const int AutoSaveTimer = 170;
+    public const int SaveProgressRequest = 171;
+    public const int CompletedChanged = 172;
+    public const int CurrentHPChanged = 173;
+    public const int CurrentQuestionIndexChanged = 174;
+    public const int DuckStateChanged = 175;
+    public const int DuckThrowCountChanged = 176;
+    public const int ExamElapsedSecondsChanged = 177;
+    public const int ExamFinishedChanged = 178;
+    public const int ExamOutcomeChanged = 179;
+    public const int HiddenChanged = 180;
+    public const int IdChanged = 181;
+    public const int LocalPositionChanged = 182;
+    public const int LocalRotationChanged = 183;
+    public const int LookDirectionChanged = 184;
+    public const int LossyScaleChanged = 185;
+    public const int MovementSpeedChanged = 186;
+    public const int NameChanged = 187;
+    public const int OnCooldownChanged = 188;
+    public const int PawLiftedChanged = 189;
+    public const int ProcessedChanged = 190;
+    public const int ReadyChanged = 191;
+    public const int StartedChanged = 192;
+    public const int SuspicionLevelChanged = 193;
+    public const int TeacherAttentionChanged = 194;
+    public const int VelocityChanged = 195;
+    public const int ViewChanged = 196;
+    public const int WorldPositionChanged = 197;
+    public const int WorldRotationChanged = 198;
 
-    public const int TotalComponents = 191;
+    public const int TotalComponents = 199;
 
     public static readonly string[] componentNames = {
         "AliveChanged",
@@ -250,6 +258,12 @@ public static class GameComponentsLookup {
         "CloseBranchRequest",
         "GoToBranchRequest",
         "GoToLoopNodeRequest",
+        "Duck",
+        "DuckState",
+        "DuckStateTimeLeft",
+        "DuckThrowCount",
+        "DuckThrownEvent",
+        "ThrowDuckRequest",
         "AnswerCopied",
         "AnswerCopiedEvent",
         "AnswerLength",
@@ -372,6 +386,8 @@ public static class GameComponentsLookup {
         "CompletedChanged",
         "CurrentHPChanged",
         "CurrentQuestionIndexChanged",
+        "DuckStateChanged",
+        "DuckThrowCountChanged",
         "ExamElapsedSecondsChanged",
         "ExamFinishedChanged",
         "ExamOutcomeChanged",
@@ -444,6 +460,12 @@ public static class GameComponentsLookup {
         typeof(Code.Gameplay.CoreLoop.CloseBranchRequest),
         typeof(Code.Gameplay.CoreLoop.GoToBranchRequest),
         typeof(Code.Gameplay.CoreLoop.GoToLoopNodeRequest),
+        typeof(Code.Gameplay.Duck.Duck),
+        typeof(Code.Gameplay.Duck.DuckStateComponent),
+        typeof(Code.Gameplay.Duck.DuckStateTimeLeft),
+        typeof(Code.Gameplay.Duck.DuckThrowCount),
+        typeof(Code.Gameplay.Duck.DuckThrownEvent),
+        typeof(Code.Gameplay.Duck.ThrowDuckRequest),
         typeof(Code.Gameplay.Exam.AnswerCopied),
         typeof(Code.Gameplay.Exam.AnswerCopiedEvent),
         typeof(Code.Gameplay.Exam.AnswerLength),
@@ -566,6 +588,8 @@ public static class GameComponentsLookup {
         typeof(CompletedChanged),
         typeof(CurrentHPChanged),
         typeof(CurrentQuestionIndexChanged),
+        typeof(DuckStateChanged),
+        typeof(DuckThrowCountChanged),
         typeof(ExamElapsedSecondsChanged),
         typeof(ExamFinishedChanged),
         typeof(ExamOutcomeChanged),

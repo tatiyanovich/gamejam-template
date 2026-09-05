@@ -19,6 +19,8 @@ public sealed class GameWatchedCleanupSystems : Feature {
         Add(new RemoveCompletedChangedGameSystem(contexts));
         Add(new RemoveCurrentHPChangedGameSystem(contexts));
         Add(new RemoveCurrentQuestionIndexChangedGameSystem(contexts));
+        Add(new RemoveDuckStateChangedGameSystem(contexts));
+        Add(new RemoveDuckThrowCountChangedGameSystem(contexts));
         Add(new RemoveExamElapsedSecondsChangedGameSystem(contexts));
         Add(new RemoveExamFinishedChangedGameSystem(contexts));
         Add(new RemoveExamOutcomeChangedGameSystem(contexts));

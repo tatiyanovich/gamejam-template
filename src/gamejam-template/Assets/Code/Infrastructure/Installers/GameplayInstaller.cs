@@ -1,8 +1,8 @@
 using Code.Gameplay.Camera.Services;
 using Code.Gameplay.Debugging.Services;
 using Code.Gameplay.Difficulty.Services;
+using Code.Gameplay.Duck.Services;
 using Code.Gameplay.Exam.Services;
-using Code.Gameplay.Greybox.Services;
 using Code.Gameplay.Movement.Services;
 using Code.Gameplay.Neighbours.Services;
 using Code.Gameplay.Teacher.Services;
@@ -36,7 +36,7 @@ namespace Code.Infrastructure.Installers
 			Container.BindInterfacesTo<ExamFactory>().AsSingle();
 			Container.BindInterfacesTo<NeighbourFactory>().AsSingle();
 			Container.BindInterfacesTo<TeacherFactory>().AsSingle();
-			Container.BindInterfacesTo<GreyboxBoardFactory>().AsSingle();
+			Container.BindInterfacesTo<DuckFactory>().AsSingle();
 		}
 
 		private void BindDebugServices()

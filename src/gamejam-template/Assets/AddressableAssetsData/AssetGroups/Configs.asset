@@ -35,6 +35,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 84b9dfbeefb3f46f8bb299ab15876d1a
+    m_Address: duck_config
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 9c5aa64f3ec445458519e5de2151a12d
     m_Address: camera_shake_default
     m_ReadOnly: 0

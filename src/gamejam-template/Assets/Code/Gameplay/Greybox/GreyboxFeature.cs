@@ -13,6 +13,7 @@ namespace Code.Gameplay.Greybox
 			Add(systemFactory.Create<ShowSuspicionInGreyboxSystem>());
 			Add(systemFactory.Create<ShowMeowInGreyboxSystem>());
 			Add(systemFactory.Create<ShowNeighbourPawInGreyboxSystem>());
+			Add(systemFactory.Create<ShowDuckInGreyboxSystem>());
 
 			Add(systemFactory.Create<ShowQuestionInGreyboxSystem>());
 			Add(systemFactory.Create<ShowStrokeAnswerInGreyboxSystem>());

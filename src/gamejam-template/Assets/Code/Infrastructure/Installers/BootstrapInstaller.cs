@@ -1,5 +1,6 @@
 using Code.Gameplay.Camera.Services;
 using Code.Gameplay.CoreLoop;
+using Code.Gameplay.Duck.Services;
 using Code.Gameplay.Exam.Services;
 using Code.Gameplay.Lifetime;
 using Code.Gameplay.Meow.Services;
@@ -54,6 +55,7 @@ namespace Code.Infrastructure.Installers
 			Container.BindInterfacesTo<MeowConfigsService>().AsSingle();
 			Container.BindInterfacesTo<SuspicionConfigsService>().AsSingle();
 			Container.BindInterfacesTo<TeacherConfigsService>().AsSingle();
+			Container.BindInterfacesTo<DuckConfigsService>().AsSingle();
 		}
 
 		private void BindInfrastructureServices()

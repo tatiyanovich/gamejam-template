@@ -1,6 +1,6 @@
 using Code.Gameplay.Camera.Systems;
+using Code.Gameplay.Duck;
 using Code.Gameplay.Exam;
-using Code.Gameplay.Greybox;
 using Code.Gameplay.Meow;
 using Code.Gameplay.Movement;
 using Code.Gameplay.Neighbours;
@@ -27,13 +27,13 @@ namespace Code.Gameplay
 
 			Add(systemFactory.Create<TeacherFeature>());
 
+			Add(systemFactory.Create<DuckFeature>());
+
 			Add(systemFactory.Create<SuspicionFeature>());
 
 			Add(systemFactory.Create<ExamFeature>());
 
 			Add(systemFactory.Create<MovementUpdateFeature>());
-
-			Add(systemFactory.Create<GreyboxFeature>());
 
 			Add(systemFactory.Create<UIFeature>());
 
