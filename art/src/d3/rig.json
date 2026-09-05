@@ -1,0 +1,379 @@
+{
+  "canvas": [
+    470,
+    450
+  ],
+  "textureScale": 2,
+  "pixelsPerUnit": 200,
+  "trim": false,
+  "coordinateSystem": "Top-left pixels @1x; positive rotation clockwise. Node position is its pivot in parent space.",
+  "rootPivot": [
+    235,
+    430
+  ],
+  "assets": [
+    {
+      "name": "kitten_tail",
+      "size": [
+        470,
+        450
+      ],
+      "pivotPixels": [
+        313,
+        407
+      ]
+    },
+    {
+      "name": "kitten_body_back",
+      "size": [
+        470,
+        450
+      ],
+      "pivotPixels": [
+        235,
+        430
+      ]
+    },
+    {
+      "name": "kitten_paw_l",
+      "size": [
+        470,
+        450
+      ],
+      "pivotPixels": [
+        176,
+        287
+      ]
+    },
+    {
+      "name": "kitten_paw_r",
+      "size": [
+        470,
+        450
+      ],
+      "pivotPixels": [
+        294,
+        287
+      ]
+    },
+    {
+      "name": "kitten_ear_l",
+      "size": [
+        470,
+        450
+      ],
+      "pivotPixels": [
+        143,
+        115
+      ]
+    },
+    {
+      "name": "kitten_ear_r",
+      "size": [
+        470,
+        450
+      ],
+      "pivotPixels": [
+        321,
+        115
+      ]
+    },
+    {
+      "name": "kitten_head_back",
+      "size": [
+        470,
+        450
+      ],
+      "pivotPixels": [
+        235,
+        247
+      ]
+    },
+    {
+      "name": "kitten_head_profile_left",
+      "size": [
+        470,
+        450
+      ],
+      "pivotPixels": [
+        235,
+        247
+      ]
+    },
+    {
+      "name": "kitten_head_profile_right",
+      "size": [
+        470,
+        450
+      ],
+      "pivotPixels": [
+        235,
+        247
+      ]
+    },
+    {
+      "name": "kitten_eye_white",
+      "size": [
+        110,
+        130
+      ],
+      "pivotPixels": [
+        55,
+        65
+      ]
+    },
+    {
+      "name": "kitten_pupil",
+      "size": [
+        24,
+        28
+      ],
+      "pivotPixels": [
+        12,
+        14
+      ]
+    },
+    {
+      "name": "kitten_eye_squint",
+      "size": [
+        110,
+        130
+      ],
+      "pivotPixels": [
+        55,
+        65
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "name": "tail",
+      "asset": "kitten_tail",
+      "parent": "root",
+      "position": [
+        313,
+        407
+      ],
+      "order": 0
+    },
+    {
+      "name": "body",
+      "asset": "kitten_body_back",
+      "parent": "root",
+      "position": [
+        235,
+        430
+      ],
+      "order": 1
+    },
+    {
+      "name": "pawLeft",
+      "asset": "kitten_paw_l",
+      "parent": "root",
+      "position": [
+        176,
+        287
+      ],
+      "order": 2
+    },
+    {
+      "name": "pawRight",
+      "asset": "kitten_paw_r",
+      "parent": "root",
+      "position": [
+        294,
+        287
+      ],
+      "order": 3
+    },
+    {
+      "name": "earLeft",
+      "asset": "kitten_ear_l",
+      "parent": "head",
+      "position": [
+        -92,
+        -132
+      ],
+      "order": 4
+    },
+    {
+      "name": "earRight",
+      "asset": "kitten_ear_r",
+      "parent": "head",
+      "position": [
+        86,
+        -132
+      ],
+      "order": 5
+    },
+    {
+      "name": "head",
+      "asset": "kitten_head_back",
+      "parent": "root",
+      "position": [
+        235,
+        247
+      ],
+      "order": 6
+    }
+  ],
+  "headProfiles": {
+    "back": {
+      "asset": "kitten_head_back",
+      "earOffsets": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "eyes": []
+    },
+    "left": {
+      "asset": "kitten_head_profile_left",
+      "earOffsets": [
+        [
+          -48,
+          -5
+        ],
+        [
+          -43,
+          5
+        ]
+      ],
+      "eyes": [
+        [
+          105,
+          155
+        ],
+        [
+          208,
+          162
+        ]
+      ],
+      "gaze": [
+        -22,
+        0
+      ]
+    },
+    "right": {
+      "asset": "kitten_head_profile_right",
+      "earOffsets": [
+        [
+          43,
+          5
+        ],
+        [
+          48,
+          -5
+        ]
+      ],
+      "eyes": [
+        [
+          365,
+          155
+        ],
+        [
+          262,
+          162
+        ]
+      ],
+      "gaze": [
+        22,
+        0
+      ]
+    }
+  },
+  "expressions": {
+    "normal": {
+      "eyeAsset": "kitten_eye_white",
+      "eyeScale": 1,
+      "pupilScale": 1
+    },
+    "panic": {
+      "eyeAsset": "kitten_eye_white",
+      "eyeScale": 1.2,
+      "pupilScale": 0.6
+    },
+    "squint": {
+      "eyeAsset": "kitten_eye_squint",
+      "eyeScale": 1,
+      "pupilScale": 0
+    }
+  },
+  "poses": {
+    "idle": {
+      "profile": "back",
+      "expression": "normal",
+      "x": 0,
+      "rotation": 0
+    },
+    "lean_left": {
+      "profile": "left",
+      "expression": "normal",
+      "x": -60,
+      "rotation": -12
+    },
+    "lean_right": {
+      "profile": "right",
+      "expression": "normal",
+      "x": 60,
+      "rotation": 12
+    },
+    "panic_left": {
+      "profile": "left",
+      "expression": "panic",
+      "x": -60,
+      "rotation": -12
+    },
+    "panic_right": {
+      "profile": "right",
+      "expression": "panic",
+      "x": 60,
+      "rotation": 12
+    },
+    "squint_left": {
+      "profile": "left",
+      "expression": "squint",
+      "x": -60,
+      "rotation": -12
+    },
+    "squint_right": {
+      "profile": "right",
+      "expression": "squint",
+      "x": 60,
+      "rotation": 12
+    }
+  },
+  "motion": {
+    "breathing": {
+      "scale": [
+        1,
+        1.02
+      ],
+      "seconds": 1.6
+    },
+    "tail": {
+      "rotation": [
+        -10,
+        10
+      ]
+    },
+    "typing": {
+      "node": "pawRight",
+      "rotation": [
+        0,
+        -15,
+        0
+      ],
+      "seconds": 0.12
+    }
+  },
+  "sceneOrigin": [
+    653,
+    628
+  ]
+}

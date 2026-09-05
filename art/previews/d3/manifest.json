@@ -1,0 +1,51 @@
+[
+  {
+    "name": "pose_sheet",
+    "width": 1800,
+    "height": 1120,
+    "scale": 1,
+    "sha256": "217a591c20be6aa119ccf1b14a1182d82d98ad1ace83559d1448ef42c7c95c34"
+  },
+  {
+    "name": "layer_sheet",
+    "width": 1600,
+    "height": 1420,
+    "scale": 1,
+    "sha256": "c6fb0f2115abd6b5eb9034647add8dfb20d75a8523a67b14767cf7f42c64c67e"
+  },
+  {
+    "name": "motion_sheet",
+    "width": 1800,
+    "height": 640,
+    "scale": 1,
+    "sha256": "8eff3f36894eb27e32b294df77e8dae2034c0fde4f4c65f9b3ffcd70e90245d7"
+  },
+  {
+    "name": "classroom_idle",
+    "width": 1920,
+    "height": 1080,
+    "scale": 1,
+    "sha256": "c9f945c078661854d01181c1c7a33ac714ba5d62ac0c3105a9c2e32b8af0a808"
+  },
+  {
+    "name": "classroom_panic_left",
+    "width": 1920,
+    "height": 1080,
+    "scale": 1,
+    "sha256": "9545191124121c261a4303350e1b06823a4bff6a4c16b5e41b6009c3a08a691d"
+  },
+  {
+    "name": "classroom_panic_right",
+    "width": 1920,
+    "height": 1080,
+    "scale": 1,
+    "sha256": "70950af2043337e00c55d7ac8083f358aac919c2f18e22e570f8c054c9eb8f86"
+  },
+  {
+    "name": "classroom_thumbnail",
+    "width": 480,
+    "height": 270,
+    "scale": 0.25,
+    "sha256": "e3753fc758e0f42e56d331d14aac31123c7c200685f6f37308a8a98c59e7998c"
+  }
+]

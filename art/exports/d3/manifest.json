@@ -1,0 +1,86 @@
+[
+  {
+    "name": "kitten_tail",
+    "width": 940,
+    "height": 900,
+    "scale": 2,
+    "sha256": "28c230fb9a9773c2242795edc3b887314b0a61edb1427ed0304df96e3bc4a682"
+  },
+  {
+    "name": "kitten_body_back",
+    "width": 940,
+    "height": 900,
+    "scale": 2,
+    "sha256": "da4f886bf25e424568a8d34090a688fce793bb4cdd373761f6f4cc3ef055021c"
+  },
+  {
+    "name": "kitten_paw_l",
+    "width": 940,
+    "height": 900,
+    "scale": 2,
+    "sha256": "d64c13a2a1afe2f1b85bc155351d48a97d4ef0e4d039c6ad4c43b6a437b73b5c"
+  },
+  {
+    "name": "kitten_paw_r",
+    "width": 940,
+    "height": 900,
+    "scale": 2,
+    "sha256": "467da0ced81ea67ee637f7e7750bf775a4a1f502ec78db35a448d3a8d79abdff"
+  },
+  {
+    "name": "kitten_ear_l",
+    "width": 940,
+    "height": 900,
+    "scale": 2,
+    "sha256": "ce5c1f3bc955aa03d3e6dd359f1bc50c43706299efe422c67dedc544da4cb3d9"
+  },
+  {
+    "name": "kitten_ear_r",
+    "width": 940,
+    "height": 900,
+    "scale": 2,
+    "sha256": "e2201b381097a99b223f6aeb144769ea6e9913c7e95bedf983eda665209ffc6b"
+  },
+  {
+    "name": "kitten_head_back",
+    "width": 940,
+    "height": 900,
+    "scale": 2,
+    "sha256": "30215198ac99e5ed072086997abdacaad7c5d65334ddd8582307ffc16172a11c"
+  },
+  {
+    "name": "kitten_head_profile_left",
+    "width": 940,
+    "height": 900,
+    "scale": 2,
+    "sha256": "a383c2c2dad2b2bba68c8829788a0911a35138b5ca19213581ca8d54266ab594"
+  },
+  {
+    "name": "kitten_head_profile_right",
+    "width": 940,
+    "height": 900,
+    "scale": 2,
+    "sha256": "a77022e47967de80f5ad6209d7c4588b0350262001de9520933dd475d2b07c86"
+  },
+  {
+    "name": "kitten_eye_white",
+    "width": 220,
+    "height": 260,
+    "scale": 2,
+    "sha256": "44badf9d3fb089cda07da2fa48987f9b155ec8aa1c2393bf8b365cf8728d37a8"
+  },
+  {
+    "name": "kitten_pupil",
+    "width": 48,
+    "height": 56,
+    "scale": 2,
+    "sha256": "6abbaf0ad7368df8d1d618fba4ea9cac74aca4b56a5dd4a3d847ed6223fe966f"
+  },
+  {
+    "name": "kitten_eye_squint",
+    "width": 220,
+    "height": 260,
+    "scale": 2,
+    "sha256": "ccb590ce89aef13f3a8c55f37c5813af8fc9b965c0d787f42e04703f752dd53a"
+  }
+]

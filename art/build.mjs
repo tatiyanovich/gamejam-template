@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 import { createRequire } from 'node:module';
 import { createHash } from 'node:crypto';
 import { classroomOutputs } from './classroom.mjs';
+import { kittenOutputs } from './kitten.mjs';
 
 const root = dirname(fileURLToPath(import.meta.url));
 const require = createRequire(import.meta.url);
@@ -151,7 +152,7 @@ function output(name, markup, scale = 1, directory = outputRoot, manifestEntries
   console.log(`${check ? 'Verified' : 'Rendered'} ${name}: ${rendered.width}×${rendered.height}`);
 }
 
-const classroom = classroomOutputs(root);
+const classroom = { ...classroomOutputs(root), ...kittenOutputs(root) };
 for (const [directory, assets] of Object.entries(classroom)) {
   const target = join(root, directory);
   const entries = [];

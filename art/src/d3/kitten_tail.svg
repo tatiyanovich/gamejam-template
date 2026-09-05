@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="470" height="450" viewBox="0 0 470 450">
+  <g stroke="{{INK}}" stroke-width="10" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M308 391 Q386 424 404 355 Q408 335 426 342 Q449 357 423 395 Q388 439 313 423" fill="{{KITTEN}}"/>
+    <path d="M404 356 L426 365 M394 385 L408 399" fill="none" stroke="#A66B37" stroke-width="10"/>
+  </g>
+</svg>

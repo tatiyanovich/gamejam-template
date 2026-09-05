@@ -89,6 +89,8 @@
 
 ## 5. Маппинг дизайна на код шаблона
 
+D3: `art/src/d3/` → `art/kitten.mjs` → `art/exports/d3/` (12 спрайтов котёнка); `rig.json` описывает pivots, слои и позы для будущего префаба `Content/Characters/` в D11 и анимации E2.
+
 | Дизайн | Код |
 |---|---|
 | Меню | `LoopNodeId.StartLaunch`, сцена `Launch`, `LaunchWindow` (Play → Attendance или сразу Exam; Quit → `Application.Quit`) |
@@ -204,3 +206,4 @@ Unity: `UnityWebRequest.Post(url, json, "application/json")`, редиректы
 - 2026‑09‑05 12:05 · Claude · A5: Jenny‑Gen (249 файлов), компиляция чистая; Play Mode с подменённым `IInputService` — Q1–Q8 пройдены: без наклона прогресс не растёт для всех трёх типов, ошибка даёт `WrongInputEvent` без сброса прогресса, верный ввод доводит до COPIED (8/8), ошибок в консоли нет · Unity 6000.3.22f1
 - 2026‑09‑05 12:25 · Claude · H1 (частично): выставил `macOS Microphone Usage Description` = «COPYCAT needs your microphone to hear you MEOW.», Architecture = Universal, `Run in Background = true`, Fullscreen Window; прогнал Addressables build (чисто, 24 с) и оба player‑билда — macOS (128 МБ, 0 ошибок) и Windows x64 (105 МБ, 0 ошибок); проверил `Info.plist` — `NSMicrophoneUsageDescription` записан верно; осталось: физический запуск на второй машине (Дима) · `Builds/macOS`, `Builds/Windows`, `docs/PLAN.md` H1
 - 2026-09-05 12:10 · Codex · D2: 9 слоёв окружения SVG/PNG @2x, раскладка с pivots и текстом доски, 6 превью; визуальная проверка 1920×1080/480×270, build/check прошли, D1 совпадает побайтно; импорт — D11 · `art/src/d2`, `art/exports/d2`, `art/previews/d2`, D‑35
+- 2026-09-05 13:16 · Codex · D3: 12 слоёв котёнка SVG/PNG @2x, rig с pivots/иерархией/позами, нормальные/панические/прищуренные глаза, 7 превью; визуально проверены оба наклона, стыки лап/хвоста и 480×270, build/check прошли, D1/D2 совпадают побайтно · `art/src/d3`, `art/exports/d3`, `art/previews/d3`; D3 закрыт, импорт — D11, runtime — E2

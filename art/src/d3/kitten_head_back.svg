@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="470" height="450" viewBox="0 0 470 450">
+  <g stroke="{{INK}}" stroke-width="10" stroke-linejoin="round" stroke-linecap="round">
+    <defs><path id="head" d="M107 150 Q98 109 144 88 Q229 62 304 89 Q363 109 355 150 Q384 195 348 234 Q321 268 235 267 Q141 264 113 232 Q76 194 107 150Z"/><clipPath id="shade"><use href="#head"/></clipPath></defs>
+    <use href="#head" fill="{{KITTEN}}"/>
+    <path d="M338 58 Q380 258 119 224 L126 299 L397 297 L390 56Z" fill="#C7853D" clip-path="url(#shade)" stroke="none"/>
+    <path d="M198 79 L201 121 M235 74 L235 112 M269 83 L263 121 M116 170 L148 180 M111 198 L147 199 M342 173 L316 182 M350 203 L318 205" fill="none" stroke="#A66B37" stroke-width="12"/>
+    <path d="M183 232 Q230 242 282 231" fill="none" stroke="#A66B37" stroke-width="6"/>
+    <path d="M109 209 L73 202 M112 222 L70 225 M350 208 L389 199 M352 223 L393 226" fill="none" stroke-width="6"/>
+  </g>
+</svg>

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="110" height="130" viewBox="0 0 110 130">
+  <g stroke="{{INK}}" stroke-width="10" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M12 61 Q55 76 98 58 M14 61 L9 53 M97 59 L102 50" fill="none"/>
+  </g>
+</svg>
