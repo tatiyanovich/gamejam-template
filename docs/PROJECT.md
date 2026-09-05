@@ -88,6 +88,7 @@
 - **D‑35 · 05.09** · D2: пол 1920×670 @1x от y=410 до 1080; точка схода (960,410) на оси доски, как в D1. Девять слоёв @2x без trim, координаты/pivots/порядок и отдельный текст доски в `art/src/d2/layout.json`. · Исходных 420 px пола недостаточно для кадра; отдельные стрелки и текст позволяют анимировать часы и использовать TMP в D11.
 
 - **D‑36 · 05.09** · Экзамен — **12 вопросов** (по фазам 3/2/3/2/2), звонок **120 с** с объявлением на **45 с**, сетка оценок и звёзды пересчитаны под 12 (отменяет числа D‑05, параметры самих фаз не тронуты). · Коля не уверен в 20 вопросах: идеальный проход занимал 161 с из 180, полный экзамен видели бы единицы, а обучающая фаза съедала четверть контента. На 12 вопросах идеал ≈ 91 с из 120 с, попытка укладывается в 1–2 минуты (`GDD §2`, столп 4), `12/12` остаётся мастерским, но достижимым. Выброшены 8 вопросов, ramp длин сохранён: Strokes 2/3/3 → 3 → 4 → 5 → 6, Word `BIRD`/`PURRS`/`CATNIP` (4/5/6), Pick на Q4 и Q8.
+- **D‑37 · 05.09** · Скрипт лидерборда живёт в репозитории (`tools/leaderboard/Code.gs`) и правится там, а не в веб‑редакторе; к нему приложены `test.js` (запуск логики под заглушками Apps Script) и `smoke.sh`. Черновик из §6.1 переписан: явный `SPREADSHEET_ID` вместо `getActiveSpreadsheet`, автосоздание листа с шапкой, `LockService` на запись, whitelist оценок `F D C B A A+`, клампы `answers 0–12` / `timeSeconds 0–999`, пустое после фильтра имя → `Anonymous`, любое исключение → JSON с полем `error` вместо HTML. · Черновик падал HTML‑страницей на любой ошибке (клиент C2 не смог бы распарсить ответ), ломался на отсутствующем листе и терял записи при одновременных попытках; без `test.js` каждая правка стоила бы редеплоя. Числа приведены к D‑36 и `GDD §12`.
 
 ## 5. Маппинг дизайна на код шаблона
 
@@ -108,7 +109,7 @@ D4: `art/src/d4/` → `art/teacher.mjs` → `art/exports/d4/` (12 слоёв у�
 | Данные фазы | `DifficultyPhase` (`Gameplay/Difficulty/Data`): `QuestionCount`, `TeacherChecks`, `CheckDelayMinimum/Maximum`, `LookDurationMinimum/Maximum`, `MeowAlertChance`, `PencilSnapAlerts`, `StaringEnabled`, `PawWindow` |
 | HUD | `GameplayWindow` переписываем под HUD; подписки через reactive queries (`ISuspicionQuery`, `IExamQuery`, `ITeacherQuery`, `IMeowQuery`, `IDuckQuery`, `IBellQuery`) |
 | Report Card | `ResultWindow` переписываем: grade, статы, лидерборд, Retake/Menu |
-| Лидерборд | `Infrastructure/Leaderboard/` сервис `ILeaderboardService` (UnityWebRequest), конфиг с URL Apps Script |
+| Лидерборд | `Infrastructure/Leaderboard/` сервис `ILeaderboardService` (UnityWebRequest), конфиг с URL Apps Script. Серверная часть — `tools/leaderboard/` (`Code.gs`, `test.js`, `smoke.sh`), см. §6.1 |
 | Сейв | `GeneralSaveFile`: `PlayerName`, `IntroSeen`, `BestAnswers`, `BestTimeSeconds`. Снапшот обновляет `RefreshExamProgressSystem` в `RefreshSnapshotsFeature` |
 | Аудио | `Infrastructure/Audio/` `IAudioService` (SFX по enum `SfxId`, музыка, авто‑дакинг под микрофон) |
 | Input | `Gameplay/Input`: флаги `LeanHeld`, `MeowKeyPressed`, `DuckKeyPressed` и однокадровые `StrokeInput` (`StrokeDirection`), `PickInput` (индекс варианта 0–3, клавиши 1–4), `LetterInput` (`char` A–Z без `M`/`Q`) в Input‑контексте; раскладка — `Gameplay/Input/Data/InputKeyMap`, пишет `EmitInputSystem` в `GlobalLoopInfraHeadFeature` |
@@ -124,38 +125,26 @@ D4: `art/src/d4/` → `art/teacher.mjs` → `art/exports/d4/` (12 слоёв у�
 
 ## 6. Внешние сервисы
 
-### 6.1 Google Sheets лидерборд (Коля деплоит, Claude пишет скрипт)
-1. Создать таблицу `COPYCAT Leaderboard`, лист `scores`, шапка: `name | answers | timeSeconds | grade | dateUtc`.
-2. Extensions → Apps Script, вставить код ниже, Deploy → **Web app**, Execute as *Me*, Access **Anyone**. Скопировать URL `/exec` в `LeaderboardConfig`.
-3. Проверить `curl -L "<url>?top=10&name=test"`.
+### 6.1 Google Sheets лидерборд (C1)
 
-```javascript
-const SHEET = 'scores';
-function doPost(e) {
-  const body = JSON.parse(e.postData.contents);
-  const name = String(body.name || 'Anonymous').slice(0, 12).replace(/[^\w \-]/g, '');
-  const answers = Math.max(0, Math.min(12, Number(body.answers) | 0));
-  const time = Math.max(0, Math.min(999, Number(body.timeSeconds) || 0));
-  const grade = String(body.grade || 'F').slice(0, 2);
-  SpreadsheetApp.openById(SpreadsheetApp.getActiveSpreadsheet().getId())
-    .getSheetByName(SHEET).appendRow([name, answers, time, grade, new Date().toISOString()]);
-  return doGet({ parameter: { top: '10', name: name, answers: String(answers), timeSeconds: String(time) } });
-}
-function doGet(e) {
-  const p = (e && e.parameter) || {};
-  const top = Math.min(50, Number(p.top) || 10);
-  const rows = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET).getDataRange().getValues().slice(1)
-    .map(r => ({ name: r[0], answers: Number(r[1]), timeSeconds: Number(r[2]), grade: r[3] }))
-    .sort((a, b) => b.answers - a.answers || a.timeSeconds - b.timeSeconds);
-  let rank = 0;
-  if (p.name !== undefined) {
-    rank = 1 + rows.findIndex(r => r.name === p.name && r.answers === Number(p.answers) && r.timeSeconds === Number(p.timeSeconds));
-  }
-  const out = { top: rows.slice(0, top), rank: rank, total: rows.length };
-  return ContentService.createTextOutput(JSON.stringify(out)).setMimeType(ContentService.MimeType.JSON);
-}
-```
-Unity: `UnityWebRequest.Post(url, json, "application/json")`, редиректы Apps Script (302) UnityWebRequest следует сам. Таймаут 5 с.
+| | |
+|---|---|
+| Таблица | `COPYCAT Leaderboard`, лист `scores`, шапка `name \| answers \| timeSeconds \| grade \| dateUtc` |
+| Ссылка | https://docs.google.com/spreadsheets/d/1a9t4uwVDtyPE-O1zC9yAPIs1J1wGLTzbJEE7Zz-PF6o/edit |
+| Скрипт | `tools/leaderboard/Code.gs` — источник правды; в Apps Script копируем оттуда |
+| Инструкция деплоя, API, санитизация | `tools/leaderboard/README.md` |
+| URL `/exec` | **не задеплоен**, вписать в `tools/leaderboard/README.md` и в `LeaderboardConfig` (C2) |
+
+Деплой: Extensions → Apps Script → вставить `Code.gs` → запустить `setup()` → Deploy → Web app,
+*Execute as* **Me**, *Who has access* **Anyone**. Проверка — `tools/leaderboard/smoke.sh "<url>"`.
+Правка после деплоя требует **New version** в Manage deployments, иначе `/exec` отдаёт старый код.
+
+Ответ на `POST` и `GET` одинаковый: `{ top: [{name, answers, timeSeconds, grade}], rank, total }`,
+сортировка `answers` ↓ + `timeSeconds` ↑ (`GDD §12`), `rank == 0` — «не найдено».
+`POST` пишет строку и сразу возвращает обновлённый топ, второй запрос не нужен.
+
+Unity: `UnityWebRequest.Post(url, json, "application/json")`, таймаут 5 с, редирект `302`
+Apps Script `UnityWebRequest` отрабатывает сам. Логика без деплоя проверяется `node tools/leaderboard/test.js`.
 
 ### 6.2 itch.io
 Страница создаётся Колей 5‑го вечером (черновик, скрыт). Нужно: название, короткое описание, 5 скриншотов 1920×1080, GIF мяуканья, список управления, «Microphone required (M key fallback)», билды `COPYCAT_win64.zip`, `COPYCAT_mac.zip`.
@@ -217,3 +206,4 @@ Unity: `UnityWebRequest.Post(url, json, "application/json")`, редиректы
 - 2026‑09‑05 13:24 · Claude · Баланс: обновлены A2/A11/B5/G1 в `PLAN.md`, маппинг конфигов и клэмп `answers` в Apps Script (20 → 12) · `docs/PLAN.md`, `docs/PROJECT.md §5–6`
 - 2026-09-05 13:28 · Codex · D4: 12 слоёв учительницы SVG/PNG @2x, rig с pivots и шестью позами, 8 превью; проверены полуоборот, злой взгляд, рука ±8° и зрачки ±6 px, 1920×1080/480×270; build/check прошли, D1–D3 совпадают побайтно · `art/src/d4`, `art/exports/d4`, `art/previews/d4`; D4 закрыт, импорт — D11, анимация — E1
 - 2026-09-05 14:05 · Claude · G1: финализировал формулировки 12 вопросов (7 из 12 переписаны), структура тип/сосед/длина payload не менялась; тексты синхронизированы в GDD и конфиге · `docs/GDD.md §13.1`, `Assets/AddressableResources/Configs/Exam/ExamConfig.asset`; G1 закрыт
+- 2026‑09‑05 13:40 · Claude · C1: скрипт лидерборда, инструкция деплоя, локальные тесты и smoke‑скрипт · `tools/leaderboard/`, D‑37; деплой и `/exec`‑URL — за владельцем таблицы
