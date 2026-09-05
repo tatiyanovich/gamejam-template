@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="84" height="84" viewBox="0 0 84 84">
+  <g stroke="{{INK}}" stroke-width="6" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M14 7 L70 5 Q78 5 78 13 L79 70 Q79 78 71 78 L13 79 Q5 79 5 71 L6 15 Q6 7 14 7Z" fill="{{GLYPH_FILL}}"/>
+    <g id="arrow" transform="rotate({{GLYPH_ANGLE}} 42 42)" fill="none" stroke="{{GLYPH_INK}}" stroke-width="8">
+      <path d="M42 64 L42 24"/>
+      <path d="M26 40 L42 22 L58 40"/>
+    </g>
+  </g>
+</svg>

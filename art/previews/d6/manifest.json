@@ -1,0 +1,58 @@
+[
+  {
+    "name": "state_sheet",
+    "width": 1920,
+    "height": 1400,
+    "scale": 1,
+    "sha256": "3a7c4b9ac2da2ce5e4c3ef9adb4d6ad9ee8853a714e1f8bd431ef6c4b63084cd"
+  },
+  {
+    "name": "layer_sheet",
+    "width": 1920,
+    "height": 1000,
+    "scale": 1,
+    "sha256": "b4ebdc41ba5e3adc3f3cafadf8ec15fe802120b64c91f5a4f7283205f3c101d1"
+  },
+  {
+    "name": "classroom_strokes",
+    "width": 1920,
+    "height": 1080,
+    "scale": 1,
+    "sha256": "6756af4f92e559c1042c1180706cdff7749f142896fba724c3f509afcd6124bc"
+  },
+  {
+    "name": "classroom_word",
+    "width": 1920,
+    "height": 1080,
+    "scale": 1,
+    "sha256": "e757002d5f48faba370ca9d8016d89471ba55cca28b0489e2884f3208a6bf6e2"
+  },
+  {
+    "name": "classroom_pick",
+    "width": 1920,
+    "height": 1080,
+    "scale": 1,
+    "sha256": "39cabc11947b8bf5503a3ba9a62f7dd5d103cb3fe5af903c138b1ca395e08852"
+  },
+  {
+    "name": "classroom_copied",
+    "width": 1920,
+    "height": 1080,
+    "scale": 1,
+    "sha256": "f7a6afa478d542587ee7b5b016a919ebbe4ba41c15d4b27861b2a85a0e0ea76f"
+  },
+  {
+    "name": "classroom_covered",
+    "width": 1920,
+    "height": 1080,
+    "scale": 1,
+    "sha256": "44c1f5f6431245f24701c56ef2b704feae23aaff979037ee99384d4632928da9"
+  },
+  {
+    "name": "classroom_thumbnail",
+    "width": 480,
+    "height": 270,
+    "scale": 0.25,
+    "sha256": "a64360d129a7163af34d17163b655c7e4ebf7922c50e076c385980b713074247"
+  }
+]

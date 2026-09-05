@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { classroomOutputs } from './classroom.mjs';
 
-export function neighbourOutputs(root) {
+export function neighbourComposer(root) {
   const rig = JSON.parse(readFileSync(join(root, 'src/d5/rig.json'), 'utf8'));
   const layout = JSON.parse(readFileSync(join(root, 'src/d2/layout.json'), 'utf8'));
   const sources = Object.fromEntries(rig.assets.map(asset => [asset.name,
@@ -52,24 +52,33 @@ export function neighbourOutputs(root) {
         <path d="M143 97 V67 M129 81 L143 67 L157 81 M181 81 H211 M197 67 L211 81 L197 95" fill="none" stroke="{{PENCIL_INK}}" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/></g>`);
     }).join('');
   }
-  function scene(progress) {
+  function scene(progress, options = {}) {
+    const paperMarkup = options.papers || papers;
+    const lift = name => typeof progress === 'object' ? progress[name] : progress;
     let content = body(empty);
     const teacherDesk = layout.layers.find(layer => layer.name === 'teacher_desk');
     const teacherMarker = `<g transform="translate(${teacherDesk.x} ${teacherDesk.y})`;
     content = content.replace(teacherMarker, `<g transform="translate(976 235) scale(.4)">${body(readFileSync(join(root, 'src/d1/teacher_writing.svg'), 'utf8'))}</g>` + teacherMarker);
     const leftDesk = layout.layers.find(layer => layer.name === 'desk_neighbour_left');
     const marker = `<g transform="translate(${leftDesk.x} ${leftDesk.y})`;
-    const bodies = Object.keys(rig.characters).map(name => inScene(name, progress, ['body'])).join('');
+    const bodies = Object.keys(rig.characters).map(name => inScene(name, lift(name), ['body'])).join('');
     if (!content.includes(marker)) throw new Error('D5 neighbour desk insertion point missing');
     content = content.replace(marker, bodies + marker);
     const playerDesk = layout.layers.find(layer => layer.name === 'desk_player');
     const front = `<g transform="translate(${playerDesk.x} ${playerDesk.y})`;
-    const upper = papers() + Object.keys(rig.characters).map(name => inScene(name, progress, ['paw', 'head', 'eyes', 'pupils'])).join('');
+    const upper = paperMarkup() + Object.keys(rig.characters).map(name => inScene(name, lift(name), ['paw', 'head', 'eyes', 'pupils'])).join('');
     if (!content.includes(front)) throw new Error('D5 player desk insertion point missing');
     content = content.replace(front, upper + front);
+    content += options.beforeKitten ? options.beforeKitten() : '';
     content += `<g transform="translate(653 628)">${body(readFileSync(join(root, 'src/d1/kitten_back.svg'), 'utf8'))}</g>`;
+    content += options.afterKitten ? options.afterKitten() : '';
     return frame(1920, 1080, content);
   }
+  return { rig, layout, sources, frame, label, body, sprite, character, inScene, deskTransform, papers, scene };
+}
+
+export function neighbourOutputs(root) {
+  const { rig, sources, frame, label, body, character, scene } = neighbourComposer(root);
   function poseSheet() {
     let content = '<rect width="1800" height="1060" fill="{{PAPER}}"/>' + label(35, 52, 'COPYCAT / D5 / WHISKERSTEIN + FLUFFY', 34);
     content += label(35, 92, 'Separate body / head / cover paw / shared eyes and pupils');

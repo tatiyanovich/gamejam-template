@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="460" viewBox="0 0 640 460">
+  <defs>
+    <path id="sheet" d="M52 34 Q54 22 66 22 L596 12 Q608 12 609 24 L638 428 Q639 440 627 441 L14 452 Q2 452 2 440 L40 44 Q41 34 52 34Z"/>
+    <clipPath id="sheet-clip"><use href="#sheet"/></clipPath>
+  </defs>
+  <g stroke="{{INK}}" stroke-width="7" stroke-linejoin="round" stroke-linecap="round">
+    <ellipse cx="330" cy="248" rx="318" ry="214" fill="{{INK}}" opacity=".12" stroke="none"/>
+    <use href="#sheet" fill="{{PAPER_SHADE}}" transform="translate(14 12)"/>
+    <use href="#sheet" fill="{{PAPER}}"/>
+    <g clip-path="url(#sheet-clip)" stroke="none">
+      <path d="M86 20 L74 452" stroke="{{DANGER}}" stroke-width="3" opacity=".35"/>
+      <path d="M40 142 L618 128 M36 214 Q330 208 621 194 M33 256 L623 236 M29 302 Q328 293 626 280 M25 348 L629 324 M21 394 Q325 383 631 368" stroke="#8C8C8C" stroke-width="3" opacity=".5"/>
+      <path d="M48 90 Q330 84 606 74 M48 98 Q330 92 606 82" stroke="{{PENCIL_INK}}" stroke-width="3" opacity=".45"/>
+    </g>
+    <path d="M556 12 L566 52 Q567 60 575 58 L612 50 Q610 30 596 12Z" fill="{{PAPER_SHADE}}" stroke-width="4"/>
+    <g fill="{{PENCIL_INK}}" stroke="none" opacity=".55">
+      <ellipse cx="591" cy="392" rx="13" ry="11"/>
+      <ellipse cx="575" cy="373" rx="5" ry="6"/><ellipse cx="587" cy="367" rx="5" ry="6"/>
+      <ellipse cx="600" cy="369" rx="5" ry="6"/><ellipse cx="610" cy="379" rx="5" ry="6"/>
+    </g>
+  </g>
+</svg>

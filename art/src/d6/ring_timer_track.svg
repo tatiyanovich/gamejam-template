@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160">
+  <g fill="none" stroke-linejoin="round" stroke-linecap="round" opacity=".45">
+    <circle cx="80" cy="80" r="62" stroke="{{PAPER_SHADE}}" stroke-width="26"/>
+    <circle cx="80" cy="80" r="76" stroke="{{INK}}" stroke-width="6"/>
+    <circle cx="80" cy="80" r="48" stroke="{{INK}}" stroke-width="6"/>
+  </g>
+</svg>

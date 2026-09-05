@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="360" viewBox="0 0 480 360">
+  <defs>
+    <path id="sheet" d="M66 72 Q67 62 77 62 L412 54 Q422 54 423 64 L478 328 Q480 338 470 338 L12 346 Q2 346 3 336 L58 80 Q59 72 66 72Z"/>
+    <clipPath id="sheet-clip"><use href="#sheet"/></clipPath>
+  </defs>
+  <g stroke="{{INK}}" stroke-width="6" stroke-linejoin="round" stroke-linecap="round">
+    <ellipse cx="248" cy="212" rx="238" ry="150" fill="{{INK}}" opacity=".12" stroke="none"/>
+    <use href="#sheet" fill="{{PAPER_SHADE}}" transform="translate(10 10)"/>
+    <use href="#sheet" fill="{{PAPER}}"/>
+    <g clip-path="url(#sheet-clip)" stroke="none">
+      <path d="M72 130 L426 122 M64 172 Q246 168 434 160 M54 222 L444 210 M42 270 Q246 262 458 252 M32 314 L470 300" stroke="#8C8C8C" stroke-width="3" opacity=".5"/>
+    </g>
+    <path d="M388 55 L396 86 Q397 93 404 92 L432 86 Q428 70 412 54Z" fill="{{PAPER_SHADE}}" stroke-width="4"/>
+  </g>
+</svg>

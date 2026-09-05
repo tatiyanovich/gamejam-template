@@ -1,0 +1,156 @@
+[
+  {
+    "name": "paper_player",
+    "width": 1280,
+    "height": 920,
+    "scale": 2,
+    "sha256": "cbcaaaf392e8174a150baa925a19313becbf57281860f71e7300fcd7cb6838c9"
+  },
+  {
+    "name": "paper_neighbour",
+    "width": 960,
+    "height": 720,
+    "scale": 2,
+    "sha256": "d5a4db859a7915c2ec7250927710d901fcce9e3a14cf3c609ef792a429ad4033"
+  },
+  {
+    "name": "glyph_arrow_up_normal",
+    "width": 168,
+    "height": 168,
+    "scale": 2,
+    "sha256": "be9e34baf03012d47f4f0c89954e0e08c464a8a00f0bcdc49f51772220af2d0c"
+  },
+  {
+    "name": "glyph_arrow_up_done",
+    "width": 168,
+    "height": 168,
+    "scale": 2,
+    "sha256": "4d962b14479db639b6cf932c29def844581602dbc93f22d95ac574ae915469b4"
+  },
+  {
+    "name": "glyph_arrow_up_wrong",
+    "width": 168,
+    "height": 168,
+    "scale": 2,
+    "sha256": "41e0610a5182e7ab3d410150ed3d64d2c556dcf42ca6a5cee575aaf161adbc82"
+  },
+  {
+    "name": "glyph_arrow_right_normal",
+    "width": 168,
+    "height": 168,
+    "scale": 2,
+    "sha256": "f4ec1141b06ea6e7e777610d59cfdf9a79ee6fa628905d9a598fb48e674cc1a4"
+  },
+  {
+    "name": "glyph_arrow_right_done",
+    "width": 168,
+    "height": 168,
+    "scale": 2,
+    "sha256": "7b9967b211c8a3a85979d43ae93c19d111ba730598f0f1ce25ce963802ade7cb"
+  },
+  {
+    "name": "glyph_arrow_right_wrong",
+    "width": 168,
+    "height": 168,
+    "scale": 2,
+    "sha256": "a16b4740f28feec64d01bbfdbd8fbd7e72ac3b1bded45a99d7a031c1db8952ef"
+  },
+  {
+    "name": "glyph_arrow_down_normal",
+    "width": 168,
+    "height": 168,
+    "scale": 2,
+    "sha256": "a2cafd72c7146c0130640693f1ba88d174eaabe3e7c82b40de39b2da014c8b46"
+  },
+  {
+    "name": "glyph_arrow_down_done",
+    "width": 168,
+    "height": 168,
+    "scale": 2,
+    "sha256": "8e7e6bef36e4691c241b77b751e98c24b9125d20a9723bf8f243a935db8704a6"
+  },
+  {
+    "name": "glyph_arrow_down_wrong",
+    "width": 168,
+    "height": 168,
+    "scale": 2,
+    "sha256": "1eacc2f2cf33b5d53663284732afd479f8708f37bcc748701244584fd175767c"
+  },
+  {
+    "name": "glyph_arrow_left_normal",
+    "width": 168,
+    "height": 168,
+    "scale": 2,
+    "sha256": "dcff17ab87da69a9d352109f25af7cb7de39ef4dec2863f96f9bf66479ab8144"
+  },
+  {
+    "name": "glyph_arrow_left_done",
+    "width": 168,
+    "height": 168,
+    "scale": 2,
+    "sha256": "9ebce3235bfee595aacc3358644ee01c149d508e47e4bf32770ffc5be5813eaf"
+  },
+  {
+    "name": "glyph_arrow_left_wrong",
+    "width": 168,
+    "height": 168,
+    "scale": 2,
+    "sha256": "ef6a49e52ca0d29fa140ad5d3087c38c9df333ea7eb80b13856359dcb1fc2861"
+  },
+  {
+    "name": "glyph_pick_circle",
+    "width": 440,
+    "height": 200,
+    "scale": 2,
+    "sha256": "ad69c5fa271d33317b40bf9ef1f53844d95ca4763f2de0131d3c7e0bd124e104"
+  },
+  {
+    "name": "stamp_copied",
+    "width": 600,
+    "height": 240,
+    "scale": 2,
+    "sha256": "6a6161f9639347d188b4a83bda36479101f5bc9f342a389696efcce17479e604"
+  },
+  {
+    "name": "ring_timer",
+    "width": 320,
+    "height": 320,
+    "scale": 2,
+    "sha256": "09c59794bf9685b24ce78007f796a5ada788a81c95dab1e1581e0ad16225b74f"
+  },
+  {
+    "name": "ring_timer_track",
+    "width": 320,
+    "height": 320,
+    "scale": 2,
+    "sha256": "4d0214d089af197a5db0e0003f49047e2bfba31cff9de6767f8074a06e1c444d"
+  },
+  {
+    "name": "scribble_1",
+    "width": 480,
+    "height": 80,
+    "scale": 2,
+    "sha256": "4164a4cb65a7632156b1867962ac4681b742215a7084b8ff4a0af68b6baf0fb8"
+  },
+  {
+    "name": "scribble_2",
+    "width": 480,
+    "height": 80,
+    "scale": 2,
+    "sha256": "db38f9988110f93d96c2c41ce580ba3261480f3d7eb53a40d7954a6747a87222"
+  },
+  {
+    "name": "scribble_3",
+    "width": 480,
+    "height": 80,
+    "scale": 2,
+    "sha256": "d70412ff9f2a2b347f69db49eae4ebd5478c82b8522909f96511492869e9bad8"
+  },
+  {
+    "name": "scribble_4",
+    "width": 480,
+    "height": 80,
+    "scale": 2,
+    "sha256": "d4415a88b3c1197329a689b4cf2a6c41083d9c3eaf2b87833f9fac4852c3b6f9"
+  }
+]

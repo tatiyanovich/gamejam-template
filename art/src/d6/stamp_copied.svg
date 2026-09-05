@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="120" viewBox="0 0 300 120">
+  <g fill="none" stroke="{{OK}}" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M22 12 L282 9 Q292 9 292 19 L289 104 Q289 112 281 112 L18 109 Q9 109 9 100 L12 21 Q12 12 22 12Z" stroke-width="8"/>
+    <path d="M30 24 L272 22 L270 98 L28 96Z" stroke-width="3" opacity=".8"/>
+    <path d="M232 64 L252 84 L288 36" stroke-width="12"/>
+  </g>
+  <text x="120" y="82" font-family="Luckiest Guy" font-size="54" fill="{{OK}}" text-anchor="middle" letter-spacing="2">COPIED</text>
+</svg>

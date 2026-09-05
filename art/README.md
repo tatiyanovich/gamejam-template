@@ -1,10 +1,20 @@
 # COPYCAT / Art
 
+## D6 — листы и ввод
+
+[Состояния](previews/d6/state_sheet.png) · [Спрайты и pivots](previews/d6/layer_sheet.png) · [Strokes](previews/d6/classroom_strokes.png) · [Pick](previews/d6/classroom_pick.png) · [Word](previews/d6/classroom_word.png) · [COPIED](previews/d6/classroom_copied.png) · [Закрыто лапой](previews/d6/classroom_covered.png) · [480×270](previews/d6/classroom_thumbnail.png)
+
+`src/d6/` — 11 SVG, `layout.json` и `exam_samples.json`; `exports/d6/` — 22 прозрачных PNG @2x и автономные SVG; `previews/d6/` — 8 проверочных PNG/SVG. `papers.mjs` подключён к общей сборке и использует `neighbourComposer` из `neighbours.mjs` (класс D2, соседи D5, тестовые позы D1). 12 глифов стрелок генерируются из шаблона `glyph_arrow.svg`: токены `{{GLYPH_ANGLE}}` (0/90/180/270) и `{{GLYPH_FILL}}`/`{{GLYPH_INK}}` из `layout.glyphStates`. Кроме `stamp_copied`, спрайты не содержат текста — сборка это проверяет.
+
+`layout.json` — координаты @1x с Y вниз. `playerPaper.placement` (1058,770), rotation 4°, scale 0.6 — лист на своей парте; `text` — слоты TMP (Patrick Hand) в координатах листа; `answerRow` — начало ряда глифов, шаг 68 при scale 0.72, базовая линия и шаг букв Word; `stamp.center` (468,368), −12°. `neighbourPaper.placements.left/right` — начало листа в координатах парты D2 (наследует поворот ±12°), scale 0.5; `answerArea` — область под лапой D5; `strokes` центрирует ряд глифов по X=240 с шагом 66 при scale 0.75; `pick.cells` — центры четырёх вариантов, круг ставится по центру верной ячейки; `word` — центр, базовая линия, кегль 70. `ringTimer.placements` — центры колец над головами (372,262)/(1548,262), scale 0.5; заливка Radial360 от верха по часовой, `fillAmount = remaining / PawWindow`. Normalized pivot = `(px/width, 1-py/height)`, мировая позиция `((x-960)/100, (540-y)/100)`.
+
+Проверено в 1920×1080 и 480×270: шапка и ответ на своём листе не перекрыты лапами котёнка, ряд ответа соседа целиком под лапой в закрытой позе (Q9, 5 стрелок) и читаем в поднятой, круг Pick и слово Word видны без наклона, штамп не закрывает ряд ответа. Импорт в `Content/Papers/` и группа `Copycat_Papers` — D11.
+
 ## D5 — соседи
 
 [Позы](previews/d5/pose_sheet.png) · [Слои](previews/d5/layer_sheet.png) · [Стыки и парты](previews/d5/motion_sheet.png) · [Закрыто](previews/d5/classroom_covered.png) · [Открыто](previews/d5/classroom_lifted.png) · [480×270](previews/d5/classroom_thumbnail.png)
 
-`src/d5/` — 8 SVG и `rig.json`: тело, голова, лапа каждого соседа плюс общие `eye_white` и `pupil`. `exports/d5/` — 8 прозрачных PNG @2x и автономные SVG, `previews/d5/` — 6 проверочных PNG/SVG. `neighbours.mjs` подключён к общей сборке. `npm run check` сверяет все D1–D5 и запускает `check-neighbours.mjs`: связность силуэта тела/лапы при 111 значениях подъёма (0–110%) для каждого персонажа. Это проверка отсутствия отрыва; художественный стык/перекрытия дополнительно смотрим в motion sheet, runtime — в E3.
+`src/d5/` — 8 SVG и `rig.json`: тело, голова, лапа каждого соседа плюс общие `eye_white` и `pupil`. `exports/d5/` — 8 прозрачных PNG @2x и автономные SVG, `previews/d5/` — 6 проверочных PNG/SVG. `neighbours.mjs` подключён к общей сборке. `npm run check` сверяет все D1–D6 и запускает `check-neighbours.mjs`: связность силуэта тела/лапы при 111 значениях подъёма (0–110%) для каждого персонажа. Это проверка отсутствия отрыва; художественный стык/перекрытия дополнительно смотрим в motion sheet, runtime — в E3.
 
 Whiskerstein — серый табби в круглых очках (оправа входит в голову), Fluffy — более широкий белый пушистый кот. Белки/зрачки отдельные; сонные белки Fluffy масштабируются (1.05,0.38), зрачки сохраняют размер. Все крупные слои 540×760 @1x, белок 110×130, зрачок 24×28. PPU 200, Bilinear, no mipmaps, без trim. Unity normalized pivot = `(px/width,1-py/height)`.
 

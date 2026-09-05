@@ -1,0 +1,315 @@
+{
+  "coordinates": "Pixels at 1x, top-left origin, Y down, positive angles clockwise. Paper-local coordinates are relative to the paper canvas top-left; text is TextMeshPro in Unity, sprites carry no text except stamp_copied.",
+  "textureScale": 2,
+  "pixelsPerUnit": 200,
+  "filter": "Bilinear",
+  "mipmaps": false,
+  "trim": false,
+  "fonts": {
+    "paper": "Patrick Hand",
+    "stamp": "Luckiest Guy"
+  },
+  "inkColor": "PENCIL_INK",
+  "wrongColor": "DANGER",
+  "playerPaper": {
+    "size": [
+      640,
+      460
+    ],
+    "pivotPixels": [
+      320,
+      230
+    ],
+    "placement": {
+      "x": 1058,
+      "y": 770,
+      "rotation": 4,
+      "scale": 0.6,
+      "sortingOrder": 32
+    },
+    "text": {
+      "header": {
+        "value": "CAT ACADEMY — FINAL EXAM",
+        "x": 66,
+        "baseline": 74,
+        "fontSize": 34
+      },
+      "student": {
+        "value": "Student: {name}",
+        "x": 64,
+        "baseline": 130,
+        "fontSize": 30
+      },
+      "question": {
+        "x": 60,
+        "baselines": [
+          204,
+          246
+        ],
+        "fontSize": 32,
+        "maxWidth": 540
+      },
+      "answerLabel": {
+        "value": "Answer:",
+        "x": 72,
+        "baseline": 336,
+        "fontSize": 38
+      }
+    },
+    "answerRow": {
+      "origin": [
+        206,
+        288
+      ],
+      "glyphScale": 0.72,
+      "advance": 68,
+      "letterBaseline": 336,
+      "letterSize": 44,
+      "letterAdvance": 40,
+      "blank": "____"
+    },
+    "stamp": {
+      "center": [
+        468,
+        368
+      ],
+      "rotation": -12,
+      "scale": 1
+    }
+  },
+  "neighbourPaper": {
+    "size": [
+      480,
+      360
+    ],
+    "pivotPixels": [
+      240,
+      180
+    ],
+    "placements": {
+      "left": {
+        "desk": "desk_neighbour_left",
+        "x": 138,
+        "y": 40,
+        "scale": 0.5,
+        "sortingOrder": 22
+      },
+      "right": {
+        "desk": "desk_neighbour_right",
+        "x": 212,
+        "y": 40,
+        "scale": 0.5,
+        "sortingOrder": 22
+      }
+    },
+    "name": {
+      "x": 96,
+      "baseline": 116,
+      "fontSize": 32
+    },
+    "answerArea": [
+      50,
+      176,
+      380,
+      150
+    ],
+    "strokes": {
+      "centerY": 246,
+      "glyphScale": 0.75,
+      "advance": 66
+    },
+    "pick": {
+      "cells": [
+        [
+          150,
+          224
+        ],
+        [
+          334,
+          224
+        ],
+        [
+          150,
+          292
+        ],
+        [
+          334,
+          292
+        ]
+      ],
+      "fontSize": 34,
+      "circleScale": 0.9
+    },
+    "word": {
+      "centerX": 246,
+      "baseline": 272,
+      "fontSize": 70,
+      "letterSpacing": 4
+    }
+  },
+  "ringTimer": {
+    "size": [
+      160,
+      160
+    ],
+    "pivotPixels": [
+      80,
+      80
+    ],
+    "fillMethod": "Radial360, origin Top, clockwise, fillAmount = remaining / PawWindow",
+    "placements": {
+      "left": {
+        "x": 372,
+        "y": 262,
+        "scale": 0.5
+      },
+      "right": {
+        "x": 1548,
+        "y": 262,
+        "scale": 0.5
+      }
+    }
+  },
+  "glyphStates": {
+    "normal": {
+      "fill": "PAPER",
+      "ink": "PENCIL_INK"
+    },
+    "done": {
+      "fill": "OK",
+      "ink": "PAPER"
+    },
+    "wrong": {
+      "fill": "DANGER",
+      "ink": "PAPER"
+    }
+  },
+  "glyphDirections": {
+    "up": 0,
+    "right": 90,
+    "down": 180,
+    "left": 270
+  },
+  "assets": [
+    {
+      "name": "paper_player",
+      "size": [
+        640,
+        460
+      ],
+      "pivotPixels": [
+        320,
+        230
+      ]
+    },
+    {
+      "name": "paper_neighbour",
+      "size": [
+        480,
+        360
+      ],
+      "pivotPixels": [
+        240,
+        180
+      ]
+    },
+    {
+      "name": "glyph_pick_circle",
+      "size": [
+        220,
+        100
+      ],
+      "pivotPixels": [
+        110,
+        50
+      ]
+    },
+    {
+      "name": "stamp_copied",
+      "size": [
+        300,
+        120
+      ],
+      "pivotPixels": [
+        150,
+        60
+      ]
+    },
+    {
+      "name": "ring_timer",
+      "size": [
+        160,
+        160
+      ],
+      "pivotPixels": [
+        80,
+        80
+      ]
+    },
+    {
+      "name": "ring_timer_track",
+      "size": [
+        160,
+        160
+      ],
+      "pivotPixels": [
+        80,
+        80
+      ]
+    },
+    {
+      "name": "scribble_1",
+      "size": [
+        240,
+        40
+      ],
+      "pivotPixels": [
+        0,
+        20
+      ]
+    },
+    {
+      "name": "scribble_2",
+      "size": [
+        240,
+        40
+      ],
+      "pivotPixels": [
+        0,
+        20
+      ]
+    },
+    {
+      "name": "scribble_3",
+      "size": [
+        240,
+        40
+      ],
+      "pivotPixels": [
+        0,
+        20
+      ]
+    },
+    {
+      "name": "scribble_4",
+      "size": [
+        240,
+        40
+      ],
+      "pivotPixels": [
+        0,
+        20
+      ]
+    }
+  ],
+  "glyphAsset": {
+    "size": [
+      84,
+      84
+    ],
+    "pivotPixels": [
+      42,
+      42
+    ]
+  }
+}

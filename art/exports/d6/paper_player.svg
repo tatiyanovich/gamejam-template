@@ -1,0 +1,37 @@
+<svg width="640" height="460" viewBox="0 0 640 460" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <clipPath id="sheet-clip">
+            <path fill="#000000" stroke="none" d="M 52 34 Q 54 22 66 22 L 596 12 Q 608 12 609 24 L 638 428 Q 639 440 627 441 L 14 452 Q 2 452 2 440 L 40 44 Q 41 34 52 34 Z"/>
+        </clipPath>
+    </defs>
+    <g>
+        <g opacity="0.12">
+            <path fill="#2a1f1a" stroke="none" d="M 648 248 C 648 366.18896 505.62656 462 330 462 C 154.37344 462 12 366.18896 12 248 C 12 129.81107 154.37344 34 330 34 C 505.62656 34 648 129.81107 648 248 Z"/>
+        </g>
+        <g transform="matrix(1 0 0 1 14 12)">
+            <path fill="#eadfc6" stroke="#2a1f1a" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" d="M 52 34 Q 54 22 66 22 L 596 12 Q 608 12 609 24 L 638 428 Q 639 440 627 441 L 14 452 Q 2 452 2 440 L 40 44 Q 41 34 52 34 Z"/>
+        </g>
+        <g>
+            <path fill="#fff6e3" stroke="#2a1f1a" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" d="M 52 34 Q 54 22 66 22 L 596 12 Q 608 12 609 24 L 638 428 Q 639 440 627 441 L 14 452 Q 2 452 2 440 L 40 44 Q 41 34 52 34 Z"/>
+        </g>
+        <g clip-path="url(#sheet-clip)">
+            <g opacity="0.35">
+                <path fill="#000000" stroke="#e84c4c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M 86 20 L 74 452"/>
+            </g>
+            <g opacity="0.5">
+                <path fill="#000000" stroke="#8c8c8c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M 40 142 L 618 128 M 36 214 Q 330 208 621 194 M 33 256 L 623 236 M 29 302 Q 328 293 626 280 M 25 348 L 629 324 M 21 394 Q 325 383 631 368"/>
+            </g>
+            <g opacity="0.45">
+                <path fill="#000000" stroke="#3b3a8c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M 48 90 Q 330 84 606 74 M 48 98 Q 330 92 606 82"/>
+            </g>
+        </g>
+        <path fill="#eadfc6" stroke="#2a1f1a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" d="M 556 12 L 566 52 Q 567 60 575 58 L 612 50 Q 610 30 596 12 Z"/>
+        <g opacity="0.55">
+            <path fill="#3b3a8c" stroke="none" d="M 604 392 C 604 398.07513 598.1797 403 591 403 C 583.8203 403 578 398.07513 578 392 C 578 385.92487 583.8203 381 591 381 C 598.1797 381 604 385.92487 604 392 Z"/>
+            <path fill="#3b3a8c" stroke="none" d="M 580 373 C 580 376.31372 577.7614 379 575 379 C 572.2386 379 570 376.31372 570 373 C 570 369.68628 572.2386 367 575 367 C 577.7614 367 580 369.68628 580 373 Z"/>
+            <path fill="#3b3a8c" stroke="none" d="M 592 367 C 592 370.31372 589.7614 373 587 373 C 584.2386 373 582 370.31372 582 367 C 582 363.6863 584.2386 361 587 361 C 589.7614 361 592 363.6863 592 367 Z"/>
+            <path fill="#3b3a8c" stroke="none" d="M 605 369 C 605 372.3137 602.7614 375 600 375 C 597.2386 375 595 372.3137 595 369 C 595 365.68628 597.2386 363 600 363 C 602.7614 363 605 365.68628 605 369 Z"/>
+            <path fill="#3b3a8c" stroke="none" d="M 615 379 C 615 382.31372 612.7614 385 610 385 C 607.2386 385 605 382.31372 605 379 C 605 375.68628 607.2386 373 610 373 C 612.7614 373 615 375.68628 615 379 Z"/>
+        </g>
+    </g>
+</svg>

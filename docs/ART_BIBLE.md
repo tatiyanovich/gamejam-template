@@ -45,6 +45,14 @@
 
 Лапа вращается вокруг плеча (145,335), открытый стык заливкой перекрывает тело. Тело за партой, лапа поверх парты и листа, голова выше лапы. Fluffy зеркалит весь rig. В SVG поднятая лапа имеет угол −70° и Y −40 px; Y +40 из §7 относится к Unity с Y вверх, угол Unity +70° до зеркалирования корня. Длительности и easing §7 сохранены. Шесть превью проверяют позы, слои, переход, выброс OutBack 10% и кадр класса. `check-neighbours.mjs` проверяет связность силуэта тела/лапы в 111 положениях на каждого соседа (0–110%). B‑002 исправлен в арте D5, остаётся проверить runtime в E3. Листы и стрелки — заглушки D6, учительница/котёнок — позы D1, окружение D2; импорт/префабы — D11. Формулы сборки — `art/README.md`.
 
+## D6 — листы и ввод
+
+[Состояния](../art/previews/d6/state_sheet.png) · [Спрайты и pivots](../art/previews/d6/layer_sheet.png) · [Strokes](../art/previews/d6/classroom_strokes.png) · [Pick](../art/previews/d6/classroom_pick.png) · [Word](../art/previews/d6/classroom_word.png) · [COPIED](../art/previews/d6/classroom_copied.png) · [Закрыто лапой](../art/previews/d6/classroom_covered.png) · [480×270](../art/previews/d6/classroom_thumbnail.png).
+
+Готовы 22 спрайта §5.3: `paper_player` 640×460 (перспективный лист с шапкой‑линейками, красным полем, загнутым углом и лапкой‑печатью академии), `paper_neighbour` 480×360, 12 глифов стрелок 84×84 (4 направления × normal/done/wrong: бумага+чернила / OK+белая стрелка / DANGER+белая стрелка), `glyph_pick_circle` 220×100 (карандашная обводка в полтора оборота), `stamp_copied` 300×120 (зелёный штамп `COPIED` + галочка), `ring_timer` и `ring_timer_track` 160×160, `scribble_1..4` 240×40. Исходники — `art/src/d6/`, PNG @2x и автономные SVG — `art/exports/d6/`, `papers.mjs` в общей сборке; глифы собираются из одного шаблона `glyph_arrow.svg` подстановкой угла и цветов состояния. PPU 200, Bilinear, no mipmaps, без trim.
+
+Весь текст листов (шапка `CAT ACADEMY — FINAL EXAM`, `Student: <имя>`, вопрос, `Answer: ____`, имя соседа, варианты Pick, буквы Word) — TextMeshPro Patrick Hand в Unity, в спрайтах текста нет; координаты, размеры шрифта, ряд ответа, ячейки Pick, позиции листов на партах и кольца над головами — `art/src/d6/layout.json`. Штамп — единственный спрайт с запечённым текстом (Luckiest Guy, D‑39). Строки превью взяты из `GDD §13.1` (`exam_samples.json` — только для превью, геймплей читает `ExamConfig`). Лист соседа стоит так, что ряд ответа попадает под лапу D5: `classroom_covered.png` показывает Q9 полностью скрытым. Правильный ввод: глиф `done` на листе соседа и копия на своём листе; ошибка — глиф `wrong` / красная буква; Pick с фазы 3 — круг с alpha 0.35; кольцо — `Image` Filled Radial360 от верха по часовой поверх `ring_timer_track`. Импорт и префабы — D11, привязка к ECS — A5/B3/E3.
+
 ## 1. Стиль: «Chunky Vector Cartoon»
 
 Референс‑ощущение: флэт‑мультяшность уровня Adventure Time / Cartoon Network shorts, кооп‑симуляторные коты с огромными глазами.
@@ -95,8 +103,8 @@
 
 | Роль | Шрифт | Источник |
 |---|---|---|
-| Заголовки, логотип, HUD‑цифры | **Luckiest Guy** | уже в проекте (`Content/UI/Fonts`); Apache 2.0, лицензия в `art/fonts/` |
-| Листы, штампы, реплики учительницы | **Patrick Hand** | Google Fonts, OFL — скачан в `art/fonts/`; импорт в `Content/UI/Fonts` и TMP‑ассет — при интеграции |
+| Заголовки, логотип, HUD‑цифры, штампы (`COPIED`, оценки) | **Luckiest Guy** | уже в проекте (`Content/UI/Fonts`); Apache 2.0, лицензия в `art/fonts/` |
+| Листы, реплики учительницы | **Patrick Hand** | Google Fonts, OFL — скачан в `art/fonts/`; импорт в `Content/UI/Fonts` и TMP‑ассет — при интеграции |
 | Текст UI, статы, лидерборд | **Nunito Bold** | Google Fonts, OFL — исходный variable font и статический `wght=700` в `art/fonts/` |
 
 Стрелки на листах рисуем как глифы (SVG), не шрифтом.
@@ -144,8 +152,9 @@ art/
 Критерий приёмки D5/E3 (B‑002, замечание Коли к D1): лапа естественно выходит из плеча и сохраняет непрерывный силуэт с телом в закрытой и поднятой позах; pivot у плеча, стык слоёв скрыт перекрытием, парта не перерезает лапу. Проверить обе позы и весь переход между ними.
 
 ### 5.3 Листы и ввод (`Content/Papers/`) — группа `Copycat_Papers`
-`paper_player.png` 640×460, `paper_neighbour.png` 480×360, `glyph_arrow_up/down/left/right.png` 84×84 (3 состояния каждый: normal/done/wrong → 12 файлов),
-`glyph_pick_circle.png`, `stamp_copied.png` 300×120, `ring_timer.png` 160×160 (radial fill в UI), `scribble_1..4.png`.
+`paper_player.png` 640×460, `paper_neighbour.png` 480×360, `glyph_arrow_<up|down|left|right>_<normal|done|wrong>.png` 84×84 (12 файлов),
+`glyph_pick_circle.png` 220×100, `stamp_copied.png` 300×120, `ring_timer.png` + `ring_timer_track.png` 160×160 (radial fill в UI поверх трека), `scribble_1..4.png` 240×40.
+Все 22 готовы в D6 (`art/exports/d6/`), текст листов — TMP по `art/src/d6/layout.json`.
 
 ### 5.4 Утка (`Content/Duck/`)
 `duck_idle.png` 140×130, `duck_fly_1.png`, `duck_fly_2.png`, `duck_sad.png`, `keycap_q.png` 64×64.
