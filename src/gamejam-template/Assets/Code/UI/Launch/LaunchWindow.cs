@@ -4,7 +4,6 @@ using Code.Gameplay.CoreLoop.Services;
 using Code.Gameplay.Progress.Queries;
 using Code.UI.Attendance;
 using Code.Infrastructure.CoreLoop;
-using Code.UI.Fade;
 using Cysharp.Threading.Tasks;
 using Framework.UI.UiManagement.Elements.Windows;
 using UnityEngine;
@@ -26,8 +25,6 @@ namespace Code.UI.Launch
 		private ICoreLoopRequestFactory _coreLoopRequestFactory;
 		private ICameraSwitcher _cameraSwitch;
 		private IProgressQuery _progressQuery;
-
-		private const float FadeInDuration = 0.3f;
 
 		[Inject]
 		public void Construct(
@@ -77,17 +74,6 @@ namespace Code.UI.Launch
 		{
 			_isStarting = true;
 			SetInteractable(false);
-			FadeToBlackThenTransition().Forget();
-		}
-
-		private async UniTask FadeToBlackThenTransition()
-		{
-			CancellationToken cancellationToken = Cts.Token;
-			await UniTask.NextFrame(cancellationToken);
-			FadeWindow fadeWindow = await _uiService.OpenWindow<FadeWindow>(withAnimation: false);
-			cancellationToken.ThrowIfCancellationRequested();
-			await fadeWindow.FadeIn(FadeInDuration, cancellationToken);
-			cancellationToken.ThrowIfCancellationRequested();
 			_cameraSwitch.SwitchTo(LoopNodeId.Exam);
 			_coreLoopRequestFactory.CreateGoToBranchRequest(LoopNodeId.Exam);
 		}

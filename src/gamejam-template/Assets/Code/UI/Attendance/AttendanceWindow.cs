@@ -5,7 +5,6 @@ using Code.Gameplay.Meow.Queries;
 using Code.Gameplay.Progress.Services;
 using Code.Infrastructure.CoreLoop;
 using Code.Infrastructure.Microphone;
-using Code.UI.Fade;
 using Cysharp.Threading.Tasks;
 using Framework.UI.UiManagement.Elements.Windows;
 using TMPro;
@@ -130,14 +129,8 @@ namespace Code.UI.Attendance
 				: _quietSeconds >= 0.5f ? "LOUDER!" : "Meow to test your mic";
 		}
 
-		private async UniTask StartExam()
+		private void StartExam()
 		{
-			CancellationToken cancellationToken = Cts.Token;
-			await UniTask.NextFrame(cancellationToken);
-			FadeWindow fadeWindow = await _uiService.OpenWindow<FadeWindow>(withAnimation: false);
-			cancellationToken.ThrowIfCancellationRequested();
-			await fadeWindow.FadeIn(0.3f, cancellationToken);
-			cancellationToken.ThrowIfCancellationRequested();
 			_cameraSwitcher.SwitchTo(LoopNodeId.Exam);
 			_coreLoopRequestFactory.CreateGoToBranchRequest(LoopNodeId.Exam);
 		}
@@ -173,7 +166,7 @@ namespace Code.UI.Attendance
 			studentName.interactable = false;
 			string playerName = string.IsNullOrWhiteSpace(studentName.text) ? "Nameless Kitten" : studentName.text;
 			_progressFactory.CreateSetPlayerNameRequest(playerName);
-			StartExam().Forget();
+			StartExam();
 		}
 	}
 }

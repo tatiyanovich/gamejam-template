@@ -151,10 +151,10 @@ namespace Code.Gameplay.Exam.Behaviours
 
 				_answerBuilder.Append(stroke switch
 				{
-					StrokeDirection.Up => "[↑]",
-					StrokeDirection.Right => "[→]",
-					StrokeDirection.Down => "[↓]",
-					_ => "[←]"
+					StrokeDirection.Up => "↑",
+					StrokeDirection.Right => "→",
+					StrokeDirection.Down => "↓",
+					_ => "←"
 				});
 			}
 
