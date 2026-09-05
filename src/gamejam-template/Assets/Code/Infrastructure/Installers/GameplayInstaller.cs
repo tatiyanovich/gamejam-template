@@ -1,6 +1,5 @@
 using Code.Gameplay.Camera.Services;
 using Code.Gameplay.Debugging.Services;
-using Code.Gameplay.Difficulty.Services;
 using Code.Gameplay.Duck.Services;
 using Code.Gameplay.Exam.Services;
 using Code.Gameplay.Movement.Services;
@@ -27,7 +26,6 @@ namespace Code.Infrastructure.Installers
 		private void BindServices()
 		{
 			Container.BindInterfacesTo<KinematicCollision2DResolver>().AsSingle();
-			Container.BindInterfacesTo<DifficultyService>().AsSingle();
 		}
 
 		private void BindFactories()

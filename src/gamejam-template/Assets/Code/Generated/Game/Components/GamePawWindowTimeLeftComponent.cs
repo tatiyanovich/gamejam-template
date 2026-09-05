@@ -25,7 +25,7 @@ public partial class GameEntity {
         component.Value = newValue;
         AddComponent(index, component);
 
-		
+		isPawWindowTimeLeftChanged = true;
 
         return this;
     }
@@ -52,14 +52,14 @@ public partial class GameEntity {
         component.Value = newValue;
         ReplaceComponent(index, component);
 #endif
-		
+		isPawWindowTimeLeftChanged = true;
 
         return this;
     }
 
     public GameEntity RemovePawWindowTimeLeft() {
         RemoveComponent(GameComponentsLookup.PawWindowTimeLeft);
-		
+		isPawWindowTimeLeftChanged = true;
         return this;
     }
 
@@ -67,7 +67,7 @@ public partial class GameEntity {
         if (hasPawWindowTimeLeft) 
         {
             RemoveComponent(GameComponentsLookup.PawWindowTimeLeft);
-			
+			isPawWindowTimeLeftChanged = true;
         }
 
         return this;

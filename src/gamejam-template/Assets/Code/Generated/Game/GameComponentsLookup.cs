@@ -208,22 +208,24 @@ public static class GameComponentsLookup {
     public const int LocalRotationChanged = 197;
     public const int LookDirectionChanged = 198;
     public const int LossyScaleChanged = 199;
-    public const int MovementSpeedChanged = 200;
-    public const int NameChanged = 201;
-    public const int OnCooldownChanged = 202;
-    public const int PawLiftedChanged = 203;
-    public const int PlayerNameChanged = 204;
-    public const int ProcessedChanged = 205;
-    public const int ReadyChanged = 206;
-    public const int StartedChanged = 207;
-    public const int SuspicionLevelChanged = 208;
-    public const int TeacherAttentionChanged = 209;
-    public const int VelocityChanged = 210;
-    public const int ViewChanged = 211;
-    public const int WorldPositionChanged = 212;
-    public const int WorldRotationChanged = 213;
+    public const int MicrophoneLevelChanged = 200;
+    public const int MovementSpeedChanged = 201;
+    public const int NameChanged = 202;
+    public const int OnCooldownChanged = 203;
+    public const int PawLiftedChanged = 204;
+    public const int PawWindowTimeLeftChanged = 205;
+    public const int PlayerNameChanged = 206;
+    public const int ProcessedChanged = 207;
+    public const int ReadyChanged = 208;
+    public const int StartedChanged = 209;
+    public const int SuspicionLevelChanged = 210;
+    public const int TeacherAttentionChanged = 211;
+    public const int VelocityChanged = 212;
+    public const int ViewChanged = 213;
+    public const int WorldPositionChanged = 214;
+    public const int WorldRotationChanged = 215;
 
-    public const int TotalComponents = 214;
+    public const int TotalComponents = 216;
 
     public static readonly string[] componentNames = {
         "AliveChanged",
@@ -426,10 +428,12 @@ public static class GameComponentsLookup {
         "LocalRotationChanged",
         "LookDirectionChanged",
         "LossyScaleChanged",
+        "MicrophoneLevelChanged",
         "MovementSpeedChanged",
         "NameChanged",
         "OnCooldownChanged",
         "PawLiftedChanged",
+        "PawWindowTimeLeftChanged",
         "PlayerNameChanged",
         "ProcessedChanged",
         "ReadyChanged",
@@ -643,10 +647,12 @@ public static class GameComponentsLookup {
         typeof(LocalRotationChanged),
         typeof(LookDirectionChanged),
         typeof(LossyScaleChanged),
+        typeof(MicrophoneLevelChanged),
         typeof(MovementSpeedChanged),
         typeof(NameChanged),
         typeof(OnCooldownChanged),
         typeof(PawLiftedChanged),
+        typeof(PawWindowTimeLeftChanged),
         typeof(PlayerNameChanged),
         typeof(ProcessedChanged),
         typeof(ReadyChanged),

@@ -1,12 +1,20 @@
+using Code.Gameplay.Bell.Queries;
 using Code.Gameplay.Bell.Services;
 using Code.Gameplay.Camera.Services;
 using Code.Gameplay.CoreLoop;
+using Code.Gameplay.Difficulty.Services;
+using Code.Gameplay.Duck.Queries;
 using Code.Gameplay.Duck.Services;
+using Code.Gameplay.Exam.Queries;
 using Code.Gameplay.Exam.Services;
 using Code.Gameplay.Leaderboard.Services;
 using Code.Gameplay.Lifetime;
+using Code.Gameplay.Meow.Queries;
 using Code.Gameplay.Meow.Services;
+using Code.Gameplay.Neighbours.Queries;
+using Code.Gameplay.Suspicion.Queries;
 using Code.Gameplay.Suspicion.Services;
+using Code.Gameplay.Teacher.Queries;
 using Code.Gameplay.Teacher.Services;
 using Code.Infrastructure.EntityComponentSystem.Destruct.Services;
 using Code.Infrastructure.EntityComponentSystem.Installers;
@@ -60,6 +68,7 @@ namespace Code.Infrastructure.Installers
 			Container.BindInterfacesTo<DuckConfigsService>().AsSingle();
 			Container.BindInterfacesTo<BellConfigsService>().AsSingle();
 			Container.BindInterfacesTo<LeaderboardConfigsService>().AsSingle();
+			Container.BindInterfacesTo<DifficultyService>().AsSingle();
 		}
 
 		private void BindInfrastructureServices()
@@ -118,6 +127,13 @@ namespace Code.Infrastructure.Installers
 			new CoreLoopInstaller(Container).InstallBindings();
 			new LifetimeInstaller(Container).InstallBindings();
 			Container.BindInterfacesTo<CameraQuery>().AsSingle();
+			Container.BindInterfacesTo<ExamQuery>().AsSingle();
+			Container.BindInterfacesTo<SuspicionQuery>().AsSingle();
+			Container.BindInterfacesTo<TeacherQuery>().AsSingle();
+			Container.BindInterfacesTo<MeowQuery>().AsSingle();
+			Container.BindInterfacesTo<DuckQuery>().AsSingle();
+			Container.BindInterfacesTo<BellQuery>().AsSingle();
+			Container.BindInterfacesTo<NeighbourQuery>().AsSingle();
 			Container.BindInterfacesTo<CameraSwitcher>().AsSingle();
 		}
 

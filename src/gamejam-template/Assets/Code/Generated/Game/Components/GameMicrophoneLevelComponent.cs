@@ -25,7 +25,7 @@ public partial class GameEntity {
         component.Value = newValue;
         AddComponent(index, component);
 
-		
+		isMicrophoneLevelChanged = true;
 
         return this;
     }
@@ -52,14 +52,14 @@ public partial class GameEntity {
         component.Value = newValue;
         ReplaceComponent(index, component);
 #endif
-		
+		isMicrophoneLevelChanged = true;
 
         return this;
     }
 
     public GameEntity RemoveMicrophoneLevel() {
         RemoveComponent(GameComponentsLookup.MicrophoneLevel);
-		
+		isMicrophoneLevelChanged = true;
         return this;
     }
 
@@ -67,7 +67,7 @@ public partial class GameEntity {
         if (hasMicrophoneLevel) 
         {
             RemoveComponent(GameComponentsLookup.MicrophoneLevel);
-			
+			isMicrophoneLevelChanged = true;
         }
 
         return this;

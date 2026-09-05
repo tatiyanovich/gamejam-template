@@ -34,10 +34,12 @@ public sealed class GameWatchedCleanupSystems : Feature {
         Add(new RemoveLocalRotationChangedGameSystem(contexts));
         Add(new RemoveLookDirectionChangedGameSystem(contexts));
         Add(new RemoveLossyScaleChangedGameSystem(contexts));
+        Add(new RemoveMicrophoneLevelChangedGameSystem(contexts));
         Add(new RemoveMovementSpeedChangedGameSystem(contexts));
         Add(new RemoveNameChangedGameSystem(contexts));
         Add(new RemoveOnCooldownChangedGameSystem(contexts));
         Add(new RemovePawLiftedChangedGameSystem(contexts));
+        Add(new RemovePawWindowTimeLeftChangedGameSystem(contexts));
         Add(new RemovePlayerNameChangedGameSystem(contexts));
         Add(new RemoveProcessedChangedGameSystem(contexts));
         Add(new RemoveReadyChangedGameSystem(contexts));
