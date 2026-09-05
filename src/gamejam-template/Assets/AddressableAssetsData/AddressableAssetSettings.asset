@@ -42,6 +42,7 @@ MonoBehaviour:
   m_BundleRedirectLimit: -1
   m_SharedBundleSettings: 0
   m_SharedBundleSettingsCustomGroupIndex: 0
+  m_simulatedLoadDelay: 0.1
   m_ContiguousBundles: 1
   m_StripUnityVersionFromBundleBuild: 0
   m_DisableVisibleSubAssetRepresentations: 0
@@ -60,13 +61,19 @@ MonoBehaviour:
   m_BuildAddressablesWithPlayerBuild: 0
   m_overridePlayerVersion: '[UnityEditor.PlayerSettings.bundleVersion]'
   m_GroupAssets:
+  - {fileID: 11400000, guid: a63647de98175463fbb184d1f236d287, type: 2}
   - {fileID: 11400000, guid: 8837f55baa52f844484dbcba86fc8cee, type: 2}
+  - {fileID: 11400000, guid: 8b95c05154e9b44d6a6695710cf87a56, type: 2}
   - {fileID: 11400000, guid: 1485b2df1de0747659540b0970638909, type: 2}
   - {fileID: 11400000, guid: bd6423bf9f9fe4611ab171899e606363, type: 2}
   - {fileID: 11400000, guid: c0fc82a5b21ec694db55e07fc11a9444, type: 2}
+  - {fileID: 11400000, guid: 4af222256dc8d469e80e363c5315a030, type: 2}
   - {fileID: 11400000, guid: e0d4817304c6d488eb3df497fb8ec736, type: 2}
+  - {fileID: 11400000, guid: 289580a0aaf304ab98ec403fcceee844, type: 2}
   - {fileID: 11400000, guid: 4d46623893ad5458d9ab4463ac71307b, type: 2}
+  - {fileID: 11400000, guid: 96e28534df5d3428d87d3dd59935bd32, type: 2}
   - {fileID: 11400000, guid: 0ffbccb78902b44c1a5a7557c6b0b682, type: 2}
+  - {fileID: 11400000, guid: 9666e10e1363e40d0b5450b2c8a70da4, type: 2}
   - {fileID: 11400000, guid: 1c0f4e0d71a8f804dab90f355c2260cc, type: 2}
   m_BuildSettings:
     m_LogResourceManagerExceptions: 1

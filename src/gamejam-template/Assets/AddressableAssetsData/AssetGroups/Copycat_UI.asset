@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Copycat_UI
+  m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
+  m_GroupName: Copycat_UI
+  m_GUID: 3f9f34fbf4dc747368a250b229cbfc54
+  m_SerializeEntries:
+  - m_GUID: 0b4b97008e8c24131bb1d6cd523250d2
+    m_Address: copycat_suspicion_meter_prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0da76f3401a4040e4b29153a89c5ec99
+    m_Address: copycat_ui_folder
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3950664aba012437fab49cb6ff1a9ecc
+    m_Address: copycat_meow_meter_prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4c917f802850940a3ab33a09f9a17c4b
+    m_Address: copycat_yellow_button_prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 595a24990157c444680544228726101a
+    m_Address: copycat_danger_vignette_prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b623ef8192674425788ac52693d76540
+    m_Address: copycat_paper_panel_prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c664ca35ff681484990d257408778f15
+    m_Address: copycat_hud_chip_prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 93b346209c333447f9df9a22fceba535, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 4ce123566740f4bfc80131f4afeeee7f, type: 2}
+    - {fileID: 11400000, guid: 395e781a7c6204791b38242dfb70108c, type: 2}

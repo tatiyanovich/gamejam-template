@@ -9,6 +9,7 @@ using Framework.Essentials.SceneManagement;
 using Framework.StateManagement;
 using UnityEngine;
 using UnityEngine.ResourceManagement.ResourceProviders;
+using UnityEngine.SceneManagement;
 
 namespace Code.Infrastructure.StateManagement.Sessions.SessionStates
 {
@@ -105,6 +106,9 @@ namespace Code.Infrastructure.StateManagement.Sessions.SessionStates
 		private void UnloadSessionScene()
 		{
 			if (_loadedSceneRegistry.TryGet(_nodeId, out SceneInstance scene) == false)
+				return;
+
+			if (scene.Scene.IsValid() && scene.Scene.isLoaded && SceneManager.loadedSceneCount <= 1)
 				return;
 
 			_loadedSceneRegistry.Remove(_nodeId);
