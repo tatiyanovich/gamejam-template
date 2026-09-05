@@ -81,8 +81,8 @@ namespace Code.UI.Launch
 
 		private async UniTask OpenAttendance()
 		{
-			await _uiService.OpenWindow<AttendanceWindow>();
 			await _uiService.CloseWindow<LaunchWindow>(withAnimation: false);
+			await _uiService.OpenWindow<AttendanceWindow>();
 		}
 
 		private void HandlePlay()
