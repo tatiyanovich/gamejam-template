@@ -23,7 +23,7 @@ MonoBehaviour:
     pencilSnapAlerts: 0
     staringEnabled: 0
     pawWindow: 10
-  - questionCount: 4
+  - questionCount: 2
     teacherChecks: 1
     checkDelayMinimum: 4.5
     checkDelayMaximum: 6.5
@@ -33,7 +33,7 @@ MonoBehaviour:
     pencilSnapAlerts: 0
     staringEnabled: 0
     pawWindow: 7
-  - questionCount: 4
+  - questionCount: 3
     teacherChecks: 1
     checkDelayMinimum: 3
     checkDelayMaximum: 4.5
@@ -43,7 +43,7 @@ MonoBehaviour:
     pencilSnapAlerts: 1
     staringEnabled: 1
     pawWindow: 5
-  - questionCount: 4
+  - questionCount: 2
     teacherChecks: 1
     checkDelayMinimum: 2
     checkDelayMaximum: 3
@@ -53,7 +53,7 @@ MonoBehaviour:
     pencilSnapAlerts: 1
     staringEnabled: 1
     pawWindow: 4
-  - questionCount: 5
+  - questionCount: 2
     teacherChecks: 1
     checkDelayMinimum: 1.5
     checkDelayMaximum: 2.2

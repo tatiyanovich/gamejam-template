@@ -52,7 +52,7 @@
 ### A. Foundation / Gameplay ECS (Егор + Claude) — P0, ~14 ч
 - [x] **A0** (0.5) Открыть в 6000.3.22f1, убедиться, что компилируется, Jenny‑Gen работает. Если нет — 6000.3.6f1 (D‑12).
 - [x] **A1** (1.0) Снести Drilling/Fuel/Joystick/RefreshDrillRunSystem, `BestDrilledDistance`, `Player` префаб; `Battle` → `Exam`; product name `COPYCAT`.
-- [x] **A2** (1.0) `ExamConfig` (20 вопросов: текст, тип, сосед, payload), `DifficultyConfig` (5 фаз, поля из `GDD §11`), `QuestionType` enum. Зав.: A1.
+- [x] **A2** (1.0) `ExamConfig` (12 вопросов: текст, тип, сосед, payload), `DifficultyConfig` (5 фаз, поля из `GDD §11`), `QuestionType` enum. Зав.: A1.
 - [x] **A3** (1.5) Сущность `ExamRun` (индекс вопроса, счётчик ответов, elapsed), `Question` сущность, системы: `SpawnNextQuestionSystem`, `MarkAnswerCopiedSystem`, `FinishExamOnLastAnswerSystem`, событие `AnswerCopiedEvent`. Зав.: A2.
 - [x] **A4** (1.0) Input‑контекст: `LeanHeld`, `StrokePressed(dir)`, `PickPressed(1–4)`, `LetterPressed(char)`, `MeowKeyPressed`, `DuckKeyPressed`; `EmitInputSystem` по `KeyCode`. Зав.: A1.
 - [x] **A5** (1.5) Валидация ввода: `ValidateStrokeInputSystem`, `ValidatePickInputSystem`, `ValidateWordInputSystem` — только при `LeanHeld` и открытой лапе; событие `WrongInputEvent`. Зав.: A3, A4.
@@ -61,7 +61,7 @@
 - [ ] **A8** (2.0) Учительница: `TeacherAttention` компонент‑состояние (Writing/Turning/Watching/Staring/Alerted/Distracted) + таймер; системы `ScheduleTeacherCheckSystem`, `TelegraphTeacherTurnSystem`, `WatchClassSystem`, `KeepStaringWhileLeaningSystem`, `AlertTeacherOnMeowSystem` (шанс по фазе), `AlertTeacherOnPencilSnapSystem`, `DistractTeacherByDuckSystem`; счётчик `AlmostCaught`. Зав.: A12, A7.
 - [ ] **A9** (0.5) Подозрение: `AccumulateSuspicionWhileWatchedSystem`, `DecaySuspicionSystem`, `AddSuspicionOnWrongInputSystem`, `AddSuspicionOnMeowWhileWatchedSystem`, `FinishExamOnMaxSuspicionSystem`. Зав.: A8.
 - [ ] **A10** (1.0) Утка: `DuckOnDesk`/`DuckFlying`/`DuckCarried`/`DuckConfiscated`, `ThrowDuckByRequestSystem`, `ReturnDuckSystem`, `ConfiscateDuckOnThirdThrowSystem`, `−20` подозрения. Зав.: A8.
-- [ ] **A11** (0.5) Звонок: `BellTimer` 180 с, событие `BellAnnouncementEvent` на 60 с, `FinishExamOnBellSystem`. Зав.: A3.
+- [ ] **A11** (0.5) Звонок: `BellTimer` 120 с, событие `BellAnnouncementEvent` на 45 с, `FinishExamOnBellSystem`. Зав.: A3.
 - [ ] **A12** (0.5) `IDifficultyService.GetPhase(questionIndex)` → параметры из `DifficultyConfig`. Зав.: A2.
 - [ ] **A13** (1.0) Сейв: `PlayerName`, `IntroSeen`, `BestAnswers`, `BestTimeSeconds`; `RefreshExamProgressSystem`; миграция. Зав.: A3.
 - [ ] **A14** (0.5) Greybox‑сцена: цветные прямоугольники/круги для всех сущностей, чтобы плейтест №1 состоялся в 13:00. Зав.: A3–A9.
@@ -72,7 +72,7 @@
 - [ ] **B2** (1.0, P0) `AttendanceWindow`: поле имени (≤12, фильтр), метр мика с порогом, галочка `LOUD ENOUGH!`, `START EXAM`. Зав.: A7, A13.
 - [ ] **B3** (2.0, P0) HUD в `GameplayWindow`: счётчик, часы, шкала подозрения, метр MEOW (заливка + порог + кулдаун), кейкап Q, кольцо‑таймер лапы (world‑space), пузырь учительницы. Зав.: A15.
 - [ ] **B4** (0.5, P0) Контекстные подсказки фазы 1 (пять штук из `GDD §11`), скрываются по выполнению. Зав.: B3.
-- [ ] **B5** (1.5, P0) `ResultWindow` → Report Card: заголовок по исходу, статы, штамп grade, звёзды при 20/20, лидерборд топ‑10 + свой ранг, `RETAKE EXAM`/`MAIN MENU`, `R`. Зав.: A13, C2.
+- [ ] **B5** (1.5, P0) `ResultWindow` → Report Card: заголовок по исходу, статы, штамп grade, звёзды при 12/12, лидерборд топ‑10 + свой ранг, `RETAKE EXAM`/`MAIN MENU`, `R`. Зав.: A13, C2.
 - [ ] **B6** (1.5, P1) `IntroWindow`: 5 панелей, Ken Burns (DOTween), субтитры, аудио, Skip; флаг `IntroSeen`. Зав.: D9, F3.
 - [ ] **B7** (0.5, P1) Виньет опасности (оранжевый/красный пульс) + флеш‑нотификации слева. Зав.: A15.
 
@@ -104,12 +104,12 @@
 
 ### F. Аудио (Claude) — P0 1.5 ч, P1 1 ч
 - [ ] **F1** (1.0, P0) SFX из `GDD §16` (синтез Python/ffmpeg + `say` для мяу‑фолбэка), нормализация −6 dBFS.
-- [ ] **F2** (0.5, P1) Музыкальный луп 60 с «класс/тик‑так» + ускоренная версия для последних 60 с.
+- [ ] **F2** (0.5, P1) Музыкальный луп 60 с «класс/тик‑так» + ускоренная версия для последних 45 с.
 - [ ] **F3** (0.5, P1) VO интро: EN «meow meow» + UA `Lesya` гундосый дубляж, микс, 4 файла по панелям.
 - [ ] **F4** (0.5, P0) `AudioService`: SFX по `SfxId`, музыка, дакинг при активном мике, громкости из `SettingsSaveFile`.
 
 ### G. Контент и баланс (Коля) — ~4 ч
-- [ ] **G1** (0.5) Финальные 20 вопросов по структуре `GDD §13.1` (тип/сосед/длина не менять).
+- [ ] **G1** (0.5) Финальные 12 вопросов по структуре `GDD §13.1` (тип/сосед/длина не менять).
 - [ ] **G2** (0.5) Реплики учительницы, тексты Report Card, подсказки — финальные строки в `GDD §13`.
 - [ ] **G3** (3 × 0.5) Баланс после плейтестов №1–3: только цифры в `DifficultyConfig`/`SuspicionConfig`, записывать изменения в `GDD §10–11`.
 - [ ] **G4** (1.0) Страница itch: тексты, управление, «микрофон обязателен», скриншоты от Димы.

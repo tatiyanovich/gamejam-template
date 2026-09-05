@@ -1,7 +1,7 @@
 # COPYCAT — Game Design Document
 
 **Версия:** 1.0 (5 сентября 2026) · **Тема джема:** Cheat to Win! · **Обязательный элемент:** резиновая утка
-**Платформы:** Windows x64, macOS (Universal) · **Сессия:** 1–3 минуты на попытку, 4–6 попыток на игрока
+**Платформы:** Windows x64, macOS (Universal) · **Сессия:** 1–2 минуты на попытку, 4–6 попыток на игрока
 **Весь текст в игре — английский.** Единственное исключение — украинский дубляж интро (P1).
 
 > Предыдущая версия (по HTML‑прототипу) лежит в `docs/prototype/COPYCAT_GDD_v0_prototype.html`.
@@ -94,7 +94,7 @@ Main Menu ──Play──▶ Attendance Sheet (имя + тест микрофо
 ### 6.2 Pick (тест A/B/C/D) — «подсмотри, что обвёл»
 - Лист соседа: четыре варианта `A B C D` (короткие смешные слова), один обведён карандашным кругом.
 - Ввод: одно нажатие `1–4`. Верно — сразу COPIED. Ошибка — `+8`, круг у соседа на 0.4 с исчезает (надо снова вглядеться), потом появляется.
-- Самый быстрый тип. Хитрость на поздних фазах: обведённый круг **бледный** и заметен только в наклоне.
+- Самый быстрый тип. Хитрость с фазы 3: обведённый круг **бледный** и заметен только в наклоне.
 
 ### 6.3 Word (слово) — «перепиши слово»
 - Лист соседа: слово из 3–6 букв крупным рукописным шрифтом (`TUNA`, `PURR`, `CATNIP`).
@@ -181,55 +181,55 @@ Main Menu ──Play──▶ Attendance Sheet (имя + тест микрофо
 
 ## 11. Кривая сложности
 
-Экзамен — **20 вопросов**, 5 фаз. Игра длится до CAUGHT, звонка или 20‑го ответа. Параметры берутся из таблицы по индексу вопроса.
+Экзамен — **12 вопросов**, 5 фаз. Игра длится до CAUGHT, звонка или 12‑го ответа. Параметры берутся из таблицы по индексу вопроса.
 
 | Фаза | Вопросы | `CheckDelay` (с) | `LookDuration` (с) | `MeowAlert` | Треск → разворот | Staring | `PawWindow` (с) | Strokes / Word | Типы |
 |---|---|---|---|---|---|---|---|---|---|
 | 1 Tutorial | Q1–Q3 | никогда | — | 0 % | нет | нет | 10 | 2, 3, 3 / — | Strokes |
-| 2 Warm‑up | Q4–Q7 | 4.5–6.5 | 1.2–1.8 | 0 % | нет | нет | 7 | 3 / — | Strokes, Pick |
-| 3 Attention | Q8–Q11 | 3.0–4.5 | 1.5–2.0 | 35 % | да | да | 5 | 4 / 4 букв | все |
-| 4 Pressure | Q12–Q15 | 2.0–3.0 | 1.5–2.5 | 60 % | да | да | 4 | 5 / 5 букв | все |
-| 5 Final | Q16–Q20 | 1.5–2.2 | 2.0–2.5 | 90 % | да | да | 3 | 6 / 6 букв | все |
+| 2 Warm‑up | Q4–Q5 | 4.5–6.5 | 1.2–1.8 | 0 % | нет | нет | 7 | 3 / — | Strokes, Pick |
+| 3 Attention | Q6–Q8 | 3.0–4.5 | 1.5–2.0 | 35 % | да | да | 5 | 4 / 4 букв | все |
+| 4 Pressure | Q9–Q10 | 2.0–3.0 | 1.5–2.5 | 60 % | да | да | 4 | 5 / 5 букв | все |
+| 5 Final | Q11–Q12 | 1.5–2.2 | 2.0–2.5 | 90 % | да | да | 3 | 6 / 6 букв | все |
 
 **Как это ощущается по попыткам (цель):**
-- Попытка 1: игрок учится мяукать и наклоняться, впервые видит разворот на Q4, умирает на Q5–Q7 (или проигрывает звонку).
-- Попытки 2–3: понимает телеграф `Hmm?`, доходит до Q8–Q12, впервые ловит `Did someone MEOW?` и понимает, что мяу — риск.
-- Попытка 4+: челлендж. Q13–Q18. Утка используется осознанно. 20/20 — редкое достижение (`EXAM PASSED`).
+- Попытка 1: игрок учится мяукать и наклоняться, впервые видит разворот на Q4, умирает на Q5–Q6 (или проигрывает звонку).
+- Попытки 2–3: понимает телеграф `Hmm?`, доходит до Q6–Q8, впервые ловит `Did someone MEOW?` и понимает, что мяу — риск.
+- Попытка 4+: челлендж. Q9–Q11. Утка используется осознанно. 12/12 — редкое достижение (`EXAM PASSED`).
 
 **Обучение в фазе 1 (контекстные подсказки над партой, исчезают после выполнения):**
 1. `MEOW into your mic to get Whiskerstein's attention!` (мигает метр) → после первого мяу
 2. `Hold SPACE to lean over` → после первого наклона
 3. `Copy the strokes: ← ↑ →` → после первого ответа
 4. На Q4 перед первым разворотом: `Psst. She turns around sometimes. Let go of SPACE!`
-5. На Q8, когда утка впервые полезна: `Throw the duck when it gets hot [Q]`
+5. На Q6, когда утка впервые полезна: `Throw the duck when it gets hot [Q]`
 
 ### 11.1 Звонок (таймер)
-- Экзамен длится **180 с**. Часы на стене всегда видны, но спокойные (ambient).
-- На **60 с** до конца учительница объявляет `Ten minutes left, class!`, часы становятся красными и тикают. Это «момент, когда добавился таймер».
+- Экзамен длится **120 с**. Часы на стене всегда видны, но спокойные (ambient).
+- На **45 с** до конца учительница объявляет `Ten minutes left, class!`, часы становятся красными и тикают. Это «момент, когда добавился таймер».
 - Последние 10 с — громкое тиканье. `0:00` → **BELL RANG**, экзамен окончен с текущим числом ответов.
 
 ### 11.2 Бюджет времени (проверка)
-Средняя цена вопроса по фазам ≈ 5 / 7 / 8 / 9 / 10 с → 15 + 28 + 32 + 36 + 50 = **161 с** при идеальной игре. 20/20 достижимо только мастером — так и задумано.
+Средняя цена вопроса по фазам ≈ 5 / 7 / 8 / 9 / 10 с → 15 + 14 + 24 + 18 + 20 = **91 с** при идеальной игре из 120 с. 12/12 достижимо только мастером — так и задумано.
 
 ## 12. Результат, оценка, лидерборд
 
 **Report Card** (табель) открывается при CAUGHT / BELL RANG / EXAM PASSED.
 
 Заголовок: `CAUGHT 😾` / `BELL RANG 🔔` / `EXAM PASSED!`
-Статы: `Answers copied N/20` · `Time 1:23` · `Meows` · `Almost caught` · `Ducks thrown`
+Статы: `Answers copied N/12` · `Time 1:23` · `Meows` · `Almost caught` · `Ducks thrown`
 
 **Оценка (grade) по числу ответов** — штамп на табеле:
 
 | Ответов | Grade | Сообщение |
 |---|---|---|
-| 0–4 | **F** | `Detention. Even the duck is disappointed.` |
-| 5–8 | **D** | `You cheated like a dog. Cats do better.` |
-| 9–12 | **C** | `Average copycat. Whiskerstein noticed.` |
-| 13–16 | **B** | `Solid cheating. Barely any paw prints.` |
-| 17–19 | **A** | `Almost purrfect. The bell saved her, not you.` |
-| 20 | **A+** + звёзды | см. ниже |
+| 0–2 | **F** | `Detention. Even the duck is disappointed.` |
+| 3–5 | **D** | `You cheated like a dog. Cats do better.` |
+| 6–8 | **C** | `Average copycat. Whiskerstein noticed.` |
+| 9–10 | **B** | `Solid cheating. Barely any paw prints.` |
+| 11 | **A** | `Almost purrfect. The bell saved her, not you.` |
+| 12 | **A+** + звёзды | см. ниже |
 
-**Звёзды только при 20/20:** ★★★ — 0 уток и ≤1 almost caught (`Purrfect crime. No duck, no evidence.`); ★★☆ — ≤3 almost caught (`Nice cheating. A few close calls.`); ★☆☆ — иначе (`Passed by a whisker.`).
+**Звёзды только при 12/12:** ★★★ — 0 уток и ≤1 almost caught (`Purrfect crime. No duck, no evidence.`); ★★☆ — ≤3 almost caught (`Nice cheating. A few close calls.`); ★☆☆ — иначе (`Passed by a whisker.`).
 
 **Лидерборд (Google Sheets):**
 - Строка: `name, answers, timeSeconds, grade, dateUtc`. Время — сколько секунд шёл экзамен до конца попытки.
@@ -241,7 +241,7 @@ Main Menu ──Play──▶ Attendance Sheet (имя + тест микрофо
 
 ## 13. Контент
 
-### 13.1 Вопросы (20)
+### 13.1 Вопросы (12)
 Вопрос печатается на своём листе одной строкой (≤ 9 слов). Тип и сосед фиксированы. `Payload` — что показывает сосед.
 
 | # | Фаза | Тип | Сосед | Вопрос (на своём листе) | Payload (на листе соседа) |
@@ -251,21 +251,13 @@ Main Menu ──Play──▶ Attendance Sheet (имя + тест микрофо
 | 3 | 1 | Strokes | L | Who discovered gravity by knocking a cup off? | `↓ → ↑` |
 | 4 | 2 | Pick | R | Best time for zoomies? | A 3 AM ✓ · B Noon · C Never · D Tuesday |
 | 5 | 2 | Strokes | L | Translate 'pspspsps' into Cat Latin. | `↑ ← ↓` |
-| 6 | 2 | Pick | R | Primary purpose of an expensive cat bed? | A Sleeping · B Ignoring it ✓ · C Resale · D Art |
-| 7 | 2 | Strokes | L | Newton's First Law of Napping states: | `→ ↓ ←` |
-| 8 | 3 | Word | R | What sings outside at 5 AM? | `BIRD` |
-| 9 | 3 | Strokes | L | Optimal nap-to-chaos ratio? | `↓ ← ↑ →` |
-| 10 | 3 | Pick | R | Why is the laser dot impossible to catch? | A Physics · B Betrayal ✓ · C Lag · D Magic |
-| 11 | 3 | Word | L | Fish served in a can is called? | `TUNA` |
-| 12 | 4 | Strokes | R | Define cardboard-box quantum mechanics. | `← ↑ → ↓ ←` |
-| 13 | 4 | Word | L | The sound of a happy cat? | `PURRS` |
-| 14 | 4 | Pick | R | 3 tuna cans + 2 tuna cans = ? | A 5 · B Reasons to ignore you ✓ · C 6 · D Fish |
-| 15 | 4 | Word | L | Formal name for 'the red dot'? | `LASER` |
-| 16 | 5 | Strokes | R | Prove the vase 'fell on its own'. | `↑ ← ↓ → ↑ ←` |
-| 17 | 5 | Word | L | Forbidden green plant of joy? | `CATNIP` |
-| 18 | 5 | Pick | R | Where does a cat sit? | A The bed · B The box · C The laptop ✓ · D Your face |
-| 19 | 5 | Word | L | What do you do to things on shelves? | `KNOCKS` |
-| 20 | 5 | Strokes | R | Did you CATegorically avoid cheating? | `← → ↑ ↓ ← ↑` — на своём листе печатается `Answer: NO` |
+| 6 | 3 | Word | R | What sings outside at 5 AM? | `BIRD` |
+| 7 | 3 | Strokes | L | Optimal nap-to-chaos ratio? | `↓ ← ↑ →` |
+| 8 | 3 | Pick | R | Why is the laser dot impossible to catch? | A Physics · B Betrayal ✓ · C Lag · D Magic |
+| 9 | 4 | Strokes | L | Define cardboard-box quantum mechanics. | `← ↑ → ↓ ←` |
+| 10 | 4 | Word | R | The sound of a happy cat? | `PURRS` |
+| 11 | 5 | Word | L | Forbidden green plant of joy? | `CATNIP` |
+| 12 | 5 | Strokes | R | Did you CATegorically avoid cheating? | `← → ↑ ↓ ← ↑` — на своём листе печатается `Answer: NO` |
 
 Правила контента: слова без `M` и `Q`, длина строго по фазе; у Pick варианты — 1–3 слова; вопрос ≤ 9 слов.
 Коля финализирует формулировки (задача G1), но структура (тип/сосед/длина) фиксирована балансом.
@@ -276,13 +268,13 @@ Main Menu ──Play──▶ Attendance Sheet (имя + тест микрофо
 - Доска: `FINAL EXAM` · `Rule #1: NO CHEATING.` · `Rule #2: NO MEOWING.` · мелко: `Emotional support ducks permitted.`
 - Свой лист: заголовок `CAT ACADEMY — FINAL EXAM`, `Student: <имя игрока>`, `Answer: ____`, штамп `COPIED ✓`.
 - Лист соседа: `Whiskerstein` / `Fluffy`, лапа с подписью при закрытом ответе — ничего (лапа говорит сама за себя).
-- HUD: `ANSWERS 7 / 20` · часы `2:14` · `SUSPICION` · метр `MEOW` с подписью `[M] if no mic` · кейкап `Q` под уткой.
+- HUD: `ANSWERS 7 / 12` · часы `2:14` · `SUSPICION` · метр `MEOW` с подписью `[M] if no mic` · кейкап `Q` под уткой.
 - Флеши слева: `ANSWER COPIED!` · `PENCIL SNAP!` · `LOUDER!` · `SHE'S LOOKING!` · `DUCK AWAY! 4s` · `DUCK CONFISCATED`.
 
 ### 13.3 Реплики учительницы
 Turning: `Hmm?` · Watching: `I'm watching you.` / `Eyes on your OWN paper.` / `Whiskers down, everyone.` · Staring: `MISS HISSKINS SEES YOU.` ·
 Meow alert: `Did someone MEOW?` / `NO. MEOWING.` · Pencil snap: `What was that?!` · Duck: `WHOSE DUCK IS THIS?!` → `Keep. It. Quiet.` → `That's it. The duck is MINE.` ·
-60 с: `Ten minutes left, class!` · Caught: `CAUGHT. See me after class.` · Bell: `RIIING! Pencils down!` · Passed: `...You all passed? Suspicious.`
+45 с: `Ten minutes left, class!` · Caught: `CAUGHT. See me after class.` · Bell: `RIIING! Pencils down!` · Passed: `...You all passed? Suspicious.`
 
 ## 14. Интро (лор)
 
@@ -303,7 +295,7 @@ Meow alert: `Did someone MEOW?` / `NO. MEOWING.` · Pencil snap: `What was that?
 
 ## 15. UI/HUD (раскладка 1920×1080)
 
-- **Верх:** слева логотип‑чип `COPYCAT`, центр `ANSWERS 7 / 20`, справа часы на стене (часть фона, цифры поверх).
+- **Верх:** слева логотип‑чип `COPYCAT`, центр `ANSWERS 7 / 12`, справа часы на стене (часть фона, цифры поверх).
 - **Центр‑верх:** доска с правилами, перед ней учительница. Под ней шкала `SUSPICION`.
 - **Средний план:** парты соседей слева и справа под углом (перспектива), их листы, лапы, кольца‑таймеры.
 - **Низ (своя парта, трапеция):** свой лист по центру, лапы котёнка, утка справа с кейкапом `Q`, метр `MEOW` (круг с заливкой и красной линией порога) слева над партой.
@@ -315,7 +307,7 @@ Meow alert: `Did someone MEOW?` / `NO. MEOWING.` · Pencil snap: `What was that?
 ## 16. Аудио
 
 SFX: мяу‑фолбэк ×3, писк утки, свист броска, шлепок приземления, смех класса, треск карандаша, скрип карандаша при вводе, штамп COPIED, скрип мела, вздох «Hmm?», сердцебиение (80 %+), тиканье, звонок, шаги учительницы.
-Музыка: тихий напряжённый эмбиент «класс» с тиканьем, ускоряется на последних 60 с. Громкость музыки авто‑приглушается при активном микрофоне (чтобы не триггерить сам себя через колонки: игрок в наушниках не обязателен, поэтому музыка тихая, −18 dB).
+Музыка: тихий напряжённый эмбиент «класс» с тиканьем, ускоряется на последних 45 с. Громкость музыки авто‑приглушается при активном микрофоне (чтобы не триггерить сам себя через колонки: игрок в наушниках не обязателен, поэтому музыка тихая, −18 dB).
 VO: только интро.
 
 ## 17. Вне скоупа (не делаем)

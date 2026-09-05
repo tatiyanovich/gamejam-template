@@ -51,7 +51,7 @@
 - **D‑02 · 05.09** · Наклон (hold Space) — отдельное действие, оно и есть «видимое списывание». Ввод считается только в наклоне. · Игроку нужен мгновенный «спрятаться»; учительница ловит поведение, а не факт открытого листа.
 - **D‑03 · 05.09** · Три типа ввода: Strokes (стрелки), Pick (1–4), Word (буквы). Типы фиксированы по вопросам. · Разнообразие без взрыва скоупа; всё — нажатия клавиш, один input‑слой.
 - **D‑04 · 05.09** · Утка = бросок‑decoy с диегетическим кулдауном (учительница относит и приносит), 3 использования, потом конфискация. Утка снимает −20 подозрения. · Самая смешная и читаемая версия; кулдаун виден без UI; выполняет требование «утка на столе + на неё можно нажать + это имеет смысл».
-- **D‑05 · 05.09** · 20 вопросов, 5 фаз, глобальный звонок 180 с с объявлением на 60 с. Лидерборд: ответы ↓, время ↑. · Короткие сессии, эндлесс‑ощущение, редкий «полный проход» как достижение.
+- **D‑05 · 05.09** · 20 вопросов, 5 фаз, глобальный звонок 180 с с объявлением на 60 с (числа отменены D‑36, сортировка лидерборда в силе). Лидерборд: ответы ↓, время ↑. · Короткие сессии, эндлесс‑ощущение, редкий «полный проход» как достижение.
 - **D‑06 · 05.09** · Вопросы на своём листе — короткий английский текст (флейвор), всё остальное на листах — каракули. · Юмор — канал ценности игры; текст читается в паузах и не конкурирует с копированием, которое идёт по листу соседа.
 - **D‑07 · 05.09** · Интро — 5 статичных панелей с наездом камеры, субтитры, озвучка. **Не видео.** · Нет риска кодеков/VideoPlayer на двух платформах, панели правятся по одной, легко пропускать. Визуал интро может отличаться от геймплея.
 - **D‑08 · 05.09** · Визуальный стиль — «Chunky Vector Cartoon»: толстые тёмные контуры, плоские заливки, одна тень, огромные глаза с крошечными зрачками; 2D с одноточечной перспективой класса. · Единственный стиль, который Claude стабильно генерирует кодом (SVG) и который одинаково работает для UI и геймплея. Детали — `ART_BIBLE.md`.
@@ -87,6 +87,8 @@
 
 - **D‑35 · 05.09** · D2: пол 1920×670 @1x от y=410 до 1080; точка схода (960,410) на оси доски, как в D1. Девять слоёв @2x без trim, координаты/pivots/порядок и отдельный текст доски в `art/src/d2/layout.json`. · Исходных 420 px пола недостаточно для кадра; отдельные стрелки и текст позволяют анимировать часы и использовать TMP в D11.
 
+- **D‑36 · 05.09** · Экзамен — **12 вопросов** (по фазам 3/2/3/2/2), звонок **120 с** с объявлением на **45 с**, сетка оценок и звёзды пересчитаны под 12 (отменяет числа D‑05, параметры самих фаз не тронуты). · Коля не уверен в 20 вопросах: идеальный проход занимал 161 с из 180, полный экзамен видели бы единицы, а обучающая фаза съедала четверть контента. На 12 вопросах идеал ≈ 91 с из 120 с, попытка укладывается в 1–2 минуты (`GDD §2`, столп 4), `12/12` остаётся мастерским, но достижимым. Выброшены 8 вопросов, ramp длин сохранён: Strokes 2/3/3 → 3 → 4 → 5 → 6, Word `BIRD`/`PURRS`/`CATNIP` (4/5/6), Pick на Q4 и Q8.
+
 ## 5. Маппинг дизайна на код шаблона
 
 D3: `art/src/d3/` → `art/kitten.mjs` → `art/exports/d3/` (12 спрайтов котёнка); `rig.json` описывает pivots, слои и позы для будущего префаба `Content/Characters/` в D11 и анимации E2.
@@ -98,7 +100,7 @@ D3: `art/src/d3/` → `art/kitten.mjs` → `art/exports/d3/` (12 спрайто�
 | Intro | новое окно `IntroWindow` (`UI/Intro/`), открывается при входе в Exam, если `IntroSeen == false`; по завершении создаёт `StartExamRequest` |
 | Exam | `LoopNodeId.Exam` (переименованный `Battle`), сцена `Gameplay`, фичи в `GameplayCoreFeature` |
 | Фичи геймплея | `Gameplay/Exam` (вопросы, прогресс, ответы), `Gameplay/Neighbours` (лапа/окно), `Gameplay/Teacher` (внимание), `Gameplay/Suspicion`, `Gameplay/Meow` (микрофон), `Gameplay/Duck`, `Gameplay/Bell` (таймер), `Gameplay/Difficulty` (фазы) |
-| Конфиги | `ExamConfig` (20 вопросов, ключ `exam_config`), `DifficultyConfig` (5 фаз, `difficulty_config`), `MeowConfig` (порог/масштаб), `SuspicionConfig`, `DuckConfig`, `BellConfig` — ScriptableObject в `AddressableResources/Configs/<Feature>/`, группа `Configs` |
+| Конфиги | `ExamConfig` (12 вопросов, ключ `exam_config`), `DifficultyConfig` (5 фаз, `difficulty_config`), `MeowConfig` (порог/масштаб), `SuspicionConfig`, `DuckConfig`, `BellConfig` — ScriptableObject в `AddressableResources/Configs/<Feature>/`, группа `Configs` |
 | Загрузка конфигов экзамена | `IExamConfigsService` (`Gameplay/Exam/Services`) — грузит `ExamConfig` и `DifficultyConfig`, регистрируется в `BootstrapInstaller.BindConfigServices` |
 | Данные вопроса | `QuestionDefinition` (`Gameplay/Exam/Data`), enum‑ы `QuestionType`, `StrokeDirection` (`Gameplay/Exam`), `NeighbourSide` (`Gameplay/Neighbours`) |
 | Данные фазы | `DifficultyPhase` (`Gameplay/Difficulty/Data`): `QuestionCount`, `TeacherChecks`, `CheckDelayMinimum/Maximum`, `LookDurationMinimum/Maximum`, `MeowAlertChance`, `PencilSnapAlerts`, `StaringEnabled`, `PawWindow` |
@@ -130,7 +132,7 @@ const SHEET = 'scores';
 function doPost(e) {
   const body = JSON.parse(e.postData.contents);
   const name = String(body.name || 'Anonymous').slice(0, 12).replace(/[^\w \-]/g, '');
-  const answers = Math.max(0, Math.min(20, Number(body.answers) | 0));
+  const answers = Math.max(0, Math.min(12, Number(body.answers) | 0));
   const time = Math.max(0, Math.min(999, Number(body.timeSeconds) || 0));
   const grade = String(body.grade || 'F').slice(0, 2);
   SpreadsheetApp.openById(SpreadsheetApp.getActiveSpreadsheet().getId())
@@ -207,3 +209,6 @@ Unity: `UnityWebRequest.Post(url, json, "application/json")`, редиректы
 - 2026‑09‑05 12:25 · Claude · H1 (частично): выставил `macOS Microphone Usage Description` = «COPYCAT needs your microphone to hear you MEOW.», Architecture = Universal, `Run in Background = true`, Fullscreen Window; прогнал Addressables build (чисто, 24 с) и оба player‑билда — macOS (128 МБ, 0 ошибок) и Windows x64 (105 МБ, 0 ошибок); проверил `Info.plist` — `NSMicrophoneUsageDescription` записан верно; осталось: физический запуск на второй машине (Дима) · `Builds/macOS`, `Builds/Windows`, `docs/PLAN.md` H1
 - 2026-09-05 12:10 · Codex · D2: 9 слоёв окружения SVG/PNG @2x, раскладка с pivots и текстом доски, 6 превью; визуальная проверка 1920×1080/480×270, build/check прошли, D1 совпадает побайтно; импорт — D11 · `art/src/d2`, `art/exports/d2`, `art/previews/d2`, D‑35
 - 2026-09-05 13:16 · Codex · D3: 12 слоёв котёнка SVG/PNG @2x, rig с pivots/иерархией/позами, нормальные/панические/прищуренные глаза, 7 превью; визуально проверены оба наклона, стыки лап/хвоста и 480×270, build/check прошли, D1/D2 совпадают побайтно · `art/src/d3`, `art/exports/d3`, `art/previews/d3`; D3 закрыт, импорт — D11, runtime — E2
+- 2026‑09‑05 13:24 · Claude · Баланс: экзамен переведён с 20 вопросов на 12 — `GDD §11/§12/§13.1`, звонок 120 с и объявление на 45 с, сетка оценок F 0–2 / D 3–5 / C 6–8 / B 9–10 / A 11 / A+ 12, звёзды при 12/12 · D‑36, `docs/GDD.md`
+- 2026‑09‑05 13:24 · Claude · Баланс: через MCP обрезан `ExamConfig.asset` до 12 вопросов (сняты 8, у `cardboard-box quantum` сосед L, у `PURRS` — R) и выставлены `questionCount` фаз 3/2/3/2/2 в `DifficultyConfig.asset`; ошибок в консоли нет · `Assets/AddressableResources/Configs/{Exam,Difficulty}`
+- 2026‑09‑05 13:24 · Claude · Баланс: обновлены A2/A11/B5/G1 в `PLAN.md`, маппинг конфигов и клэмп `answers` в Apps Script (20 → 12) · `docs/PLAN.md`, `docs/PROJECT.md §5–6`
