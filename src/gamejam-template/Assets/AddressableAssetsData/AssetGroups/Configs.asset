@@ -56,6 +56,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cd5a5bdff8c464a29a8827fdeb6c60be
+    m_Address: bell_config
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d68f75d8162374a0794705b6b4237047
     m_Address: difficulty_config
     m_ReadOnly: 0

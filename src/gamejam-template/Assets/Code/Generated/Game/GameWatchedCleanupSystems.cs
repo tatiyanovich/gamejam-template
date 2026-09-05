@@ -16,6 +16,7 @@ public sealed class GameWatchedCleanupSystems : Feature {
         Add(new RemoveAnswerProgressChangedGameSystem(contexts));
         Add(new RemoveAnswerReadableChangedGameSystem(contexts));
         Add(new RemoveAnswersCopiedChangedGameSystem(contexts));
+        Add(new RemoveBellAnnouncedChangedGameSystem(contexts));
         Add(new RemoveCompletedChangedGameSystem(contexts));
         Add(new RemoveCurrentHPChangedGameSystem(contexts));
         Add(new RemoveCurrentQuestionIndexChangedGameSystem(contexts));

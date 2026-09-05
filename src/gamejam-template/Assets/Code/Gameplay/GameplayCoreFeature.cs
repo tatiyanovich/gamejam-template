@@ -1,3 +1,4 @@
+using Code.Gameplay.Bell;
 using Code.Gameplay.Camera.Systems;
 using Code.Gameplay.Duck;
 using Code.Gameplay.Exam;
@@ -32,6 +33,8 @@ namespace Code.Gameplay
 			Add(systemFactory.Create<SuspicionFeature>());
 
 			Add(systemFactory.Create<ExamFeature>());
+
+			Add(systemFactory.Create<BellFeature>());
 
 			Add(systemFactory.Create<MovementUpdateFeature>());
 

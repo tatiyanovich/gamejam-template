@@ -1,3 +1,4 @@
+using Code.Gameplay.Bell.Services;
 using Code.Gameplay.Camera.Services;
 using Code.Gameplay.CoreLoop;
 using Code.Gameplay.Duck.Services;
@@ -56,6 +57,7 @@ namespace Code.Infrastructure.Installers
 			Container.BindInterfacesTo<SuspicionConfigsService>().AsSingle();
 			Container.BindInterfacesTo<TeacherConfigsService>().AsSingle();
 			Container.BindInterfacesTo<DuckConfigsService>().AsSingle();
+			Container.BindInterfacesTo<BellConfigsService>().AsSingle();
 		}
 
 		private void BindInfrastructureServices()
