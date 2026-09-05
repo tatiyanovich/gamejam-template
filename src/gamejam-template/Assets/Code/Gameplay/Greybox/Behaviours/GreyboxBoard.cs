@@ -91,6 +91,21 @@ namespace Code.Gameplay.Greybox.Behaviours
 			_bottomAnchoredSprite = CreateSprite(new Vector2(0.5f, 0f));
 		}
 
+		private void OnDestroy()
+		{
+			DestroySprite(_blockSprite);
+			DestroySprite(_leftAnchoredSprite);
+			DestroySprite(_bottomAnchoredSprite);
+		}
+
+		private static void DestroySprite(Sprite sprite)
+		{
+			if (sprite == null)
+				return;
+			Destroy(sprite.texture);
+			Destroy(sprite);
+		}
+
 		private void BuildBackdrop()
 		{
 			CreateBlock(new Vector3(0f, 0f, BackdropDepth), new Vector2(26f, 15f), GreyboxColors.Wall);

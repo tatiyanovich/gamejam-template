@@ -18,7 +18,7 @@ namespace Code.Gameplay.Exam
 			Add(systemFactory.Create<ValidateWordInputSystem>());
 
 			Add(systemFactory.Create<MarkAnswerCopiedSystem>());
-			Add(systemFactory.Create<AdvanceExamRunOnAnswerCopiedSystem>());
+			Add(systemFactory.Create<AdvanceExamRunSystem>());
 			Add(systemFactory.Create<FinishExamOnLastAnswerSystem>());
 		}
 	}

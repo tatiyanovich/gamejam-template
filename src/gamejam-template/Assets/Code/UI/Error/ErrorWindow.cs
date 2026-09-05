@@ -16,6 +16,8 @@ namespace Code.UI.Error
 		[SF] private TextMeshProUGUI logsText;
 		[SF] private Button closeGameButton;
 
+		private const int MaximumDisplayedLogCharacters = 12000;
+
 		protected override async UniTask OnOpen(CancellationToken cancellationToken = new())
 		{
 			closeGameButton.OnClicked += HandleCloseGameButtonClicked;
@@ -32,7 +34,10 @@ namespace Code.UI.Error
 
 		public void Setup(string recentLogs)
 		{
-			logsText.text = recentLogs;
+			logsText.richText = false;
+			logsText.text = recentLogs.Length > MaximumDisplayedLogCharacters
+				? recentLogs.Substring(0, MaximumDisplayedLogCharacters)
+				: recentLogs;
 		}
 
 		private void HandleCloseGameButtonClicked()

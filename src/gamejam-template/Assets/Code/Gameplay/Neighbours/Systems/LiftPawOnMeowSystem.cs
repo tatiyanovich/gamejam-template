@@ -10,6 +10,7 @@ namespace Code.Gameplay.Neighbours.Systems
 		private readonly IDifficultyService _difficultyService;
 
 		private readonly IGroup<GameEntity> _meowEvents;
+		private readonly IGroup<GameEntity> _runningExams;
 		private readonly IGroup<GameEntity> _questions;
 		private readonly IGroup<GameEntity> _neighbours;
 
@@ -19,6 +20,12 @@ namespace Code.Gameplay.Neighbours.Systems
 		public LiftPawOnMeowSystem(GameContext game, IDifficultyService difficultyService)
 		{
 			_difficultyService = difficultyService;
+
+			_runningExams = game.GetGroup(GameMatcher
+				.AllOf(
+					GameMatcher.ExamRun)
+				.NoneOf(
+					GameMatcher.ExamFinished));
 
 			_meowEvents = game.GetEvents(GameMatcher
 				.AllOf(
@@ -41,7 +48,7 @@ namespace Code.Gameplay.Neighbours.Systems
 
 		public void Execute()
 		{
-			if (_meowEvents.count == 0)
+			if (_meowEvents.count == 0 || _runningExams.count == 0)
 				return;
 
 			foreach (GameEntity question in _questions.GetEntities(_questionBuffer))

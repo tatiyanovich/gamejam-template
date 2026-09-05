@@ -11,6 +11,7 @@ namespace Code.Gameplay.Teacher.Systems
 		private readonly ITeacherConfigsService _teacherConfigsService;
 
 		private readonly IGroup<GameEntity> _meowEvents;
+		private readonly IGroup<GameEntity> _runningExams;
 		private readonly IGroup<GameEntity> _scheduledTeachers;
 
 		private readonly List<GameEntity> _buffer = new(1);
@@ -18,6 +19,12 @@ namespace Code.Gameplay.Teacher.Systems
 		public ExtendTeacherLookOnMeowSystem(GameContext game, ITeacherConfigsService teacherConfigsService)
 		{
 			_teacherConfigsService = teacherConfigsService;
+
+			_runningExams = game.GetGroup(GameMatcher
+				.AllOf(
+					GameMatcher.ExamRun)
+				.NoneOf(
+					GameMatcher.ExamFinished));
 
 			_meowEvents = game.GetEvents(GameMatcher
 				.AllOf(
@@ -32,7 +39,7 @@ namespace Code.Gameplay.Teacher.Systems
 
 		public void Execute()
 		{
-			if (_meowEvents.count == 0)
+			if (_meowEvents.count == 0 || _runningExams.count == 0)
 				return;
 
 			float lookExtensionSeconds = _teacherConfigsService.TeacherConfig.MeowLookExtensionSeconds;

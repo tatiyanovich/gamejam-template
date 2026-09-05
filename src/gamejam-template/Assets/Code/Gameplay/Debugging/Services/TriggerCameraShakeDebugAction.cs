@@ -15,8 +15,7 @@ namespace Code.Gameplay.Debugging.Services
 
 		public bool WasTriggeredThisFrame()
 		{
-			return UnityEngine.Input.GetKeyDown(KeyCode.Space)
-				|| UnityEngine.Input.GetMouseButtonDown(2);
+			return UnityEngine.Input.GetMouseButtonDown(2);
 		}
 
 		public void Execute(Vector3 pointerWorldPosition)

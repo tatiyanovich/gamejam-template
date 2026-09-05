@@ -27,9 +27,9 @@ namespace Code.Gameplay
 
 			Add(systemFactory.Create<NeighboursFeature>());
 
-			Add(systemFactory.Create<TeacherFeature>());
-
 			Add(systemFactory.Create<DuckFeature>());
+
+			Add(systemFactory.Create<TeacherFeature>());
 
 			Add(systemFactory.Create<SuspicionFeature>());
 

@@ -69,7 +69,8 @@ namespace Code.Gameplay.Teacher.Systems
 			{
 				if (teacher.TeacherAttention == TeacherAttention.Staring)
 				{
-					teacher.ReplaceTeacherAttentionTimeLeft(staringReleaseSeconds);
+					if (teacher.TeacherAttentionTimeLeft < staringReleaseSeconds)
+						teacher.ReplaceTeacherAttentionTimeLeft(staringReleaseSeconds);
 					continue;
 				}
 

@@ -1,0 +1,3 @@
+PASS long marked-up log renders as bounded plain text
+PASS short log
+DONE

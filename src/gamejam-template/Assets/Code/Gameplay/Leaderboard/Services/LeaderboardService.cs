@@ -28,6 +28,8 @@ namespace Code.Gameplay.Leaderboard.Services
 			LeaderboardEntry entry,
 			CancellationToken cancellationToken = default)
 		{
+			cancellationToken.ThrowIfCancellationRequested();
+
 			if (_satelliteService.HasConnection() == false)
 				return LeaderboardResponse.Offline;
 
@@ -58,13 +60,35 @@ namespace Code.Gameplay.Leaderboard.Services
 		{
 			LeaderboardResponseDto response = JsonUtility.FromJson<LeaderboardResponseDto>(json);
 
-			if (response == null || response.top == null || string.IsNullOrEmpty(response.error) == false)
+			if (IsValid(response) == false)
 			{
 				Debug.LogWarning($"Leaderboard response rejected: {json}");
 				return LeaderboardResponse.Offline;
 			}
 
 			return response.ToResponse();
+		}
+
+		private static bool IsValid(LeaderboardResponseDto response)
+		{
+			if (response == null || response.top == null || response.top.Length == 0
+				|| response.top.Length > 10 || response.total < response.top.Length
+				|| response.rank < 1 || response.rank > response.total
+				|| string.IsNullOrEmpty(response.error) == false)
+				return false;
+
+			foreach (LeaderboardEntryDto entry in response.top)
+			{
+				if (entry == null || string.IsNullOrWhiteSpace(entry.name) || entry.name.Length > 12
+					|| entry.answers < 0 || entry.answers > 12 || float.IsNaN(entry.timeSeconds)
+					|| float.IsInfinity(entry.timeSeconds) || entry.timeSeconds < 0f || entry.timeSeconds > 999f)
+					return false;
+
+				if (entry.grade is not ("F" or "D" or "C" or "B" or "A" or "A+"))
+					return false;
+			}
+
+			return true;
 		}
 	}
 }

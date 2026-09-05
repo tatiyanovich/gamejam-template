@@ -1,0 +1,11 @@
+Frame=11212 Time=189.5133 Scale=1
+KeyboardMeowOnly=True
+CooldownTimeLeft={"Value":-0.0013997815549373627} MeowArmed={} MeowSource={} MicrophoneLevel={"Value":0.0} Id={"Value":552}
+BestAnswers={"Value":12} BestTimeSeconds={"Value":42.48621368408203} ExamProgress={} PlayerName={"Value":""} PersistAcrossLoopNodes={} Id={"Value":553}
+Neighbour={} NeighbourSideComponent={"Value":1} PawWindowTimeLeft={"Value":0.0} LoopNodeScope={"NodeId":2} Id={"Value":644}
+AnswerLength={"Value":2} AnswerNeighbourSide={"Value":1} AnswerProgress={"Value":0} AnswerStrokes={} Question={} QuestionIndex={"Value":0} QuestionText={"Value":"How many lives does a cat claim to have?"} QuestionTypeComponent={"Value":1} LoopNodeScope={"NodeId":2} Id={"Value":649}
+AnswersCopied={"Value":0} CurrentQuestionIndex={"Value":0} ExamElapsedSeconds={"Value":0.18328100442886353} ExamOutcomeComponent={"Value":0} ExamRun={} SuspicionLevel={"Value":0.0} LoopNodeScope={"NodeId":2} Id={"Value":648}
+AlmostCaughtCount={"Value":0} Teacher={} TeacherAttentionComponent={"Value":0} LoopNodeScope={"NodeId":2} Id={"Value":647}
+Duck={} DuckStateComponent={"Value":0} DuckThrowCount={"Value":0} LoopNodeScope={"NodeId":2} Id={"Value":646}
+Neighbour={} NeighbourSideComponent={"Value":2} PawWindowTimeLeft={"Value":0.0} LoopNodeScope={"NodeId":2} Id={"Value":645}
+Input={} LeanHeld={} PointerWorldPosition={"Value":{"x":-0.07000008225440979,"y":-1.350000023841858,"z":0.0}}

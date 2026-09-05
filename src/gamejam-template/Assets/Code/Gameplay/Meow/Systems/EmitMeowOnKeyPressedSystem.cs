@@ -45,6 +45,7 @@ namespace Code.Gameplay.Meow.Systems
 
 			foreach (GameEntity meowSource in _meowSources.GetEntities(_buffer))
 			{
+				meowSource.isMeowArmed = false;
 				meowSource.PutOnCooldown(_meowConfigsService.MeowConfig.CooldownSeconds);
 
 				_entityFactory.Event()
