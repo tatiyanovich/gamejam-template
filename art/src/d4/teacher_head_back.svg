@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="380" height="600" viewBox="0 0 380 600">
+
+<g stroke="{{INK}}" stroke-width="10" stroke-linejoin="round" stroke-linecap="round">
+<path d="M70 139 L59 32 Q57 14 77 27 L141 70 Q184 50 228 70 L299 25 Q318 13 315 40 L309 137 Q340 194 305 236 Q268 271 184 269 Q98 268 66 231 Q39 188 70 139Z" fill="{{TEACHER}}" />
+<path d="M294 60 Q332 214 186 242 Q109 247 67 224 Q105 266 184 267 Q270 270 305 233 Q339 188 307 137Z" fill="#7383A4" stroke="none" />
+<path d="M80 49 L91 111 L117 79 M296 48 L263 81 L294 111" fill="#D3A5B4" stroke="none" />
+<path d="M158 65 Q160 37 183 58 Q207 32 223 65" fill="{{TEACHER}}" />
+<path d="M160 234 Q185 244 217 232" fill="none" stroke-width="6" />
+<path d="M68 212 L29 204 M71 229 L28 231 M305 217 L347 209 M299 235 L342 238" fill="none" stroke-width="6" />
+</g>
+</svg>

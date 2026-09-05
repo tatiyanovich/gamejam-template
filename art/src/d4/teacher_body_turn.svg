@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="380" height="600" viewBox="0 0 380 600"><g stroke="{{INK}}" stroke-width="10" stroke-linejoin="round" stroke-linecap="round">
+<path d="M128 524 L121 578 L175 578 L173 523 M227 524 L232 578 L283 578 L266 521" fill="{{INK}}" />
+<path d="M126 245 L256 246 Q261 354 305 533 Q202 559 88 535 Q117 349 126 245Z" fill="{{TEACHER_DRESS}}" />
+<path d="M235 259 Q247 436 109 533 Q207 550 296 530 Q256 360 247 261Z" fill="#4B3E71" stroke="none" />
+<path d="M135 258 Q83 281 91 372 L120 380 L135 313" fill="{{TEACHER_DRESS}}"/>
+<path d="M187 259 L226 293 L250 261 M219 297 L235 445" fill="{{PAPER}}" stroke-width="6"/><g transform="translate(63 0) scale(.78 1)"><path d="M257 277 Q287 306 284 363 L254 386 L228 358 L250 338 L241 309" fill="{{TEACHER_DRESS}}" />
+<path d="M239 352 Q220 346 214 365 Q207 385 225 394 Q246 407 257 386 L259 367Z" fill="{{TEACHER}}" /></g></g></svg>

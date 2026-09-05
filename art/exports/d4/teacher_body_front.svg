@@ -1,0 +1,27 @@
+<svg width="380" height="600" viewBox="0 0 380 600" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <clipPath id="teacher-dress-clip">
+            <path fill="#000000" stroke="none" d="M 128 253 L 249 251 Q 256 335 307 532 Q 207 559 87 534 Q 124 364 128 253 Z"/>
+        </clipPath>
+    </defs>
+    <g>
+        <path fill="none" stroke="#2a1f1a" stroke-width="29" stroke-linecap="round" stroke-linejoin="round" d="M 267 497 Q 334 546 346 480"/>
+        <path fill="none" stroke="#8ca0c8" stroke-width="17" stroke-linecap="round" stroke-linejoin="round" d="M 267 497 Q 334 546 346 480"/>
+        <path fill="#8ca0c8" stroke="#2a1f1a" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" d="M 145 526 L 141 555 Q 106 555 111 582 L 171 582 L 173 530 M 230 532 L 232 556 Q 267 553 271 580 L 208 582 L 205 534"/>
+        <path fill="#2a1f1a" stroke="#2a1f1a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" d="M 112 566 Q 140 570 171 562 L 171 582 L 112 582 Z M 209 563 Q 239 570 266 563 L 272 580 L 209 582 Z"/>
+        <g>
+            <path fill="#5b4b8a" stroke="#2a1f1a" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" d="M 128 253 L 249 251 Q 256 335 307 532 Q 207 559 87 534 Q 124 364 128 253 Z"/>
+        </g>
+        <g clip-path="url(#teacher-dress-clip)">
+            <path fill="#4b3e71" stroke="none" d="M 226 252 Q 216 418 110 537 L 325 573 L 260 251 Z"/>
+        </g>
+        <path fill="#fff6e3" stroke="#2a1f1a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" d="M 122 263 L 163 294 L 187 268 L 213 295 L 257 258"/>
+        <path fill="none" stroke="#2a1f1a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" d="M 182 291 L 185 439"/>
+        <path fill="#fff6e3" stroke="none" d="M 203 321 C 203 323.7614 200.76143 326 198 326 C 195.23857 326 193 323.7614 193 321 C 193 318.2386 195.23857 316 198 316 C 200.76143 316 203 318.2386 203 321 Z"/>
+        <path fill="#fff6e3" stroke="none" d="M 205 356 C 205 358.76144 202.76141 361 200 361 C 197.23859 361 195 358.76144 195 356 C 195 353.2386 197.23859 351 200 351 C 202.76141 351 205 353.2386 205 356 Z"/>
+        <path fill="#5b4b8a" stroke="#2a1f1a" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" d="M 118 277 Q 65 286 68 361 Q 71 388 105 381 L 173 351 L 160 318 L 108 337 L 122 305"/>
+        <path fill="#8ca0c8" stroke="#2a1f1a" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" d="M 158 320 Q 174 303 190 316 L 209 331 Q 213 350 190 355 L 164 351 Z"/>
+        <path fill="#5b4b8a" stroke="#2a1f1a" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" d="M 257 277 Q 287 306 284 363 L 254 386 L 228 358 L 250 338 L 241 309"/>
+        <path fill="#8ca0c8" stroke="#2a1f1a" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" d="M 239 352 Q 220 346 214 365 Q 207 385 225 394 Q 246 407 257 386 L 259 367 Z"/>
+    </g>
+</svg>

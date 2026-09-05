@@ -20,7 +20,7 @@ MonoBehaviour:
     options: []
     correctOptionIndex: 0
     word: 
-  - text: 'Complete: cat + cardboard box = ?'
+  - text: 'Complete: cat + empty cardboard box = ?'
     type: 1
     neighbour: 1
     strokes: 040000000100000002000000
@@ -45,21 +45,21 @@ MonoBehaviour:
     - Tuesday
     correctOptionIndex: 0
     word: 
-  - text: Translate 'pspspsps' into Cat Latin.
+  - text: Translate 'pspspsps' into formal Cat Latin.
     type: 1
     neighbour: 1
     strokes: 010000000400000003000000
     options: []
     correctOptionIndex: 0
     word: 
-  - text: What sings outside at 5 AM?
+  - text: What sings outside your window at 5 AM?
     type: 3
     neighbour: 2
     strokes: 
     options: []
     correctOptionIndex: 0
     word: BIRD
-  - text: Optimal nap-to-chaos ratio?
+  - text: State the optimal nap-to-chaos ratio.
     type: 1
     neighbour: 1
     strokes: 03000000040000000100000002000000
@@ -84,21 +84,21 @@ MonoBehaviour:
     options: []
     correctOptionIndex: 0
     word: 
-  - text: The sound of a happy cat?
+  - text: The engine sound of a happy cat?
     type: 3
     neighbour: 2
     strokes: 
     options: []
     correctOptionIndex: 0
     word: PURRS
-  - text: Forbidden green plant of joy?
+  - text: Name the forbidden green plant of joy.
     type: 3
     neighbour: 1
     strokes: 
     options: []
     correctOptionIndex: 0
     word: CATNIP
-  - text: Did you CATegorically avoid cheating?
+  - text: Did you CATegorically avoid cheating today?
     type: 1
     neighbour: 2
     strokes: 040000000200000001000000030000000400000001000000

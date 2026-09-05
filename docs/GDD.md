@@ -247,20 +247,21 @@ Main Menu ──Play──▶ Attendance Sheet (имя + тест микрофо
 | # | Фаза | Тип | Сосед | Вопрос (на своём листе) | Payload (на листе соседа) |
 |---|---|---|---|---|---|
 | 1 | 1 | Strokes | L | How many lives does a cat claim to have? | `↑ →` |
-| 2 | 1 | Strokes | L | Complete: cat + cardboard box = ? | `← ↑ →` |
+| 2 | 1 | Strokes | L | Complete: cat + empty cardboard box = ? | `← ↑ →` |
 | 3 | 1 | Strokes | L | Who discovered gravity by knocking a cup off? | `↓ → ↑` |
 | 4 | 2 | Pick | R | Best time for zoomies? | A 3 AM ✓ · B Noon · C Never · D Tuesday |
-| 5 | 2 | Strokes | L | Translate 'pspspsps' into Cat Latin. | `↑ ← ↓` |
-| 6 | 3 | Word | R | What sings outside at 5 AM? | `BIRD` |
-| 7 | 3 | Strokes | L | Optimal nap-to-chaos ratio? | `↓ ← ↑ →` |
+| 5 | 2 | Strokes | L | Translate 'pspspsps' into formal Cat Latin. | `↑ ← ↓` |
+| 6 | 3 | Word | R | What sings outside your window at 5 AM? | `BIRD` |
+| 7 | 3 | Strokes | L | State the optimal nap-to-chaos ratio. | `↓ ← ↑ →` |
 | 8 | 3 | Pick | R | Why is the laser dot impossible to catch? | A Physics · B Betrayal ✓ · C Lag · D Magic |
 | 9 | 4 | Strokes | L | Define cardboard-box quantum mechanics. | `← ↑ → ↓ ←` |
-| 10 | 4 | Word | R | The sound of a happy cat? | `PURRS` |
-| 11 | 5 | Word | L | Forbidden green plant of joy? | `CATNIP` |
-| 12 | 5 | Strokes | R | Did you CATegorically avoid cheating? | `← → ↑ ↓ ← ↑` — на своём листе печатается `Answer: NO` |
+| 10 | 4 | Word | R | The engine sound of a happy cat? | `PURRS` |
+| 11 | 5 | Word | L | Name the forbidden green plant of joy. | `CATNIP` |
+| 12 | 5 | Strokes | R | Did you CATegorically avoid cheating today? | `← → ↑ ↓ ← ↑` — на своём листе печатается `Answer: NO` |
 
 Правила контента: слова без `M` и `Q`, длина строго по фазе; у Pick варианты — 1–3 слова; вопрос ≤ 9 слов.
-Коля финализирует формулировки (задача G1), но структура (тип/сосед/длина) фиксирована балансом.
+Формулировки финальные (G1 закрыта): структура (тип/сосед/длина payload) не менялась, менялись только тексты вопросов.
+Любое дальнейшее изменение текста — сразу и в этой таблице, и в `ExamConfig.asset`.
 
 **Банк слов (без M/Q):** 4 — `TUNA BIRD FISH YARN HISS PAWS NAPS`; 5 — `PURRS LASER TREAT KNOCK SOFAS`; 6 — `CATNIP KNOCKS HAIRDO`.
 

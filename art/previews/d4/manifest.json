@@ -1,0 +1,58 @@
+[
+  {
+    "name": "pose_sheet",
+    "width": 1800,
+    "height": 850,
+    "scale": 1,
+    "sha256": "44d89d49c502c8e9308f9654707956d5398d1743398e1366833fb11f0cc3e37e"
+  },
+  {
+    "name": "layer_sheet",
+    "width": 1600,
+    "height": 1490,
+    "scale": 1,
+    "sha256": "f0867fe1ca4a874e90158060f4512a420a97cf36889baf03f97841784779063c"
+  },
+  {
+    "name": "motion_sheet",
+    "width": 1800,
+    "height": 1100,
+    "scale": 1,
+    "sha256": "7e9fc152b34c43ab3e2910c5906ba8ba5faaa9456e6261fa549333c2c15b4a80"
+  },
+  {
+    "name": "classroom_writing",
+    "width": 1920,
+    "height": 1080,
+    "scale": 1,
+    "sha256": "5fb980e7c25dd3296eb403d02044548c34ddaf41bda90fedd652b3df95a538d3"
+  },
+  {
+    "name": "classroom_turning",
+    "width": 1920,
+    "height": 1080,
+    "scale": 1,
+    "sha256": "d43af9d6e1b7f175bac3cb82998f08179b9d305f36c8cb001c21cd063698f6f1"
+  },
+  {
+    "name": "classroom_watching",
+    "width": 1920,
+    "height": 1080,
+    "scale": 1,
+    "sha256": "7d9d7740f31e2e0a79ca71216208a3b32d15eaf0e495dae5b7f4ec7d344a67b9"
+  },
+  {
+    "name": "classroom_staring",
+    "width": 1920,
+    "height": 1080,
+    "scale": 1,
+    "sha256": "bc9eded2d5f6bb1226a66850ab5df953ccad7731c48c04c3f2e8425963e0b289"
+  },
+  {
+    "name": "classroom_thumbnail",
+    "width": 480,
+    "height": 270,
+    "scale": 0.25,
+    "sha256": "0b0e8babc771bcdfd06376fa758a1aa761a83e5d77c9cfc6783f9ef512220b8c"
+  }
+]

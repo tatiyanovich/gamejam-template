@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="380" height="600" viewBox="0 0 380 600">
+
+<g stroke="{{INK}}" stroke-width="10" stroke-linejoin="round" stroke-linecap="round">
+<path d="M241 389 L346 230" fill="none" stroke-width="14" />
+<path d="M241 389 L346 230" fill="none" stroke="{{WOOD}}" stroke-width="6" />
+</g>
+</svg>

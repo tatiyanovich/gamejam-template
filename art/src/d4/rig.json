@@ -1,0 +1,343 @@
+{
+  "textureScale": 2,
+  "pixelsPerUnit": 200,
+  "filterMode": "Bilinear",
+  "mipmaps": false,
+  "trim": false,
+  "rootPivot": [
+    190,
+    578
+  ],
+  "sceneScale": 0.4,
+  "assets": [
+    {
+      "name": "teacher_body_back",
+      "size": [
+        380,
+        600
+      ],
+      "pivotPixels": [
+        190,
+        578
+      ]
+    },
+    {
+      "name": "teacher_body_turn",
+      "size": [
+        380,
+        600
+      ],
+      "pivotPixels": [
+        190,
+        578
+      ]
+    },
+    {
+      "name": "teacher_body_front",
+      "size": [
+        380,
+        600
+      ],
+      "pivotPixels": [
+        190,
+        578
+      ]
+    },
+    {
+      "name": "teacher_head_back",
+      "size": [
+        380,
+        600
+      ],
+      "pivotPixels": [
+        190,
+        250
+      ]
+    },
+    {
+      "name": "teacher_head_turn",
+      "size": [
+        380,
+        600
+      ],
+      "pivotPixels": [
+        190,
+        250
+      ]
+    },
+    {
+      "name": "teacher_head_front",
+      "size": [
+        380,
+        600
+      ],
+      "pivotPixels": [
+        190,
+        250
+      ]
+    },
+    {
+      "name": "teacher_head_angry",
+      "size": [
+        380,
+        600
+      ],
+      "pivotPixels": [
+        190,
+        250
+      ]
+    },
+    {
+      "name": "teacher_eye_white",
+      "size": [
+        110,
+        130
+      ],
+      "pivotPixels": [
+        55,
+        65
+      ]
+    },
+    {
+      "name": "teacher_pupil",
+      "size": [
+        24,
+        28
+      ],
+      "pivotPixels": [
+        12,
+        14
+      ]
+    },
+    {
+      "name": "teacher_glasses",
+      "size": [
+        380,
+        600
+      ],
+      "pivotPixels": [
+        186,
+        178
+      ]
+    },
+    {
+      "name": "teacher_pointer",
+      "size": [
+        380,
+        600
+      ],
+      "pivotPixels": [
+        241,
+        389
+      ]
+    },
+    {
+      "name": "teacher_arm_chalk",
+      "size": [
+        380,
+        600
+      ],
+      "pivotPixels": [
+        254,
+        276
+      ]
+    }
+  ],
+  "profiles": {
+    "back": {
+      "body": "teacher_body_back",
+      "head": "teacher_head_back",
+      "eyes": [],
+      "glasses": false,
+      "chalk": true,
+      "pointer": false
+    },
+    "turn": {
+      "body": "teacher_body_turn",
+      "head": "teacher_head_turn",
+      "eyes": [
+        [
+          207.48,
+          151
+        ],
+        [
+          275.96,
+          151
+        ]
+      ],
+      "faceScaleX": 0.64,
+      "faceOffsetX": 123,
+      "glasses": true,
+      "chalk": false,
+      "pointer": true,
+      "pointerScaleX": 0.78,
+      "pointerOffsetX": 63,
+      "pupilOffset": [
+        0,
+        -10
+      ]
+    },
+    "front": {
+      "body": "teacher_body_front",
+      "head": "teacher_head_front",
+      "eyes": [
+        [
+          132,
+          151
+        ],
+        [
+          239,
+          151
+        ]
+      ],
+      "faceScaleX": 1,
+      "faceOffsetX": 0,
+      "glasses": true,
+      "chalk": false,
+      "pointer": true,
+      "pupilOffset": [
+        0,
+        -10
+      ]
+    },
+    "angry": {
+      "body": "teacher_body_front",
+      "head": "teacher_head_angry",
+      "eyes": [
+        [
+          132,
+          151
+        ],
+        [
+          239,
+          151
+        ]
+      ],
+      "faceScaleX": 1,
+      "faceOffsetX": 0,
+      "glasses": true,
+      "chalk": false,
+      "pointer": true,
+      "eyeScaleY": 0.36,
+      "pupilOffset": [
+        0,
+        -3
+      ]
+    }
+  },
+  "poses": {
+    "writing": {
+      "profile": "back",
+      "rotation": 0,
+      "scale": 1
+    },
+    "turning": {
+      "profile": "turn",
+      "rotation": 0,
+      "scale": 1
+    },
+    "watching": {
+      "profile": "front",
+      "rotation": 0,
+      "scale": 1
+    },
+    "staring": {
+      "profile": "angry",
+      "rotation": 6,
+      "scale": 1.05
+    },
+    "alerted": {
+      "profile": "front",
+      "rotation": 0,
+      "scale": 1
+    },
+    "distracted": {
+      "profile": "back",
+      "rotation": 0,
+      "scale": 1,
+      "armRotation": 145
+    }
+  },
+  "drawOrder": [
+    "body",
+    "pointer",
+    "armChalk",
+    "head",
+    "eyeLeft",
+    "eyeRight",
+    "pupilLeft",
+    "pupilRight",
+    "glasses"
+  ],
+  "motion": {
+    "writing": {
+      "pivot": [
+        254,
+        276
+      ],
+      "rotationDegrees": [
+        -8,
+        8
+      ],
+      "loopSeconds": 0.6
+    },
+    "turning": {
+      "durationSeconds": 0.3,
+      "halfTurnSeconds": 0.15
+    },
+    "watching": {
+      "gazeX": [
+        -6,
+        6
+      ],
+      "pauseSeconds": [
+        0.3,
+        0.6
+      ]
+    },
+    "staring": {
+      "rotationDegrees": 6,
+      "scale": 1.05
+    }
+  },
+  "sceneOrigins": {
+    "writing": [
+      976,
+      235
+    ],
+    "turning": [
+      976,
+      235
+    ],
+    "watching": [
+      976,
+      354
+    ],
+    "staring": [
+      976,
+      354
+    ]
+  },
+  "placements": {
+    "body": [
+      190,
+      578
+    ],
+    "head": [
+      190,
+      250
+    ],
+    "pointer": [
+      241,
+      389
+    ],
+    "armChalk": [
+      254,
+      276
+    ],
+    "glasses": [
+      186,
+      178
+    ]
+  }
+}

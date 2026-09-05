@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="110" height="130" viewBox="0 0 110 130">
+
+<g stroke="{{INK}}" stroke-width="10" stroke-linejoin="round" stroke-linecap="round">
+<ellipse cx="55" cy="65" rx="48" ry="58" fill="{{PAPER}}" stroke-width="6"/>
+</g>
+</svg>

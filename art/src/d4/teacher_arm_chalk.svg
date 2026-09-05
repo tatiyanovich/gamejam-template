@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="380" height="600" viewBox="0 0 380 600">
+
+<g stroke="{{INK}}" stroke-width="10" stroke-linejoin="round" stroke-linecap="round">
+<path d="M246 261 Q273 293 300 276 L317 199 L345 206 Q346 284 327 314 Q293 347 253 309" fill="{{TEACHER_DRESS}}"/>
+<path d="M317 203 Q305 184 318 170 Q332 159 346 173 Q356 187 345 207Z" fill="{{TEACHER}}" />
+<path d="M341 176 L355 148" fill="none" stroke-width="15" />
+<path d="M341 176 L355 148" fill="none" stroke="{{PAPER}}" stroke-width="7" />
+</g>
+</svg>

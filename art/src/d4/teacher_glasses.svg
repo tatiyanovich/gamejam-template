@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="380" height="600" viewBox="0 0 380 600">
+
+<g stroke="{{INK}}" stroke-width="10" stroke-linejoin="round" stroke-linecap="round">
+<path d="M72 157 L175 166 L171 208 Q119 229 88 201Z M194 166 L299 154 L284 203 Q245 226 203 207Z M176 178 Q185 171 196 178" fill="none" stroke-width="20" />
+<path d="M72 157 L175 166 L171 208 Q119 229 88 201Z M194 166 L299 154 L284 203 Q245 226 203 207Z M176 178 Q185 171 196 178" fill="none" stroke="{{GLASSES_RED}}" stroke-width="10" />
+</g>
+</svg>

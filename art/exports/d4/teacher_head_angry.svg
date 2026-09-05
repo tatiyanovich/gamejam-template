@@ -1,0 +1,22 @@
+<svg width="380" height="600" viewBox="0 0 380 600" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <clipPath id="teacher-head-clip">
+            <path fill="#000000" stroke="none" d="M 73 129 L 58 34 Q 55 14 74 24 L 143 69 Q 184 57 230 70 L 299 23 Q 317 12 316 36 L 310 126 Q 342 146 323 205 Q 313 253 194 263 Q 82 260 58 220 Q 39 171 73 129 Z"/>
+        </clipPath>
+    </defs>
+    <g>
+        <g>
+            <path fill="#8ca0c8" stroke="#2a1f1a" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" d="M 73 129 L 58 34 Q 55 14 74 24 L 143 69 Q 184 57 230 70 L 299 23 Q 317 12 316 36 L 310 126 Q 342 146 323 205 Q 313 253 194 263 Q 82 260 58 220 Q 39 171 73 129 Z"/>
+        </g>
+        <g clip-path="url(#teacher-head-clip)">
+            <path fill="#7383a4" stroke="none" d="M 287 67 Q 330 209 188 230 Q 110 238 61 203 L 73 287 L 344 281 L 350 70 Z"/>
+        </g>
+        <path fill="#d3a5b4" stroke="none" d="M 77 45 L 89 113 L 119 77 M 296 47 L 264 79 L 296 108 Z"/>
+        <path fill="#8ca0c8" stroke="#2a1f1a" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" d="M 155 66 Q 163 38 184 57 Q 208 32 224 68"/>
+        <path fill="#dcebe7" stroke="none" d="M 112 219 Q 110 242 148 242 L 233 240 Q 264 233 246 213"/>
+        <path fill="#2a1f1a" stroke="#2a1f1a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" d="M 178 206 L 194 206 L 186 216 Z"/>
+        <path fill="none" stroke="#2a1f1a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" d="M 165 235 Q 185 218 208 235"/>
+        <path fill="none" stroke="#2a1f1a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" d="M 90 217 L 35 201 M 87 229 L 28 228 M 97 239 L 49 254 M 282 216 L 339 199 M 286 231 L 350 229 M 277 242 L 329 259"/>
+        <path fill="none" stroke="#2a1f1a" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" d="M 86 101 L 165 128 M 205 128 L 281 100"/>
+    </g>
+</svg>

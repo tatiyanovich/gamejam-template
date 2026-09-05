@@ -1,0 +1,86 @@
+[
+  {
+    "name": "teacher_body_back",
+    "width": 760,
+    "height": 1200,
+    "scale": 2,
+    "sha256": "4d609abe204264c35de01ba7977abf1bca18553c3229a9b973eaad9729a0e65c"
+  },
+  {
+    "name": "teacher_body_turn",
+    "width": 760,
+    "height": 1200,
+    "scale": 2,
+    "sha256": "ee6bd65d85a1247f47ccd3cd8afa5001fc625c9dd15d02b31b13c62eaff5d154"
+  },
+  {
+    "name": "teacher_body_front",
+    "width": 760,
+    "height": 1200,
+    "scale": 2,
+    "sha256": "73a9499b2600d513b38ee66c667c5f8a0cee72388dafbd3c49f8d351d4b6fbbc"
+  },
+  {
+    "name": "teacher_head_back",
+    "width": 760,
+    "height": 1200,
+    "scale": 2,
+    "sha256": "b0e95ac73b47d7c0180f39b4881ab264230be98f2943ce719aaf0b36e97d1fbb"
+  },
+  {
+    "name": "teacher_head_turn",
+    "width": 760,
+    "height": 1200,
+    "scale": 2,
+    "sha256": "39cf7c33293280913b686bb230da0301bbd5965958d73ce75155bf921d06e4ff"
+  },
+  {
+    "name": "teacher_head_front",
+    "width": 760,
+    "height": 1200,
+    "scale": 2,
+    "sha256": "f90bd9ace1a2b1aaaa68aef58df1f60f24f6edbaec53622aa89d5b63f9b9226f"
+  },
+  {
+    "name": "teacher_head_angry",
+    "width": 760,
+    "height": 1200,
+    "scale": 2,
+    "sha256": "d1e554fbe66682520f7c098f32b11d0761288e52059d16ce41353ef361c3bf78"
+  },
+  {
+    "name": "teacher_eye_white",
+    "width": 220,
+    "height": 260,
+    "scale": 2,
+    "sha256": "1731d5829addfb20c7fd01a5d368e51aa84fa35b2bb1622347efa4d06176f4fa"
+  },
+  {
+    "name": "teacher_pupil",
+    "width": 48,
+    "height": 56,
+    "scale": 2,
+    "sha256": "6abbaf0ad7368df8d1d618fba4ea9cac74aca4b56a5dd4a3d847ed6223fe966f"
+  },
+  {
+    "name": "teacher_glasses",
+    "width": 760,
+    "height": 1200,
+    "scale": 2,
+    "sha256": "47a674f87fd69a9442e703e75f58637660ae0aec80125d98333b768b0bb15ddf"
+  },
+  {
+    "name": "teacher_pointer",
+    "width": 760,
+    "height": 1200,
+    "scale": 2,
+    "sha256": "60b43e20270de63620bc138d5129b56fa15395496785f3294200491cb6195839"
+  },
+  {
+    "name": "teacher_arm_chalk",
+    "width": 760,
+    "height": 1200,
+    "scale": 2,
+    "sha256": "d2997c003b3c27d0a816ed86dcae51d81b41666adac8dad48ea12052236e2c62"
+  }
+]

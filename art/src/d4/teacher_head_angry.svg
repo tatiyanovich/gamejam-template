@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="380" height="600" viewBox="0 0 380 600">
+<defs>
+    <path id="teacher-head" d="M73 129 L58 34 Q55 14 74 24 L143 69 Q184 57 230 70 L299 23 Q317 12 316 36 L310 126 Q342 146 323 205 Q313 253 194 263 Q82 260 58 220 Q39 171 73 129Z" />
+    <clipPath id="teacher-head-clip"><use href="#teacher-head" /></clipPath>
+    <path id="teacher-dress" d="M128 253 L249 251 Q256 335 307 532 Q207 559 87 534 Q124 364 128 253Z" />
+    <clipPath id="teacher-dress-clip"><use href="#teacher-dress" /></clipPath>
+  </defs>
+<g stroke="{{INK}}" stroke-width="10" stroke-linejoin="round" stroke-linecap="round">
+<use href="#teacher-head" fill="{{TEACHER}}" />
+<path d="M287 67 Q330 209 188 230 Q110 238 61 203 L73 287 L344 281 L350 70Z" fill="#7383A4" stroke="none" clip-path="url(#teacher-head-clip)" />
+<path d="M77 45 L89 113 L119 77 M296 47 L264 79 L296 108Z" fill="#D3A5B4" stroke="none" />
+<path d="M155 66 Q163 38 184 57 Q208 32 224 68" fill="{{TEACHER}}" />
+<path d="M112 219 Q110 242 148 242 L233 240 Q264 233 246 213" fill="{{WALL_LIGHT}}" stroke="none" />
+<path d="M178 206 L194 206 L186 216Z" fill="{{INK}}" stroke-width="4" />
+<path d="M165 235 Q185 218 208 235" fill="none" stroke-width="6" />
+<path d="M90 217 L35 201 M87 229 L28 228 M97 239 L49 254 M282 216 L339 199 M286 231 L350 229 M277 242 L329 259" fill="none" stroke-width="6" /><path d="M86 101 L165 128 M205 128 L281 100" fill="none" stroke-width="12"/>
+</g>
+</svg>
