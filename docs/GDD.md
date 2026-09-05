@@ -45,10 +45,10 @@ Main Menu ──Play──▶ Attendance Sheet (имя + тест микрофо
                    │ Main Menu ────▶ Main Menu
 ```
 
-- **Main Menu:** логотип, кнопки `PLAY`, `QUIT`. Утка сидит на углу меню и пищит по клику (пасхалка, P2).
-- **Attendance Sheet:** «Sign the attendance sheet»: поле имени (≤12 символов, латиница/цифры), индикатор
-  микрофона с порогом и подпись `Meow to test your mic` → при успешном мяуке ставится галочка `LOUD ENOUGH!`.
-  Кнопка `START EXAM` активна всегда (микрофон может не быть — тогда игрок увидит подсказку про `M`).
+- **Main Menu:** логотип, две кнопки (строки — `§13.2`). Утка сидит на углу меню и пищит по клику (пасхалка, P2).
+- **Attendance Sheet:** поле имени (≤12 символов, латиница/цифры) и индикатор микрофона с порогом:
+  игрок мяукает, чтобы проверить мик, при пробитом пороге ставится галочка.
+  Кнопка старта активна всегда (микрофон может не быть — тогда игрок увидит подсказку про `M`). Строки — `§13.2`.
   Имя сохраняется; повторно окно не показывается.
 - **Intro Comic:** 5 панелей, ~25 секунд, см. §14. Показывается один раз (флаг в сейве). Пропуск — клик/Esc/Space.
 - **Report Card:** см. §12.
@@ -198,11 +198,13 @@ Main Menu ──Play──▶ Attendance Sheet (имя + тест микрофо
 - Попытка 4+: челлендж. Q9–Q11. Утка используется осознанно. 12/12 — редкое достижение (`EXAM PASSED`).
 
 **Обучение в фазе 1 (контекстные подсказки над партой, исчезают после выполнения):**
-1. `MEOW into your mic to get Whiskerstein's attention!` (мигает метр) → после первого мяу
-2. `Hold SPACE to lean over` → после первого наклона
-3. `Copy the strokes: ← ↑ →` → после первого ответа
-4. На Q4 перед первым разворотом: `Psst. She turns around sometimes. Let go of SPACE!`
-5. На Q6, когда утка впервые полезна: `Throw the duck when it gets hot [Q]`
+1. подсказка про мяу (мигает метр) → скрывается после первого мяу
+2. подсказка про наклон → после первого наклона
+3. подсказка про ввод стрелок → после первого ответа
+4. на Q4 перед первым разворотом — подсказка про телеграф и SPACE
+5. на Q6, когда утка впервые полезна — подсказка про бросок утки
+
+Строки подсказок — таблица `§13.4` (единственное место, здесь не дублируем).
 
 ### 11.1 Звонок (таймер)
 - Экзамен длится **120 с**. Часы на стене всегда видны, но спокойные (ambient).
@@ -216,8 +218,8 @@ Main Menu ──Play──▶ Attendance Sheet (имя + тест микрофо
 
 **Report Card** (табель) открывается при CAUGHT / BELL RANG / EXAM PASSED.
 
-Заголовок: `CAUGHT 😾` / `BELL RANG 🔔` / `EXAM PASSED!`
-Статы: `Answers copied N/12` · `Time 1:23` · `Meows` · `Almost caught` · `Ducks thrown`
+Заголовок по исходу, под ним реплика учительницы, статы: ответы, время, мяу, almost caught, броски утки.
+Точные строки заголовков, подписей статов, лидерборда и кнопок — `§13.2` (здесь не дублируем).
 
 **Оценка (grade) по числу ответов** — штамп на табеле:
 
@@ -235,10 +237,10 @@ Main Menu ──Play──▶ Attendance Sheet (имя + тест микрофо
 **Лидерборд (Google Sheets):**
 - Строка: `name, answers, timeSeconds, grade, dateUtc`. Время — сколько секунд шёл экзамен до конца попытки.
 - Сортировка: `answers` по убыванию, затем `timeSeconds` по возрастанию (быстрее набрал столько же — выше).
-- Показываем топ‑10 и строку игрока с рангом (`#37 — you`). Своя строка подсвечена.
-- Отправка после каждой попытки. Нет сети/таймаут 5 с → `Leaderboard offline` и локальный лучший результат.
+- Показываем топ‑10 и строку игрока с рангом. Своя строка подсвечена.
+- Отправка после каждой попытки. Нет сети/таймаут 5 с → офлайн‑подпись и локальный лучший результат.
 
-Кнопки: `RETAKE EXAM` (сразу в геймплей, без интро) · `MAIN MENU`.
+Кнопки: «пересдать» (сразу в геймплей, без интро, дублируется клавишей `R`) и «в меню».
 
 ## 13. Контент
 
@@ -267,16 +269,148 @@ Main Menu ──Play──▶ Attendance Sheet (имя + тест микрофо
 **Банк слов (без M/Q):** 4 — `TUNA BIRD FISH YARN HISS PAWS NAPS`; 5 — `PURRS LASER TREAT KNOCK SOFAS`; 6 — `CATNIP KNOCKS HAIRDO`.
 
 ### 13.2 Тексты UI (английский, финальные)
-- Доска: `FINAL EXAM` · `Rule #1: NO CHEATING.` · `Rule #2: NO MEOWING.` · мелко: `Emotional support ducks permitted.`
-- Свой лист: заголовок `CAT ACADEMY — FINAL EXAM`, `Student: <имя игрока>`, `Answer: ____`, штамп `COPIED ✓`.
-- Лист соседа: `Whiskerstein` / `Fluffy`, лапа с подписью при закрытом ответе — ничего (лапа говорит сама за себя).
-- HUD: `ANSWERS 7 / 12` · часы `2:14` · `SUSPICION` · метр `MEOW` с подписью `[M] if no mic` · кейкап `Q` под уткой.
-- Флеши слева: `ANSWER COPIED!` · `PENCIL SNAP!` · `LOUDER!` · `SHE'S LOOKING!` · `DUCK AWAY! 4s` · `DUCK CONFISCATED`.
 
-### 13.3 Реплики учительницы
-Turning: `Hmm?` · Watching: `I'm watching you.` / `Eyes on your OWN paper.` / `Whiskers down, everyone.` · Staring: `MISS HISSKINS SEES YOU.` ·
-Meow alert: `Did someone MEOW?` / `NO. MEOWING.` · Pencil snap: `What was that?!` · Duck: `WHOSE DUCK IS THIS?!` → `Keep. It. Quiet.` → `That's it. The duck is MINE.` ·
-45 с: `Ten minutes left, class!` · Caught: `CAUGHT. See me after class.` · Bell: `RIIING! Pencils down!` · Passed: `...You all passed? Suspicious.`
+Все строки ниже — финальные (G2 закрыта). Любая правка — сразу здесь; в префабах и TMP‑слотах текст
+набирается ровно как в этой таблице, включая регистр, точки и пробелы вокруг `·`/`/`.
+`<name>` — имя игрока из Attendance Sheet, `<n>`/`<m>` — числа, `<time>` — `M:SS`.
+
+**Main Menu**
+
+| Слот | Строка |
+|---|---|
+| Логотип | `COPYCAT` |
+| Слоган под логотипом | `Cheat to win.` |
+| Кнопка 1 | `PLAY` |
+| Кнопка 2 | `QUIT` |
+| Подпись внизу экрана | `Microphone required. You will have to meow out loud.` |
+
+**Attendance Sheet**
+
+| Слот | Строка |
+|---|---|
+| Заголовок листа | `ATTENDANCE SHEET` |
+| Подзаголовок | `Sign in before the exam.` |
+| Подпись поля имени | `Student name` |
+| Placeholder поля имени | `Nameless Kitten` |
+| Подсказка под полем | `12 characters max.` |
+| Заголовок блока микрофона | `MIC CHECK` |
+| Приглашение (мик есть, тишина) | `Meow to test your mic` |
+| Слишком тихо (20–40 % на 0.5 с) | `LOUDER!` |
+| Успех (порог пробит) | `LOUD ENOUGH!` |
+| Микрофона нет или запрещён | `No mic — press M to meow` |
+| Кнопка | `START EXAM` |
+
+**Класс (мир): доска, свой лист, лист соседа**
+
+| Слот | Строка |
+|---|---|
+| Доска, заголовок | `FINAL EXAM` |
+| Доска, правило 1 | `Rule #1: NO CHEATING.` |
+| Доска, правило 2 | `Rule #2: NO MEOWING.` |
+| Доска, мелкий шрифт | `Emotional support ducks permitted.` |
+| Свой лист, шапка | `CAT ACADEMY — FINAL EXAM` |
+| Свой лист, имя | `Student: <name>` |
+| Свой лист, строка ответа | `Answer: ____` |
+| Свой лист, штамп | `COPIED ✓` |
+| Лист левого соседа | `Whiskerstein` |
+| Лист правого соседа | `Fluffy` |
+| Лапа поверх ответа | текста нет — лапа говорит сама за себя |
+
+**HUD**
+
+| Слот | Строка |
+|---|---|
+| Чип слева сверху | `COPYCAT` |
+| Счётчик по центру | `ANSWERS <n> / 12` |
+| Часы на стене | `<time>` (например `2:14`) |
+| Шкала подозрения | `SUSPICION` |
+| Метр микрофона | `MEOW` |
+| Подпись под метром | `[M] if no mic` |
+| Подпись под метром, если мика нет | `No mic — press M to meow` |
+| Кейкап под уткой | `Q` |
+
+**Report Card**
+
+| Слот | Строка |
+|---|---|
+| Заголовок, поймали | `CAUGHT 😾` |
+| Заголовок, звонок | `BELL RANG 🔔` |
+| Заголовок, 12/12 | `EXAM PASSED!` |
+| Подзаголовок | реплика учительницы по исходу — §13.3 |
+| Статы (подписи) | `Answers copied` · `Time` · `Meows` · `Almost caught` · `Ducks thrown` |
+| Стат «ответы» (значение) | `<n>/12` |
+| Штамп оценки | `F` / `D` / `C` / `B` / `A` / `A+` |
+| Сообщение под оценкой | таблица §12 (единственное место, не дублируем) |
+| Заголовок лидерборда | `TOP COPYCATS` |
+| Колонки лидерборда | `#` · `NAME` · `ANSWERS` · `TIME` · `GRADE` |
+| Своя строка вне топ‑10 | `#<n> — you` |
+| Пока отправляем результат | `Sending your result…` |
+| Нет сети / таймаут 5 с | `Leaderboard offline` |
+| Локальный рекорд под лидербордом | `Your best: <n> answers · <time>` |
+| Кнопка 1 | `RETAKE EXAM [R]` |
+| Кнопка 2 | `MAIN MENU` |
+
+**Служебные окна (из шаблона)**
+
+| Слот | Строка |
+|---|---|
+| Loading, строка 1 | `Sharpening pencils…` |
+| Loading, строка 2 | `Waking up Fluffy…` |
+| Loading, строка 3 | `Hiding the duck…` |
+| Error, заголовок | `SOMETHING BROKE` |
+| Error, текст | `The duck denies all responsibility.` |
+| Error, кнопка | `RESTART` |
+| Intro, подсказка пропуска | `Skip [Esc]` |
+
+### 13.3 Реплики учительницы (пузырь над головой, 1.2 с)
+
+Голос миссис Хисскинс — сухая строгая учительница: короткие фразы, точки вместо восклицаний, капсом только
+угроза. Реплика выбирается по триггеру; где вариантов несколько — по кругу, чтобы не повторяться подряд.
+
+| Триггер (§9, §11) | Реплика |
+|---|---|
+| Turning (телеграф 0.3 с) | `Hmm?` |
+| Watching, вариант 1 | `I'm watching you.` |
+| Watching, вариант 2 | `Eyes on your OWN paper.` |
+| Watching, вариант 3 | `Whiskers down, everyone.` |
+| Staring (не отворачивается) | `MRS. HISSKINS SEES YOU.` |
+| Alerted по мяу (она была спиной) | `Did someone MEOW?` |
+| Мяу, когда она уже смотрит | `NO. MEOWING.` |
+| Alerted по треску карандаша | `What was that?!` |
+| Бросок утки | `WHOSE DUCK IS THIS?!` |
+| Возврат утки на парту | `Keep. It. Quiet.` |
+| Третий бросок — конфискация | `That's it. The duck is MINE.` |
+| 45 с до звонка | `Ten minutes left, class!` |
+| CAUGHT (и подзаголовок Report Card) | `CAUGHT. See me after class.` |
+| BELL RANG (и подзаголовок Report Card) | `RIIING! Pencils down!` |
+| EXAM PASSED (и подзаголовок Report Card) | `...You all passed? Suspicious.` |
+
+### 13.4 Подсказки и флеши
+
+**Обучающие подсказки** — контекстные пузыри над своей партой в фазе 1 (§11), каждая исчезает после выполнения
+и больше не возвращается. Порядок и условия появления — §11; строки финальные:
+
+| # | Условие | Строка |
+|---|---|---|
+| 1 | старт экзамена, ни одного мяу | `MEOW into your mic to get Whiskerstein's attention!` |
+| 2 | первое мяу прошло, SPACE ещё не жали | `Hold SPACE to lean over` |
+| 3 | наклонился, ответ читаем | `Copy the strokes: ← ↑ →` |
+| 4 | Q4, перед первым разворотом | `Psst. She turns around sometimes. Let go of SPACE!` |
+| 5 | Q6, утка впервые полезна | `Throw the duck when it gets hot [Q]` |
+
+Если микрофона нет, подсказка 1 звучит как `Press M to get Whiskerstein's attention!`.
+
+**Флеши** — короткие строки слева над своей партой, 0.6 с, не перекрывают учительницу (§15):
+
+| Триггер | Строка |
+|---|---|
+| Ответ списан | `ANSWER COPIED!` |
+| Ошибка ввода | `PENCIL SNAP!` |
+| Уровень мика 20–40 % на 0.5 с | `LOUDER!` |
+| Учительница вошла в Watching, а ты наклонён | `SHE'S LOOKING!` |
+| Утка брошена, учительница отвлечена | `DUCK AWAY! 4s` |
+| Утка забрана после третьего броска | `DUCK CONFISCATED` |
+| Подозрение впервые ≥ 80 % за попытку | `TOO HOT!` |
 
 ## 14. Интро (лор)
 
