@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="96" viewBox="0 0 128 96">
+<path d="M30 9 H98 Q119 9 119 30 V64 Q119 86 98 86 H30 Q9 86 9 64 V30 Q8 9 30 9Z" fill="{{PAPER}}" stroke="{{INK}}" stroke-width="10" stroke-linejoin="round"/>
+<path d="M32 76 H96" stroke="{{PAPER_SHADE}}" stroke-width="8"/>
+</svg>

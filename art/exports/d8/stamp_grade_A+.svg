@@ -1,0 +1,11 @@
+<svg width="220" height="220" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+    <defs/>
+    <g transform="matrix(0.9876884 -0.15643446 0.15643446 0.9876884 -15.853509 18.562073)">
+        <path fill="none" stroke="#4fcb7a" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" d="M 42 20 L 177 24 Q 198 25 197 46 L 194 177 Q 194 198 173 197 L 40 194 Q 21 193 22 172 L 24 41 Q 24 20 42 20 Z"/>
+        <path fill="none" stroke="#4fcb7a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M 42 39 L 175 43 L 174 178 L 40 175 Z"/>
+        <path fill="none" stroke="#4fcb7a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" d="M 43 164 L 172 164"/>
+        <g>
+            <path fill="#4fcb7a" stroke="none" d="M 119.985344 142.80078 L 95.7666 145.92578 L 92.836914 134.89063 L 81.7041 134.89063 L 79.262695 145.92578 L 54.36035 143.48438 L 73.793945 78.44531 L 100.94239 77.078125 L 119.985344 142.80078 Z M 91.07911 119.94922 L 87.368164 102.95704 L 83.75488 119.94922 L 91.07911 119.94922 Z M 133.46191 135.96484 L 133.36426 123.17187 L 121.15722 122.97656 L 120.961914 108.32812 L 133.16895 107.93749 L 133.16895 96.41406 L 148.30566 94.85156 L 148.50098 107.25391 L 161.29395 106.86328 L 161.48926 123.56249 L 148.69629 123.36719 L 148.8916 136.16016 L 133.46191 135.96484 Z"/>
+        </g>
+    </g>
+</svg>

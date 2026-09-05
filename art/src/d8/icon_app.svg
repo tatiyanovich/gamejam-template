@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+<rect width="1024" height="1024" fill="{{WALL}}"/>
+<path d="M0 840 Q480 742 1024 873 V1024 H0Z" fill="{{BOARD}}"/>
+<defs><path id="duck" d="M577 563 Q740 651 888 459 Q973 765 761 843 Q514 950 237 817 Q106 756 171 586 Q65 456 138 304 Q216 137 394 184 Q568 228 524 413 Q503 528 577 563Z"/><clipPath id="duck-clip"><use href="#duck"/></clipPath></defs>
+<use href="#duck" fill="{{DUCK}}" stroke="{{INK}}" stroke-width="38" stroke-linejoin="round"/>
+<path d="M950 564 Q922 918 156 750 V970 H987Z" fill="#D1B132" clip-path="url(#duck-clip)"/>
+<path d="M239 475 Q59 447 70 528 Q106 601 281 548Z" fill="{{DUCK_BEAK}}" stroke="{{INK}}" stroke-width="30" stroke-linejoin="round"/>
+<path d="M456 694 Q611 615 750 707 Q647 829 488 787" fill="none" stroke="{{INK}}" stroke-width="32" stroke-linecap="round"/>
+<g stroke="{{INK}}" stroke-width="22"><ellipse cx="238" cy="368" rx="60" ry="83" fill="#FFFFFF"/><ellipse cx="403" cy="372" rx="62" ry="85" fill="#FFFFFF"/></g>
+<g fill="{{INK}}"><ellipse cx="253" cy="379" rx="17" ry="24"/><ellipse cx="418" cy="383" rx="17" ry="24"/></g>
+<g fill="none" stroke="{{GLASSES_RED}}" stroke-width="30" stroke-linecap="round" stroke-linejoin="round"><path d="M164 316 L309 320 L304 419 Q237 454 172 411Z M328 321 L482 318 L474 419 Q402 457 338 418Z M309 341 Q319 332 332 342 M483 335 L519 306"/></g>
+
+</svg>

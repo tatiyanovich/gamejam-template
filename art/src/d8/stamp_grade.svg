@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="220" viewBox="0 0 220 220">
+<g transform="rotate(-9 110 110)" fill="none" stroke="{{GRADE_COLOR}}" stroke-linecap="round" stroke-linejoin="round">
+<path d="M42 20 L177 24 Q198 25 197 46 L194 177 Q194 198 173 197 L40 194 Q21 193 22 172 L24 41 Q24 20 42 20Z" stroke-width="9"/>
+<path d="M42 39 L175 43 L174 178 L40 175Z" stroke-width="3"/>
+<path d="M43 164 H172" stroke-width="5"/>
+<text x="110" y="147" text-anchor="middle" font-family="Luckiest Guy" font-size="{{GRADE_SIZE}}" fill="{{GRADE_COLOR}}" stroke="none">{{GRADE_LABEL}}</text>
+</g>
+</svg>

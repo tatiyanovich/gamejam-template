@@ -1,5 +1,33 @@
 # COPYCAT / Art
 
+## D8 — UI-кит
+
+[Комплект и состояния](previews/d8/state_sheet.png) · [9-slice](previews/d8/slice_sheet.png) · [Меню](previews/d8/main_menu.png) · [HUD](previews/d8/hud_calm.png) · [Риск](previews/d8/hud_risk.png) · [Report Card](previews/d8/report_card.png) · [480×270](previews/d8/hud_thumbnail.png)
+
+`src/d8/` — 16 SVG (включая шаблон оценок) и `layout.json`; `ui.mjs` выдаёт 27 PNG и автономных SVG в `exports/d8/`, 9 PNG/SVG в `previews/d8/`. Все спрайты @2x, кроме `icon_app` 1024×1024 и `vignette_radial` 512×512 @1x. Макеты используют класс D2, соседей D5, листы D6, утку D7 и тестовые позы D1; значения HUD и лидерборда иллюстративные. Это SVG-макеты, не скриншоты Unity.
+
+| Спрайты | Размер @1x | Применение |
+|---|---|---|
+| `panel_paper_9slice` | 128×128 | бумажная панель, `Image.Sliced` |
+| `button_yellow_9slice`, `_hover`, `_pressed` | 128×128 | три состояния одной кнопки, одинаковые поля и pivot |
+| `chip_hud` | 128×96 | `Image.Sliced`, логотип-чип и счётчик |
+| `bar_frame` / `bar_fill` | 420×64 / 390×36 | рамка с отметками 50/80%, градиентная заливка |
+| `meow_circle` / `meow_fill` / `meow_threshold_line` | 240×240 / 192×192 / 192×12 | круг-подложка, белая маска заливки, красный пунктир порога |
+| `star_filled` / `star_empty` | 96×96 | звёзды результата |
+| `stamp_grade_F`, `_D`, `_C`, `_B`, `_A`, `_A+` | 220×220 | один шаблон, Luckiest Guy, цвет по оценке |
+| `logo_copycat` | 900×300 | статичный логотип с кошачьими ушами |
+| `icon_app` | 1024×1024 (@1x) | непрозрачная утка в красных очках; Default texture |
+| `vignette_radial` | 512×512 (@1x) | белый виньет с прозрачным центром, tint WARN/DANGER |
+| `keycap_space` / `keycap_m`, `_1..4` | 160×64 / 64×64 | общий шаблон D7; Space расширяет правые углы и прямые участки |
+
+Импорт D11: группа `Copycat_UI`, путь `Content/UI/Copycat/`; PNG @2x — Sprite PPU 200, Bilinear, no mipmaps, Clamp, без trim. Пивоты и размеры в `layout.assets`. У всех 9-slice borders **32 reference px**, то есть **64 texture px** с каждой стороны на PNG @2x (порядок L/B/R/T); эти значения записаны отдельно. Для Canvas reference PPU 100 и `Image.pixelsPerUnitMultiplier = 1` углы остаются 32 px на экране. Минимальный размер 9-slice — 65×65 reference px. `vignette_radial` — PPU 100, прямоугольник растягивается на экран; иконка — Default texture, установка в Player Settings остаётся D11.
+
+Текст панелей, кнопок, чипов, `SUSPICION`, `MEOW` и таблиц — отдельный TMP по GDD §13.2; запечены только логотип, оценки и кейкапы. Для нажатия TMP смещается на 4 px вниз. `layout.json` задаёт раскладку 1920×1080; для RectTransform с верхним левым anchor/pivot использовать `(x, -y)` и `sizeDelta=(w,h)`, для текстового центра/базовой линии — соответствующий alignment TMP. Шкала стоит под учительницей, круг MEOW — слева на своей парте, ниже ответа соседа. Подпись `SUSPICION` получает тонкую светлую обводку, чтобы читаться на дереве.
+
+Подозрение: фон `PAPER_SHADE` в прямоугольнике (15,14,390,36), поверх `bar_fill` (`Image.Filled`, Horizontal, Left), сверху `bar_frame`. Менять `fillAmount`, не ширину RectTransform: градиент должен сохранять соответствие уровням. MEOW: `meow_circle`, затем `meow_fill` в (24,24,192,192), tint OK, `Image.Filled` Vertical Bottom; сверху линия порога и TMP. Нормализованное значение порога берёт B3 из адаптера микрофона: `centerY=24+192*(1-threshold01)`, `centerX=120`, ширина хорды `2*sqrt(max(0,96²-(192*(0.5-threshold01))²))`. Пример 0.65 в превью — только тест раскладки, не новый порог геймплея. Виньет рисуется поверх мира, под HUD; alpha/пульс — B7/E6.
+
+`npm run check` сверяет все PNG/SVG/manifests и запускает `check-ui.mjs`: прозрачные поля, геометрия полос растяжения, непрозрачность иконки, белые маски, направление градиента, целостность широкого Space и различимость кнопок. Превью 9-slice собираются из девяти фрагментов с фиксированными углами; перекрытие 2 px только внутри прямых полос устраняет швы SVG clip-antialias в миниатюрах, Unity этого не требует. Проверены 1920×1080/480×270, все шесть оценок, иконка 1024/220/64/32 и состояния шкал. Мелкий текст табеля оценивается в полном размере; миниатюра проверяет иерархию, а не чтение всей таблицы. Импорт — D11, оконная логика — B1/B3/B5/B7.
+
 ## D7 — утка
 
 [Состояния и бросок](previews/d7/state_sheet.png) · [Спрайты и pivots](previews/d7/layer_sheet.png) · [На парте](previews/d7/classroom_desk.png) · [Hover](previews/d7/classroom_hover.png) · [Бросок](previews/d7/classroom_throw.png) · [Конфискована](previews/d7/classroom_confiscated.png) · [480×270](previews/d7/classroom_thumbnail.png)

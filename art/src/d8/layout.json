@@ -1,0 +1,696 @@
+{
+  "version": 1,
+  "coordinateSystem": "Top-left, x right, y down; all coordinates in reference pixels @1x",
+  "referenceResolution": [
+    1920,
+    1080
+  ],
+  "textureScale": 2,
+  "pixelsPerUnit": 200,
+  "filterMode": "Bilinear",
+  "mipmaps": false,
+  "trim": false,
+  "wrapMode": "Clamp",
+  "borderOrder": [
+    "left",
+    "bottom",
+    "right",
+    "top"
+  ],
+  "unityCanvas": {
+    "referencePixelsPerUnit": 100,
+    "scaleFactor": 1,
+    "pixelsPerUnitMultiplier": 1,
+    "note": "Sprite PPU 200 and PNG @2x preserve 32 reference-pixel corners; native size = texture pixels * 100 / 200. Vignette overrides sprite PPU to 100."
+  },
+  "text": {
+    "default": "Nunito Bold",
+    "heading": "Luckiest Guy",
+    "paper": "Patrick Hand",
+    "baked": [
+      "logo_copycat",
+      "stamp_grade_*",
+      "keycap_*"
+    ]
+  },
+  "assets": [
+    {
+      "name": "panel_paper_9slice",
+      "size": [
+        128,
+        128
+      ],
+      "pivotPixels": [
+        64.0,
+        64.0
+      ],
+      "textureScale": 2,
+      "borderPixels": [
+        32,
+        32,
+        32,
+        32
+      ],
+      "unityBorderPixels": [
+        64,
+        64,
+        64,
+        64
+      ],
+      "minimumSize": [
+        65,
+        65
+      ]
+    },
+    {
+      "name": "button_yellow_9slice",
+      "size": [
+        128,
+        128
+      ],
+      "pivotPixels": [
+        64.0,
+        64.0
+      ],
+      "textureScale": 2,
+      "borderPixels": [
+        32,
+        32,
+        32,
+        32
+      ],
+      "unityBorderPixels": [
+        64,
+        64,
+        64,
+        64
+      ],
+      "minimumSize": [
+        65,
+        65
+      ]
+    },
+    {
+      "name": "button_yellow_9slice_hover",
+      "size": [
+        128,
+        128
+      ],
+      "pivotPixels": [
+        64.0,
+        64.0
+      ],
+      "textureScale": 2,
+      "borderPixels": [
+        32,
+        32,
+        32,
+        32
+      ],
+      "unityBorderPixels": [
+        64,
+        64,
+        64,
+        64
+      ],
+      "minimumSize": [
+        65,
+        65
+      ]
+    },
+    {
+      "name": "button_yellow_9slice_pressed",
+      "size": [
+        128,
+        128
+      ],
+      "pivotPixels": [
+        64.0,
+        64.0
+      ],
+      "textureScale": 2,
+      "borderPixels": [
+        32,
+        32,
+        32,
+        32
+      ],
+      "unityBorderPixels": [
+        64,
+        64,
+        64,
+        64
+      ],
+      "minimumSize": [
+        65,
+        65
+      ]
+    },
+    {
+      "name": "chip_hud",
+      "size": [
+        128,
+        96
+      ],
+      "pivotPixels": [
+        64.0,
+        48.0
+      ],
+      "textureScale": 2,
+      "borderPixels": [
+        32,
+        32,
+        32,
+        32
+      ],
+      "unityBorderPixels": [
+        64,
+        64,
+        64,
+        64
+      ],
+      "minimumSize": [
+        65,
+        65
+      ]
+    },
+    {
+      "name": "bar_frame",
+      "size": [
+        420,
+        64
+      ],
+      "pivotPixels": [
+        210.0,
+        32.0
+      ],
+      "textureScale": 2,
+      "fillRect": [
+        15,
+        14,
+        390,
+        36
+      ],
+      "tickValues": [
+        0.5,
+        0.8
+      ]
+    },
+    {
+      "name": "bar_fill",
+      "size": [
+        390,
+        36
+      ],
+      "pivotPixels": [
+        195.0,
+        18.0
+      ],
+      "textureScale": 2,
+      "imageType": "Filled",
+      "fillMethod": "Horizontal",
+      "fillOrigin": "Left"
+    },
+    {
+      "name": "meow_circle",
+      "size": [
+        240,
+        240
+      ],
+      "pivotPixels": [
+        120.0,
+        120.0
+      ],
+      "textureScale": 2,
+      "meterRect": [
+        24,
+        24,
+        192,
+        192
+      ]
+    },
+    {
+      "name": "meow_fill",
+      "size": [
+        192,
+        192
+      ],
+      "pivotPixels": [
+        96.0,
+        96.0
+      ],
+      "textureScale": 2,
+      "imageType": "Filled",
+      "fillMethod": "Vertical",
+      "fillOrigin": "Bottom",
+      "tint": "OK"
+    },
+    {
+      "name": "meow_threshold_line",
+      "size": [
+        192,
+        12
+      ],
+      "pivotPixels": [
+        96.0,
+        6.0
+      ],
+      "textureScale": 2
+    },
+    {
+      "name": "star_filled",
+      "size": [
+        96,
+        96
+      ],
+      "pivotPixels": [
+        48.0,
+        48.0
+      ],
+      "textureScale": 2
+    },
+    {
+      "name": "star_empty",
+      "size": [
+        96,
+        96
+      ],
+      "pivotPixels": [
+        48.0,
+        48.0
+      ],
+      "textureScale": 2
+    },
+    {
+      "name": "stamp_grade_F",
+      "size": [
+        220,
+        220
+      ],
+      "pivotPixels": [
+        110,
+        110
+      ],
+      "textureScale": 2,
+      "template": "stamp_grade",
+      "label": "F",
+      "color": "DANGER",
+      "fontSize": 136
+    },
+    {
+      "name": "stamp_grade_D",
+      "size": [
+        220,
+        220
+      ],
+      "pivotPixels": [
+        110,
+        110
+      ],
+      "textureScale": 2,
+      "template": "stamp_grade",
+      "label": "D",
+      "color": "DANGER",
+      "fontSize": 136
+    },
+    {
+      "name": "stamp_grade_C",
+      "size": [
+        220,
+        220
+      ],
+      "pivotPixels": [
+        110,
+        110
+      ],
+      "textureScale": 2,
+      "template": "stamp_grade",
+      "label": "C",
+      "color": "WARN",
+      "fontSize": 136
+    },
+    {
+      "name": "stamp_grade_B",
+      "size": [
+        220,
+        220
+      ],
+      "pivotPixels": [
+        110,
+        110
+      ],
+      "textureScale": 2,
+      "template": "stamp_grade",
+      "label": "B",
+      "color": "PENCIL_INK",
+      "fontSize": 136
+    },
+    {
+      "name": "stamp_grade_A",
+      "size": [
+        220,
+        220
+      ],
+      "pivotPixels": [
+        110,
+        110
+      ],
+      "textureScale": 2,
+      "template": "stamp_grade",
+      "label": "A",
+      "color": "OK",
+      "fontSize": 136
+    },
+    {
+      "name": "stamp_grade_A+",
+      "size": [
+        220,
+        220
+      ],
+      "pivotPixels": [
+        110,
+        110
+      ],
+      "textureScale": 2,
+      "template": "stamp_grade",
+      "label": "A+",
+      "color": "OK",
+      "fontSize": 100
+    },
+    {
+      "name": "logo_copycat",
+      "size": [
+        900,
+        300
+      ],
+      "pivotPixels": [
+        450.0,
+        150.0
+      ],
+      "textureScale": 2
+    },
+    {
+      "name": "icon_app",
+      "size": [
+        1024,
+        1024
+      ],
+      "pivotPixels": [
+        512.0,
+        512.0
+      ],
+      "textureScale": 1,
+      "textureType": "Default",
+      "alphaIsTransparency": false
+    },
+    {
+      "name": "vignette_radial",
+      "size": [
+        512,
+        512
+      ],
+      "pivotPixels": [
+        256.0,
+        256.0
+      ],
+      "textureScale": 1,
+      "tint": "WARN or DANGER",
+      "preserveAspect": false,
+      "pixelsPerUnit": 100
+    },
+    {
+      "name": "keycap_space",
+      "size": [
+        160,
+        64
+      ],
+      "pivotPixels": [
+        80,
+        32
+      ],
+      "textureScale": 2,
+      "template": "../d7/keycap",
+      "label": "Space"
+    },
+    {
+      "name": "keycap_m",
+      "size": [
+        64,
+        64
+      ],
+      "pivotPixels": [
+        32,
+        32
+      ],
+      "textureScale": 2,
+      "template": "../d7/keycap",
+      "label": "M"
+    },
+    {
+      "name": "keycap_1",
+      "size": [
+        64,
+        64
+      ],
+      "pivotPixels": [
+        32,
+        32
+      ],
+      "textureScale": 2,
+      "template": "../d7/keycap",
+      "label": "1"
+    },
+    {
+      "name": "keycap_2",
+      "size": [
+        64,
+        64
+      ],
+      "pivotPixels": [
+        32,
+        32
+      ],
+      "textureScale": 2,
+      "template": "../d7/keycap",
+      "label": "2"
+    },
+    {
+      "name": "keycap_3",
+      "size": [
+        64,
+        64
+      ],
+      "pivotPixels": [
+        32,
+        32
+      ],
+      "textureScale": 2,
+      "template": "../d7/keycap",
+      "label": "3"
+    },
+    {
+      "name": "keycap_4",
+      "size": [
+        64,
+        64
+      ],
+      "pivotPixels": [
+        32,
+        32
+      ],
+      "textureScale": 2,
+      "template": "../d7/keycap",
+      "label": "4"
+    }
+  ],
+  "button": {
+    "normal": "button_yellow_9slice",
+    "hover": "button_yellow_9slice_hover",
+    "pressed": "button_yellow_9slice_pressed",
+    "labelOffsetPressed": [
+      0,
+      4
+    ],
+    "contentInsets": [
+      32,
+      24,
+      32,
+      24
+    ]
+  },
+  "suspicion": {
+    "rect": [
+      750,
+      570,
+      420,
+      64
+    ],
+    "label": [
+      960,
+      559
+    ],
+    "trackColor": "PAPER_SHADE",
+    "fillInset": [
+      15,
+      14
+    ],
+    "fillSize": [
+      390,
+      36
+    ],
+    "range": [
+      0,
+      100
+    ],
+    "imageType": "Filled",
+    "fillMethod": "Horizontal",
+    "fillOrigin": "Left",
+    "note": "Keep full gradient width; clip via fillAmount, never resize the fill sprite. Frame overlays fill. Label is TMP.",
+    "labelStyle": {
+      "font": "Luckiest Guy",
+      "size": 28,
+      "color": "INK",
+      "outlineColor": "PAPER",
+      "outlineReferencePixels": 2
+    }
+  },
+  "meow": {
+    "rect": [
+      82,
+      760,
+      240,
+      240
+    ],
+    "fillRect": [
+      24,
+      24,
+      192,
+      192
+    ],
+    "fillMethod": "Vertical",
+    "fillOrigin": "Bottom",
+    "fillColor": "OK",
+    "label": [
+      202,
+      904
+    ],
+    "fallback": [
+      202,
+      1040
+    ],
+    "threshold": "Read normalized display threshold from the mic meter adapter; no gameplay threshold is baked into the asset.",
+    "thresholdPosition": "centerY = 24 + 192 * (1 - threshold01), centerX = 120",
+    "thresholdWidth": "max(0, 2 * sqrt(96^2 - (192 * (0.5 - threshold01))^2))",
+    "layers": [
+      "meow_circle",
+      "meow_fill",
+      "meow_threshold_line",
+      "TMP MEOW"
+    ]
+  },
+  "hud": {
+    "logo": [
+      42,
+      28,
+      280,
+      88
+    ],
+    "answers": [
+      732,
+      28,
+      456,
+      88
+    ],
+    "clockText": [
+      1676,
+      203
+    ]
+  },
+  "menu": {
+    "logo": [
+      510,
+      170,
+      900,
+      300
+    ],
+    "panel": [
+      600,
+      498,
+      720,
+      350
+    ],
+    "play": [
+      730,
+      530,
+      460,
+      100
+    ],
+    "quit": [
+      730,
+      656,
+      460,
+      100
+    ]
+  },
+  "report": {
+    "panel": [
+      185,
+      80,
+      1550,
+      928
+    ],
+    "grade": [
+      300,
+      350,
+      220,
+      220
+    ],
+    "stars": [
+      266,
+      590,
+      96,
+      96
+    ],
+    "stats": [
+      590,
+      365,
+      390,
+      290
+    ],
+    "leaderboard": [
+      1070,
+      280,
+      535,
+      500
+    ],
+    "retake": [
+      310,
+      820,
+      600,
+      108
+    ],
+    "menu": [
+      1040,
+      820,
+      540,
+      108
+    ]
+  },
+  "preview": {
+    "threshold01": 0.65,
+    "suspicion": [
+      0,
+      0.5,
+      0.8,
+      1
+    ],
+    "mic": [
+      0,
+      0.35,
+      0.65,
+      1
+    ],
+    "note": "Illustrative display values, not a replacement for MicConfig or gameplay balance. Leaderboard rows and stats are mock data."
+  },
+  "textureType": "Sprite"
+}

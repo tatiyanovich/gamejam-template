@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+<defs><path id="face" d="M32 12 H96 Q119 12 120 32 V96 Q120 112 96 113 H32 Q8 113 8 96 V32 Q7 12 32 12Z"/><clipPath id="clip"><use href="#face"/></clipPath></defs>
+<path d="M32 16 H96 Q120 16 120 32 V96 Q120 120 96 120 H32 Q8 120 8 96 V32 Q8 16 32 16Z" fill="#AB8D2B" stroke="{{INK}}" stroke-width="14" stroke-linejoin="round" stroke-linecap="round"/>
+<use href="#face" fill="#D1AC34" stroke="{{INK}}" stroke-width="14" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M0 101 H128 V128 H0Z" fill="#AB8D2B" clip-path="url(#clip)"/>
+<use href="#face" fill="none" stroke="{{INK}}" stroke-width="14" stroke-linejoin="round" stroke-linecap="round"/>
+</svg>

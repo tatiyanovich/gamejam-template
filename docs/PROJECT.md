@@ -119,6 +119,8 @@
 - **D‑57 · 05.09** · Корень борда парентится к `ProjectContext.Instance.transform` (как `EntityViewFactory` для `Entity Views`), а уничтожается `TearDownGreyboxBoardSystem` в хвосте `GreyboxFeature`. · `RunSessionState.Enter` инициализирует фичу **до** `UnloadLaunchScene`, поэтому объект, созданный в активной сцене, умирает вместе с ней, а сущность остаётся с destroyed‑ссылкой (проверено: `MissingReferenceException` каждый кадр). Персистентный родитель + teardown на выходе из сессии дают ровно один борд после рестарта (проверено).
 - **D‑58 · 05.09** · Строку ответа на листе соседа пишут три системы по компоненту payload — `ShowStrokeAnswerInGreyboxSystem`, `ShowPickAnswerInGreyboxSystem`, `ShowWordAnswerInGreyboxSystem`; формат строит сам вид (rich text TMP), стрелки — ASCII `^ > v <`. Ответ в greybox не маскируется: его физически закрывает прямоугольник лапы. · Различие систем — в матчере, а не в `switch` по `QuestionType` (`ecs-conventions`). ASCII вместо `↑→↓←` — дефолтный динамический шрифт TMP гарантирует только ASCII‑глифы. Маскировка нечитаемого ответа принадлежит A5/D6, а гейт ввода и так в домене (`AnswerReadable`).
 
+- **D‑59 · 05.09** · D8: 9-slice borders 32 px @1x передаются Unity как 64 texture px на PNG @2x (Sprite PPU 200, Canvas reference PPU 100); `meow_fill` — отдельная белая маска Vertical Bottom, линия порога позиционируется по нормализованному значению микрофона; иконка 1024 и виньет 512 экспортируются @1x. · Фиксированные углы не растягиваются, заливка не красит рамку, порог не запекает баланс в арт; платформенная иконка сохраняет требуемый размер.
+
 ## 5. Маппинг дизайна на код шаблона
 
 D3: `art/src/d3/` → `art/kitten.mjs` → `art/exports/d3/` (12 спрайтов котёнка); `rig.json` описывает pivots, слои и позы для будущего префаба `Content/Characters/` в D11 и анимации E2.
@@ -128,6 +130,8 @@ D4: `art/src/d4/` → `art/teacher.mjs` → `art/exports/d4/` (12 слоёв у�
 D6: `art/src/d6/` → `art/papers.mjs` → `art/exports/d6/` (22 спрайта листов/глифов/штампа/кольца); `layout.json` — слоты TMP, ряды ответа, позиции листов на партах и колец над соседями для префабов `Content/Papers/` (D11), подсветки ввода (A5/B3) и кольца‑таймера (E3).
 
 D7: `art/src/d7/` → `art/duck.mjs` → `art/exports/d7/` (4 кадра утки + `keycap_q`); `layout.json` — позиция утки и кейкапа на парте, три точки дуги броска, место конфискации на учительском столе для префаба `Content/Duck/` (D11), твина броска (E4) и `Gameplay/Duck`.
+
+D8: `art/src/d8/` → `art/ui.mjs` → `art/exports/d8/` (27 UI-спрайтов); `layout.json` — borders, pivots, раскладка меню/HUD/Report Card и сборка индикаторов для `Content/UI/Copycat/`, группы `Copycat_UI` (D11), окон B1/B3/B5/B7. Проверки — `art/check-ui.mjs`, девять превью — `art/previews/d8/`.
 
 | Дизайн | Код |
 |---|---|
@@ -282,3 +286,4 @@ Apps Script `UnityWebRequest` отрабатывает сам. Логика бе
 - 2026-09-05 16:09 · Claude · A14: фича `Gameplay/Greybox` — компонент `GreyboxBoardComponent`, вид `GreyboxBoard` (процедурные спрайты 1×1 + TMP в мире), `GreyboxColors`, `GreyboxBoardFactory` (бинд в `GameplayInstaller`), 12 систем `Show*`/`Initialize`/`TearDown`, `GreyboxFeature` в `GameplayCoreFeature`; Jenny‑Gen перегенерирован (276 файлов), компиляция чистая · `Assets/Code/Gameplay/Greybox`, D‑56–D‑58
 - 2026-09-05 16:09 · Claude · A14: проверка в Play Mode через MCP — борд появляется в узле `Exam`, мяу поднимает лапу нужного соседа и открывает строку ответа, кольцо‑окно тает, состояния учительницы (Writing/Turning/Watching/Staring) и зоны шкалы 42/55/88 читаются, метр MEOW с порогом и серым «не взведён», строки Strokes/Pick/Word, наклон котёнка, `COPIED`, исходы `CAUGHT`/`BELLRANG`; рестарт сессии — ровно один борд, консоль чистая · узел `Exam`; A14 закрыт
 - 2026-09-05 16:09 · Claude · A14: раскладка борда подогнана по шести кадрам камеры (фон‑стена, метр MEOW внутри кадра, лапа не перекрывает шкалу, строка Pick в две строки на листе) · `Assets/Code/Gameplay/Greybox/Behaviours/GreyboxBoard.cs`
+- 2026-09-05 16:09 · Codex · D8: 27 SVG/PNG UI-кита, 16 SVG-исходников, `layout.json` (9-slice borders 32→64 @2x, pivots, TMP/индикаторы/экраны), 9 превью; проверены 1920×1080/480×270, кнопки, шкалы, штампы, иконка 1024/64/32; build/check и пиксельные проверки D8 прошли, D1–D7 совпадают побайтно · `art/src/d8`, `art/exports/d8`, `art/previews/d8`, D‑59; D8 закрыт, импорт — D11

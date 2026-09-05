@@ -63,6 +63,16 @@
 
 Проверено в 1920×1080 и 480×270: утка и кейкап `Q` читаются на парте и в миниатюре, не перекрывают лист и лапы котёнка; кадры полёта различимы при любом угле поворота (лист состояний показывает 7 положений 0–720°); грустная утка на учительском столе читается как утка, а не пятно. Превью используют класс D2, соседей D5, тестовые позы D1 и листы‑заглушки. Импорт в `Content/Duck/` — D11, твин броска и возврат в руках учительницы — E4, логика — `Gameplay/Duck`.
 
+## D8 — UI-кит
+
+[Состояния](../art/previews/d8/state_sheet.png) · [9-slice](../art/previews/d8/slice_sheet.png) · [Меню](../art/previews/d8/main_menu.png) · [HUD](../art/previews/d8/hud_calm.png) · [Риск](../art/previews/d8/hud_risk.png) · [Report Card](../art/previews/d8/report_card.png) · [480×270](../art/previews/d8/hud_thumbnail.png).
+
+Готовы все ассеты §5.5: 27 SVG/PNG — бумажная панель, три состояния жёлтой кнопки, HUD-чип, рамка/градиент подозрения, круг MEOW, отдельная белая маска заливки и линия порога, две звезды, шесть штампов F–A+, логотип с кошачьими ушами, непрозрачная иконка утки в красных очках, белый виньет и шесть кейкапов. Исходники — `art/src/d8/`, результаты — `art/exports/d8/`; `ui.mjs` и `check-ui.mjs` включены в общие build/check. PNG @2x, PPU 200, Bilinear, no mipmaps, Clamp, без trim; иконка 1024×1024 и виньет 512×512 — @1x. Виньет Sprite PPU 100, иконка Default texture.
+
+Панели/кнопки 128×128 и чип 128×96: borders 32 px @1x = 64 px в PNG @2x, L/B/R/T; Canvas reference PPU 100 сохраняет экранную толщину углов. `layout.json` содержит оба набора borders, pivots, размеры, состояния кнопки и координаты меню/HUD/табеля. Кнопка hover светлее, pressed темнее и подпись смещается на 4 px вниз. `bar_frame` 420×64, `bar_fill` 390×36; заливка горизонтальная слева, с обрезкой полного градиента. MEOW — круг 240×240, белая заливка 192×192 снизу вверх, красный пунктир 192×12; высота линии и длина хорды зависят от нормализованного порога микрофона, значение 0.65 в превью иллюстративное. Маска `meow_fill` добавлена для независимой заливки без окраски рамки. Виньет красится WARN/DANGER из кода.
+
+Надписи интерфейса остаются TMP; запечены только логотип, оценки (Luckiest Guy, D‑39) и кейкапы (D‑42). Space 160×64 расширяет правую часть шаблона D7 без растяжения контура; M/1–4 — 64×64. Девять превью проверяют три состояния кнопки, 0/50/80/100% подозрения, четыре уровня MEOW, все оценки, разные размеры панелей и композицию экранов в 1920×1080/480×270. Иконка дополнительно показана в 64/32 px. Класс — D2/D5/D6/D7 с позами D1; макет риска показывает оформление HUD, не runtime-состояние учительницы. В меню и табеле использованы строки GDD §12/§13.2, данные таблицы — примеры. Данные импорта и формулы — `art/README.md`; Unity/Addressables — D11, привязка окон — B1/B3/B5/B7.
+
 ## 1. Стиль: «Chunky Vector Cartoon»
 
 Референс‑ощущение: флэт‑мультяшность уровня Adventure Time / Cartoon Network shorts, кооп‑симуляторные коты с огромными глазами.
@@ -172,8 +182,10 @@ art/
 
 ### 5.5 UI (`Content/UI/Copycat/`) — группа `Copycat_UI`
 `panel_paper_9slice.png` 128×128 (borders 32), `button_yellow_9slice.png` (normal/hover/pressed), `bar_frame.png`, `bar_fill.png`, `meow_circle.png` 240×240,
-`meow_threshold_line.png`, `chip_hud.png` 9‑slice, `star_filled.png`/`star_empty.png` 96×96, `stamp_grade_F/D/C/B/A/A+.png` 220×220, `logo_copycat.png` 900×300,
+`meow_fill.png` 192×192 (белая маска), `meow_threshold_line.png` 192×12, `chip_hud.png` 9‑slice, `star_filled.png`/`star_empty.png` 96×96, `stamp_grade_F/D/C/B/A/A+.png` 220×220, `logo_copycat.png` 900×300,
 `icon_app.png` 1024×1024 (утка в очках), `vignette_radial.png` 512×512 (белый радиальный, красится кодом), `keycap_space.png`, `keycap_m.png`, `keycap_1..4.png`.
+
+Все 27 готовы в D8 (`art/exports/d8/`). Размеры выше — @1x; экспорт @2x, кроме иконки 1024×1024 и виньета 512×512. Borders 32 @1x = 64 texture px; полный список, состояния, pivots и раскладка — `art/src/d8/layout.json`, инструкция импорта — `art/README.md`.
 
 ### 5.6 Интро (`Content/Intro/`) — группа `Copycat_Intro`
 `intro_panel_1..5.png` 2304×1296 (на 20 % больше кадра для наезда), `letterbox.png`, `film_grain.png` 512×512 (tile, Pillow noise).

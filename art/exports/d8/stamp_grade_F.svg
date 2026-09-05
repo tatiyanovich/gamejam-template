@@ -1,0 +1,11 @@
+<svg width="220" height="220" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+    <defs/>
+    <g transform="matrix(0.9876884 -0.15643446 0.15643446 0.9876884 -15.853509 18.562073)">
+        <path fill="none" stroke="#e84c4c" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" d="M 42 20 L 177 24 Q 198 25 197 46 L 194 177 Q 194 198 173 197 L 40 194 Q 21 193 22 172 L 24 41 Q 24 20 42 20 Z"/>
+        <path fill="none" stroke="#e84c4c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M 42 39 L 175 43 L 174 178 L 40 175 Z"/>
+        <path fill="none" stroke="#e84c4c" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" d="M 43 164 L 172 164"/>
+        <g>
+            <path fill="#e84c4c" stroke="none" d="M 143.13672 51.242188 Q 142.73828 57.484375 142.40625 63.59375 Q 142.07422 69.703125 141.54297 75.94531 L 113.38672 77.40625 L 113.38672 85.77344 L 137.82422 85.77344 L 136.4961 106.359375 L 113.25391 107.023445 L 113.38672 146.33594 L 79.78516 147 L 81.91016 51.242188 L 143.13672 51.242188 Z"/>
+        </g>
+    </g>
+</svg>

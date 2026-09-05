@@ -1,0 +1,28 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <clipPath id="duck-clip">
+            <path fill="#000000" stroke="none" d="M 577 563 Q 740 651 888 459 Q 973 765 761 843 Q 514 950 237 817 Q 106 756 171 586 Q 65 456 138 304 Q 216 137 394 184 Q 568 228 524 413 Q 503 528 577 563 Z"/>
+        </clipPath>
+    </defs>
+    <path fill="#bfd8d2" stroke="none" d="M 0 0 L 1024 0 L 1024 1024 L 0 1024 Z"/>
+    <path fill="#2e5b4f" stroke="none" d="M 0 840 Q 480 742 1024 873 L 1024 1024 L 0 1024 Z"/>
+    <g>
+        <path fill="#ffd83d" stroke="#2a1f1a" stroke-width="38" stroke-linejoin="round" d="M 577 563 Q 740 651 888 459 Q 973 765 761 843 Q 514 950 237 817 Q 106 756 171 586 Q 65 456 138 304 Q 216 137 394 184 Q 568 228 524 413 Q 503 528 577 563 Z"/>
+    </g>
+    <g clip-path="url(#duck-clip)">
+        <path fill="#d1b132" stroke="none" d="M 950 564 Q 922 918 156 750 L 156 970 L 987 970 Z"/>
+    </g>
+    <path fill="#ff8a3d" stroke="#2a1f1a" stroke-width="30" stroke-linejoin="round" d="M 239 475 Q 59 447 70 528 Q 106 601 281 548 Z"/>
+    <path fill="none" stroke="#2a1f1a" stroke-width="32" stroke-linecap="round" d="M 456 694 Q 611 615 750 707 Q 647 829 488 787"/>
+    <g>
+        <path fill="#ffffff" stroke="#2a1f1a" stroke-width="22" d="M 298 368 C 298 413.83966 271.1371 451 238 451 C 204.86292 451 178 413.83966 178 368 C 178 322.16037 204.86292 285 238 285 C 271.1371 285 298 322.16037 298 368 Z"/>
+        <path fill="#ffffff" stroke="#2a1f1a" stroke-width="22" d="M 465 372 C 465 418.9442 437.24164 457 403 457 C 368.75833 457 341 418.9442 341 372 C 341 325.0558 368.75833 287 403 287 C 437.24164 287 465 325.0558 465 372 Z"/>
+    </g>
+    <g>
+        <path fill="#2a1f1a" stroke="none" d="M 270 379 C 270 392.25482 262.38885 403 253 403 C 243.61116 403 236 392.25482 236 379 C 236 365.74518 243.61116 355 253 355 C 262.38885 355 270 365.74518 270 379 Z"/>
+        <path fill="#2a1f1a" stroke="none" d="M 435 383 C 435 396.25482 427.38885 407 418 407 C 408.61115 407 401 396.25482 401 383 C 401 369.74518 408.61115 359 418 359 C 427.38885 359 435 369.74518 435 383 Z"/>
+    </g>
+    <g>
+        <path fill="none" stroke="#e0453b" stroke-width="30" stroke-linecap="round" stroke-linejoin="round" d="M 164 316 L 309 320 L 304 419 Q 237 454 172 411 Z M 328 321 L 482 318 L 474 419 Q 402 457 338 418 Z M 309 341 Q 319 332 332 342 M 483 335 L 519 306"/>
+    </g>
+</svg>

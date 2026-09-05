@@ -1,0 +1,191 @@
+[
+  {
+    "name": "panel_paper_9slice",
+    "width": 256,
+    "height": 256,
+    "scale": 2,
+    "sha256": "45872f9c7677db7b319f74547c550cdc49bb7f9cd0a423f20009acc16db3b938"
+  },
+  {
+    "name": "button_yellow_9slice",
+    "width": 256,
+    "height": 256,
+    "scale": 2,
+    "sha256": "91dd891b331ec48c664225575f2656a57caca3ee3b3aece9aec75bde3b2fa4f5"
+  },
+  {
+    "name": "button_yellow_9slice_hover",
+    "width": 256,
+    "height": 256,
+    "scale": 2,
+    "sha256": "123e5b4737ef10848cf677d8bd696fcd02fa481b6aed4f47f649086dacbedcbf"
+  },
+  {
+    "name": "button_yellow_9slice_pressed",
+    "width": 256,
+    "height": 256,
+    "scale": 2,
+    "sha256": "60e058ca75ebd40793ee57f78bea86eb4608176689f667b347f837cdb281b3da"
+  },
+  {
+    "name": "chip_hud",
+    "width": 256,
+    "height": 192,
+    "scale": 2,
+    "sha256": "465e93878ad00a08dea82677093aef2ba522e979ede6db87c17b9068f17a8ccd"
+  },
+  {
+    "name": "bar_frame",
+    "width": 840,
+    "height": 128,
+    "scale": 2,
+    "sha256": "c13f847c20cbe8bbb2a916d730d67e7a27aee76a00410ff40158aeaea6d8a418"
+  },
+  {
+    "name": "bar_fill",
+    "width": 780,
+    "height": 72,
+    "scale": 2,
+    "sha256": "2d638104794243336593b950ee69e1b75e653b5f9d9a0b1e4a7112622262a3ea"
+  },
+  {
+    "name": "meow_circle",
+    "width": 480,
+    "height": 480,
+    "scale": 2,
+    "sha256": "7734c3d6f60f20f74bc10a47ef9760ca36f9451e4fe861919e4a3e4e912e3d11"
+  },
+  {
+    "name": "meow_fill",
+    "width": 384,
+    "height": 384,
+    "scale": 2,
+    "sha256": "4c45c459f2294a68d73b7f5dcf36f7f8b01c7bbf6b31ce778810957d80e5c6e2"
+  },
+  {
+    "name": "meow_threshold_line",
+    "width": 384,
+    "height": 24,
+    "scale": 2,
+    "sha256": "34b57a63c50f16c54d9fe16161bf68c01263f1d15e31dd3df1f9eb0624701300"
+  },
+  {
+    "name": "star_filled",
+    "width": 192,
+    "height": 192,
+    "scale": 2,
+    "sha256": "35026f54f568e0730a8bcb0c59ca49985a0e5ad05558936a69ad56d0ee514171"
+  },
+  {
+    "name": "star_empty",
+    "width": 192,
+    "height": 192,
+    "scale": 2,
+    "sha256": "be761c6caf1ee8c6b51d55bd27e3ea557869c24954cd35486312d5422503b7d0"
+  },
+  {
+    "name": "stamp_grade_F",
+    "width": 440,
+    "height": 440,
+    "scale": 2,
+    "sha256": "6e542327a916a47300688f469e5384542e1bc3f1e58357b3a49258b2f095a889"
+  },
+  {
+    "name": "stamp_grade_D",
+    "width": 440,
+    "height": 440,
+    "scale": 2,
+    "sha256": "1d44d08ea3def4e66b3cbb13aee0ca9416b8e4e73a113a2e39ba88d0ab36293f"
+  },
+  {
+    "name": "stamp_grade_C",
+    "width": 440,
+    "height": 440,
+    "scale": 2,
+    "sha256": "d3dafb77de7a07ffd296e884ec91f6052cdafb5bf798a4a792aba733da4ece01"
+  },
+  {
+    "name": "stamp_grade_B",
+    "width": 440,
+    "height": 440,
+    "scale": 2,
+    "sha256": "3c40017d5aca86b0dfaff745c8d8bb3b9ca8b135e0c4c8bd9896312d3405f015"
+  },
+  {
+    "name": "stamp_grade_A",
+    "width": 440,
+    "height": 440,
+    "scale": 2,
+    "sha256": "82e336add1713fb654de4deccc720d64b46891dc8c1711972ace05f97d6601d8"
+  },
+  {
+    "name": "stamp_grade_A+",
+    "width": 440,
+    "height": 440,
+    "scale": 2,
+    "sha256": "50431fe079b8e9b5349d3e791a589b7319c63312830ce6247e54d624da13794a"
+  },
+  {
+    "name": "logo_copycat",
+    "width": 1800,
+    "height": 600,
+    "scale": 2,
+    "sha256": "0c7ecefeaa6d9c7686eed194ff9a711acaaf74afd771f1d4ab8c9629c9d8f7cb"
+  },
+  {
+    "name": "icon_app",
+    "width": 1024,
+    "height": 1024,
+    "scale": 1,
+    "sha256": "45f74d4081bfe4919e8db99b390e448e115c70d8546140ba94c91cc22d7da73f"
+  },
+  {
+    "name": "vignette_radial",
+    "width": 512,
+    "height": 512,
+    "scale": 1,
+    "sha256": "6a7578909132db13f7403daa6ae277677e4463c13693e54f212bdd1c86a1b0b7"
+  },
+  {
+    "name": "keycap_space",
+    "width": 320,
+    "height": 128,
+    "scale": 2,
+    "sha256": "eb0490dfdb395e4510e04e5f30f5abd634ce054123a2ab2a3cf95da874f4c22a"
+  },
+  {
+    "name": "keycap_m",
+    "width": 128,
+    "height": 128,
+    "scale": 2,
+    "sha256": "c1646c2da0a66e22853184bed43ab2edc12bcf729fd6911bed7e19e1e6a69a59"
+  },
+  {
+    "name": "keycap_1",
+    "width": 128,
+    "height": 128,
+    "scale": 2,
+    "sha256": "7fc6552249b9387895a85376ea3f494352143a0275877ebfa4273334ff35147e"
+  },
+  {
+    "name": "keycap_2",
+    "width": 128,
+    "height": 128,
+    "scale": 2,
+    "sha256": "06246132d42f1d81cba9ee354143e6003732e71c0ce7b1ae2e789e732d0c58b7"
+  },
+  {
+    "name": "keycap_3",
+    "width": 128,
+    "height": 128,
+    "scale": 2,
+    "sha256": "cf9456f93dd7dfc7f98e0922a233a5b21f367245f43bd8820baaf21e477795ef"
+  },
+  {
+    "name": "keycap_4",
+    "width": 128,
+    "height": 128,
+    "scale": 2,
+    "sha256": "8e5c5b58dbf5840b65a74c6c0f8741ebd5749c2f0540d9d2419c27b8a623b7d2"
+  }
+]

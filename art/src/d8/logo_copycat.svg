@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="300" viewBox="0 0 900 300">
+<g stroke="{{INK}}" stroke-linejoin="round" stroke-linecap="round">
+<path d="M207 89 L218 20 L282 72 M650 74 L709 21 L722 98" fill="{{KITTEN}}" stroke-width="12"/>
+<path d="M231 60 L235 43 L252 65 M680 63 L697 44 L701 66" fill="{{DUCK_BEAK}}" stroke="none"/>
+<text x="450" y="215" text-anchor="middle" font-family="Luckiest Guy" font-size="180" fill="{{WOOD_SHADE}}" stroke-width="20">COPYCAT</text>
+<text x="444" y="203" text-anchor="middle" font-family="Luckiest Guy" font-size="180" fill="{{UI_ACCENT}}" stroke-width="16" paint-order="stroke fill">COPYCAT</text>
+<path d="M238 249 Q442 265 663 238" fill="none" stroke-width="10"/>
+</g>
+</svg>

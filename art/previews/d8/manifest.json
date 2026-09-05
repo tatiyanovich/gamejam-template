@@ -1,0 +1,65 @@
+[
+  {
+    "name": "state_sheet",
+    "width": 1920,
+    "height": 1420,
+    "scale": 1,
+    "sha256": "ece56b531b48ccf09e55289330404ef0c9980049c08581532905f41c9f1236ed"
+  },
+  {
+    "name": "slice_sheet",
+    "width": 1920,
+    "height": 1120,
+    "scale": 1,
+    "sha256": "8abdaa982de16db409f51b99cf78a59932cf8d9048378eed9f41d32238738152"
+  },
+  {
+    "name": "main_menu",
+    "width": 1920,
+    "height": 1080,
+    "scale": 1,
+    "sha256": "7feb630aadb97de42c75de333b1f228d8cddaf4f537becb0a5ff5e1f589c9038"
+  },
+  {
+    "name": "hud_calm",
+    "width": 1920,
+    "height": 1080,
+    "scale": 1,
+    "sha256": "f8a55f29f3a447eb5a80c4fc1ac7d30f13a3c1a4cc777e232e802beba111afc7"
+  },
+  {
+    "name": "hud_risk",
+    "width": 1920,
+    "height": 1080,
+    "scale": 1,
+    "sha256": "57615417dce0c7b6ffafcc874c07d096578c53beef2fed98a84affe6dbccca43"
+  },
+  {
+    "name": "report_card",
+    "width": 1920,
+    "height": 1080,
+    "scale": 1,
+    "sha256": "beb8981e8de435c101a2dc863e7ebacc90db17ba1a60fdb0fae1c5b879b66c40"
+  },
+  {
+    "name": "menu_thumbnail",
+    "width": 480,
+    "height": 270,
+    "scale": 0.25,
+    "sha256": "cf37a1f53e38935e1b2a9ee5ff80830e77bce3e78763225a5403d55280f07b24"
+  },
+  {
+    "name": "hud_thumbnail",
+    "width": 480,
+    "height": 270,
+    "scale": 0.25,
+    "sha256": "4bf7734674e4e6dd47e8f0261e573bdc6a9ded9d449845bf4c56a9ef1622df25"
+  },
+  {
+    "name": "report_thumbnail",
+    "width": 480,
+    "height": 270,
+    "scale": 0.25,
+    "sha256": "8db8a808d18034e7fd5897e90618f044a5c56ff2ab6db9480e81ff375de98b0d"
+  }
+]
