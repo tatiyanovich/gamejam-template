@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Code.Gameplay.Input.Behaviours;
+using Code.Gameplay.Neighbours.Behaviours;
 using Code.Gameplay.Teacher;
 using Code.Gameplay.Teacher.Behaviours;
 using Newtonsoft.Json.Linq;
@@ -61,6 +62,18 @@ namespace Code.Editor.Art
 			AssetDatabase.SaveAssets();
 			AssetDatabase.Refresh();
 			Debug.Log("D11: built classroom, rigs, papers, duck and UI prefabs.");
+		}
+
+		[MenuItem("COPYCAT/Art/Build E3 Neighbour Views")]
+		public static void BuildNeighbourViews()
+		{
+			if (EditorApplication.isPlaying)
+				throw new InvalidOperationException("Stop Play Mode before building neighbour views.");
+
+			ConfigureNeighbourPrefab("Whiskerstein", "nerd_head");
+			ConfigureNeighbourPrefab("Fluffy", "fluffy_head");
+			AssetDatabase.SaveAssets();
+			Debug.Log("E3: configured both neighbour views.");
 		}
 
 		private static JObject Read(int day)
@@ -387,8 +400,9 @@ namespace Code.Editor.Art
 				Layer(root, "Characters/Neighbours", (character.Name + "_body", Vector3.zero, 18));
 				Transform head = Layer(root, "Characters/Neighbours",
 					(character.Name + "_head", Local(Point(rig["placements"]["head"]) - pivot), 24)).transform;
-				Layer(root, "Characters/Neighbours",
-					(character.Name + "_paw_cover", Local(Point(rig["placements"]["paw"]) - pivot), 23)).name = "Paw";
+				Transform paw = Layer(root, "Characters/Neighbours",
+					(character.Name + "_paw_cover", Local(Point(rig["placements"]["paw"]) - pivot), 23)).transform;
+				paw.name = "Paw";
 				foreach (JToken eye in character.Value["eyes"])
 				{
 					Vector2 position = Point(eye) - Point(rig["placements"]["head"]);
@@ -398,8 +412,33 @@ namespace Code.Editor.Art
 					Layer(head, "Characters/Neighbours",
 						("pupil", Local(position + Point(character.Value["pupilOffset"])), 26));
 				}
+				ConfigureNeighbourView(root, paw, head);
 				Save(root, "Characters/Neighbours");
 			}
+		}
+
+		private static void ConfigureNeighbourPrefab(string characterName, string headName)
+		{
+			string path = Content + "Characters/Neighbours/" + characterName + ".prefab";
+			GameObject root = PrefabUtility.LoadPrefabContents(path);
+			try
+			{
+				ConfigureNeighbourView(root.transform, root.transform.Find("Paw"), root.transform.Find(headName));
+				PrefabUtility.SaveAsPrefabAsset(root, path);
+			}
+			finally
+			{
+				PrefabUtility.UnloadPrefabContents(root);
+			}
+		}
+
+		private static void ConfigureNeighbourView(Transform root, Transform paw, Transform head)
+		{
+			NeighbourView view = root.GetComponent<NeighbourView>();
+			if (view == null)
+				view = root.gameObject.AddComponent<NeighbourView>();
+
+			view.Configure(paw, head);
 		}
 
 		private static void BuildPapers()

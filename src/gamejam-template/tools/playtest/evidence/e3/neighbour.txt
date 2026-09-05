@@ -1,0 +1,7 @@
+PASS lift: left paw moves 0.4 units and 70 degrees from the shoulder
+PASS meow: first and repeated meows jolt the matching neighbour and restart the ring
+PASS telegraph: the last second shakes the paw while the radial ring drains
+PASS gaze: neighbours duck into their papers while Mrs. Hisskins watches
+PASS cover: paw returns over the answer in 0.35 seconds and hides the ring
+PASS mirror: Fluffy uses the same authored shoulder motion under a mirrored root
+DONE

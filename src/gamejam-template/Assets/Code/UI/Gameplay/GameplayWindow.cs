@@ -9,6 +9,7 @@ using Code.Gameplay.Exam.Queries;
 using Code.Gameplay.Input.Behaviours;
 using Code.Gameplay.Input.Queries;
 using Code.Gameplay.Meow.Queries;
+using Code.Gameplay.Neighbours.Behaviours;
 using Code.Gameplay.Neighbours.Queries;
 using Code.Gameplay.Suspicion.Queries;
 using Code.Gameplay.Teacher;
@@ -45,6 +46,7 @@ namespace Code.UI.Gameplay
 		[SF] private FlashStackView flashes;
 
 		private PawTimerView[] _pawTimers;
+		private NeighbourView[] _neighbourViews;
 		private TeacherView _teacherView;
 		private KittenView _kittenView;
 		private bool _worldViewsBound;
@@ -195,13 +197,17 @@ namespace Code.UI.Gameplay
 		private void BindWorldViews()
 		{
 			_pawTimers = FindObjectsByType<PawTimerView>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+			_neighbourViews = FindObjectsByType<NeighbourView>(FindObjectsInactive.Include, FindObjectsSortMode.None);
 			_teacherView = FindFirstObjectByType<TeacherView>(FindObjectsInactive.Include);
 			_kittenView = FindFirstObjectByType<KittenView>(FindObjectsInactive.Include);
-			if (_pawTimers.Length == 0 || _teacherView == null || _kittenView == null)
+			if (_pawTimers.Length < 2 || _neighbourViews.Length < 2 || _teacherView == null || _kittenView == null)
 				return;
 
 			foreach (PawTimerView timer in _pawTimers)
 				timer.Bind(_neighbours);
+
+			foreach (NeighbourView neighbour in _neighbourViews)
+				neighbour.Bind(_neighbours, _teacher);
 
 			_teacherView.Bind(_teacher);
 			_kittenView.Bind(_input, _exam, _teacher);
@@ -216,6 +222,12 @@ namespace Code.UI.Gameplay
 					timer.Unbind();
 			}
 
+			foreach (NeighbourView neighbour in _neighbourViews)
+			{
+				if (neighbour != null)
+					neighbour.Unbind();
+			}
+
 			if (_teacherView != null)
 				_teacherView.Unbind();
 
@@ -223,6 +235,7 @@ namespace Code.UI.Gameplay
 				_kittenView.Unbind();
 
 			_pawTimers = Array.Empty<PawTimerView>();
+			_neighbourViews = Array.Empty<NeighbourView>();
 			_teacherView = null;
 			_kittenView = null;
 			_worldViewsBound = false;

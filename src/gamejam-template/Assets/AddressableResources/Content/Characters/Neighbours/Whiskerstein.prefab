@@ -100,6 +100,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8708511321386321309}
+  - component: {fileID: 4125215778248612614}
   m_Layer: 0
   m_Name: Whiskerstein
   m_TagString: Untagged
@@ -125,6 +126,20 @@ Transform:
   - {fileID: 7731719304571660133}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4125215778248612614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1125304096687191758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32e5591e668f4dd8855c03982a37d717, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Gameplay.Neighbours.Behaviours.NeighbourView
+  paw: {fileID: 7731719304571660133}
+  head: {fileID: 1223753776935420525}
 --- !u!1 &4789273098331329970
 GameObject:
   m_ObjectHideFlags: 0
