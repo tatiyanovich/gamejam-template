@@ -1,0 +1,44 @@
+[
+  {
+    "name": "classroom_empty",
+    "width": 1920,
+    "height": 1080,
+    "scale": 1,
+    "sha256": "1dbb03c1bd2121e5dc865846fcc9d2dea3916bd10f454fdadd445bd15706980b"
+  },
+  {
+    "name": "classroom_calm",
+    "width": 1920,
+    "height": 1080,
+    "scale": 1,
+    "sha256": "ccd9e2e5bc82a1ce0636029ee1e76209863c4957235e0adddac33d5a93f0082f"
+  },
+  {
+    "name": "classroom_risk",
+    "width": 1920,
+    "height": 1080,
+    "scale": 1,
+    "sha256": "23c224a0dbf5ad24bb50fddfef31c87c3c4fcce2f0f78dbbeaffa49f240543d2"
+  },
+  {
+    "name": "classroom_thumbnail",
+    "width": 480,
+    "height": 270,
+    "scale": 0.25,
+    "sha256": "71ffc3cc1988e642d15489c8969b6bb67191f990608c692418d1ce1530cb4758"
+  },
+  {
+    "name": "classroom_layout",
+    "width": 1920,
+    "height": 1080,
+    "scale": 1,
+    "sha256": "c1eb931851d8520462c94ea9e64a340f0e9044887110c039e38ace3decb2b76a"
+  },
+  {
+    "name": "layer_sheet",
+    "width": 1600,
+    "height": 1300,
+    "scale": 1,
+    "sha256": "1e1593baabd90a99537ef20c6affcdebb162378a7279a5c7beb0d42bf8d9fbb2"
+  }
+]

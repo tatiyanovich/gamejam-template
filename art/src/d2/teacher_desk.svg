@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="160" viewBox="0 0 520 160">
+  <g stroke="{{INK}}" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M29 59 L67 59 L62 154 L39 154Z M455 59 L491 59 L480 154 L455 154Z" fill="{{WOOD_SHADE}}"/>
+    <path d="M29 12 Q260 7 490 13 L516 48 Q260 56 4 49Z" fill="{{WOOD}}"/>
+    <path d="M4 49 Q260 56 516 48 L510 85 Q260 92 9 85Z" fill="{{WOOD_SHADE}}"/>
+    <path d="M25 61 Q260 67 489 59" fill="none" stroke="{{BOARD_FRAME}}" stroke-width="3"/>
+    <path d="M52 25 Q93 19 130 24 M414 36 Q444 32 476 36" fill="none" stroke="{{BOARD_FRAME}}" stroke-width="3"/>
+  </g>
+</svg>

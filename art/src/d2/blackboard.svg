@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="300" viewBox="0 0 900 300">
+  <defs>
+    <path id="board-face" d="M30 28 Q447 18 869 29 L874 259 Q450 270 27 260Z"/>
+    <clipPath id="board-clip"><use href="#board-face"/></clipPath>
+  </defs>
+  <g stroke="{{INK}}" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M17 15 Q448 5 882 17 L889 274 Q448 284 12 272Z" fill="{{BOARD_FRAME}}" stroke-width="10"/>
+    <use href="#board-face" fill="{{BOARD}}" stroke-width="6"/>
+    <path d="M21 20 H883 V44 Q452 31 45 42 L43 270 H20Z" fill="{{INK}}" opacity=".12" stroke="none" clip-path="url(#board-clip)"/>
+    <path d="M17 272 L882 271 L895 290 Q446 298 5 291Z" fill="{{WOOD}}" stroke-width="6"/>
+    <path d="M15 289 Q447 293 889 287 L895 290 Q446 298 5 291Z" fill="{{WOOD_SHADE}}" stroke="none"/>
+    <path d="M45 277 L77 277 M88 277 L106 277" fill="none" stroke="{{PAPER}}" stroke-width="6"/>
+    <path d="M776 260 L832 258 L835 273 L776 275Z" fill="{{PAPER_SHADE}}" stroke-width="4"/>
+  </g>
+</svg>

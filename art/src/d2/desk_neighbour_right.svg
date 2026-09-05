@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="620" height="260" viewBox="0 0 620 260">
+  <defs>
+    <path id="desk-top" d="M79 16 Q309 5 542 11 L614 219 Q307 232 6 221Z"/>
+    <clipPath id="desk-clip"><use href="#desk-top"/></clipPath>
+  </defs>
+  <g stroke="{{INK}}" stroke-width="8" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M6 221 Q307 232 614 219 L608 247 Q311 259 12 253Z" fill="{{WOOD_SHADE}}"/>
+    <use href="#desk-top" fill="{{WOOD}}"/>
+    <path d="M545 0 L627 233 L0 247 V210 Q311 220 583 207Z" fill="{{WOOD_SHADE}}" stroke="none" clip-path="url(#desk-clip)"/>
+    <path d="M384 56 Q433 48 478 53 M65 183 Q117 177 162 184 M365 17 L380 225" fill="none" stroke="{{BOARD_FRAME}}" stroke-width="3" clip-path="url(#desk-clip)"/>
+    <g fill="{{INK}}" stroke="none">
+      <ellipse cx="94" cy="34" rx="4" ry="3"/><ellipse cx="526" cy="29" rx="4" ry="3"/>
+      <ellipse cx="36" cy="205" rx="5" ry="3"/><ellipse cx="591" cy="203" rx="5" ry="3"/>
+    </g>
+  </g>
+</svg>

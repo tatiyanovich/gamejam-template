@@ -1,0 +1,29 @@
+<svg width="1920" height="700" viewBox="0 0 1920 700" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <radialGradient id="window-light" cx="0" cy="0.24" r="1" fx="0" fy="0.24">
+            <stop offset="0" stop-color="#dcebe7"/>
+            <stop offset="1" stop-color="#bfd8d2"/>
+        </radialGradient>
+    </defs>
+    <path fill="url(#window-light)" stroke="none" d="M 0 0 L 1920 0 L 1920 700 L 0 700 Z"/>
+    <g>
+        <g opacity="0.12">
+            <path fill="#2a1f1a" stroke="none" d="M 91 85 L 346 77 L 340 350 L 88 357 Z"/>
+        </g>
+        <path fill="#eadfc6" stroke="#2a1f1a" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" d="M 81 76 L 337 68 L 331 341 L 80 348 Z"/>
+        <path fill="#dcebe7" stroke="#2a1f1a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" d="M 96 90 L 318 84 L 315 326 L 96 331 Z"/>
+        <path fill="none" stroke="#8b5a34" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" d="M 206 90 L 204 328 M 96 207 L 316 203"/>
+        <path fill="none" stroke="#fff6e3" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" d="M 114 116 L 171 106 M 115 138 L 151 131 M 232 244 L 291 234"/>
+        <path fill="#c48a5a" stroke="#2a1f1a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" d="M 68 350 L 345 344 L 357 358 L 67 366 Z"/>
+        <path fill="#9e6a3f" stroke="none" d="M 73 360 L 349 353 L 357 358 L 67 366 Z"/>
+        <g transform="matrix(1 0 0 1 1676 161)">
+            <g opacity="0.12">
+                <path fill="#2a1f1a" stroke="none" d="M 91 7 C 91 55.60106 52.944206 95 6 95 C -40.944202 95 -79 55.60106 -79 7 C -79 -41.60106 -40.944202 -81 6 -81 C 52.944206 -81 91 -41.60106 91 7 Z"/>
+            </g>
+            <path fill="#c48a5a" stroke="#2a1f1a" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" d="M -84 0 C -87 -48 -48 -89 0 -88 C 48 -88 85 -49 84 0 C 86 51 45 88 -1 88 C -49 88 -86 47 -84 0 Z"/>
+            <path fill="#fff6e3" stroke="#2a1f1a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" d="M 69 0 C 69 38.65993 38.107647 70 0 70 C -38.107647 70 -69 38.65993 -69 0 C -69 -38.65993 -38.107647 -70 -0 -70 C 38.107647 -70 69 -38.65993 69 0 Z"/>
+            <path fill="none" stroke="#2a1f1a" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" d="M 0 -56 L 0 -46 M 56 0 L 46 0 M 0 56 L 0 46 M -56 0 L -46 0"/>
+            <path fill="none" stroke="#2a1f1a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" d="M 27 -48 L 24 -42 M 48 -28 L 42 -24 M 48 28 L 42 24 M 28 48 L 24 42 M -28 48 L -24 42 M -48 28 L -42 24 M -48 -28 L -42 -24 M -28 -48 L -24 -42"/>
+        </g>
+    </g>
+</svg>

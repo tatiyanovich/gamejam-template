@@ -3,6 +3,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createRequire } from 'node:module';
 import { createHash } from 'node:crypto';
+import { classroomOutputs } from './classroom.mjs';
 
 const root = dirname(fileURLToPath(import.meta.url));
 const require = createRequire(import.meta.url);
@@ -128,7 +129,7 @@ function validate(markup, name) {
   }
 }
 
-function output(name, markup, scale = 1) {
+function output(name, markup, scale = 1, directory = outputRoot, manifestEntries = generated) {
   const resolved = colors(markup);
   validate(resolved, name);
   const renderer = new Resvg(resolved, {
@@ -139,15 +140,30 @@ function output(name, markup, scale = 1) {
   const png = rendered.asPng();
   const files = [[`${name}.svg`, Buffer.from(renderer.toString())], [`${name}.png`, png]];
   for (const [file, data] of files) {
-    const path = join(outputRoot, file);
+    const path = join(directory, file);
     if (check) {
       if (!readFileSync(path).equals(data)) throw new Error(`${file}: rebuild required`);
     } else {
       writeFileSync(path, data);
     }
   }
-  generated.push({ name, width: rendered.width, height: rendered.height, scale, sha256: createHash('sha256').update(png).digest('hex') });
+  manifestEntries.push({ name, width: rendered.width, height: rendered.height, scale, sha256: createHash('sha256').update(png).digest('hex') });
   console.log(`${check ? 'Verified' : 'Rendered'} ${name}: ${rendered.width}×${rendered.height}`);
+}
+
+const classroom = classroomOutputs(root);
+for (const [directory, assets] of Object.entries(classroom)) {
+  const target = join(root, directory);
+  const entries = [];
+  if (!check) mkdirSync(target, { recursive: true });
+  for (const asset of assets) output(asset.name, asset.markup, asset.scale, target, entries);
+  const data = Buffer.from(`${JSON.stringify(entries, null, 2)}\n`);
+  const path = join(target, 'manifest.json');
+  if (check) {
+    if (!readFileSync(path).equals(data)) throw new Error(`${directory}/manifest.json: rebuild required`);
+  } else {
+    writeFileSync(path, data);
+  }
 }
 
 mkdirSync(outputRoot, { recursive: true });

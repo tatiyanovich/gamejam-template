@@ -85,6 +85,8 @@
 - **D‑33 · 05.09** · В A5 гейт = `LeanHeld` + незавершённый экзамен; условие «лапа соседа поднята» добавляется в `MarkAnswerReadableSystem` вместе с A6. · `PawLifted` и сами соседи создаются в A6 (зависит от A12); поставить условие на несуществующие сущности значило бы заблокировать весь ввод и плейтест до A6. Место врезки — одна строка в `MarkAnswerReadableSystem.Execute`.
 - **D‑34 · 05.09** · `WrongInputEvent` несёт только `QuestionIndex` (как `AnswerCopiedEvent`), прогресс ответа при ошибке не сбрасывается. · `GDD §6`: ошибка — штраф подозрения (A9) и треск карандаша (A8), а не потеря набранного; потребители находят текущий вопрос по индексу.
 
+- **D‑35 · 05.09** · D2: пол 1920×670 @1x от y=410 до 1080; точка схода (960,410) на оси доски, как в D1. Девять слоёв @2x без trim, координаты/pivots/порядок и отдельный текст доски в `art/src/d2/layout.json`. · Исходных 420 px пола недостаточно для кадра; отдельные стрелки и текст позволяют анимировать часы и использовать TMP в D11.
+
 ## 5. Маппинг дизайна на код шаблона
 
 | Дизайн | Код |
@@ -201,3 +203,4 @@ Unity: `UnityWebRequest.Post(url, json, "application/json")`, редиректы
 - 2026‑09‑05 12:05 · Claude · A5: гейт ввода пока без лапы соседа — условие `PawLifted` добавляется в A6 одной строкой в `MarkAnswerReadableSystem` · D‑33, `docs/PLAN.md` A6
 - 2026‑09‑05 12:05 · Claude · A5: Jenny‑Gen (249 файлов), компиляция чистая; Play Mode с подменённым `IInputService` — Q1–Q8 пройдены: без наклона прогресс не растёт для всех трёх типов, ошибка даёт `WrongInputEvent` без сброса прогресса, верный ввод доводит до COPIED (8/8), ошибок в консоли нет · Unity 6000.3.22f1
 - 2026‑09‑05 12:25 · Claude · H1 (частично): выставил `macOS Microphone Usage Description` = «COPYCAT needs your microphone to hear you MEOW.», Architecture = Universal, `Run in Background = true`, Fullscreen Window; прогнал Addressables build (чисто, 24 с) и оба player‑билда — macOS (128 МБ, 0 ошибок) и Windows x64 (105 МБ, 0 ошибок); проверил `Info.plist` — `NSMicrophoneUsageDescription` записан верно; осталось: физический запуск на второй машине (Дима) · `Builds/macOS`, `Builds/Windows`, `docs/PLAN.md` H1
+- 2026-09-05 12:10 · Codex · D2: 9 слоёв окружения SVG/PNG @2x, раскладка с pivots и текстом доски, 6 превью; визуальная проверка 1920×1080/480×270, build/check прошли, D1 совпадает побайтно; импорт — D11 · `art/src/d2`, `art/exports/d2`, `art/previews/d2`, D‑35

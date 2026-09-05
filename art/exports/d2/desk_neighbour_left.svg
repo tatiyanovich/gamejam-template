@@ -1,0 +1,25 @@
+<svg width="620" height="260" viewBox="0 0 620 260" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <clipPath id="desk-clip">
+            <path fill="#000000" stroke="none" d="M 78 11 Q 311 5 541 16 L 614 221 Q 313 232 6 219 Z"/>
+        </clipPath>
+    </defs>
+    <g>
+        <path fill="#9e6a3f" stroke="#2a1f1a" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" d="M 6 219 Q 313 232 614 221 L 608 253 Q 309 259 12 247 Z"/>
+        <g>
+            <path fill="#c48a5a" stroke="#2a1f1a" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" d="M 78 11 Q 311 5 541 16 L 614 221 Q 313 232 6 219 Z"/>
+        </g>
+        <g clip-path="url(#desk-clip)">
+            <path fill="#9e6a3f" stroke="none" d="M 542 0 L 627 233 L 0 247 L 0 208 Q 289 220 582 209 Z"/>
+        </g>
+        <g clip-path="url(#desk-clip)">
+            <path fill="none" stroke="#8b5a34" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M 133 53 Q 184 48 226 55 M 455 184 Q 499 177 553 183 M 255 17 L 240 225"/>
+        </g>
+        <g>
+            <path fill="#2a1f1a" stroke="none" d="M 98 29 C 98 30.656855 96.209145 32 94 32 C 91.790855 32 90 30.656855 90 29 C 90 27.343145 91.790855 26 94 26 C 96.209145 26 98 27.343145 98 29 Z"/>
+            <path fill="#2a1f1a" stroke="none" d="M 530 34 C 530 35.656853 528.20917 37 526 37 C 523.79083 37 522 35.656853 522 34 C 522 32.343147 523.79083 31 526 31 C 528.20917 31 530 32.343147 530 34 Z"/>
+            <path fill="#2a1f1a" stroke="none" d="M 34 203 C 34 204.65686 31.761423 206 29 206 C 26.238577 206 24 204.65686 24 203 C 24 201.34314 26.238577 200 29 200 C 31.761423 200 34 201.34314 34 203 Z"/>
+            <path fill="#2a1f1a" stroke="none" d="M 589 205 C 589 206.65686 586.7614 208 584 208 C 581.2386 208 579 206.65686 579 205 C 579 203.34314 581.2386 202 584 202 C 586.7614 202 589 203.34314 589 205 Z"/>
+        </g>
+    </g>
+</svg>

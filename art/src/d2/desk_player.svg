@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="360" viewBox="0 0 1920 360">
+  <defs>
+    <path id="desk-top" d="M145 12 Q954 0 1772 14 L1958 321 Q961 350 -40 319Z"/>
+    <clipPath id="desk-clip"><use href="#desk-top"/></clipPath>
+  </defs>
+  <g stroke="{{INK}}" stroke-width="10" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M-20 300 L1940 300 L1940 365 L-20 365Z" fill="{{WOOD_SHADE}}"/>
+    <use href="#desk-top" fill="{{WOOD}}"/>
+    <path d="M1777 0 L1975 325 Q961 366 -40 332 L-40 298 Q919 326 1870 303Z" fill="{{WOOD_SHADE}}" stroke="none" clip-path="url(#desk-clip)"/>
+    <g stroke="{{BOARD_FRAME}}" stroke-width="4" fill="none" clip-path="url(#desk-clip)">
+      <path d="M85 116 Q457 107 732 121 M1260 115 Q1539 118 1852 109 M-1 255 Q197 245 322 252 M1393 280 Q1659 264 1921 272 M289 55 Q368 45 438 56 M300 68 Q387 57 420 66"/>
+      <path d="M502 2 L450 320 M1404 4 L1460 327"/>
+    </g>
+    <g fill="{{INK}}" stroke="none">
+      <ellipse cx="177" cy="47" rx="6" ry="4"/><ellipse cx="1739" cy="46" rx="6" ry="4"/>
+      <ellipse cx="55" cy="286" rx="7" ry="5"/><ellipse cx="1851" cy="286" rx="7" ry="5"/>
+    </g>
+  </g>
+</svg>

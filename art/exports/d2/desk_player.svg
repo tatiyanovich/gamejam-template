@@ -1,0 +1,26 @@
+<svg width="1920" height="360" viewBox="0 0 1920 360" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <clipPath id="desk-clip">
+            <path fill="#000000" stroke="none" d="M 145 12 Q 954 0 1772 14 L 1958 321 Q 961 350 -40 319 Z"/>
+        </clipPath>
+    </defs>
+    <g>
+        <path fill="#9e6a3f" stroke="#2a1f1a" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" d="M -20 300 L 1940 300 L 1940 365 L -20 365 Z"/>
+        <g>
+            <path fill="#c48a5a" stroke="#2a1f1a" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" d="M 145 12 Q 954 0 1772 14 L 1958 321 Q 961 350 -40 319 Z"/>
+        </g>
+        <g clip-path="url(#desk-clip)">
+            <path fill="#9e6a3f" stroke="none" d="M 1777 0 L 1975 325 Q 961 366 -40 332 L -40 298 Q 919 326 1870 303 Z"/>
+        </g>
+        <g clip-path="url(#desk-clip)">
+            <path fill="none" stroke="#8b5a34" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" d="M 85 116 Q 457 107 732 121 M 1260 115 Q 1539 118 1852 109 M -1 255 Q 197 245 322 252 M 1393 280 Q 1659 264 1921 272 M 289 55 Q 368 45 438 56 M 300 68 Q 387 57 420 66"/>
+            <path fill="none" stroke="#8b5a34" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" d="M 502 2 L 450 320 M 1404 4 L 1460 327"/>
+        </g>
+        <g>
+            <path fill="#2a1f1a" stroke="none" d="M 183 47 C 183 49.20914 180.3137 51 177 51 C 173.6863 51 171 49.20914 171 47 C 171 44.79086 173.6863 43 177 43 C 180.3137 43 183 44.79086 183 47 Z"/>
+            <path fill="#2a1f1a" stroke="none" d="M 1745 46 C 1745 48.20914 1742.3137 50 1739 50 C 1735.6863 50 1733 48.20914 1733 46 C 1733 43.79086 1735.6863 42 1739 42 C 1742.3137 42 1745 43.79086 1745 46 Z"/>
+            <path fill="#2a1f1a" stroke="none" d="M 62 286 C 62 288.7614 58.865993 291 55 291 C 51.134007 291 48 288.7614 48 286 C 48 283.2386 51.134007 281 55 281 C 58.865993 281 62 283.2386 62 286 Z"/>
+            <path fill="#2a1f1a" stroke="none" d="M 1858 286 C 1858 288.7614 1854.8658 291 1851 291 C 1847.1339 291 1844 288.7614 1844 286 C 1844 283.2386 1847.1339 281 1851 281 C 1854.8658 281 1858 283.2386 1858 286 Z"/>
+        </g>
+    </g>
+</svg>

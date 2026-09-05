@@ -1,0 +1,65 @@
+[
+  {
+    "name": "classroom_wall",
+    "width": 3840,
+    "height": 1400,
+    "scale": 2,
+    "sha256": "c2772afd7547d79f4903fefe5f1b84beb5955032f267ed879a88a3991b0a9e41"
+  },
+  {
+    "name": "classroom_floor",
+    "width": 3840,
+    "height": 1340,
+    "scale": 2,
+    "sha256": "098481e546b5fed9966160e529af0390b6c6f0143f9f748c4162ce45c61b6462"
+  },
+  {
+    "name": "blackboard",
+    "width": 1800,
+    "height": 600,
+    "scale": 2,
+    "sha256": "e2166d4b1f8f49c35168b614cd282ae42b5590e86cc30d7b89b687b6b1dc129f"
+  },
+  {
+    "name": "clock_hand_minute",
+    "width": 24,
+    "height": 180,
+    "scale": 2,
+    "sha256": "78ac282d74e5491fb84ed327ca56d1d663422b2a859ba2f3fa083afe5f516a31"
+  },
+  {
+    "name": "clock_hand_hour",
+    "width": 24,
+    "height": 180,
+    "scale": 2,
+    "sha256": "d34efcb0fd084304d86814a3b5b5f5c47bd847f64802984c8f599a34c37d7a47"
+  },
+  {
+    "name": "teacher_desk",
+    "width": 1040,
+    "height": 320,
+    "scale": 2,
+    "sha256": "a255929e2c73fc374b12b4213abd87387479dd77a95a75602ce514fae2bfa1a5"
+  },
+  {
+    "name": "desk_neighbour_left",
+    "width": 1240,
+    "height": 520,
+    "scale": 2,
+    "sha256": "ca432b53663ccb0ac08facdf4cc7411091c1775ae5a06eb2d48a64e947d0c0a0"
+  },
+  {
+    "name": "desk_neighbour_right",
+    "width": 1240,
+    "height": 520,
+    "scale": 2,
+    "sha256": "c477be219009d35901a1168030ba09b947929c3a072fc6f56626bdd66b7abcf9"
+  },
+  {
+    "name": "desk_player",
+    "width": 3840,
+    "height": 720,
+    "scale": 2,
+    "sha256": "76233bfa8623c2008b5858f73b6a9e0a83bfd735dd7cddf250fa1efaddf63d69"
+  }
+]

@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="700" viewBox="0 0 1920 700">
+  <defs>
+    <radialGradient id="window-light" cx="0" cy=".24" r="1">
+      <stop offset="0" stop-color="{{WALL_LIGHT}}"/>
+      <stop offset="1" stop-color="{{WALL}}"/>
+    </radialGradient>
+  </defs>
+  <path d="M0 0 H1920 V700 H0Z" fill="url(#window-light)"/>
+  <g stroke="{{INK}}" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M91 85 L346 77 L340 350 L88 357Z" fill="{{INK}}" opacity=".12" stroke="none"/>
+    <path d="M81 76 L337 68 L331 341 L80 348Z" fill="{{PAPER_SHADE}}" stroke-width="10"/>
+    <path d="M96 90 L318 84 L315 326 L96 331Z" fill="{{WALL_LIGHT}}" stroke-width="6"/>
+    <path d="M206 90 L204 328 M96 207 L316 203" fill="none" stroke="{{BOARD_FRAME}}" stroke-width="9"/>
+    <path d="M114 116 L171 106 M115 138 L151 131 M232 244 L291 234" fill="none" stroke="{{PAPER}}" stroke-width="9"/>
+    <path d="M68 350 L345 344 L357 358 L67 366Z" fill="{{WOOD}}" stroke-width="6"/>
+    <path d="M73 360 L349 353 L357 358 L67 366Z" fill="{{WOOD_SHADE}}" stroke="none"/>
+    <g transform="translate(1676 161)">
+      <ellipse cx="6" cy="7" rx="85" ry="88" fill="{{INK}}" opacity=".12" stroke="none"/>
+      <path d="M-84 0 C-87 -48 -48 -89 0 -88 C48 -88 85 -49 84 0 C86 51 45 88 -1 88 C-49 88 -86 47 -84 0Z" fill="{{WOOD}}" stroke-width="9"/>
+      <ellipse rx="69" ry="70" fill="{{PAPER}}" stroke-width="6"/>
+      <path d="M0 -56 V-46 M56 0 H46 M0 56 V46 M-56 0 H-46" fill="none" stroke-width="7"/>
+      <path d="M27 -48 L24 -42 M48 -28 L42 -24 M48 28 L42 24 M28 48 L24 42 M-28 48 L-24 42 M-48 28 L-42 24 M-48 -28 L-42 -24 M-28 -48 L-24 -42" fill="none" stroke-width="4"/>
+    </g>
+  </g>
+</svg>
