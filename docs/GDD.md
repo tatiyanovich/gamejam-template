@@ -254,10 +254,10 @@ Main Menu ──Play──▶ Attendance Sheet (имя + тест микрофо
 | 6 | 2 | Pick | R | Primary purpose of an expensive cat bed? | A Sleeping · B Ignoring it ✓ · C Resale · D Art |
 | 7 | 2 | Strokes | L | Newton's First Law of Napping states: | `→ ↓ ←` |
 | 8 | 3 | Word | R | What sings outside at 5 AM? | `BIRD` |
-| 9 | 3 | Strokes | L | Optimal nap‑to‑chaos ratio? | `↓ ← ↑ →` |
+| 9 | 3 | Strokes | L | Optimal nap-to-chaos ratio? | `↓ ← ↑ →` |
 | 10 | 3 | Pick | R | Why is the laser dot impossible to catch? | A Physics · B Betrayal ✓ · C Lag · D Magic |
 | 11 | 3 | Word | L | Fish served in a can is called? | `TUNA` |
-| 12 | 4 | Strokes | R | Define cardboard‑box quantum mechanics. | `← ↑ → ↓ ←` |
+| 12 | 4 | Strokes | R | Define cardboard-box quantum mechanics. | `← ↑ → ↓ ←` |
 | 13 | 4 | Word | L | The sound of a happy cat? | `PURRS` |
 | 14 | 4 | Pick | R | 3 tuna cans + 2 tuna cans = ? | A 5 · B Reasons to ignore you ✓ · C 6 · D Fish |
 | 15 | 4 | Word | L | Formal name for 'the red dot'? | `LASER` |

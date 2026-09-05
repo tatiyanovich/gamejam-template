@@ -68,6 +68,8 @@
 - **D‑19 · 05.09** · Фичу `Gameplay/Player` (кинематическое движение, коллизии тела, спавн‑поинт) и `Gameplay/Environment` (бесконечный пол с шейдером) удаляем целиком, а не адаптируем. · Котёнок — статичный cut‑out за партой, он никуда не ходит; `Movement`/`Collisions` остаются как инфраструктура для утки и вьюх.
 - **D‑20 · 05.09** · `JoystickInputService` → `KeyboardInputService` (единственная реализация `IInputService`), окно джойстика удалено. · Управление только клавиатура + микрофон (D‑14), тач не поддерживаем.
 - **D‑21 · 05.09** · Камеру экзамена создаёт `InitializeExamCameraSystem` через `ICameraFactory.CreateStaticCamera` в начале `GameplayCoreFeature`. · Раньше камера спавнилась вместе с игроком в `InitializePlayerSystem`; камера класса статична, ей не за кем следить.
+- **D‑22 · 05.09** · Один сервис конфигов на экзамен: `IExamConfigsService` грузит и `exam_config`, и `difficulty_config`. `IDifficultyService` (A12) берёт фазы у него, своего конфиг‑сервиса не имеет. · Два сервиса на два ассета одной фичи — лишний файл; фазы и вопросы всегда нужны вместе.
+- **D‑23 · 05.09** · Длина Strokes/Word и набор типов вопросов — только в `ExamConfig` (контент), в `DifficultyConfig` их нет. Фаза 1 без проверок задана флагом `teacherChecks: false`, а не нулевым `CheckDelay`. · Колонки `GDD §11` «Strokes / Word» и «Типы» — ограничение для автора контента, рантайм их не читает; флаг читается однозначно, ноль — нет.
 
 ## 5. Маппинг дизайна на код шаблона
 
@@ -78,7 +80,10 @@
 | Intro | новое окно `IntroWindow` (`UI/Intro/`), открывается при входе в Exam, если `IntroSeen == false`; по завершении создаёт `StartExamRequest` |
 | Exam | `LoopNodeId.Exam` (переименованный `Battle`), сцена `Gameplay`, фичи в `GameplayCoreFeature` |
 | Фичи геймплея | `Gameplay/Exam` (вопросы, прогресс, ответы), `Gameplay/Neighbours` (лапа/окно), `Gameplay/Teacher` (внимание), `Gameplay/Suspicion`, `Gameplay/Meow` (микрофон), `Gameplay/Duck`, `Gameplay/Bell` (таймер), `Gameplay/Difficulty` (фазы) |
-| Конфиги | `ExamConfig` (20 вопросов), `DifficultyConfig` (5 фаз), `MeowConfig` (порог/масштаб), `SuspicionConfig`, `DuckConfig`, `BellConfig` — ScriptableObject в `AddressableResources/Configs/<Feature>/` |
+| Конфиги | `ExamConfig` (20 вопросов, ключ `exam_config`), `DifficultyConfig` (5 фаз, `difficulty_config`), `MeowConfig` (порог/масштаб), `SuspicionConfig`, `DuckConfig`, `BellConfig` — ScriptableObject в `AddressableResources/Configs/<Feature>/`, группа `Configs` |
+| Загрузка конфигов экзамена | `IExamConfigsService` (`Gameplay/Exam/Services`) — грузит `ExamConfig` и `DifficultyConfig`, регистрируется в `BootstrapInstaller.BindConfigServices` |
+| Данные вопроса | `QuestionDefinition` (`Gameplay/Exam/Data`), enum‑ы `QuestionType`, `StrokeDirection` (`Gameplay/Exam`), `NeighbourSide` (`Gameplay/Neighbours`) |
+| Данные фазы | `DifficultyPhase` (`Gameplay/Difficulty/Data`): `QuestionCount`, `TeacherChecks`, `CheckDelayMinimum/Maximum`, `LookDurationMinimum/Maximum`, `MeowAlertChance`, `PencilSnapAlerts`, `StaringEnabled`, `PawWindow` |
 | HUD | `GameplayWindow` переписываем под HUD; подписки через reactive queries (`ISuspicionQuery`, `IExamQuery`, `ITeacherQuery`, `IMeowQuery`, `IDuckQuery`, `IBellQuery`) |
 | Report Card | `ResultWindow` переписываем: grade, статы, лидерборд, Retake/Menu |
 | Лидерборд | `Infrastructure/Leaderboard/` сервис `ILeaderboardService` (UnityWebRequest), конфиг с URL Apps Script |
@@ -154,3 +159,8 @@ Unity: `UnityWebRequest.Post(url, json, "application/json")`, редиректы
 - 2026‑09‑05 10:45 · Claude · A1: `GameplayCoreFeature` пересобран (scene entities → камера → Movement → UI → teardown), добавлен `InitializeExamCameraSystem`; `GameplayWindow` и `ResultWindow` очищены до заготовок под B3/B5 (из префабов убраны `FuelBar`, `DistanceText`, `BestDistanceText`) · D‑21
 - 2026‑09‑05 10:45 · Claude · A1: из сцены `Gameplay` удалены `SpawnPoint` и оба объекта `Ground`; product name = `COPYCAT` · `Assets/Scenes/Gameplay.unity`, `ProjectSettings`
 - 2026‑09‑05 10:45 · Claude · A1: Jenny‑Gen после удаления компонентов (200 файлов, минус 23 сгенерированных), компиляция чистая, Play Mode доходит до узла `Exam` без ошибок — камера и HUD‑окно поднимаются · `Assets/Code/Generated`
+- 2026‑09‑05 11:05 · Claude · A2: добавил `QuestionType`, `StrokeDirection`, `NeighbourSide`, `QuestionDefinition`, `DifficultyPhase`, `ExamConfig`, `DifficultyConfig` · `Assets/Code/Gameplay/{Exam,Difficulty,Neighbours}`
+- 2026‑09‑05 11:05 · Claude · A2: `ExamConfigsService` грузит оба конфига, зарегистрирован в `BootstrapInstaller.BindConfigServices` · D‑22
+- 2026‑09‑05 11:05 · Claude · A2: через MCP созданы ассеты `ExamConfig.asset` (20 вопросов из `GDD §13.1`) и `DifficultyConfig.asset` (5 фаз из `GDD §11`), оба в Addressables‑группе `Configs` как `exam_config` / `difficulty_config` · `Assets/AddressableResources/Configs/{Exam,Difficulty}`
+- 2026‑09‑05 11:05 · Claude · A2: в `GDD §13.1` заменил неразрывные дефисы на обычные в `nap-to-chaos` и `cardboard-box` — строки в игре именно такие · `docs/GDD.md`
+- 2026‑09‑05 11:05 · Claude · A2: проверка — компиляция чистая, Play Mode доходит до `StartLaunch`, `PrepareAssetsState` грузит оба конфига без ошибок · Unity 6000.3.22f1

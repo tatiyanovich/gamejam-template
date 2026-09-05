@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5420e408eb1545188bfd4ca1678433b, type: 3}
+  m_Name: DifficultyConfig
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Gameplay.Difficulty.Configs.DifficultyConfig
+  phases:
+  - questionCount: 3
+    teacherChecks: 0
+    checkDelayMinimum: 0
+    checkDelayMaximum: 0
+    lookDurationMinimum: 0
+    lookDurationMaximum: 0
+    meowAlertChance: 0
+    pencilSnapAlerts: 0
+    staringEnabled: 0
+    pawWindow: 10
+  - questionCount: 4
+    teacherChecks: 1
+    checkDelayMinimum: 4.5
+    checkDelayMaximum: 6.5
+    lookDurationMinimum: 1.2
+    lookDurationMaximum: 1.8
+    meowAlertChance: 0
+    pencilSnapAlerts: 0
+    staringEnabled: 0
+    pawWindow: 7
+  - questionCount: 4
+    teacherChecks: 1
+    checkDelayMinimum: 3
+    checkDelayMaximum: 4.5
+    lookDurationMinimum: 1.5
+    lookDurationMaximum: 2
+    meowAlertChance: 0.35
+    pencilSnapAlerts: 1
+    staringEnabled: 1
+    pawWindow: 5
+  - questionCount: 4
+    teacherChecks: 1
+    checkDelayMinimum: 2
+    checkDelayMaximum: 3
+    lookDurationMinimum: 1.5
+    lookDurationMaximum: 2.5
+    meowAlertChance: 0.6
+    pencilSnapAlerts: 1
+    staringEnabled: 1
+    pawWindow: 4
+  - questionCount: 5
+    teacherChecks: 1
+    checkDelayMinimum: 1.5
+    checkDelayMaximum: 2.2
+    lookDurationMinimum: 2
+    lookDurationMaximum: 2.5
+    meowAlertChance: 0.9
+    pencilSnapAlerts: 1
+    staringEnabled: 1
+    pawWindow: 3

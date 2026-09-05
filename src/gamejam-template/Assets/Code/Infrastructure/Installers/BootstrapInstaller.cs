@@ -1,5 +1,6 @@
 using Code.Gameplay.Camera.Services;
 using Code.Gameplay.CoreLoop;
+using Code.Gameplay.Exam.Services;
 using Code.Gameplay.Lifetime;
 using Code.Infrastructure.EntityComponentSystem.Destruct.Services;
 using Code.Infrastructure.EntityComponentSystem.Installers;
@@ -45,6 +46,7 @@ namespace Code.Infrastructure.Installers
 		private void BindConfigServices()
 		{
 			Container.BindInterfacesTo<CameraConfigsService>().AsSingle();
+			Container.BindInterfacesTo<ExamConfigsService>().AsSingle();
 		}
 
 		private void BindInfrastructureServices()

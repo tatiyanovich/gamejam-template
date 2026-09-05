@@ -1,0 +1,175 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 713838de8f09e40b2ba14e0f18d75951, type: 3}
+  m_Name: ExamConfig
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Gameplay.Exam.Configs.ExamConfig
+  questions:
+  - text: How many lives does a cat claim to have?
+    type: 1
+    neighbour: 1
+    strokes: 0100000002000000
+    options: []
+    correctOptionIndex: 0
+    word: 
+  - text: 'Complete: cat + cardboard box = ?'
+    type: 1
+    neighbour: 1
+    strokes: 040000000100000002000000
+    options: []
+    correctOptionIndex: 0
+    word: 
+  - text: Who discovered gravity by knocking a cup off?
+    type: 1
+    neighbour: 1
+    strokes: 030000000200000001000000
+    options: []
+    correctOptionIndex: 0
+    word: 
+  - text: Best time for zoomies?
+    type: 2
+    neighbour: 2
+    strokes: 
+    options:
+    - 3 AM
+    - Noon
+    - Never
+    - Tuesday
+    correctOptionIndex: 0
+    word: 
+  - text: Translate 'pspspsps' into Cat Latin.
+    type: 1
+    neighbour: 1
+    strokes: 010000000400000003000000
+    options: []
+    correctOptionIndex: 0
+    word: 
+  - text: Primary purpose of an expensive cat bed?
+    type: 2
+    neighbour: 2
+    strokes: 
+    options:
+    - Sleeping
+    - Ignoring it
+    - Resale
+    - Art
+    correctOptionIndex: 1
+    word: 
+  - text: 'Newton''s First Law of Napping states:'
+    type: 1
+    neighbour: 1
+    strokes: 020000000300000004000000
+    options: []
+    correctOptionIndex: 0
+    word: 
+  - text: What sings outside at 5 AM?
+    type: 3
+    neighbour: 2
+    strokes: 
+    options: []
+    correctOptionIndex: 0
+    word: BIRD
+  - text: Optimal nap-to-chaos ratio?
+    type: 1
+    neighbour: 1
+    strokes: 03000000040000000100000002000000
+    options: []
+    correctOptionIndex: 0
+    word: 
+  - text: Why is the laser dot impossible to catch?
+    type: 2
+    neighbour: 2
+    strokes: 
+    options:
+    - Physics
+    - Betrayal
+    - Lag
+    - Magic
+    correctOptionIndex: 1
+    word: 
+  - text: Fish served in a can is called?
+    type: 3
+    neighbour: 1
+    strokes: 
+    options: []
+    correctOptionIndex: 0
+    word: TUNA
+  - text: Define cardboard-box quantum mechanics.
+    type: 1
+    neighbour: 2
+    strokes: 0400000001000000020000000300000004000000
+    options: []
+    correctOptionIndex: 0
+    word: 
+  - text: The sound of a happy cat?
+    type: 3
+    neighbour: 1
+    strokes: 
+    options: []
+    correctOptionIndex: 0
+    word: PURRS
+  - text: 3 tuna cans + 2 tuna cans = ?
+    type: 2
+    neighbour: 2
+    strokes: 
+    options:
+    - 5
+    - Reasons to ignore you
+    - 6
+    - Fish
+    correctOptionIndex: 1
+    word: 
+  - text: Formal name for 'the red dot'?
+    type: 3
+    neighbour: 1
+    strokes: 
+    options: []
+    correctOptionIndex: 0
+    word: LASER
+  - text: Prove the vase 'fell on its own'.
+    type: 1
+    neighbour: 2
+    strokes: 010000000400000003000000020000000100000004000000
+    options: []
+    correctOptionIndex: 0
+    word: 
+  - text: Forbidden green plant of joy?
+    type: 3
+    neighbour: 1
+    strokes: 
+    options: []
+    correctOptionIndex: 0
+    word: CATNIP
+  - text: Where does a cat sit?
+    type: 2
+    neighbour: 2
+    strokes: 
+    options:
+    - The bed
+    - The box
+    - The laptop
+    - Your face
+    correctOptionIndex: 2
+    word: 
+  - text: What do you do to things on shelves?
+    type: 3
+    neighbour: 1
+    strokes: 
+    options: []
+    correctOptionIndex: 0
+    word: KNOCKS
+  - text: Did you CATegorically avoid cheating?
+    type: 1
+    neighbour: 2
+    strokes: 040000000200000001000000030000000400000001000000
+    options: []
+    correctOptionIndex: 0
+    word: 
