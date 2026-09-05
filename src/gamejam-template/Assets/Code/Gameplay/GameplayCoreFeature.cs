@@ -1,5 +1,6 @@
 using Code.Gameplay.Camera.Systems;
 using Code.Gameplay.Exam;
+using Code.Gameplay.Greybox;
 using Code.Gameplay.Meow;
 using Code.Gameplay.Movement;
 using Code.Gameplay.Neighbours;
@@ -31,6 +32,8 @@ namespace Code.Gameplay
 			Add(systemFactory.Create<ExamFeature>());
 
 			Add(systemFactory.Create<MovementUpdateFeature>());
+
+			Add(systemFactory.Create<GreyboxFeature>());
 
 			Add(systemFactory.Create<UIFeature>());
 
