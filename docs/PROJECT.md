@@ -77,6 +77,9 @@
 
 - **D‑28 · 05.09** · D1 собирается `art/build.mjs` через закреплённый `@resvg/resvg-js` 2.6.2: SVG‑исходники + JSON‑палитра → PNG и автономные SVG с текстом в кривых; локальные шрифты, проверка повторной сборки. · Тот же SVG/resvg‑подход D‑09, воспроизводимый без системных шрифтов; отдельные тестовые объекты @2x, без trim до разделения слоёв. Уточнение D‑16: Luckiest Guy — Apache 2.0; Patrick Hand/Nunito — OFL, лицензии приложены в `art/fonts/`.
 
+- **D‑29 · 05.09** · `IInputService` остаётся механическим (`IsKeyHeld`/`IsKeyPressed`/`GetPointerScreenPosition`), вся раскладка COPYCAT лежит в `InputKeyMap` (`Gameplay/Input/Data`); `M` и `Q` исключены из букв `Word`. · Раскладка — геймплейное знание, ей не место в `Infrastructure`; исключение `M`/`Q` не даёт мяу и утке засчитываться как ошибочный ввод (`GDD §6.3`). Мёртвые `HorizontalAxis`/`VerticalAxis`/`IsRestartInputStarted` из сэмпла бура удалены — `R` на Report Card читается через `IsKeyPressed`.
+- **D‑30 · 05.09** · `InputFeature` перенесена из `GlobalLoopInfraTailFeature` в `GlobalLoopInfraHeadFeature`. · `StrokeInput`/`PickInput`/`LetterInput` живут один кадр; в хвосте геймплей читал бы их кадром позже, а в голове ввод виден в том же кадре, в котором нажата клавиша.
+
 ## 5. Маппинг дизайна на код шаблона
 
 | Дизайн | Код |
@@ -95,7 +98,7 @@
 | Лидерборд | `Infrastructure/Leaderboard/` сервис `ILeaderboardService` (UnityWebRequest), конфиг с URL Apps Script |
 | Сейв | `GeneralSaveFile`: `PlayerName`, `IntroSeen`, `BestAnswers`, `BestTimeSeconds`. Снапшот обновляет `RefreshExamProgressSystem` в `RefreshSnapshotsFeature` |
 | Аудио | `Infrastructure/Audio/` `IAudioService` (SFX по enum `SfxId`, музыка, авто‑дакинг под микрофон) |
-| Input | `Gameplay/Input` расширяем: `LeanHeld`, `StrokeInput`, `PickInput`, `LetterInput`, `MeowKeyPressed`, `DuckKeyPressed` в Input‑контексте |
+| Input | `Gameplay/Input`: флаги `LeanHeld`, `MeowKeyPressed`, `DuckKeyPressed` и однокадровые `StrokeInput` (`StrokeDirection`), `PickInput` (индекс варианта 0–3, клавиши 1–4), `LetterInput` (`char` A–Z без `M`/`Q`) в Input‑контексте; раскладка — `Gameplay/Input/Data/InputKeyMap`, пишет `EmitInputSystem` в `GlobalLoopInfraHeadFeature` |
 | Камера экзамена | `InitializeExamCameraSystem` (`Gameplay/Camera/Systems`) — статичная камера из `ICameraFactory.CreateStaticCamera`, префаб `camera_prefab`, регистрируется на узел `Exam` через `BranchCameraRegistrar` |
 | Прогресс экзамена | сущность `ExamRun` (`CurrentQuestionIndex`, `AnswersCopied`, `ExamElapsedSeconds`, `ExamFinished`, `ExamOutcomeComponent`) и сущность `Question` — компоненты в `Gameplay/Exam/ExamComponents.cs`, фича `ExamFeature` в `GameplayCoreFeature` |
 | Создание сущностей экзамена | `IExamFactory` (`Gameplay/Exam/Services`): `CreateRun` / `CreateQuestion`, биндится в `GameplayInstaller.BindFactories` |
@@ -182,3 +185,7 @@ Unity: `UnityWebRequest.Post(url, json, "application/json")`, редиректы
 - 2026‑09‑05 11:40 · Claude · Дополнил правило Unity MCP: `using System.Reflection` роняет `RunCommand`, добавлен рецепт чтения ECS‑состояния в Play Mode · `.claude/rules/Unity MCP Editor Work.md`, D‑27
 - 2026-09-05 11:12 · Codex · D1: подготовил стиль‑лист, спокойный/опасный кадры класса, тестовые позы котёнка и учительницы, парту/утку, 25 цветов палитры, SVG‑исходники и 10 PNG‑превью; шрифты и лицензии приложены · `art/`, D‑28; художественное утверждение Коли ожидается
 - 2026-09-05 11:12 · Codex · D1: визуально проверил кадры в 1920×1080 и 480×270, исправил перекрытие лица/ответа партами; `npm run build` и `npm run check` прошли, PNG/SVG/manifest совпадают · `art/previews/d1/`, `docs/ART_BIBLE.md`, `docs/PLAN.md`; Unity‑сцены и код не менялись
+- 2026‑09‑05 11:20 · Claude · A4: Input‑контекст расширен — `LeanHeld`, `MeowKeyPressed`, `DuckKeyPressed`, `StrokeInput`, `PickInput`, `LetterInput`; удалены `HorizontalAxis`/`VerticalAxis` сэмпла · `Assets/Code/Gameplay/Input/InputComponents.cs`
+- 2026‑09‑05 11:20 · Claude · A4: раскладка вынесена в `InputKeyMap` + `KeyBinding<T>` (Space, `M`, `Q`, стрелки/WASD, `1–4`, 24 буквы без `M`/`Q`), `EmitInputSystem` пишет флаги и однокадровые компоненты · `Assets/Code/Gameplay/Input/Data`, D‑29
+- 2026‑09‑05 11:20 · Claude · A4: `IInputService`/`KeyboardInputService` сведены к `IsKeyHeld`/`IsKeyPressed`/`GetPointerScreenPosition`; `InputFeature` перенесена в `GlobalLoopInfraHeadFeature` · D‑29, D‑30
+- 2026‑09‑05 11:20 · Claude · A4: Jenny‑Gen (244 файла), компиляция чистая; в Play Mode `EmitInputSystem` прогнан с подменённым `IInputService` — Space+`M`+`Q`+`↑`+`3`+`T` дают lean/meow/duck/stroke=Up/pick=2/letter=T, одиночный `M` буквы не даёт, `A` даёт stroke=Left и letter=A, отпускание всё снимает; ошибок в консоли нет · Unity 6000.3.22f1

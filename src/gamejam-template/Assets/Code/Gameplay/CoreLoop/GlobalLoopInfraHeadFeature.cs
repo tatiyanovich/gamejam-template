@@ -1,3 +1,4 @@
+using Code.Gameplay.Input;
 using Code.Infrastructure.EntityComponentSystem.Events.Systems;
 using Code.Infrastructure.EntityComponentSystem.Factories;
 using Code.Infrastructure.EntityComponentSystem.Systems;
@@ -12,6 +13,8 @@ namespace Code.Gameplay.CoreLoop
 	{
 		public GlobalLoopInfraHeadFeature(ISystemFactory systemFactory)
 		{
+			Add(systemFactory.Create<InputFeature>());
+
 			Add(systemFactory.Create<EventsReadySystem>());
 			Add(systemFactory.Create<MarkStaleRequestsSystem>());
 			Add(systemFactory.Create<ViewFeature>());

@@ -38,7 +38,7 @@ public sealed partial class InputEntity : INamedEntity
 		return components[0].GetType().Name;
 	}
 
-	private string PrintInput() => BuildEntityString("Input", hasHorizontalAxis ? $"H:{HorizontalAxis}" : null);
+	private string PrintInput() => BuildEntityString("Input", isLeanHeld ? "Lean" : null);
 
 	private string BuildEntityString(string entityType, params string[] parts)
 	{

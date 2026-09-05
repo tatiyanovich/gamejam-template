@@ -2,7 +2,6 @@ using Code.Common.Cooldown;
 using Code.Gameplay.Camera;
 using Code.Gameplay.Collisions;
 using Code.Gameplay.Debugging;
-using Code.Gameplay.Input;
 using Code.Gameplay.Lifetime;
 using Code.Gameplay.Parent;
 using Code.Gameplay.Timers;
@@ -27,7 +26,6 @@ namespace Code.Gameplay.CoreLoop
 			Add(systemFactory.Create<CooldownFeature>());
 			Add(systemFactory.Create<AutoSaveSystem>(5));
 
-			Add(systemFactory.Create<InputFeature>());
 			Add(systemFactory.Create<DebuggingFeature>());
 
 			Add(systemFactory.Create<LifetimeFeature>());

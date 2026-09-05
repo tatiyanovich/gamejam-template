@@ -4,9 +4,8 @@ namespace Code.Infrastructure.Input
 {
 	public interface IInputService
 	{
-		float GetHorizontalAxis();
-		bool IsRestartInputStarted();
-		float GetVerticalAxis();
+		bool IsKeyHeld(KeyCode key);
+		bool IsKeyPressed(KeyCode key);
 		Vector2 GetPointerScreenPosition();
 	}
 }

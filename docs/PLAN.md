@@ -54,7 +54,7 @@
 - [x] **A1** (1.0) Снести Drilling/Fuel/Joystick/RefreshDrillRunSystem, `BestDrilledDistance`, `Player` префаб; `Battle` → `Exam`; product name `COPYCAT`.
 - [x] **A2** (1.0) `ExamConfig` (20 вопросов: текст, тип, сосед, payload), `DifficultyConfig` (5 фаз, поля из `GDD §11`), `QuestionType` enum. Зав.: A1.
 - [x] **A3** (1.5) Сущность `ExamRun` (индекс вопроса, счётчик ответов, elapsed), `Question` сущность, системы: `SpawnNextQuestionSystem`, `MarkAnswerCopiedSystem`, `FinishExamOnLastAnswerSystem`, событие `AnswerCopiedEvent`. Зав.: A2.
-- [ ] **A4** (1.0) Input‑контекст: `LeanHeld`, `StrokePressed(dir)`, `PickPressed(1–4)`, `LetterPressed(char)`, `MeowKeyPressed`, `DuckKeyPressed`; `EmitInputSystem` по `KeyCode`. Зав.: A1.
+- [x] **A4** (1.0) Input‑контекст: `LeanHeld`, `StrokePressed(dir)`, `PickPressed(1–4)`, `LetterPressed(char)`, `MeowKeyPressed`, `DuckKeyPressed`; `EmitInputSystem` по `KeyCode`. Зав.: A1.
 - [ ] **A5** (1.5) Валидация ввода: `ValidateStrokeInputSystem`, `ValidatePickInputSystem`, `ValidateWordInputSystem` — только при `LeanHeld` и открытой лапе; событие `WrongInputEvent`. Зав.: A3, A4.
 - [ ] **A6** (0.5) Сосед: `PawLifted` + таймер `PawWindow` по фазе; `LiftPawOnMeowSystem`, `CoverPawOnTimerSystem`. Зав.: A12.
 - [ ] **A7** (1.5) `MicrophoneService`: `Microphone.Start` (loop clip 1 с), RMS последних 1024 сэмплов, порог/масштаб из `MeowConfig`, rising edge, перевзвод, кулдаун 0.7 с, событие `MeowEvent`; фолбэк `M`; состояние «нет микрофона». Зав.: A4.

@@ -4,19 +4,14 @@ namespace Code.Infrastructure.Input
 {
 	public class KeyboardInputService : IInputService
 	{
-		public float GetHorizontalAxis()
+		public bool IsKeyHeld(KeyCode key)
 		{
-			return UnityEngine.Input.GetAxisRaw("Horizontal");
+			return UnityEngine.Input.GetKey(key);
 		}
 
-		public float GetVerticalAxis()
+		public bool IsKeyPressed(KeyCode key)
 		{
-			return UnityEngine.Input.GetAxisRaw("Vertical");
-		}
-
-		public bool IsRestartInputStarted()
-		{
-			return UnityEngine.Input.GetKeyDown(KeyCode.R);
+			return UnityEngine.Input.GetKeyDown(key);
 		}
 
 		public Vector2 GetPointerScreenPosition()

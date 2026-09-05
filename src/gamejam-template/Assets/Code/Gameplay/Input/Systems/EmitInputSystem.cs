@@ -1,4 +1,6 @@
 using Code.Gameplay.Camera.Services;
+using Code.Gameplay.Exam;
+using Code.Gameplay.Input.Data;
 using Code.Infrastructure.Input;
 using Entitas;
 using UnityEngine;
@@ -9,6 +11,7 @@ namespace Code.Gameplay.Input.Systems
 	{
 		private readonly IInputService _inputService;
 		private readonly ICameraQuery _cameraQuery;
+
 		private readonly IGroup<InputEntity> _inputs;
 
 		public EmitInputSystem(
@@ -26,20 +29,72 @@ namespace Code.Gameplay.Input.Systems
 
 		public void Execute()
 		{
-			UnityEngine.Camera camera = _cameraQuery.GetCamera();
-
 			foreach (InputEntity input in _inputs)
 			{
-				input.ReplaceHorizontalAxis(_inputService.GetHorizontalAxis());
-				input.ReplaceVerticalAxis(_inputService.GetVerticalAxis());
+				input.isLeanHeld = _inputService.IsKeyHeld(InputKeyMap.Lean);
+				input.isMeowKeyPressed = _inputService.IsKeyPressed(InputKeyMap.Meow);
+				input.isDuckKeyPressed = _inputService.IsKeyPressed(InputKeyMap.Duck);
 
-				if (camera != null)
-				{
-					Vector3 pointerWorld = camera.ScreenToWorldPoint(_inputService.GetPointerScreenPosition());
-					pointerWorld.z = 0f;
-					input.ReplacePointerWorldPosition(pointerWorld);
-				}
+				EmitStroke(input);
+				EmitPick(input);
+				EmitLetter(input);
+				EmitPointerWorldPosition(input);
 			}
+		}
+
+		private void EmitStroke(InputEntity input)
+		{
+			foreach (KeyBinding<StrokeDirection> binding in InputKeyMap.Strokes)
+			{
+				if (_inputService.IsKeyPressed(binding.Key) == false)
+					continue;
+
+				input.ReplaceStrokeInput(binding.Value);
+				return;
+			}
+
+			input.SafeRemoveStrokeInput();
+		}
+
+		private void EmitPick(InputEntity input)
+		{
+			foreach (KeyBinding<int> binding in InputKeyMap.Picks)
+			{
+				if (_inputService.IsKeyPressed(binding.Key) == false)
+					continue;
+
+				input.ReplacePickInput(binding.Value);
+				return;
+			}
+
+			input.SafeRemovePickInput();
+		}
+
+		private void EmitLetter(InputEntity input)
+		{
+			foreach (KeyBinding<char> binding in InputKeyMap.Letters)
+			{
+				if (_inputService.IsKeyPressed(binding.Key) == false)
+					continue;
+
+				input.ReplaceLetterInput(binding.Value);
+				return;
+			}
+
+			input.SafeRemoveLetterInput();
+		}
+
+		private void EmitPointerWorldPosition(InputEntity input)
+		{
+			UnityEngine.Camera camera = _cameraQuery.GetCamera();
+
+			if (camera == null)
+				return;
+
+			Vector3 pointerWorldPosition = camera.ScreenToWorldPoint(_inputService.GetPointerScreenPosition());
+			pointerWorldPosition.z = 0f;
+
+			input.ReplacePointerWorldPosition(pointerWorldPosition);
 		}
 	}
 }
