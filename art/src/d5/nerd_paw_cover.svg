@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="540" height="760" viewBox="0 0 540 760">
+  <g stroke="{{INK}}" stroke-width="10" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M109 321 Q164 302 184 336 Q200 429 219 507 Q265 532 275 574 Q291 644 248 674 Q158 699 61 672 Q24 655 29 614 Q32 575 100 552 Q118 452 109 321Z" fill="{{NERD}}" stroke="none"/>
+    <path d="M195 437 Q225 549 254 578 Q280 655 190 666 L46 664 Q101 699 248 674 Q291 644 275 574 Q265 532 219 507Z" fill="#828282" stroke="none"/>
+    <path d="M185 349 Q200 429 219 507 Q265 532 275 574 Q291 644 248 674 Q158 699 61 672 Q24 655 29 614 Q32 575 100 552 Q117 457 110 361" fill="none"/>
+    <path d="M90 617 L91 649 M132 620 L133 653 M118 415 L158 425 M116 463 L161 474" fill="none" stroke-width="6"/>
+  </g>
+</svg>

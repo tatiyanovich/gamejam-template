@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="540" height="760" viewBox="0 0 540 760">
+  <defs><path id="head" d="M106 119 L80 40 Q78 21 98 30 L173 74 Q248 43 324 73 L404 30 Q423 19 418 41 L400 120 L426 141 L416 156 L443 177 L421 194 L436 212 L410 222 Q393 280 259 294 Q123 290 96 245 L68 231 L87 210 L64 191 L86 173 L73 153Z"/><clipPath id="shade"><use href="#head"/></clipPath></defs>
+  <g stroke="{{INK}}" stroke-width="10" stroke-linejoin="round" stroke-linecap="round">
+    <use href="#head" fill="{{FLUFFY}}"/>
+    <path d="M390 88 Q423 244 261 265 Q136 262 76 213 L72 318 L463 320 L466 76Z" fill="#C9C6C0" stroke="none" clip-path="url(#shade)"/>
+    <path d="M104 53 L121 110 L152 84Z M397 53 L352 88 L389 113Z" fill="#D3A5B4" stroke="none"/>
+    <path d="M216 65 Q207 29 237 54 Q250 16 270 53 Q299 31 296 68" fill="{{FLUFFY}}"/>
+    <path d="M240 235 L258 235 L249 245Z" fill="{{INK}}" stroke-width="4"/>
+    <path d="M249 245 Q234 260 224 252 M249 245 Q262 262 274 250 M134 235 L65 220 M134 250 L58 252 M143 265 L74 285 M369 234 L437 217 M373 251 L448 250 M362 267 L432 287" fill="none" stroke-width="6"/>
+  </g>
+</svg>

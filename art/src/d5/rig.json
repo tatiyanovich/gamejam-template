@@ -1,0 +1,30 @@
+{
+  "canvas": [540, 760],
+  "coordinates": "Pixels at 1x, top-left origin, Y down, positive angles clockwise. Right neighbour mirrors the entire rig about screen X=960.",
+  "textureScale": 2,
+  "pixelsPerUnit": 200,
+  "filter": "Bilinear",
+  "mipmaps": false,
+  "trim": false,
+  "rootPivot": [270, 730],
+  "sceneOrigin": [210, 290],
+  "sceneScale": 0.65,
+  "drawOrder": ["body", "desk", "paper", "paw", "head", "eyes", "pupils"],
+  "placements": {"body": [270, 730], "head": [250, 270], "paw": [145, 335]},
+  "characters": {
+    "nerd": {"displayName": "Whiskerstein", "mirror": false, "eyes": [[183, 170], [310, 170]], "eyeScale": [1, 1], "pupilOffset": [0, 16]},
+    "fluffy": {"displayName": "Fluffy", "mirror": true, "eyes": [[183, 185], [310, 185]], "eyeScale": [1.05, 0.38], "pupilOffset": [0, 6]}
+  },
+  "poses": {"covered": {"rotation": 0, "offsetY": 0}, "lifted": {"rotation": -70, "offsetY": -40}},
+  "animation": {"liftSeconds": 0.25, "liftEase": "OutBack", "outBackOvershoot": 1.70158, "coverSeconds": 0.35, "telegraphSeconds": 1},
+  "assets": [
+    {"name": "nerd_body", "size": [540, 760], "pivotPixels": [270, 730]},
+    {"name": "nerd_head", "size": [540, 760], "pivotPixels": [250, 270]},
+    {"name": "nerd_paw_cover", "size": [540, 760], "pivotPixels": [145, 335]},
+    {"name": "fluffy_body", "size": [540, 760], "pivotPixels": [270, 730]},
+    {"name": "fluffy_head", "size": [540, 760], "pivotPixels": [250, 270]},
+    {"name": "fluffy_paw_cover", "size": [540, 760], "pivotPixels": [145, 335]},
+    {"name": "eye_white", "size": [110, 130], "pivotPixels": [55, 65]},
+    {"name": "pupil", "size": [24, 28], "pivotPixels": [12, 14]}
+  ]
+}

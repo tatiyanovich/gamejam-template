@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="540" height="760" viewBox="0 0 540 760">
+  <defs><path id="body" d="M165 263 Q247 235 342 272 Q390 310 401 411 L425 639 Q264 686 92 640 L109 413 Q113 306 165 263Z"/><clipPath id="shade"><use href="#body"/></clipPath></defs>
+  <g stroke="{{INK}}" stroke-width="10" stroke-linejoin="round" stroke-linecap="round">
+    <use href="#body" fill="{{NERD}}"/>
+    <path d="M353 278 Q365 531 255 626 L89 641 L445 710 L454 278Z" fill="#828282" stroke="none" clip-path="url(#shade)"/>
+    <path d="M180 284 Q252 307 318 284 L293 427 Q249 452 206 425Z" fill="{{PAPER_SHADE}}" stroke="none"/>
+    <path d="M114 402 L150 417 M109 451 L147 466 M372 377 L395 366 M379 420 L400 413" fill="none" stroke-width="16"/>
+    <path d="M208 295 L244 310 L224 333Z M284 293 L248 310 L269 332Z" fill="{{PENCIL_INK}}" stroke-width="6"/>
+  </g>
+</svg>

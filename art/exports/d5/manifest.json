@@ -1,0 +1,58 @@
+[
+  {
+    "name": "nerd_body",
+    "width": 1080,
+    "height": 1520,
+    "scale": 2,
+    "sha256": "a5f5f8c57e0a93006363987efcf6f36796c4c298282576b8a228eef2cec21af5"
+  },
+  {
+    "name": "nerd_head",
+    "width": 1080,
+    "height": 1520,
+    "scale": 2,
+    "sha256": "036678e221df02988ef8da16cb9ec54ca3ce1ebfa4a139400ce2f8624c0b6280"
+  },
+  {
+    "name": "nerd_paw_cover",
+    "width": 1080,
+    "height": 1520,
+    "scale": 2,
+    "sha256": "8190bb4d184183677781f7a4772acf27663a638a57c925b241dde9d18efb6a9c"
+  },
+  {
+    "name": "fluffy_body",
+    "width": 1080,
+    "height": 1520,
+    "scale": 2,
+    "sha256": "e935762a053b03e648adab826cb6cd6891b3ca4dd43a4ded49027af92fb8690e"
+  },
+  {
+    "name": "fluffy_head",
+    "width": 1080,
+    "height": 1520,
+    "scale": 2,
+    "sha256": "b0fdba2f585138673225f3f80b85e6756321d63381c151fc18dc7e1f3bbf0fd6"
+  },
+  {
+    "name": "fluffy_paw_cover",
+    "width": 1080,
+    "height": 1520,
+    "scale": 2,
+    "sha256": "6db26d4468f1f96fd065dbb73dff97bc60e25a9876b4b32a8ccdcf201a6f64d6"
+  },
+  {
+    "name": "eye_white",
+    "width": 220,
+    "height": 260,
+    "scale": 2,
+    "sha256": "602bd66d5f041805902bb37d92c57741f9935f984c1a5bc1dd34598798689759"
+  },
+  {
+    "name": "pupil",
+    "width": 48,
+    "height": 56,
+    "scale": 2,
+    "sha256": "847707ee7476b069517b119eb19752199f51e063238675e335470ee4743e6fcc"
+  }
+]

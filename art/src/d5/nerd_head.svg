@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="540" height="760" viewBox="0 0 540 760">
+  <defs><path id="head" d="M116 119 L97 27 Q96 12 112 23 L181 67 Q247 48 311 69 L379 25 Q398 13 395 37 L390 124 Q425 157 410 207 Q397 274 258 287 Q125 282 98 233 Q78 177 116 119Z"/><clipPath id="shade"><use href="#head"/></clipPath></defs>
+  <g stroke="{{INK}}" stroke-width="10" stroke-linejoin="round" stroke-linecap="round">
+    <use href="#head" fill="{{NERD}}"/>
+    <path d="M375 67 Q431 225 250 251 Q154 259 99 217 L89 309 L440 302 L447 59Z" fill="#828282" stroke="none" clip-path="url(#shade)"/>
+    <path d="M118 45 L130 107 L162 77Z M376 48 L336 79 L378 111Z" fill="#D3A5B4" stroke="none"/>
+    <path d="M205 67 L216 99 M246 63 L248 96 M287 67 L281 98" fill="none" stroke-width="15"/>
+    <path d="M192 230 Q182 262 246 265 Q304 267 305 233" fill="{{PAPER_SHADE}}" stroke="none"/>
+    <g fill="none" stroke-width="12"><ellipse cx="183" cy="170" rx="60" ry="70"/><ellipse cx="310" cy="170" rx="60" ry="70"/><path d="M243 157 Q247 150 250 157 M122 153 L101 141 M371 153 L402 139"/></g>
+    <path d="M239 228 L257 227 L249 239Z" fill="{{INK}}" stroke-width="4"/>
+    <path d="M249 239 Q234 256 225 246 M249 239 Q259 256 272 246 M138 226 L76 212 M137 241 L69 242 M147 256 L87 273 M360 225 L421 210 M364 242 L432 240 M354 257 L416 274" fill="none" stroke-width="6"/>
+  </g>
+</svg>
