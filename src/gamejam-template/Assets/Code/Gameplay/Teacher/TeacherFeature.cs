@@ -20,6 +20,8 @@ namespace Code.Gameplay.Teacher
 			Add(systemFactory.Create<WatchClassSystem>());
 			Add(systemFactory.Create<KeepStaringWhileLeaningSystem>());
 			Add(systemFactory.Create<ReturnTeacherToWritingSystem>());
+
+			Add(systemFactory.Create<MarkTeacherFacingClassSystem>());
 		}
 	}
 }

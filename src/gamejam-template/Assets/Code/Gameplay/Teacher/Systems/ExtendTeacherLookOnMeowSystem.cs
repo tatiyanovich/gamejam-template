@@ -39,16 +39,11 @@ namespace Code.Gameplay.Teacher.Systems
 
 			foreach (GameEntity teacher in _scheduledTeachers.GetEntities(_buffer))
 			{
-				if (IsFacingClass(teacher.TeacherAttention) == false)
+				if (teacher.TeacherAttention.IsFacingClass() == false)
 					continue;
 
 				teacher.ReplaceTeacherAttentionTimeLeft(teacher.TeacherAttentionTimeLeft + lookExtensionSeconds);
 			}
-		}
-
-		private static bool IsFacingClass(TeacherAttention attention)
-		{
-			return attention == TeacherAttention.Watching || attention == TeacherAttention.Staring;
 		}
 	}
 }

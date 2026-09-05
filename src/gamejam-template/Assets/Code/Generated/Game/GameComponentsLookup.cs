@@ -131,72 +131,75 @@ public static class GameComponentsLookup {
     public const int Parent = 120;
     public const int ParentAttached = 121;
     public const int ParentId = 122;
-    public const int AlmostCaughtCount = 123;
-    public const int Teacher = 124;
-    public const int TeacherAttention = 125;
-    public const int TeacherAttentionTimeLeft = 126;
-    public const int Cooldown = 127;
-    public const int Interval = 128;
-    public const int IntervalUp = 129;
-    public const int Ticking = 130;
-    public const int TimeIsUp = 131;
-    public const int TimeLeft = 132;
-    public const int Timer = 133;
-    public const int PlayVfxRequest = 134;
-    public const int Vfx = 135;
-    public const int VfxAnimator = 136;
-    public const int VfxTargetRadius = 137;
-    public const int Destructed = 138;
-    public const int InactiveSceneEntity = 139;
-    public const int LoopNodeScope = 140;
-    public const int PersistAcrossLoopNodes = 141;
-    public const int Event = 142;
-    public const int Id = 143;
-    public const int LocalPosition = 144;
-    public const int LocalRotation = 145;
-    public const int LossyScale = 146;
-    public const int Name = 147;
-    public const int Ready = 148;
-    public const int Request = 149;
-    public const int InitializeSceneEntityRequest = 150;
-    public const int StaleRequest = 151;
-    public const int BecameHiddenEvent = 152;
-    public const int LoadingView = 153;
-    public const int View = 154;
-    public const int ViewAddressableKey = 155;
-    public const int ViewAssetReference = 156;
-    public const int ViewPath = 157;
-    public const int ViewPrefab = 158;
-    public const int WorldPosition = 159;
-    public const int WorldRotation = 160;
-    public const int AutoSaveTimer = 161;
-    public const int SaveProgressRequest = 162;
-    public const int CompletedChanged = 163;
-    public const int CurrentHPChanged = 164;
-    public const int CurrentQuestionIndexChanged = 165;
-    public const int ExamElapsedSecondsChanged = 166;
-    public const int ExamFinishedChanged = 167;
-    public const int ExamOutcomeChanged = 168;
-    public const int HiddenChanged = 169;
-    public const int IdChanged = 170;
-    public const int LocalPositionChanged = 171;
-    public const int LocalRotationChanged = 172;
-    public const int LookDirectionChanged = 173;
-    public const int LossyScaleChanged = 174;
-    public const int MovementSpeedChanged = 175;
-    public const int NameChanged = 176;
-    public const int OnCooldownChanged = 177;
-    public const int PawLiftedChanged = 178;
-    public const int ProcessedChanged = 179;
-    public const int ReadyChanged = 180;
-    public const int StartedChanged = 181;
-    public const int TeacherAttentionChanged = 182;
-    public const int VelocityChanged = 183;
-    public const int ViewChanged = 184;
-    public const int WorldPositionChanged = 185;
-    public const int WorldRotationChanged = 186;
+    public const int SuspicionLevel = 123;
+    public const int AlmostCaughtCount = 124;
+    public const int Teacher = 125;
+    public const int TeacherAttention = 126;
+    public const int TeacherAttentionTimeLeft = 127;
+    public const int TeacherFacingClass = 128;
+    public const int Cooldown = 129;
+    public const int Interval = 130;
+    public const int IntervalUp = 131;
+    public const int Ticking = 132;
+    public const int TimeIsUp = 133;
+    public const int TimeLeft = 134;
+    public const int Timer = 135;
+    public const int PlayVfxRequest = 136;
+    public const int Vfx = 137;
+    public const int VfxAnimator = 138;
+    public const int VfxTargetRadius = 139;
+    public const int Destructed = 140;
+    public const int InactiveSceneEntity = 141;
+    public const int LoopNodeScope = 142;
+    public const int PersistAcrossLoopNodes = 143;
+    public const int Event = 144;
+    public const int Id = 145;
+    public const int LocalPosition = 146;
+    public const int LocalRotation = 147;
+    public const int LossyScale = 148;
+    public const int Name = 149;
+    public const int Ready = 150;
+    public const int Request = 151;
+    public const int InitializeSceneEntityRequest = 152;
+    public const int StaleRequest = 153;
+    public const int BecameHiddenEvent = 154;
+    public const int LoadingView = 155;
+    public const int View = 156;
+    public const int ViewAddressableKey = 157;
+    public const int ViewAssetReference = 158;
+    public const int ViewPath = 159;
+    public const int ViewPrefab = 160;
+    public const int WorldPosition = 161;
+    public const int WorldRotation = 162;
+    public const int AutoSaveTimer = 163;
+    public const int SaveProgressRequest = 164;
+    public const int CompletedChanged = 165;
+    public const int CurrentHPChanged = 166;
+    public const int CurrentQuestionIndexChanged = 167;
+    public const int ExamElapsedSecondsChanged = 168;
+    public const int ExamFinishedChanged = 169;
+    public const int ExamOutcomeChanged = 170;
+    public const int HiddenChanged = 171;
+    public const int IdChanged = 172;
+    public const int LocalPositionChanged = 173;
+    public const int LocalRotationChanged = 174;
+    public const int LookDirectionChanged = 175;
+    public const int LossyScaleChanged = 176;
+    public const int MovementSpeedChanged = 177;
+    public const int NameChanged = 178;
+    public const int OnCooldownChanged = 179;
+    public const int PawLiftedChanged = 180;
+    public const int ProcessedChanged = 181;
+    public const int ReadyChanged = 182;
+    public const int StartedChanged = 183;
+    public const int SuspicionLevelChanged = 184;
+    public const int TeacherAttentionChanged = 185;
+    public const int VelocityChanged = 186;
+    public const int ViewChanged = 187;
+    public const int WorldPositionChanged = 188;
+    public const int WorldRotationChanged = 189;
 
-    public const int TotalComponents = 187;
+    public const int TotalComponents = 190;
 
     public static readonly string[] componentNames = {
         "AliveChanged",
@@ -322,10 +325,12 @@ public static class GameComponentsLookup {
         "Parent",
         "ParentAttached",
         "ParentId",
+        "SuspicionLevel",
         "AlmostCaughtCount",
         "Teacher",
         "TeacherAttention",
         "TeacherAttentionTimeLeft",
+        "TeacherFacingClass",
         "Cooldown",
         "Interval",
         "IntervalUp",
@@ -381,6 +386,7 @@ public static class GameComponentsLookup {
         "ProcessedChanged",
         "ReadyChanged",
         "StartedChanged",
+        "SuspicionLevelChanged",
         "TeacherAttentionChanged",
         "VelocityChanged",
         "ViewChanged",
@@ -512,10 +518,12 @@ public static class GameComponentsLookup {
         typeof(Code.Gameplay.Parent.Parent),
         typeof(Code.Gameplay.Parent.ParentAttached),
         typeof(Code.Gameplay.Parent.ParentId),
+        typeof(Code.Gameplay.Suspicion.SuspicionLevel),
         typeof(Code.Gameplay.Teacher.AlmostCaughtCount),
         typeof(Code.Gameplay.Teacher.Teacher),
         typeof(Code.Gameplay.Teacher.TeacherAttentionComponent),
         typeof(Code.Gameplay.Teacher.TeacherAttentionTimeLeft),
+        typeof(Code.Gameplay.Teacher.TeacherFacingClass),
         typeof(Code.Gameplay.Timers.Cooldown),
         typeof(Code.Gameplay.Timers.Interval),
         typeof(Code.Gameplay.Timers.IntervalUp),
@@ -571,6 +579,7 @@ public static class GameComponentsLookup {
         typeof(ProcessedChanged),
         typeof(ReadyChanged),
         typeof(StartedChanged),
+        typeof(SuspicionLevelChanged),
         typeof(TeacherAttentionChanged),
         typeof(VelocityChanged),
         typeof(ViewChanged),

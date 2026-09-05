@@ -3,6 +3,7 @@ using Code.Gameplay.Exam;
 using Code.Gameplay.Meow;
 using Code.Gameplay.Movement;
 using Code.Gameplay.Neighbours;
+using Code.Gameplay.Suspicion;
 using Code.Gameplay.Teacher;
 using Code.Gameplay.Teardown;
 using Code.Gameplay.UI;
@@ -24,6 +25,8 @@ namespace Code.Gameplay
 			Add(systemFactory.Create<NeighboursFeature>());
 
 			Add(systemFactory.Create<TeacherFeature>());
+
+			Add(systemFactory.Create<SuspicionFeature>());
 
 			Add(systemFactory.Create<ExamFeature>());
 

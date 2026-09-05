@@ -41,6 +41,11 @@ MonoBehaviour:
     m_SerializedLabels:
     - camera_shake_configs
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b8a9949dc04654fab8928244abf1b3bd
+    m_Address: suspicion_config
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c92a51b125eef7a43a60062aa578e48f
     m_Address: player_camera_config
     m_ReadOnly: 0

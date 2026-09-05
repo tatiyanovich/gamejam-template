@@ -13,5 +13,10 @@ namespace Code.Gameplay.Teacher
 			teacher.ReplaceTeacherAttention(TeacherAttention.Writing);
 			teacher.RemoveTeacherAttentionTimeLeft();
 		}
+
+		public static bool IsFacingClass(this TeacherAttention attention)
+		{
+			return attention == TeacherAttention.Watching || attention == TeacherAttention.Staring;
+		}
 	}
 }
