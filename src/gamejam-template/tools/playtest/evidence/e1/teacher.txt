@@ -1,0 +1,8 @@
+PASS writing: back pose visible, chalk arm swings
+PASS turning: head snaps around within the 0.3-second telegraph
+PASS watching: front pose visible, pupils dart across the rows
+PASS staring: leans in to the authored 6 degrees and 1.05 scale
+PASS alerted: sharp turn punch on the front pose
+PASS distracted: back pose walks left towards the blackboard
+PASS return: she walks back to the blackboard spot and writes again
+DONE

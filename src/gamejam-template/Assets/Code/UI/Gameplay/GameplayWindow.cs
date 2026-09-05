@@ -11,6 +11,7 @@ using Code.Gameplay.Meow.Queries;
 using Code.Gameplay.Neighbours.Queries;
 using Code.Gameplay.Suspicion.Queries;
 using Code.Gameplay.Teacher;
+using Code.Gameplay.Teacher.Behaviours;
 using Code.Gameplay.Teacher.Queries;
 using Code.UI.Result;
 using Cysharp.Threading.Tasks;
@@ -43,6 +44,8 @@ namespace Code.UI.Gameplay
 		[SF] private FlashStackView flashes;
 
 		private PawTimerView[] _pawTimers;
+		private TeacherView _teacherView;
+		private bool _worldViewsBound;
 		private float _speechSeconds;
 		private int _watchingLine;
 		private bool _isOpen;
@@ -134,9 +137,7 @@ namespace Code.UI.Gameplay
 			_teacher.OnAttentionChanged += HandleAttention;
 			_teacher.OnRemark += HandleRemark;
 			duckButton.onClick.AddListener(HandleThrowDuck);
-			_pawTimers = FindObjectsByType<PawTimerView>(FindObjectsInactive.Include, FindObjectsSortMode.None);
-			foreach (PawTimerView timer in _pawTimers)
-				timer.Bind(_neighbours);
+			BindWorldViews();
 			OnRectTransformDimensionsChange();
 			HandleAnswers(_exam.GetAnswersCopied());
 			HandleTime(_bell.GetTimeLeft());
@@ -182,21 +183,50 @@ namespace Code.UI.Gameplay
 			_teacher.OnAttentionChanged -= HandleAttention;
 			_teacher.OnRemark -= HandleRemark;
 			duckButton.onClick.RemoveListener(HandleThrowDuck);
-			foreach (PawTimerView timer in _pawTimers)
-			{
-				if (timer != null)
-					timer.Unbind();
-			}
+			UnbindWorldViews();
 			bubble.SetActive(false);
 			hintBubble.gameObject.SetActive(false);
 			vignette.Hide();
 			flashes.Clear();
 		}
 
+		private void BindWorldViews()
+		{
+			_pawTimers = FindObjectsByType<PawTimerView>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+			_teacherView = FindFirstObjectByType<TeacherView>(FindObjectsInactive.Include);
+			if (_pawTimers.Length == 0 || _teacherView == null)
+				return;
+
+			foreach (PawTimerView timer in _pawTimers)
+				timer.Bind(_neighbours);
+
+			_teacherView.Bind(_teacher);
+			_worldViewsBound = true;
+		}
+
+		private void UnbindWorldViews()
+		{
+			foreach (PawTimerView timer in _pawTimers)
+			{
+				if (timer != null)
+					timer.Unbind();
+			}
+
+			if (_teacherView != null)
+				_teacherView.Unbind();
+
+			_pawTimers = Array.Empty<PawTimerView>();
+			_teacherView = null;
+			_worldViewsBound = false;
+		}
+
 		protected override void OnUpdate()
 		{
 			if (_isOpen == false)
 				return;
+
+			if (_worldViewsBound == false)
+				BindWorldViews();
 
 			if (_speechSeconds > 0f)
 			{

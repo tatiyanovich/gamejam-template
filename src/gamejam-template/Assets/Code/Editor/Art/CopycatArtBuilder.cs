@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Code.Gameplay.Teacher;
+using Code.Gameplay.Teacher.Behaviours;
 using Newtonsoft.Json.Linq;
 using TMPro;
 using UnityEditor;
@@ -353,7 +355,22 @@ namespace Code.Editor.Art
 				}
 				state.gameObject.SetActive(pose.Name == "writing");
 			}
+
+			ConfigureTeacherView(root);
 			Save(root, "Characters/Teacher");
+		}
+
+		private static void ConfigureTeacherView(Transform root)
+		{
+			TeacherView view = root.gameObject.AddComponent<TeacherView>();
+			SerializedObject serialized = new(view);
+			SerializedProperty poses = serialized.FindProperty("poses");
+			string[] names = Enum.GetNames(typeof(TeacherAttention));
+			poses.arraySize = names.Length;
+			for (int index = 0; index < names.Length; index++)
+				poses.GetArrayElementAtIndex(index).objectReferenceValue = root.Find(names[index].ToLowerInvariant());
+
+			serialized.ApplyModifiedPropertiesWithoutUndo();
 		}
 
 		private static void BuildNeighbours()

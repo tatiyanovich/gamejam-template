@@ -3085,6 +3085,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6944763763835617291}
+  - component: {fileID: 7626765956989349243}
   m_Layer: 0
   m_Name: Teacher
   m_TagString: Untagged
@@ -3113,6 +3114,25 @@ Transform:
   - {fileID: 1612474974738645634}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7626765956989349243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7146360502060576887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86d362945563b4abca6fa2cfa61f17e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Gameplay.Teacher.Behaviours.TeacherView
+  poses:
+  - {fileID: 3445468815188534088}
+  - {fileID: 6312865724667565179}
+  - {fileID: 6748065190348039408}
+  - {fileID: 2690750881757066400}
+  - {fileID: 2996713512610684779}
+  - {fileID: 1612474974738645634}
 --- !u!1 &7329400400146577435
 GameObject:
   m_ObjectHideFlags: 0
