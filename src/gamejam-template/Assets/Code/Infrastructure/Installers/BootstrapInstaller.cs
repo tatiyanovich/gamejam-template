@@ -3,6 +3,7 @@ using Code.Gameplay.Camera.Services;
 using Code.Gameplay.CoreLoop;
 using Code.Gameplay.Duck.Services;
 using Code.Gameplay.Exam.Services;
+using Code.Gameplay.Leaderboard.Services;
 using Code.Gameplay.Lifetime;
 using Code.Gameplay.Meow.Services;
 using Code.Gameplay.Suspicion.Services;
@@ -58,6 +59,7 @@ namespace Code.Infrastructure.Installers
 			Container.BindInterfacesTo<TeacherConfigsService>().AsSingle();
 			Container.BindInterfacesTo<DuckConfigsService>().AsSingle();
 			Container.BindInterfacesTo<BellConfigsService>().AsSingle();
+			Container.BindInterfacesTo<LeaderboardConfigsService>().AsSingle();
 		}
 
 		private void BindInfrastructureServices()
@@ -96,6 +98,7 @@ namespace Code.Infrastructure.Installers
 			Container.BindInterfacesTo<FallbackBaseCameraService>().AsSingle();
 			Container.BindInterfacesTo<SettingsService>().AsSingle();
 			Container.BindInterfacesTo<SatelliteService>().AsSingle();
+			Container.BindInterfacesTo<LeaderboardService>().AsSingle();
 
 			new SaveManagementInstaller(Container, new()
 			{

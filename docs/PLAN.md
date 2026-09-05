@@ -78,7 +78,7 @@
 
 ### C. Лидерборд (Коля + Claude) — P0, 2 ч
 - [x] **C1** (0.5) Таблица + Apps Script, деплой, URL в чат. Готово: скрипт `tools/leaderboard/Code.gs` переписан под D‑36/`GDD §12`, проверен `node tools/leaderboard/test.js` (15 кейсов); таблица задеплоена как Web app (Me / Anyone), `/exec`‑URL проверен `smoke.sh` (GET/POST/rank/санитизация), ссылка и URL в `PROJECT.md §6.1` · D‑37, D‑38
-- [ ] **C2** (1.0) `LeaderboardService`: POST после попытки, парсинг ответа, таймаут 5 с, офлайн‑фолбэк; `LeaderboardConfig` с URL. Зав.: C1.
+- [x] **C2** (1.0) `LeaderboardService`: POST после попытки, парсинг ответа, таймаут 5 с, офлайн‑фолбэк; `LeaderboardConfig` с URL. Готово: `Gameplay/Leaderboard` — `LeaderboardConfig` (`/exec` из `PROJECT.md §6.1`, таймаут 5 с) и `leaderboard_config` в группе `Configs`, `ILeaderboardConfigsService`, `ILeaderboardService.Submit` на `UniTask` (`UnityWebRequest.Post` + `JsonUtility`), домен `LeaderboardEntry`/`LeaderboardResponse` и DTO под провод, любая неудача → `LeaderboardResponse.Offline`, офлайн ловится `ISatelliteService` до запроса; оба сервиса забиндены в `BootstrapInstaller`. Путь `POST` + редирект 302 проверен из редактора настоящим `UnityWebRequest`. Оценку (`grade`) передаёт вызывающий — считает её B5 · D‑68–D‑70. Зав.: C1.
 - [ ] **C3** (0.5) Дима: 20 фейковых записей, имена с мусором/эмодзи, отключённый интернет, медленная сеть.
 
 ### D. Арт (Claude генерирует; Егор+Claude интегрируют через MCP) — P0 ~11 ч, P1 2 ч
