@@ -62,6 +62,19 @@ namespace Code.Editor.Art
 				Picture(bubble, "UI/Copycat/panel_paper_9slice", new Rect(0f, 0f, 260f, 112f));
 				TMP_Text speech = Label(bubble, "", new Rect(16f, 10f, 228f, 92f));
 				speech.fontSize = 24f;
+				RectTransform hintBubble = Rectangle(layout, "HintBubble", new Rect(560f, 472f, 560f, 112f));
+				RectTransform hintPanel = Picture(hintBubble, "UI/Copycat/panel_paper_9slice",
+					new Rect(0f, 0f, 560f, 112f)).rectTransform;
+				hintPanel.anchorMin = Vector2.zero;
+				hintPanel.anchorMax = Vector2.one;
+				hintPanel.offsetMin = Vector2.zero;
+				hintPanel.offsetMax = Vector2.zero;
+				TMP_Text hintText = Label(hintBubble, "", new Rect(24f, 10f, 512f, 92f));
+				hintText.fontSize = 26f;
+				RectTransform hintStrokes = Rectangle(hintBubble, "HintStrokes", new Rect(24f, 104f, 512f, 44f));
+				Picture(hintStrokes, "Papers/glyph_arrow_left_normal", new Rect(178f, 0f, 44f, 44f));
+				Picture(hintStrokes, "Papers/glyph_arrow_up_normal", new Rect(234f, 0f, 44f, 44f));
+				Picture(hintStrokes, "Papers/glyph_arrow_right_normal", new Rect(290f, 0f, 44f, 44f));
 				SerializedObject window = new(root.GetComponent<GameplayWindow>());
 				Assign(window, "layout", layout);
 				Assign(window, "answers", answers);
@@ -74,6 +87,9 @@ namespace Code.Editor.Art
 				Assign(window, "duckButton", duckButton);
 				Assign(window, "bubble", bubble.gameObject);
 				Assign(window, "speech", speech);
+				Assign(window, "hintBubble", hintBubble);
+				Assign(window, "hint", hintText);
+				Assign(window, "hintStrokes", hintStrokes.gameObject);
 				window.ApplyModifiedPropertiesWithoutUndo();
 				PrefabUtility.SaveAsPrefabAsset(root, Prefab);
 			}

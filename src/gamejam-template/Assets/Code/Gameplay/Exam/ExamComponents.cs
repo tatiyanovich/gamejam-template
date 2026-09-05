@@ -11,6 +11,11 @@ namespace Code.Gameplay.Exam
 	[Game, Watched] public class ExamElapsedSeconds : IComponent { public float Value; }
 	[Game, Watched] public class ExamFinished : IComponent { }
 	[Game, Watched] public class ExamOutcomeComponent : IComponent { public ExamOutcome Value; }
+	[Game] public class TutorialMeowed : IComponent { }
+	[Game] public class TutorialLeaned : IComponent { }
+	[Game] public class TutorialDodgedTeacher : IComponent { }
+	[Game] public class TutorialDuckThrown : IComponent { }
+	[Game, Watched] public class TutorialHintComponent : IComponent { public TutorialHint Value; }
 
 	[Game] public class Question : IComponent { }
 	[Game] public class QuestionIndex : IComponent { public int Value; }

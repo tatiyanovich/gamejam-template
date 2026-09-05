@@ -12,6 +12,7 @@ namespace Code.Gameplay.Exam.Queries
 		event Action<int, bool> OnAnswerReadableChanged;
 		event Action<int> OnAnswerCopied;
 		event Action<ExamOutcome> OnExamFinished;
+		event Action<TutorialHint> OnTutorialHintChanged;
 
 		int GetAnswersCopied();
 		int GetTotalQuestions();
@@ -24,5 +25,6 @@ namespace Code.Gameplay.Exam.Queries
 		bool IsAnswerCopied();
 		bool IsFinished();
 		ExamOutcome GetOutcome();
+		TutorialHint GetTutorialHint();
 	}
 }

@@ -146,7 +146,24 @@ namespace Code.Editor
 				Require(Field<TMP_Text>(fields, "clock").text == "0:44", "Seed clock");
 				Require(Field<TMP_Text>(fields, "clock").color.r > 0.7f, "Announced clock red on reopen");
 				Require(Mathf.Approximately(Field<Image>(fields, "suspicionFill").fillAmount, 0.85f), "Seed suspicion");
-				report.AppendLine("PASS mid-session seed: answers, timer, announced color and suspicion");
+				Require(Field<RectTransform>(fields, "hintBubble").gameObject.activeSelf
+					&& Field<TMP_Text>(fields, "hint").text == "MEOW into your mic to get Whiskerstein's attention!"
+					&& Field<GameObject>(fields, "hintStrokes").activeSelf == false, "Seed meow hint");
+				report.AppendLine("PASS mid-session seed: answers, timer, announced color, suspicion and meow hint");
+				fixture.Run.ReplaceTutorialHint(TutorialHint.Copy);
+				exam.ReactToChanges();
+				Require(Field<TMP_Text>(fields, "hint").text == "Copy the strokes:"
+					&& Field<GameObject>(fields, "hintStrokes").activeSelf
+					&& Field<RectTransform>(fields, "hintBubble").sizeDelta.y == 160f, "Copy hint strokes");
+				fixture.Run.ReplaceTutorialHint(TutorialHint.Duck);
+				exam.ReactToChanges();
+				Require(Field<TMP_Text>(fields, "hint").text == "Throw the duck when it gets hot [Q]"
+					&& Field<GameObject>(fields, "hintStrokes").activeSelf == false
+					&& Field<RectTransform>(fields, "hintBubble").sizeDelta.y == 112f, "Duck hint");
+				fixture.Run.ReplaceTutorialHint(TutorialHint.None);
+				exam.ReactToChanges();
+				Require(Field<RectTransform>(fields, "hintBubble").gameObject.activeSelf == false, "Hint bubble hides");
+				report.AppendLine("PASS hint strings, stroke glyphs and hidden bubble");
 				fixture.Run.ReplaceAnswersCopied(8);
 				exam.ReactToChanges();
 				Require(Field<TMP_Text>(fields, "answers").text == "ANSWERS 8 / 12", "Reactive answers");
@@ -170,7 +187,13 @@ namespace Code.Editor
 				microphone.IsAvailable = false;
 				meow.ReactToChanges();
 				Require(Field<TMP_Text>(fields, "microphoneHint").text == "No mic — press M to meow", "Fallback");
-				report.AppendLine("PASS microphone fill, config threshold, cooldown, missing-device fallback");
+				fixture.Run.ReplaceTutorialHint(TutorialHint.Meow);
+				exam.ReactToChanges();
+				Require(Field<TMP_Text>(fields, "hint").text == "Press M to get Whiskerstein's attention!",
+					"Keyboard meow hint");
+				fixture.Run.ReplaceTutorialHint(TutorialHint.None);
+				exam.ReactToChanges();
+				report.AppendLine("PASS microphone fill, config threshold, cooldown, missing-device fallback and hint");
 				Button button = Field<Button>(fields, "duckButton");
 				button.onClick.Invoke();
 				Require(game.GetGroup(GameMatcher

@@ -49,6 +49,8 @@ namespace Code.Editor
 			Check(scene.Container, "phase one safe and later checks", TeacherChecks);
 			Check(scene.Container, "suspicion gain, decay and caught", Suspicion);
 			Check(scene.Container, "bell announcement and freeze", Bell);
+			Check(scene.Container, "tutorial hints follow the first meow, lean and answer", EarlyTutorialHints);
+			Check(scene.Container, "tutorial hints for the turn and the duck never return", LateTutorialHints);
 			File.AppendAllText(ReportPath, "DONE\n");
 		}
 
@@ -348,6 +350,62 @@ namespace Code.Editor
 			float elapsed = fixture.Run.ExamElapsedSeconds;
 			fixture.Tick(1f);
 			Assert(fixture.Run.ExamElapsedSeconds == elapsed, "Clock continued after finish");
+		}
+
+		private static void EarlyTutorialHints(GameplayPlaytestFixture fixture)
+		{
+			Assert(fixture.Run.TutorialHint == TutorialHint.Meow, "Attempt does not start with the meow hint");
+			Meow(fixture);
+			fixture.Core.Execute();
+			Assert(fixture.Run.TutorialHint == TutorialHint.Lean, "Meow did not hand over to the lean hint");
+			OpenQuestion(fixture, 0);
+			fixture.Core.Execute();
+			Assert(fixture.Run.TutorialHint == TutorialHint.Copy, "Readable answer did not show the copy hint");
+			fixture.Keyboard.isLeanHeld = false;
+			fixture.Tick(0f);
+			Assert(fixture.Run.TutorialHint == TutorialHint.None, "Unreadable answer keeps the copy hint");
+			fixture.Keyboard.isLeanHeld = true;
+			fixture.Tick(0f);
+			Assert(fixture.Run.TutorialHint == TutorialHint.Copy, "Copy hint does not follow readability");
+			fixture.Run.ReplaceAnswersCopied(1);
+			fixture.Tick(0f);
+			Assert(fixture.Run.TutorialHint == TutorialHint.None, "First answer did not hide the copy hint");
+		}
+
+		private static void LateTutorialHints(GameplayPlaytestFixture fixture)
+		{
+			fixture.Run.isTutorialMeowed = true;
+			fixture.Run.isTutorialLeaned = true;
+			fixture.Run.ReplaceCurrentQuestionIndex(2);
+			fixture.Tick(0f);
+			Assert(fixture.Run.TutorialHint == TutorialHint.None, "Turn hint appears before question four");
+			fixture.Run.ReplaceCurrentQuestionIndex(3);
+			fixture.Tick(0f);
+			Assert(fixture.Run.TutorialHint == TutorialHint.Dodge, "Question four does not show the turn hint");
+			GameEntity teacher = Teacher(fixture, TeacherAttention.Watching);
+			teacher.ReplaceTeacherAttentionTimeLeft(10f);
+			fixture.Tick(0f);
+			Assert(fixture.Run.isTutorialDodgedTeacher && fixture.Run.TutorialHint == TutorialHint.None,
+				"Surviving a turn upright did not hide the turn hint");
+			teacher.ReturnToWriting();
+			fixture.Tick(0f);
+			Assert(fixture.Run.TutorialHint == TutorialHint.None, "Turn hint returned after it was learned");
+			fixture.Run.ReplaceCurrentQuestionIndex(5);
+			fixture.Tick(0f);
+			Assert(fixture.Run.TutorialHint == TutorialHint.Duck, "Question six does not show the duck hint");
+			fixture.Container.Resolve<IDuckFactory>().CreateDuck();
+			fixture.Container.Resolve<IDuckFactory>().CreateThrowDuckRequest();
+			fixture.Tick(0f);
+			fixture.Tick(0f);
+			Assert(fixture.Run.isTutorialDuckThrown && fixture.Run.TutorialHint == TutorialHint.None,
+				"Throwing the duck did not hide the duck hint");
+			fixture.Run.ReplaceCurrentQuestionIndex(2);
+			fixture.Run.isTutorialMeowed = false;
+			fixture.Tick(0f);
+			Assert(fixture.Run.TutorialHint == TutorialHint.Meow, "Missing meow hint before the attempt ends");
+			fixture.Run.isExamFinished = true;
+			fixture.Tick(0f);
+			Assert(fixture.Run.TutorialHint == TutorialHint.None, "Finished attempt still shows a hint");
 		}
 
 		private static void Assert(bool passed, string message)

@@ -46,6 +46,7 @@ public sealed class GameWatchedCleanupSystems : Feature {
         Add(new RemoveStartedChangedGameSystem(contexts));
         Add(new RemoveSuspicionLevelChangedGameSystem(contexts));
         Add(new RemoveTeacherAttentionChangedGameSystem(contexts));
+        Add(new RemoveTutorialHintChangedGameSystem(contexts));
         Add(new RemoveVelocityChangedGameSystem(contexts));
         Add(new RemoveViewChangedGameSystem(contexts));
         Add(new RemoveWorldPositionChangedGameSystem(contexts));

@@ -20,6 +20,12 @@ namespace Code.Gameplay.Exam
 			Add(systemFactory.Create<MarkAnswerCopiedSystem>());
 			Add(systemFactory.Create<AdvanceExamRunSystem>());
 			Add(systemFactory.Create<FinishExamOnLastAnswerSystem>());
+
+			Add(systemFactory.Create<MarkTutorialMeowedSystem>());
+			Add(systemFactory.Create<MarkTutorialLeanedSystem>());
+			Add(systemFactory.Create<MarkTutorialDodgedTeacherSystem>());
+			Add(systemFactory.Create<MarkTutorialDuckThrownSystem>());
+			Add(systemFactory.Create<UpdateTutorialHintSystem>());
 		}
 	}
 }

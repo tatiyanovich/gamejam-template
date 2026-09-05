@@ -22,6 +22,7 @@ namespace Code.Gameplay.Exam.Queries
 		public event Action<int, bool> OnAnswerReadableChanged;
 		public event Action<int> OnAnswerCopied;
 		public event Action<ExamOutcome> OnExamFinished;
+		public event Action<TutorialHint> OnTutorialHintChanged;
 
 		public ExamQuery(GameContext game, IExamConfigsService examConfigsService)
 		{
@@ -33,7 +34,8 @@ namespace Code.Gameplay.Exam.Queries
 					GameMatcher.CurrentQuestionIndex,
 					GameMatcher.AnswersCopied,
 					GameMatcher.ExamElapsedSeconds,
-					GameMatcher.ExamOutcome));
+					GameMatcher.ExamOutcome,
+					GameMatcher.TutorialHint));
 
 			_changedRuns = game.GetGroup(GameMatcher
 				.AllOf(
@@ -41,12 +43,14 @@ namespace Code.Gameplay.Exam.Queries
 					GameMatcher.CurrentQuestionIndex,
 					GameMatcher.AnswersCopied,
 					GameMatcher.ExamElapsedSeconds,
-					GameMatcher.ExamOutcome)
+					GameMatcher.ExamOutcome,
+					GameMatcher.TutorialHint)
 				.AnyOf(
 					GameMatcher.CurrentQuestionIndexChanged,
 					GameMatcher.AnswersCopiedChanged,
 					GameMatcher.ExamElapsedSecondsChanged,
-					GameMatcher.ExamFinishedChanged));
+					GameMatcher.ExamFinishedChanged,
+					GameMatcher.TutorialHintChanged));
 
 			_questions = game.GetGroup(GameMatcher
 				.AllOf(
@@ -82,6 +86,9 @@ namespace Code.Gameplay.Exam.Queries
 
 				if (run.isExamFinishedChanged && run.isExamFinished)
 					OnExamFinished?.Invoke(run.ExamOutcome);
+
+				if (run.isTutorialHintChanged)
+					OnTutorialHintChanged?.Invoke(run.TutorialHint);
 			}
 
 			foreach (GameEntity question in _changedQuestions)
@@ -176,6 +183,14 @@ namespace Code.Gameplay.Exam.Queries
 				return run.ExamOutcome;
 
 			return ExamOutcome.None;
+		}
+
+		public TutorialHint GetTutorialHint()
+		{
+			foreach (GameEntity run in _runs)
+				return run.TutorialHint;
+
+			return TutorialHint.None;
 		}
 
 		private GameEntity GetCurrentQuestionEntity()

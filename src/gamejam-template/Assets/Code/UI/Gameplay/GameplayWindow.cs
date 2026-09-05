@@ -33,6 +33,9 @@ namespace Code.UI.Gameplay
 		[SF] private Button duckButton;
 		[SF] private GameObject bubble;
 		[SF] private TMP_Text speech;
+		[SF] private RectTransform hintBubble;
+		[SF] private TMP_Text hint;
+		[SF] private GameObject hintStrokes;
 
 		private PawTimerView[] _pawTimers;
 		private float _speechSeconds;
@@ -88,8 +91,10 @@ namespace Code.UI.Gameplay
 			_watchingLine = 0;
 			_speechSeconds = 0f;
 			bubble.SetActive(false);
+			hintBubble.gameObject.SetActive(false);
 			_exam.OnAnswersCopiedChanged += HandleAnswers;
 			_exam.OnExamFinished += HandleFinished;
+			_exam.OnTutorialHintChanged += HandleHint;
 			_bell.OnTimeLeftChanged += HandleTime;
 			_bell.OnAnnounced += HandleAnnouncement;
 			_suspicion.OnLevelChanged += HandleSuspicion;
@@ -106,6 +111,7 @@ namespace Code.UI.Gameplay
 			HandleTime(_bell.GetTimeLeft());
 			HandleSuspicion(_suspicion.GetLevel());
 			HandleMicrophone(_meow.GetMicrophoneLevel());
+			HandleHint(_exam.GetTutorialHint());
 			RefreshDuck();
 			if (_finished)
 				HandleFinished(_exam.GetOutcome());
@@ -134,6 +140,7 @@ namespace Code.UI.Gameplay
 			_isOpen = false;
 			_exam.OnAnswersCopiedChanged -= HandleAnswers;
 			_exam.OnExamFinished -= HandleFinished;
+			_exam.OnTutorialHintChanged -= HandleHint;
 			_bell.OnTimeLeftChanged -= HandleTime;
 			_bell.OnAnnounced -= HandleAnnouncement;
 			_suspicion.OnLevelChanged -= HandleSuspicion;
@@ -148,6 +155,7 @@ namespace Code.UI.Gameplay
 					timer.Unbind();
 			}
 			bubble.SetActive(false);
+			hintBubble.gameObject.SetActive(false);
 		}
 
 		protected override void OnUpdate()
@@ -244,6 +252,25 @@ namespace Code.UI.Gameplay
 					});
 					break;
 			}
+		}
+
+		private void HandleHint(TutorialHint tutorialHint)
+		{
+			hint.text = tutorialHint switch
+			{
+				TutorialHint.Meow => _meow.IsMicrophoneAvailable()
+					? "MEOW into your mic to get Whiskerstein's attention!"
+					: "Press M to get Whiskerstein's attention!",
+				TutorialHint.Lean => "Hold SPACE to lean over",
+				TutorialHint.Copy => "Copy the strokes:",
+				TutorialHint.Dodge => "Psst. She turns around sometimes. Let go of SPACE!",
+				TutorialHint.Duck => "Throw the duck when it gets hot [Q]",
+				_ => string.Empty
+			};
+			bool strokes = tutorialHint == TutorialHint.Copy;
+			hintStrokes.SetActive(strokes);
+			hintBubble.sizeDelta = new Vector2(560f, strokes ? 160f : 112f);
+			hintBubble.gameObject.SetActive(tutorialHint != TutorialHint.None);
 		}
 
 		private void HandleRemark(TeacherRemark remark)

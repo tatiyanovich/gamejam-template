@@ -30,6 +30,7 @@ namespace Code.Gameplay.Exam.Services
 				.AddAnswersCopied(0)
 				.AddExamElapsedSeconds(0f)
 				.AddSuspicionLevel(0f)
+				.AddTutorialHint(TutorialHint.Meow)
 				.AddExamOutcome(ExamOutcome.None);
 		}
 
