@@ -3,6 +3,7 @@ using Code.Gameplay.CoreLoop;
 using Code.Gameplay.Exam.Services;
 using Code.Gameplay.Lifetime;
 using Code.Gameplay.Meow.Services;
+using Code.Gameplay.Teacher.Services;
 using Code.Infrastructure.EntityComponentSystem.Destruct.Services;
 using Code.Infrastructure.EntityComponentSystem.Installers;
 using Code.Infrastructure.ErrorHandler;
@@ -50,6 +51,7 @@ namespace Code.Infrastructure.Installers
 			Container.BindInterfacesTo<CameraConfigsService>().AsSingle();
 			Container.BindInterfacesTo<ExamConfigsService>().AsSingle();
 			Container.BindInterfacesTo<MeowConfigsService>().AsSingle();
+			Container.BindInterfacesTo<TeacherConfigsService>().AsSingle();
 		}
 
 		private void BindInfrastructureServices()

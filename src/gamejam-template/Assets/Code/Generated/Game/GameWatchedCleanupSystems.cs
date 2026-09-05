@@ -10,6 +10,7 @@ public sealed class GameWatchedCleanupSystems : Feature {
 
     public GameWatchedCleanupSystems(Contexts contexts) {
         Add(new RemoveAliveChangedGameSystem(contexts));
+        Add(new RemoveAlmostCaughtCountChangedGameSystem(contexts));
         Add(new RemoveAmountChangedGameSystem(contexts));
         Add(new RemoveAnswerCopiedChangedGameSystem(contexts));
         Add(new RemoveAnswerProgressChangedGameSystem(contexts));
@@ -34,6 +35,7 @@ public sealed class GameWatchedCleanupSystems : Feature {
         Add(new RemoveProcessedChangedGameSystem(contexts));
         Add(new RemoveReadyChangedGameSystem(contexts));
         Add(new RemoveStartedChangedGameSystem(contexts));
+        Add(new RemoveTeacherAttentionChangedGameSystem(contexts));
         Add(new RemoveVelocityChangedGameSystem(contexts));
         Add(new RemoveViewChangedGameSystem(contexts));
         Add(new RemoveWorldPositionChangedGameSystem(contexts));

@@ -4,6 +4,7 @@ using Code.Gameplay.Difficulty.Services;
 using Code.Gameplay.Exam.Services;
 using Code.Gameplay.Movement.Services;
 using Code.Gameplay.Neighbours.Services;
+using Code.Gameplay.Teacher.Services;
 using Code.Gameplay.Vfx.Services;
 using Framework.Instantiation;
 using Zenject;
@@ -33,6 +34,7 @@ namespace Code.Infrastructure.Installers
 			Container.BindInterfacesTo<VfxFactory>().AsSingle();
 			Container.BindInterfacesTo<ExamFactory>().AsSingle();
 			Container.BindInterfacesTo<NeighbourFactory>().AsSingle();
+			Container.BindInterfacesTo<TeacherFactory>().AsSingle();
 		}
 
 		private void BindDebugServices()
