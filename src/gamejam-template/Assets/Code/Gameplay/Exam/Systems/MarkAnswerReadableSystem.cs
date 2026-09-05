@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Code.Gameplay.Neighbours;
 using Entitas;
 
 namespace Code.Gameplay.Exam.Systems
@@ -7,9 +8,11 @@ namespace Code.Gameplay.Exam.Systems
 	{
 		private readonly IGroup<GameEntity> _runningExams;
 		private readonly IGroup<GameEntity> _questions;
+		private readonly IGroup<GameEntity> _liftedNeighbours;
 		private readonly IGroup<InputEntity> _leaningInputs;
 
 		private readonly List<GameEntity> _buffer = new(1);
+		private readonly List<GameEntity> _neighbourBuffer = new(2);
 
 		public MarkAnswerReadableSystem(GameContext game, InputContext input)
 		{
@@ -21,7 +24,14 @@ namespace Code.Gameplay.Exam.Systems
 
 			_questions = game.GetGroup(GameMatcher
 				.AllOf(
-					GameMatcher.Question));
+					GameMatcher.Question,
+					GameMatcher.AnswerNeighbourSide));
+
+			_liftedNeighbours = game.GetGroup(GameMatcher
+				.AllOf(
+					GameMatcher.Neighbour,
+					GameMatcher.NeighbourSide,
+					GameMatcher.PawLifted));
 
 			_leaningInputs = input.GetGroup(InputMatcher
 				.AllOf(
@@ -31,12 +41,23 @@ namespace Code.Gameplay.Exam.Systems
 
 		public void Execute()
 		{
-			bool readable = _runningExams.count > 0 && _leaningInputs.count > 0;
+			bool leaning = _runningExams.count > 0 && _leaningInputs.count > 0;
 
 			foreach (GameEntity question in _questions.GetEntities(_buffer))
 			{
-				question.isAnswerReadable = readable;
+				question.isAnswerReadable = leaning && IsPawLifted(question.AnswerNeighbourSide);
 			}
+		}
+
+		private bool IsPawLifted(NeighbourSide side)
+		{
+			foreach (GameEntity neighbour in _liftedNeighbours.GetEntities(_neighbourBuffer))
+			{
+				if (neighbour.NeighbourSide == side)
+					return true;
+			}
+
+			return false;
 		}
 	}
 }
