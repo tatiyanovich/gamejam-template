@@ -41,7 +41,8 @@ namespace Code.Gameplay.Exam.Behaviours
 		private const string ColorEndTag = "</color>";
 		private const string BlankAnswer = "____";
 		private const float WrongSeconds = 0.4f;
-		private const float PickCircleOffsetX = -0.06f;
+		private const float PickCircleOffsetX = -0.14f;
+		private const float FaintPickCircleAlpha = 0.5f;
 
 		public void Bind(IExamQuery examQuery, IDifficultyService difficultyService)
 		{
@@ -244,7 +245,7 @@ namespace Code.Gameplay.Exam.Behaviours
 			SpriteRenderer circle = paper.PickCircle.GetComponent<SpriteRenderer>();
 			DifficultyPhase phase = _difficultyService.GetPhase(_examQuery.GetCurrentQuestionIndex());
 			Color color = circle.color;
-			color.a = phase.FaintPickCircle ? 0.35f : 1f;
+			color.a = phase.FaintPickCircle ? FaintPickCircleAlpha : 1f;
 			circle.color = color;
 		}
 

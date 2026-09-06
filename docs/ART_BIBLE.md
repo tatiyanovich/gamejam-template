@@ -199,6 +199,8 @@ art/
 ### 5.7 VFX‑спрайты (`Content/Vfx/Sprites/`) — группа `Copycat_Vfx`
 `sweat_drop.png`, `note.png`, `exclaim.png`, `question.png`, `chalk_dust.png`, `sparkle.png`, `heart.png` — все 64×64.
 
+Все 7 готовы в D10 (`art/exports/d10/`). Исходники — `art/src/d10/*.svg` + `layout.json`, генератор `art/vfx.mjs` подключён к общей сборке `npm run build`/`check`. Экспорт @2x, PPU 200, Bilinear, no mipmaps, pivot по центру (32,32), без trim. Импорт в `Content/Vfx/Sprites`, материалы `Sprites/Default` в `Content/Vfx/Materials` (по одному на спрайт, `mainTexture` = PNG), группа Addressables `Copycat_Vfx`. `question` и `heart` пока не используются ни одним эффектом и держатся в запасе. Позиции эмиттеров и параметры эффектов лежат в `layout.effects` того же `layout.json` — их читает `CopycatArtBuilder.BuildVfxNodes` (`COPYCAT → Art → Build E5 Vfx`), поэтому сдвиг эффекта — правка одного JSON и пересборка.
+
 ## 6. Интро — визуальные отличия
 Та же палитра и контур, но: фон затемнён на 35 %, добавлен виньет, леттербокс 2.39:1, плёночное зерно (opacity 0.08), лёгкая хроматическая аберрация не делаем (дорого). Панель 3 (крупный план котёнка) — единственная с драматичным светом: радиальный градиент от лица.
 
@@ -225,16 +227,18 @@ art/
 
 ## 8. VFX (Unity Particle System через MCP)
 
-| Эффект | Триггер | Параметры |
+| Эффект | Триггер | Параметры (E5, факт) |
 |---|---|---|
-| Пот котёнка | Watching, пока наклонён | 3–5 капель/с, gravity 2, lifetime 0.6, из висков |
-| `!` над учительницей | Turning/Alerted | burst 1, scale 0→1.2→1, lifetime 0.5 |
-| Ноты смеха | Бросок утки | burst 12 нот от парт соседей, вверх, lifetime 1.2 |
-| Пыль | Приземление утки | burst 8, серые круги, lifetime 0.4 |
-| Мел | Writing | 2/с, мелкие белые точки, lifetime 0.3 |
-| Звёздочки | COPIED | burst 10 звёзд от штампа, lifetime 0.6, + punch‑scale счётчика |
+| Пот котёнка | Watching, пока наклонён | эмиттер `sweat` (828,690) со сдвигом ±60 px на сторону наклона, конус вниз 22°/radius 0.7, 4 капли/с, speed 0.3–0.8, size 0.14–0.22, gravity 2, lifetime 0.6, sorting 36 |
+| `!` над учительницей | Turning/Alerted | эмиттер `alert` (1052,180), `Emit(1)`, конус вверх 0°, speed 0.35, size 0.5 с кривой 0→1.2→1, lifetime 0.5, sorting 15 |
+| Ноты смеха | Бросок утки (`DuckState.Flying`) | два эмиттера `laughter_left/right` (520,390)/(1400,390), `Emit(6)` каждый (итого 12), конус вверх 28°/radius 0.35, speed 1.1–1.9, size 0.30–0.44, gravity −0.05, боковое покачивание кривой velocity‑over‑lifetime (все три оси в режиме Curve), затухание альфы, lifetime 1.2, sorting 31 |
+| Пыль | Приземление утки | `LandingDust` на префабе утки (E4): burst 8, конус 65°, lifetime 0.4, sorting 34; материал переведён на спрайт `chalk_dust` |
+| Мел | Writing | эмиттер `chalk` (1112,296), 2/с, конус вниз 35°/radius 0.04, speed 0.2–0.5, size 0.06–0.12, gravity 0.6, lifetime 0.3, sorting 9 |
+| Звёздочки | COPIED (`OnAnswerCopied`) | эмиттер `sparkles` в точке штампа (1323,1010), `Emit(10)`, конус вверх 65°, speed 0.9–2.0, size 0.14–0.26, случайный `startRotation`, gravity 1.2, затухание альфы, lifetime 0.6, sorting 36; punch‑scale счётчика — E6 |
 | Виньет | учительница смотрит | UI Image `vignette_radial` под корнем HUD: WARN alpha 0.35 ровно; DANGER alpha пульс 0.35↔0.6 с периодом 0.4 с, когда смотрит и держишь SPACE (`GDD §15`, B7) |
 | Шейк камеры | CAUGHT | `CameraShakeTypeId` из шаблона, амплитуда 0.4, 0.5 с |
+
+Все шесть эмиттеров живут под `CopycatArt/Vfx` в `Assets/Scenes/Gameplay.unity` и принадлежат одному `ExamVfxView`: он подписан на reactive queries и не требует ECS‑систем. Циклы (`sweat`, `chalk`) стартуют/останавливаются по состоянию, всплески постоянно «играют» с `rateOverTime = 0` и выдают частицы через `Emit`, поэтому повторный триггер не теряется.
 
 ### B3: компоновка HUD
 

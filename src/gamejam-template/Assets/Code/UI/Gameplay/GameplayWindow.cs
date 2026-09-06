@@ -10,6 +10,7 @@ using Code.Gameplay.Difficulty.Services;
 using Code.Gameplay.Duck.Services;
 using Code.Gameplay.Exam;
 using Code.Gameplay.Exam.Behaviours;
+using Code.Gameplay.Exam.Data;
 using Code.Gameplay.Exam.Queries;
 using Code.Gameplay.Input.Behaviours;
 using Code.Gameplay.Input.Queries;
@@ -20,6 +21,7 @@ using Code.Gameplay.Suspicion.Queries;
 using Code.Gameplay.Teacher;
 using Code.Gameplay.Teacher.Behaviours;
 using Code.Gameplay.Teacher.Queries;
+using Code.Gameplay.Vfx.Behaviours;
 using Code.UI.Result;
 using Code.UI.Tutorial;
 using Cysharp.Threading.Tasks;
@@ -48,7 +50,7 @@ namespace Code.UI.Gameplay
 		[SF] private TMP_Text speech;
 		[SF] private RectTransform hintBubble;
 		[SF] private TMP_Text hint;
-		[SF] private GameObject hintStrokes;
+		[SF] private HintStrokesView hintStrokes;
 		[SF] private DangerVignetteView vignette;
 		[SF] private FlashStackView flashes;
 
@@ -58,6 +60,7 @@ namespace Code.UI.Gameplay
 		private TeacherView _teacherView;
 		private KittenView _kittenView;
 		private ExamPapersView _papersView;
+		private ExamVfxView _vfxView;
 		private bool _worldViewsBound;
 		private float _speechSeconds;
 		private int _watchingLine;
@@ -226,6 +229,7 @@ namespace Code.UI.Gameplay
 			_teacherView = FindFirstObjectByType<TeacherView>(FindObjectsInactive.Include);
 			_kittenView = FindFirstObjectByType<KittenView>(FindObjectsInactive.Include);
 			_papersView = FindFirstObjectByType<ExamPapersView>(FindObjectsInactive.Include);
+			_vfxView = FindFirstObjectByType<ExamVfxView>(FindObjectsInactive.Include);
 			if (_papersView == null)
 			{
 				GameObject artRoot = GameObject.Find("CopycatArt");
@@ -246,6 +250,7 @@ namespace Code.UI.Gameplay
 			_teacherView.Bind(_teacher);
 			_kittenView.Bind(_input, _exam, _teacher);
 			_papersView.Bind(_exam, _difficulty);
+			BindVfxView();
 			_worldViewsBound = true;
 		}
 
@@ -275,13 +280,31 @@ namespace Code.UI.Gameplay
 			if (_papersView != null)
 				_papersView.Unbind();
 
+			if (_vfxView != null)
+				_vfxView.Unbind();
+
 			_pawTimers = Array.Empty<PawTimerView>();
 			_neighbourViews = Array.Empty<NeighbourView>();
 			_duckView = null;
 			_teacherView = null;
 			_kittenView = null;
 			_papersView = null;
+			_vfxView = null;
 			_worldViewsBound = false;
+		}
+
+		private void BindVfxView()
+		{
+			if (_vfxView == null)
+				return;
+
+			_vfxView.Bind(new ExamVfxDto
+			{
+				Exam = _exam,
+				Teacher = _teacher,
+				Input = _input,
+				Duck = _duck
+			});
 		}
 
 		protected override void OnUpdate()
@@ -493,8 +516,14 @@ namespace Code.UI.Gameplay
 				TutorialHint.Duck => "Throw the duck when it gets hot [Q]",
 				_ => string.Empty
 			};
-			bool strokes = tutorialHint == TutorialHint.Copy;
-			hintStrokes.SetActive(strokes);
+			QuestionDefinition question = _exam.GetCurrentQuestion();
+			bool strokes = tutorialHint == TutorialHint.Copy
+				&& question != null
+				&& question.Type == QuestionType.Strokes;
+			if (strokes)
+				hintStrokes.Show(question.Strokes);
+
+			hintStrokes.gameObject.SetActive(strokes);
 			hintBubble.sizeDelta = new Vector2(560f, strokes ? 160f : 112f);
 			hintBubble.gameObject.SetActive(tutorialHint != TutorialHint.None);
 		}

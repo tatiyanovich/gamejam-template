@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <defs>
+    <g id="sparkle-shape">
+      <path d="M32 5 C35.5 21.5 42.5 28.5 59 32 C42.5 35.5 35.5 42.5 32 59 C28.5 42.5 21.5 35.5 5 32 C21.5 28.5 28.5 21.5 32 5 Z"/>
+    </g>
+  </defs>
+  <use href="#sparkle-shape" fill="none" stroke="{{INK}}" stroke-width="7" stroke-linejoin="round"/>
+  <use href="#sparkle-shape" fill="{{UI_ACCENT}}" stroke="none"/>
+</svg>

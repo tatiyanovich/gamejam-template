@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <defs>
+    <g id="sweat-shape">
+      <path d="M32 5 C34 17 51 30 51 42 C51 52 43 59 32 59 C21 59 13 52 13 42 C13 30 30 17 32 5 Z"/>
+    </g>
+  </defs>
+  <use href="#sweat-shape" fill="none" stroke="{{INK}}" stroke-width="8" stroke-linejoin="round"/>
+  <use href="#sweat-shape" fill="{{SWEAT}}" stroke="none"/>
+  <path d="M22 42 C22 35 25 30 29 26" fill="none" stroke="{{PAPER}}" stroke-width="6" stroke-linecap="round" opacity=".8"/>
+</svg>

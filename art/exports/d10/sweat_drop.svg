@@ -1,0 +1,16 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+    <defs/>
+    <g>
+        <g>
+            <path fill="none" stroke="#2a1f1a" stroke-width="8" stroke-linejoin="round" d="M 32 5 C 34 17 51 30 51 42 C 51 52 43 59 32 59 C 21 59 13 52 13 42 C 13 30 30 17 32 5 Z"/>
+        </g>
+    </g>
+    <g>
+        <g>
+            <path fill="#8fd3f4" stroke="none" d="M 32 5 C 34 17 51 30 51 42 C 51 52 43 59 32 59 C 21 59 13 52 13 42 C 13 30 30 17 32 5 Z"/>
+        </g>
+    </g>
+    <g opacity="0.8">
+        <path fill="none" stroke="#fff6e3" stroke-width="6" stroke-linecap="round" d="M 22 42 C 22 35 25 30 29 26"/>
+    </g>
+</svg>

@@ -22,5 +22,9 @@
   "DANGER": "#E84C4C",
   "WARN": "#FF9A3D",
   "OK": "#4FCB7A",
-  "PENCIL_INK": "#3B3A8C"
+  "PENCIL_INK": "#3B3A8C",
+  "PICK_BLUE": "#2F6BE0",
+  "SWEAT": "#8FD3F4",
+  "CHALK": "#F2EFE6",
+  "HEART": "#FF6F91"
 }

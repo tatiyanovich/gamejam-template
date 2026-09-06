@@ -15,6 +15,11 @@ namespace Code.Editor.Art
 	{
 		private const string Content = "Assets/AddressableResources/Content/";
 		private const string Prefab = Content + "UI/Gameplay/GameplayWindow.prefab";
+		private const int HintStrokeSlotCount = 6;
+		private const float HintStrokeCenterX = 256f;
+		private const float HintStrokeAdvance = 56f;
+
+		private static readonly string[] HintStrokeDirections = { "up", "right", "down", "left" };
 
 		[MenuItem("COPYCAT/Art/Build B3 Gameplay Window")]
 		public static void Build()
@@ -75,10 +80,7 @@ namespace Code.Editor.Art
 				hintPanel.offsetMax = Vector2.zero;
 				TMP_Text hintText = Label(hintBubble, "", new Rect(24f, 10f, 512f, 92f));
 				hintText.fontSize = 26f;
-				RectTransform hintStrokes = Rectangle(hintBubble, "HintStrokes", new Rect(24f, 104f, 512f, 44f));
-				Picture(hintStrokes, "Papers/glyph_arrow_left_normal", new Rect(178f, 0f, 44f, 44f));
-				Picture(hintStrokes, "Papers/glyph_arrow_up_normal", new Rect(234f, 0f, 44f, 44f));
-				Picture(hintStrokes, "Papers/glyph_arrow_right_normal", new Rect(290f, 0f, 44f, 44f));
+				HintStrokesView hintStrokes = HintStrokes(hintBubble);
 				FlashStackView flashes = FlashStack(layout);
 				SerializedObject window = new(root.GetComponent<GameplayWindow>());
 				Assign(window, "layout", layout);
@@ -95,7 +97,7 @@ namespace Code.Editor.Art
 				Assign(window, "speech", speech);
 				Assign(window, "hintBubble", hintBubble);
 				Assign(window, "hint", hintText);
-				Assign(window, "hintStrokes", hintStrokes.gameObject);
+				Assign(window, "hintStrokes", hintStrokes);
 				Assign(window, "vignette", vignette);
 				Assign(window, "flashes", flashes);
 				window.ApplyModifiedPropertiesWithoutUndo();
@@ -139,9 +141,41 @@ namespace Code.Editor.Art
 			return instance.GetComponent<DangerVignetteView>();
 		}
 
+		private static HintStrokesView HintStrokes(Transform parent)
+		{
+			RectTransform row = Rectangle(parent, "HintStrokes", new Rect(24f, 88f, 512f, 44f));
+			Image[] slots = new Image[HintStrokeSlotCount];
+			for (int index = 0; index < slots.Length; index++)
+				slots[index] = Picture(row, "Papers/glyph_arrow_up_normal", new Rect(0f, 0f, 44f, 44f));
+
+			Sprite[] glyphs = new Sprite[HintStrokeDirections.Length];
+			for (int index = 0; index < glyphs.Length; index++)
+			{
+				glyphs[index] = AssetDatabase.LoadAssetAtPath<Sprite>(
+					Content + "Papers/glyph_arrow_" + HintStrokeDirections[index] + "_normal.png");
+			}
+
+			HintStrokesView view = row.gameObject.AddComponent<HintStrokesView>();
+			SerializedObject serialized = new(view);
+			SerializedProperty slotProperty = serialized.FindProperty("slots");
+			slotProperty.arraySize = slots.Length;
+			for (int index = 0; index < slots.Length; index++)
+				slotProperty.GetArrayElementAtIndex(index).objectReferenceValue = slots[index];
+
+			SerializedProperty glyphProperty = serialized.FindProperty("glyphs");
+			glyphProperty.arraySize = glyphs.Length;
+			for (int index = 0; index < glyphs.Length; index++)
+				glyphProperty.GetArrayElementAtIndex(index).objectReferenceValue = glyphs[index];
+
+			serialized.FindProperty("centerX").floatValue = HintStrokeCenterX;
+			serialized.FindProperty("advance").floatValue = HintStrokeAdvance;
+			serialized.ApplyModifiedPropertiesWithoutUndo();
+			return view;
+		}
+
 		private static FlashStackView FlashStack(Transform parent)
 		{
-			RectTransform stack = Rectangle(parent, "FlashStack", new Rect(40f, 530f, 420f, 176f));
+			RectTransform stack = Rectangle(parent, "FlashStack", new Rect(40f, 120f, 420f, 176f));
 			FlashRowView[] flashRows = new FlashRowView[3];
 			for (int index = 0; index < flashRows.Length; index++)
 				flashRows[index] = FlashRow(stack, index);

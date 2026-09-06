@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <defs>
+    <g id="chalk-shape">
+      <path d="M32 8 C46 8 56 18 56 32 C56 46 46 56 31 56 C17 56 8 46 8 31 C8 17 18 8 32 8 Z"/>
+    </g>
+  </defs>
+  <use href="#chalk-shape" fill="none" stroke="{{INK}}" stroke-width="5" stroke-linejoin="round" opacity=".35"/>
+  <use href="#chalk-shape" fill="{{CHALK}}" stroke="none"/>
+</svg>

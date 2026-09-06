@@ -1,0 +1,15 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+    <defs/>
+    <g>
+        <g>
+            <path fill="none" stroke="#2a1f1a" stroke-width="24" stroke-linecap="round" d="M 32 11 L 32 38"/>
+            <path fill="none" stroke="#2a1f1a" stroke-width="24" stroke-linecap="round" d="M 32 53 L 32 54"/>
+        </g>
+    </g>
+    <g>
+        <g>
+            <path fill="none" stroke="#e84c4c" stroke-width="13" stroke-linecap="round" d="M 32 11 L 32 38"/>
+            <path fill="none" stroke="#e84c4c" stroke-width="13" stroke-linecap="round" d="M 32 53 L 32 54"/>
+        </g>
+    </g>
+</svg>

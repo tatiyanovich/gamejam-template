@@ -1,0 +1,13 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+    <defs/>
+    <g opacity="0.35">
+        <g>
+            <path fill="none" stroke="#2a1f1a" stroke-width="5" stroke-linejoin="round" d="M 32 8 C 46 8 56 18 56 32 C 56 46 46 56 31 56 C 17 56 8 46 8 31 C 8 17 18 8 32 8 Z"/>
+        </g>
+    </g>
+    <g>
+        <g>
+            <path fill="#f2efe6" stroke="none" d="M 32 8 C 46 8 56 18 56 32 C 56 46 46 56 31 56 C 17 56 8 46 8 31 C 8 17 18 8 32 8 Z"/>
+        </g>
+    </g>
+</svg>

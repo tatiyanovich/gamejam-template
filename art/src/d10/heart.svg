@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <defs>
+    <g id="heart-shape">
+      <path d="M32 57 C14 45 6 34 6 24 C6 15 13 8 21 8 C26 8 30 11 32 16 C34 11 38 8 43 8 C51 8 58 15 58 24 C58 34 50 45 32 57 Z"/>
+    </g>
+  </defs>
+  <use href="#heart-shape" fill="none" stroke="{{INK}}" stroke-width="7" stroke-linejoin="round"/>
+  <use href="#heart-shape" fill="{{HEART}}" stroke="none"/>
+  <path d="M18 22 C18 17 20 14 24 14" fill="none" stroke="{{PAPER}}" stroke-width="5" stroke-linecap="round" opacity=".75"/>
+</svg>

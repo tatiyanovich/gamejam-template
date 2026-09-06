@@ -1,5 +1,15 @@
 # COPYCAT / Art
 
+## D10 — VFX-спрайты
+
+[Набор и эффекты](previews/d10/state_sheet.png) · [Класс с эффектами](previews/d10/classroom_vfx.png) · [480×270](previews/d10/classroom_thumbnail.png)
+
+`src/d10/` — 7 SVG и `layout.json`; `vfx.mjs` подключён к общей сборке и выдаёт 7 PNG @2x и автономных SVG в `exports/d10/`, три превью в `previews/d10/`. Спрайты: `sweat_drop`, `note`, `exclaim`, `question`, `chalk_dust`, `sparkle`, `heart` — все 64×64 @1x, pivot по центру (32,32), PPU 200, Bilinear, no mipmaps, без trim. Текста в спрайтах нет — сборка это проверяет; `!` и `?` нарисованы обводкой пути, а не шрифтом.
+
+`layout.effects` — не арт, а данные для E5: имя эффекта, спрайт, триггер, точка эмиттера в экранных px @1x (`world = ((x-960)/100, (540-y)/100)`), `sortingOrder` и базовые цифры (`rate`/`burst`/`lifetime`/`gravity`). Их читает `CopycatArtBuilder.BuildVfxNodes`, поэтому сдвинуть эффект — правка одного JSON и `COPYCAT → Art → Build E5 Vfx`. `question` и `heart` пока не привязаны ни к одному эффекту.
+
+Импорт D11: группа `Copycat_Vfx`, путь `Content/Vfx/Sprites/`, материалы `Sprites/Default` в `Content/Vfx/Materials/`.
+
 ## D8 — UI-кит
 
 [Комплект и состояния](previews/d8/state_sheet.png) · [9-slice](previews/d8/slice_sheet.png) · [Меню](previews/d8/main_menu.png) · [HUD](previews/d8/hud_calm.png) · [Риск](previews/d8/hud_risk.png) · [Report Card](previews/d8/report_card.png) · [480×270](previews/d8/hud_thumbnail.png)

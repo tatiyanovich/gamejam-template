@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <defs>
+    <g id="exclaim-shape">
+      <path d="M32 11 L32 38" fill="none"/>
+      <path d="M32 53 L32 54" fill="none"/>
+    </g>
+  </defs>
+  <use href="#exclaim-shape" stroke="{{INK}}" stroke-width="24" stroke-linecap="round" fill="none"/>
+  <use href="#exclaim-shape" stroke="{{DANGER}}" stroke-width="13" stroke-linecap="round" fill="none"/>
+</svg>

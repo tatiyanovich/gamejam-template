@@ -1,0 +1,23 @@
+[
+  {
+    "name": "state_sheet",
+    "width": 1560,
+    "height": 620,
+    "scale": 1,
+    "sha256": "5485dcd74be79579fb0f5f661232b0879392319ab94916177d794d26906db312"
+  },
+  {
+    "name": "classroom_vfx",
+    "width": 1920,
+    "height": 1080,
+    "scale": 1,
+    "sha256": "32c7919246c8502969903f40fac8c89a4b5b2e6ccdb16e3d1f628c7a738b3980"
+  },
+  {
+    "name": "classroom_thumbnail",
+    "width": 480,
+    "height": 270,
+    "scale": 0.25,
+    "sha256": "cbde36ab633f23c0ea4fa002dc96f58440e011326a408378d22a92ff63d167f2"
+  }
+]

@@ -4,14 +4,14 @@
     "width": 1920,
     "height": 1800,
     "scale": 1,
-    "sha256": "cba95dcc1825d65da79e6144a9bbd60ef96a8d9b19e5917f0a8465aee8ee0a82"
+    "sha256": "d46fe0f9fcbb77b3f28e435fb24c088b7c2f6e8ce17bfc4459a26e708bed005d"
   },
   {
     "name": "layer_sheet",
     "width": 1920,
     "height": 1600,
     "scale": 1,
-    "sha256": "98c30c1c53e336e27b575d3483129625ae74af1cdd3f12b51a54d44434283262"
+    "sha256": "57ac96402f1dbe03486feedb7eb35e6210b64fc95d81d99abf6b4ce613e36b57"
   },
   {
     "name": "classroom_strokes",
@@ -32,7 +32,7 @@
     "width": 1920,
     "height": 1080,
     "scale": 1,
-    "sha256": "1396fd5039ca8a225f9ec6c934a8c180e3097389fb8dc737097ddfed1f4117f6"
+    "sha256": "e6ee4a3d563cb053a3919db852343860e772c94130cd1061cbd8133008c6781d"
   },
   {
     "name": "classroom_copied",

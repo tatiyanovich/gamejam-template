@@ -155,17 +155,21 @@ namespace Code.Editor
 				Require(Mathf.Approximately(Field<Image>(fields, "suspicionFill").fillAmount, 0.85f), "Seed suspicion");
 				Require(Field<RectTransform>(fields, "hintBubble").gameObject.activeSelf
 					&& Field<TMP_Text>(fields, "hint").text == "MEOW into your mic to get Whiskerstein's attention!"
-					&& Field<GameObject>(fields, "hintStrokes").activeSelf == false, "Seed meow hint");
+					&& Field<HintStrokesView>(fields, "hintStrokes").gameObject.activeSelf == false, "Seed meow hint");
 				report.AppendLine("PASS mid-session seed: answers, timer, announced color, suspicion and meow hint");
+				fixture.Run.ReplaceCurrentQuestionIndex(0);
+				GameEntity firstQuestion = fixture.Exams.CreateQuestion(0);
 				fixture.Run.ReplaceTutorialHint(TutorialHint.Copy);
 				exam.ReactToChanges();
 				Require(Field<TMP_Text>(fields, "hint").text == "Copy the strokes:"
-					&& Field<GameObject>(fields, "hintStrokes").activeSelf
+					&& Field<HintStrokesView>(fields, "hintStrokes").gameObject.activeSelf
 					&& Field<RectTransform>(fields, "hintBubble").sizeDelta.y == 160f, "Copy hint strokes");
+				Require(HintStrokeSprites(Field<HintStrokesView>(fields, "hintStrokes"))
+					== StrokeSpriteNames(firstQuestion.AnswerStrokes), "Copy hint mirrors the first question");
 				fixture.Run.ReplaceTutorialHint(TutorialHint.Duck);
 				exam.ReactToChanges();
 				Require(Field<TMP_Text>(fields, "hint").text == "Throw the duck when it gets hot [Q]"
-					&& Field<GameObject>(fields, "hintStrokes").activeSelf == false
+					&& Field<HintStrokesView>(fields, "hintStrokes").gameObject.activeSelf == false
 					&& Field<RectTransform>(fields, "hintBubble").sizeDelta.y == 112f, "Duck hint");
 				fixture.Run.ReplaceTutorialHint(TutorialHint.None);
 				exam.ReactToChanges();
@@ -380,6 +384,30 @@ namespace Code.Editor
 				result[index] = (FlashRowView)rows.GetArrayElementAtIndex(index).objectReferenceValue;
 
 			return result;
+		}
+
+		private static string HintStrokeSprites(HintStrokesView view)
+		{
+			SerializedObject serialized = new(view);
+			SerializedProperty slots = serialized.FindProperty("slots");
+			StringBuilder names = new();
+			for (int index = 0; index < slots.arraySize; index++)
+			{
+				Image slot = (Image)slots.GetArrayElementAtIndex(index).objectReferenceValue;
+				if (slot.gameObject.activeSelf)
+					names.Append(slot.sprite.name).Append(' ');
+			}
+
+			return names.ToString();
+		}
+
+		private static string StrokeSpriteNames(IReadOnlyList<StrokeDirection> strokes)
+		{
+			StringBuilder names = new();
+			foreach (StrokeDirection stroke in strokes)
+				names.Append("glyph_arrow_").Append(stroke.ToString().ToLowerInvariant()).Append("_normal").Append(' ');
+
+			return names.ToString();
 		}
 
 		private static T Field<T>(SerializedObject fields, string name) where T : Object

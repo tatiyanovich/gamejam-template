@@ -8,6 +8,7 @@ using Code.Gameplay.Input.Behaviours;
 using Code.Gameplay.Neighbours.Behaviours;
 using Code.Gameplay.Teacher;
 using Code.Gameplay.Teacher.Behaviours;
+using Code.Gameplay.Vfx.Behaviours;
 using Newtonsoft.Json.Linq;
 using TMPro;
 using UnityEditor;
@@ -28,16 +29,20 @@ namespace Code.Editor.Art
 		private const string Content = "Assets/AddressableResources/Content/";
 		private const string Shared = "CopycatShared";
 		private const string UserInterface = "UI/Copycat";
+		private const string VfxSprites = "Vfx/Sprites";
+		private const string VfxMaterials = "Vfx/Materials";
 		private const int GlyphSlotCount = 6;
 		private const int PickCellCount = 4;
+		private const float PickCircleScale = 1.2f;
 		private static readonly string ArtRoot = Path.GetFullPath(Path.Combine(Application.dataPath, "../../../art"));
 		private static readonly Vector2 GlyphRowOffset = new Vector2(30f, 30f);
 		private static readonly string[] GlyphStates = { "normal", "done", "wrong" };
 		private static readonly string[] GlyphDirections = { "up", "right", "down", "left" };
+		private static readonly int[] Days = { 2, 3, 4, 5, 6, 7, 8, 10 };
 		private static readonly string[] Folders =
 		{
 			"Classroom", "Characters/Kitten", "Characters/Teacher", "Characters/Neighbours",
-			"Papers", "Duck", UserInterface
+			"Papers", "Duck", UserInterface, VfxSprites
 		};
 
 		[MenuItem("COPYCAT/Art/Build D11")]
@@ -96,6 +101,24 @@ namespace Code.Editor.Art
 			Debug.Log("D6: rebuilt neighbour paper input glyphs and scribbles.");
 		}
 
+		[MenuItem("COPYCAT/Art/Build E5 Vfx")]
+		public static void BuildVfx()
+		{
+			if (EditorApplication.isPlaying)
+				throw new InvalidOperationException("Stop Play Mode before building vfx.");
+
+			UnityEngine.SceneManagement.Scene scene = EditorSceneManager.OpenScene("Assets/Scenes/Gameplay.unity");
+			foreach (GameObject existing in scene.GetRootGameObjects())
+			{
+				if (existing.name == "CopycatArt")
+					BuildVfxNodes(existing.transform);
+			}
+
+			EditorSceneManager.SaveScene(scene);
+			AssetDatabase.SaveAssets();
+			Debug.Log("E5: built exam vfx emitters.");
+		}
+
 		[MenuItem("COPYCAT/Art/Build E4 Duck View")]
 		public static void BuildDuckView()
 		{
@@ -141,18 +164,19 @@ namespace Code.Editor.Art
 
 		private static void ImportTextures()
 		{
-			for (int day = 2; day <= 8; day++)
+			for (int index = 0; index < Days.Length; index++)
 			{
-				string destination = Content + Folders[day - 2];
+				string destination = Content + Folders[index];
 				Directory.CreateDirectory(destination);
-				foreach (string source in Directory.GetFiles(Path.Combine(ArtRoot, $"exports/d{day}"), "*.png"))
+				foreach (string source in Directory.GetFiles(Path.Combine(ArtRoot, $"exports/d{Days[index]}"), "*.png"))
 					File.Copy(source, Path.Combine(destination, Path.GetFileName(source)), true);
 			}
 
 			AssetDatabase.Refresh(ImportAssetOptions.ForceSynchronousImport);
 
-			for (int day = 2; day <= 8; day++)
+			for (int index = 0; index < Days.Length; index++)
 			{
+				int day = Days[index];
 				JObject layout = Read(day);
 				List<JToken> assets = (layout[day == 2 ? "layers" : "assets"]).ToList();
 				if (day == 6)
@@ -170,7 +194,7 @@ namespace Code.Editor.Art
 				}
 
 				foreach (JToken asset in assets)
-					ImportTexture(Folders[day - 2], asset);
+					ImportTexture(Folders[index], asset);
 			}
 		}
 
@@ -691,7 +715,7 @@ namespace Code.Editor.Art
 				"PatrickHand-Regular", "PENCIL_INK"));
 			ConfigureNeighbourPaperViews(neighbour, layout);
 			Transform circle = Layer(neighbour, "Papers", ("glyph_pick_circle", Vector3.zero, 2)).transform;
-			circle.localScale = Vector3.one * 1.05f;
+			circle.localScale = Vector3.one * PickCircleScale;
 			circle.gameObject.SetActive(false);
 			Save(neighbour, "Papers");
 
@@ -768,7 +792,7 @@ namespace Code.Editor.Art
 			shape.radius = 0.08f;
 			ParticleSystemRenderer renderer = dust.GetComponent<ParticleSystemRenderer>();
 			renderer.sortingOrder = 34;
-			renderer.sharedMaterial = AssetDatabase.GetBuiltinExtraResource<Material>("Default-ParticleSystem.mat");
+			renderer.sharedMaterial = VfxMaterial("chalk_dust");
 			dust.Stop(
 				withChildren: true,
 				stopBehavior: ParticleSystemStopBehavior.StopEmittingAndClear);
@@ -881,7 +905,7 @@ namespace Code.Editor.Art
 		private static void RegisterAddressables()
 		{
 			AddressableAssetSettings settings = AddressableAssetSettingsDefaultObject.Settings;
-			foreach (string folder in new[] { "Classroom", "Characters", "Papers", "Duck", UserInterface, Shared })
+			foreach (string folder in new[] { "Classroom", "Characters", "Papers", "Duck", UserInterface, "Vfx", Shared })
 			{
 				string name = folder == UserInterface ? "UI" : folder == Shared ? "Shared" : folder;
 				AddressableAssetGroup group = settings.FindGroup("Copycat_" + name);
@@ -965,8 +989,191 @@ namespace Code.Editor.Art
 				if (PrefabUtility.IsPartOfPrefabInstance(transform))
 					PrefabUtility.RecordPrefabInstancePropertyModifications(transform);
 			}
+			BuildVfxNodes(root);
 			EditorSceneManager.SaveScene(scene);
 			ConfigureCamera();
+		}
+
+		private static void BuildVfxNodes(Transform root)
+		{
+			Remove(root, "Vfx");
+			Transform node = Node(root, "Vfx", Vector3.zero);
+			JObject layout = Read(10);
+			ExamVfxEmittersDto emitters = new()
+			{
+				Sweat = Sweat(node, layout),
+				Alert = Alert(node, layout),
+				LaughterLeft = Laughter(node, layout, "laughter_left"),
+				LaughterRight = Laughter(node, layout, "laughter_right"),
+				Chalk = Chalk(node, layout),
+				Sparkles = Sparkles(node, layout)
+			};
+
+			ExamVfxView view = root.GetComponent<ExamVfxView>();
+			if (view == null)
+				view = root.gameObject.AddComponent<ExamVfxView>();
+
+			view.Configure(emitters);
+			EditorUtility.SetDirty(view);
+		}
+
+		private static JToken Effect(JObject layout, string name)
+		{
+			foreach (JToken effect in layout["effects"])
+			{
+				if ((string)effect["name"] == name)
+					return effect;
+			}
+
+			throw new InvalidOperationException("Missing D10 effect: " + name);
+		}
+
+		private static ParticleSystem Emitter(Transform parent, JToken effect, Vector3 shapeRotation)
+		{
+			string name = (string)effect["name"];
+			ParticleSystem system = Node(parent, name, World(Point(effect["emitter"])))
+				.gameObject.AddComponent<ParticleSystem>();
+
+			ParticleSystem.MainModule main = system.main;
+			main.duration = 1f;
+			main.loop = true;
+			main.playOnAwake = false;
+			main.simulationSpace = ParticleSystemSimulationSpace.World;
+			main.scalingMode = ParticleSystemScalingMode.Hierarchy;
+			ParticleSystem.EmissionModule emission = system.emission;
+			emission.rateOverTime = 0f;
+			ParticleSystem.ShapeModule shape = system.shape;
+			shape.enabled = true;
+			shape.shapeType = ParticleSystemShapeType.Cone;
+			shape.rotation = shapeRotation;
+			ParticleSystemRenderer renderer = system.GetComponent<ParticleSystemRenderer>();
+			renderer.sortingOrder = (int)effect["sortingOrder"];
+			renderer.sharedMaterial = VfxMaterial((string)effect["sprite"]);
+			system.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+			return system;
+		}
+
+		private static ParticleSystem Sweat(Transform parent, JObject layout)
+		{
+			ParticleSystem system = Emitter(parent, Effect(layout, "sweat"), new Vector3(90f, 0f, 0f));
+			ParticleSystem.MainModule main = system.main;
+			main.startLifetime = 0.6f;
+			main.startSpeed = new ParticleSystem.MinMaxCurve(0.3f, 0.8f);
+			main.startSize = new ParticleSystem.MinMaxCurve(0.14f, 0.22f);
+			main.gravityModifier = 2f;
+			main.maxParticles = 12;
+			ParticleSystem.EmissionModule emission = system.emission;
+			emission.rateOverTime = 4f;
+			ParticleSystem.ShapeModule shape = system.shape;
+			shape.angle = 22f;
+			shape.radius = 0.7f;
+			return system;
+		}
+
+		private static ParticleSystem Alert(Transform parent, JObject layout)
+		{
+			ParticleSystem system = Emitter(parent, Effect(layout, "alert"), new Vector3(-90f, 0f, 0f));
+			ParticleSystem.MainModule main = system.main;
+			main.startLifetime = 0.5f;
+			main.startSpeed = new ParticleSystem.MinMaxCurve(0.35f);
+			main.startSize = new ParticleSystem.MinMaxCurve(0.5f);
+			main.maxParticles = 4;
+			ParticleSystem.ShapeModule shape = system.shape;
+			shape.angle = 0f;
+			shape.radius = 0.02f;
+			ParticleSystem.SizeOverLifetimeModule size = system.sizeOverLifetime;
+			size.enabled = true;
+			size.size = new ParticleSystem.MinMaxCurve(1f, new AnimationCurve(
+				new Keyframe(0f, 0f), new Keyframe(0.25f, 1.2f), new Keyframe(0.6f, 1f), new Keyframe(1f, 1f)));
+			return system;
+		}
+
+		private static ParticleSystem Laughter(Transform parent, JObject layout, string name)
+		{
+			ParticleSystem system = Emitter(parent, Effect(layout, name), new Vector3(-90f, 0f, 0f));
+			ParticleSystem.MainModule main = system.main;
+			main.startLifetime = 1.2f;
+			main.startSpeed = new ParticleSystem.MinMaxCurve(1.1f, 1.9f);
+			main.startSize = new ParticleSystem.MinMaxCurve(0.3f, 0.44f);
+			main.startRotation = new ParticleSystem.MinMaxCurve(-0.35f, 0.35f);
+			main.gravityModifier = -0.05f;
+			main.maxParticles = 24;
+			ParticleSystem.ShapeModule shape = system.shape;
+			shape.angle = 28f;
+			shape.radius = 0.35f;
+			ParticleSystem.VelocityOverLifetimeModule velocity = system.velocityOverLifetime;
+			velocity.enabled = true;
+			velocity.x = new ParticleSystem.MinMaxCurve(0.6f, new AnimationCurve(
+				new Keyframe(0f, 0f), new Keyframe(0.5f, 1f), new Keyframe(1f, -1f)));
+			velocity.y = new ParticleSystem.MinMaxCurve(0f, AnimationCurve.Constant(0f, 1f, 0f));
+			velocity.z = new ParticleSystem.MinMaxCurve(0f, AnimationCurve.Constant(0f, 1f, 0f));
+			ParticleSystem.ColorOverLifetimeModule color = system.colorOverLifetime;
+			color.enabled = true;
+			color.color = Fade();
+			return system;
+		}
+
+		private static ParticleSystem Chalk(Transform parent, JObject layout)
+		{
+			ParticleSystem system = Emitter(parent, Effect(layout, "chalk"), new Vector3(90f, 0f, 0f));
+			ParticleSystem.MainModule main = system.main;
+			main.startLifetime = 0.3f;
+			main.startSpeed = new ParticleSystem.MinMaxCurve(0.2f, 0.5f);
+			main.startSize = new ParticleSystem.MinMaxCurve(0.06f, 0.12f);
+			main.gravityModifier = 0.6f;
+			main.maxParticles = 8;
+			ParticleSystem.EmissionModule emission = system.emission;
+			emission.rateOverTime = 2f;
+			ParticleSystem.ShapeModule shape = system.shape;
+			shape.angle = 35f;
+			shape.radius = 0.04f;
+			return system;
+		}
+
+		private static ParticleSystem Sparkles(Transform parent, JObject layout)
+		{
+			ParticleSystem system = Emitter(parent, Effect(layout, "sparkles"), new Vector3(-90f, 0f, 0f));
+			ParticleSystem.MainModule main = system.main;
+			main.startLifetime = 0.6f;
+			main.startSpeed = new ParticleSystem.MinMaxCurve(0.9f, 2f);
+			main.startSize = new ParticleSystem.MinMaxCurve(0.14f, 0.26f);
+			main.startRotation = new ParticleSystem.MinMaxCurve(0f, 6.28f);
+			main.gravityModifier = 1.2f;
+			main.maxParticles = 20;
+			ParticleSystem.ShapeModule shape = system.shape;
+			shape.angle = 65f;
+			shape.radius = 0.08f;
+			ParticleSystem.ColorOverLifetimeModule color = system.colorOverLifetime;
+			color.enabled = true;
+			color.color = Fade();
+			return system;
+		}
+
+		private static ParticleSystem.MinMaxGradient Fade()
+		{
+			Gradient gradient = new();
+			gradient.SetKeys(
+				new[] { new GradientColorKey(UnityEngine.Color.white, 0f), new GradientColorKey(UnityEngine.Color.white, 1f) },
+				new[] { new GradientAlphaKey(1f, 0f), new GradientAlphaKey(1f, 0.6f), new GradientAlphaKey(0f, 1f) });
+			return new ParticleSystem.MinMaxGradient(gradient);
+		}
+
+		private static Material VfxMaterial(string sprite)
+		{
+			string folder = Content + VfxMaterials;
+			Directory.CreateDirectory(folder);
+			string path = folder + "/" + sprite + "_material.mat";
+			Material material = AssetDatabase.LoadAssetAtPath<Material>(path);
+			if (material == null)
+			{
+				AssetDatabase.Refresh(ImportAssetOptions.ForceSynchronousImport);
+				material = new Material(Shader.Find("Sprites/Default"));
+				AssetDatabase.CreateAsset(material, path);
+			}
+
+			material.mainTexture = AssetDatabase.LoadAssetAtPath<Texture2D>(Content + VfxSprites + "/" + sprite + ".png");
+			EditorUtility.SetDirty(material);
+			return material;
 		}
 
 		private static void ConfigureCamera()

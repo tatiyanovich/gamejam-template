@@ -1,0 +1,51 @@
+[
+  {
+    "name": "sweat_drop",
+    "width": 128,
+    "height": 128,
+    "scale": 2,
+    "sha256": "e44001317df739adc55716e5634e01743c84eab6006d0cec6f8c5cbfb42bf1d1"
+  },
+  {
+    "name": "note",
+    "width": 128,
+    "height": 128,
+    "scale": 2,
+    "sha256": "239c005f0151a2aa621095b3bf0d6fc31a86dd23cd281740345ad574331531ce"
+  },
+  {
+    "name": "exclaim",
+    "width": 128,
+    "height": 128,
+    "scale": 2,
+    "sha256": "29b98984cd6ec57b0c04d90050c03bfdf6ec349f0f083583feae1f3c22ecc952"
+  },
+  {
+    "name": "question",
+    "width": 128,
+    "height": 128,
+    "scale": 2,
+    "sha256": "5a259d560b00b9f9439360ba28afdbf3cb4fb7d481aef69f7dfb6ec4243f571a"
+  },
+  {
+    "name": "chalk_dust",
+    "width": 128,
+    "height": 128,
+    "scale": 2,
+    "sha256": "f9b2cd1cb9b446f4392efd6252c99e9e0e42cb7ca5dc408c48e30da08938ca62"
+  },
+  {
+    "name": "sparkle",
+    "width": 128,
+    "height": 128,
+    "scale": 2,
+    "sha256": "03483ae40414caa075f4238b009e69da56d250a061a0f3dda21c33d269f57c29"
+  },
+  {
+    "name": "heart",
+    "width": 128,
+    "height": 128,
+    "scale": 2,
+    "sha256": "50ebcd9aa550e6f816a4f6a752880ff37064899fd624a7976271aa6b48ef4010"
+  }
+]

@@ -10,6 +10,7 @@ import { neighbourOutputs } from './neighbours.mjs';
 import { paperOutputs } from './papers.mjs';
 import { duckOutputs } from './duck.mjs';
 import { uiOutputs } from './ui.mjs';
+import { vfxOutputs } from './vfx.mjs';
 
 const root = dirname(fileURLToPath(import.meta.url));
 const require = createRequire(import.meta.url);
@@ -157,7 +158,7 @@ function output(name, markup, scale = 1, directory = outputRoot, manifestEntries
   console.log(`${check ? 'Verified' : 'Rendered'} ${name}: ${rendered.width}×${rendered.height}`);
 }
 
-const classroom = { ...classroomOutputs(root), ...kittenOutputs(root), ...teacherOutputs(root), ...neighbourOutputs(root), ...paperOutputs(root), ...duckOutputs(root), ...uiOutputs(root) };
+const classroom = { ...classroomOutputs(root), ...kittenOutputs(root), ...teacherOutputs(root), ...neighbourOutputs(root), ...paperOutputs(root), ...duckOutputs(root), ...uiOutputs(root), ...vfxOutputs(root) };
 for (const [directory, assets] of Object.entries(classroom)) {
   const target = join(root, directory);
   const entries = [];

@@ -1,0 +1,176 @@
+{
+  "coordinates": "Pixels at 1x, top-left origin, Y down. Emitter positions are screen points in the 1920x1080 classroom layout of D2; Unity world position = ((x-960)/100, (540-y)/100).",
+  "textureScale": 2,
+  "pixelsPerUnit": 200,
+  "filter": "Bilinear",
+  "mipmaps": false,
+  "trim": false,
+  "assets": [
+    {
+      "name": "sweat_drop",
+      "size": [
+        64,
+        64
+      ],
+      "pivotPixels": [
+        32,
+        32
+      ]
+    },
+    {
+      "name": "note",
+      "size": [
+        64,
+        64
+      ],
+      "pivotPixels": [
+        32,
+        32
+      ]
+    },
+    {
+      "name": "exclaim",
+      "size": [
+        64,
+        64
+      ],
+      "pivotPixels": [
+        32,
+        32
+      ]
+    },
+    {
+      "name": "question",
+      "size": [
+        64,
+        64
+      ],
+      "pivotPixels": [
+        32,
+        32
+      ]
+    },
+    {
+      "name": "chalk_dust",
+      "size": [
+        64,
+        64
+      ],
+      "pivotPixels": [
+        32,
+        32
+      ]
+    },
+    {
+      "name": "sparkle",
+      "size": [
+        64,
+        64
+      ],
+      "pivotPixels": [
+        32,
+        32
+      ]
+    },
+    {
+      "name": "heart",
+      "size": [
+        64,
+        64
+      ],
+      "pivotPixels": [
+        32,
+        32
+      ]
+    }
+  ],
+  "effects": [
+    {
+      "name": "sweat",
+      "sprite": "sweat_drop",
+      "trigger": "Watching while leaning",
+      "emitter": [
+        828,
+        690
+      ],
+      "leanOffsetX": 60,
+      "sortingOrder": 36,
+      "rate": 4,
+      "lifetime": 0.6,
+      "gravity": 2
+    },
+    {
+      "name": "alert",
+      "sprite": "exclaim",
+      "trigger": "Turning or Alerted",
+      "emitter": [
+        1052,
+        180
+      ],
+      "sortingOrder": 15,
+      "burst": 1,
+      "lifetime": 0.5
+    },
+    {
+      "name": "laughter_left",
+      "sprite": "note",
+      "trigger": "Duck thrown",
+      "emitter": [
+        520,
+        390
+      ],
+      "sortingOrder": 31,
+      "burst": 6,
+      "lifetime": 1.2
+    },
+    {
+      "name": "laughter_right",
+      "sprite": "note",
+      "trigger": "Duck thrown",
+      "emitter": [
+        1400,
+        390
+      ],
+      "sortingOrder": 31,
+      "burst": 6,
+      "lifetime": 1.2
+    },
+    {
+      "name": "chalk",
+      "sprite": "chalk_dust",
+      "trigger": "Writing",
+      "emitter": [
+        1112,
+        296
+      ],
+      "sortingOrder": 9,
+      "rate": 2,
+      "lifetime": 0.3
+    },
+    {
+      "name": "sparkles",
+      "sprite": "sparkle",
+      "trigger": "Answer copied",
+      "emitter": [
+        1323,
+        1010
+      ],
+      "sortingOrder": 36,
+      "burst": 10,
+      "lifetime": 0.6
+    },
+    {
+      "name": "landing_dust",
+      "sprite": "chalk_dust",
+      "trigger": "Duck landing (E4)",
+      "emitter": null,
+      "sortingOrder": 34,
+      "burst": 8,
+      "lifetime": 0.4
+    }
+  ],
+  "spare": [
+    "question",
+    "heart"
+  ]
+}
