@@ -22,5 +22,5 @@ MonoBehaviour:
   layerId: Overlay
   closeOnCover: 0
   ignoreBack: 0
-  requiresCursor: 0
+  requiresCursor: 1
   pausesGame: 0
