@@ -65,11 +65,12 @@ function doGet(e) {
 /** { top: [{ name, answers, timeSeconds, grade }], rank, total }. rank is 0 when the entry is not found. */
 function board(top, entry) {
   const rows = readRows();
-  const rank = entry === null ? 0 : 1 + rows.findIndex(row => isSameEntry(row, entry));
+  const rank = entry === null ? 0 : 1 + rows.findIndex(row => row.name === entry.name);
   return { top: rows.slice(0, top), rank: rank, total: rows.length };
 }
 
 function readRows() {
+  const names = new Set();
   return sheet().getDataRange().getValues().slice(1)
     .filter(row => String(row[0]).trim() !== '')
     .map(row => ({
@@ -78,11 +79,12 @@ function readRows() {
       timeSeconds: Number(row[2]) || 0,
       grade: String(row[3])
     }))
-    .sort((left, right) => right.answers - left.answers || left.timeSeconds - right.timeSeconds);
-}
-
-function isSameEntry(row, entry) {
-  return row.name === entry.name && row.answers === entry.answers && row.timeSeconds === entry.timeSeconds;
+    .sort((left, right) => right.answers - left.answers || left.timeSeconds - right.timeSeconds)
+    .filter(row => {
+      if (names.has(row.name)) return false;
+      names.add(row.name);
+      return true;
+    });
 }
 
 function sheet() {

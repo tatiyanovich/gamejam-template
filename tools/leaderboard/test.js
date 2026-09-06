@@ -43,13 +43,21 @@ post({});
 check('missing body fields', rows[5].slice(0, 4), ['Anonymous', 0, 0, 'F']);
 
 check('sorted: answers desc then time asc', get({}).top.map(r => [r.name, r.answers, r.timeSeconds]),
-  [['ClampMe', 12, 0], ['scriptFluffy', 12, 80], ['Egor', 12, 91.37], ['Anonymous', 5, 20], ['Anonymous', 0, 0]]);
+  [['ClampMe', 12, 0], ['scriptFluffy', 12, 80], ['Egor', 12, 91.37], ['Anonymous', 5, 20]]);
 
 check('rank lookup by GET', get({ name: 'Egor', answers: '12', timeSeconds: '91.37' }).rank, 3);
 check('rank 0 when absent', get({ name: 'Ghost', answers: '1', timeSeconds: '1' }).rank, 0);
-check('top clamped to 50', get({ top: '900' }).top.length, 5);
-check('top default 10 on garbage', get({ top: 'abc' }).top.length, 5);
+check('top clamped to 50', get({ top: '900' }).top.length, 4);
+check('top default 10 on garbage', get({ top: 'abc' }).top.length, 4);
 check('top=1', get({ top: '1' }).top.length, 1);
+
+const worse = post({ name: 'Egor', answers: 11, timeSeconds: 10, grade: 'A' });
+check('worse retry keeps nickname best and its rank', [worse.rank, worse.total, worse.top[2]],
+  [3, 4, { name: 'Egor', answers: 12, timeSeconds: 91.37, grade: 'A+' }]);
+
+const better = post({ name: 'Egor', answers: 12, timeSeconds: 70, grade: 'A+' });
+check('better retry replaces nickname best', [better.rank, better.total, better.top.filter(r => r.name === 'Egor')],
+  [2, 4, [{ name: 'Egor', answers: 12, timeSeconds: 70, grade: 'A+' }]]);
 
 const broken = JSON.parse(doPost({ postData: { contents: '{not json' } }).text);
 check('malformed json returns json error', [broken.top, broken.rank, typeof broken.error], [[], 0, 'string']);
