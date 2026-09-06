@@ -6,7 +6,7 @@ using Code.Infrastructure.Audio;
 using Code.Infrastructure.Audio.Services;
 using Code.Infrastructure.CoreLoop;
 using Code.UI.Attendance;
-using Code.UI.Tutorial;
+using Code.UI.Intro;
 using Cysharp.Threading.Tasks;
 using Framework.UI.UiManagement.Elements.Windows;
 using UnityEngine;
@@ -79,13 +79,13 @@ namespace Code.UI.Launch
 			quitButton.interactable = interactable;
 		}
 
-		private async UniTask OpenTutorial()
+		private async UniTask OpenIntro()
 		{
 			_isStarting = true;
 			SetInteractable(false);
 			await _uiService.CloseWindow<LaunchWindow>(withAnimation: false);
-			await _uiService.OpenWindow<TutorialWindow>(
-				beforeOpen: window => window.Prepare(StartExam, playVoiceOver: true));
+			await _uiService.OpenWindow<IntroWindow>(
+				beforeOpen: window => window.Prepare(StartExam));
 		}
 
 		private void StartExam()
@@ -114,7 +114,15 @@ namespace Code.UI.Launch
 				return;
 			}
 
-			OpenTutorial().Forget();
+			if (_progressQuery.HasSeenIntro())
+			{
+				_isStarting = true;
+				SetInteractable(false);
+				StartExam();
+				return;
+			}
+
+			OpenIntro().Forget();
 		}
 
 		private void HandleQuit()

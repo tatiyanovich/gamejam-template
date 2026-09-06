@@ -43,6 +43,9 @@ namespace Code.Gameplay.Progress.Services
 		{
 			_entityFactory.Request()
 				.With(x => x.isMarkIntroSeenRequest = true);
+
+			_entityFactory.Request()
+				.With(x => x.isSaveProgressRequest = true);
 		}
 	}
 }

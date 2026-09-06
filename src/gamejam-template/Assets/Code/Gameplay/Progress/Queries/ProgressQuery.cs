@@ -24,6 +24,14 @@ namespace Code.Gameplay.Progress.Queries
 			return string.Empty;
 		}
 
+		public bool HasSeenIntro()
+		{
+			foreach (GameEntity progress in _progresses)
+				return progress.isIntroSeen;
+
+			return false;
+		}
+
 		public int GetBestAnswers()
 		{
 			foreach (GameEntity progress in _progresses)

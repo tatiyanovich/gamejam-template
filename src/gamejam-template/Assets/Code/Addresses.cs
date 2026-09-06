@@ -17,6 +17,7 @@ namespace Code
 			public const string LoadingWindow = "ba55290e-f182-4355-a74e-43e716dadad8";
 			public const string LaunchWindow = "6d73ca02-6b75-4f1c-b1b6-52c5b72b1c19";
 			public const string AttendanceWindow = "c4a18b37-3948-42f8-9c97-87aa5b94e210";
+			public const string IntroWindow = "d9db65d0-69e2-4ce5-a3be-19b08c05ff50";
 			public const string TutorialWindow = "272a1fbb-3578-4a7a-a954-44693cb41386";
 			public const string GameplayWindow = "01bfb656-1111-4f5a-9e0e-4b28f2ccd4d9";
 			public const string WorldOverlayWindow = "ffb30672-1a48-4c1a-a8f6-fbeaa607f3cf";

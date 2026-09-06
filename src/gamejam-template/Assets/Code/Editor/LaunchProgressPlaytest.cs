@@ -38,8 +38,23 @@ namespace Code.Editor
 						GameMatcher.SaveProgressRequest)).count != 1)
 					throw new InvalidOperationException("Name submission must request a snapshot save.");
 
+				if (query.HasSeenIntro())
+					throw new InvalidOperationException("A new save must not have seen the intro.");
+
+				factory.CreateMarkIntroSeenRequest();
+				new MarkIntroSeenByRequestSystem(game).Execute();
+				if (query.HasSeenIntro() == false)
+					throw new InvalidOperationException("Intro completion must persist on progress.");
+
+				if (game.GetGroup(GameMatcher
+					.AllOf(
+						GameMatcher.Request,
+						GameMatcher.SaveProgressRequest)).count != 2)
+					throw new InvalidOperationException("Intro completion must request a snapshot save.");
+
 				File.WriteAllText(PlaytestPaths.Get("launch-progress.txt"),
-					"PASS null save name\nPASS first name submission\nPASS persistent progress\nPASS save request\nDONE\n");
+					"PASS null save name\nPASS first name submission\nPASS persistent progress\n" +
+					"PASS name save request\nPASS intro seen and save request\nDONE\n");
 			}
 			finally
 			{

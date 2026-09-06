@@ -7,6 +7,7 @@ using Code.UI.Attendance;
 using Code.UI.Error;
 using Code.UI.Fade;
 using Code.UI.Gameplay;
+using Code.UI.Intro;
 using Code.UI.Launch;
 using Code.UI.Loading;
 using Code.UI.Result;
@@ -87,6 +88,7 @@ namespace Code.Infrastructure.StateManagement.States
 				.AddDefinition(new WindowDefinition(typeof(FadeWindow), Addresses.UI.FadeWindow))
 				.AddDefinition(new WindowDefinition(typeof(LaunchWindow), Addresses.UI.LaunchWindow))
 				.AddDefinition(new WindowDefinition(typeof(AttendanceWindow), Addresses.UI.AttendanceWindow))
+				.AddDefinition(new WindowDefinition(typeof(IntroWindow), Addresses.UI.IntroWindow))
 				.AddDefinition(new WindowDefinition(typeof(TutorialWindow), Addresses.UI.TutorialWindow))
 				.AddDefinition(new WindowDefinition(typeof(GameplayWindow), Addresses.UI.GameplayWindow))
 				.AddDefinition(new WindowDefinition(typeof(WorldOverlayWindow), Addresses.UI.WorldOverlayWindow))
