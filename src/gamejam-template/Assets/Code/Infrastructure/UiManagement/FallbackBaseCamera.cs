@@ -57,6 +57,7 @@ namespace Code.Infrastructure.UiManagement
 			_fallbackCamera.transform.SetParent(transform);
 
 			Camera baseCamera = _fallbackCamera.AddComponent<Camera>();
+			_fallbackCamera.AddComponent<AudioListener>();
 			baseCamera.clearFlags = CameraClearFlags.SolidColor;
 			baseCamera.backgroundColor = new Color(10f / 255f, 10f / 255f, 10f / 255f);
 			baseCamera.cullingMask = 0;

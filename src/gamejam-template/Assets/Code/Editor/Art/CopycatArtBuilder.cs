@@ -773,19 +773,11 @@ namespace Code.Editor.Art
 				withChildren: true,
 				stopBehavior: ParticleSystemStopBehavior.StopEmittingAndClear);
 
-			AudioSource audioSource = root.GetComponent<AudioSource>();
-			if (audioSource == null)
-				audioSource = root.gameObject.AddComponent<AudioSource>();
-
-			audioSource.playOnAwake = false;
-			audioSource.loop = false;
-			audioSource.spatialBlend = 0f;
-
 			DuckView view = root.GetComponent<DuckView>();
 			if (view == null)
 				view = root.gameObject.AddComponent<DuckView>();
 
-			view.Configure(frames, dust, audioSource);
+			view.Configure(frames, dust);
 		}
 
 		private static RectTransform Rectangle(Transform parent, string name, Rect rectangle)

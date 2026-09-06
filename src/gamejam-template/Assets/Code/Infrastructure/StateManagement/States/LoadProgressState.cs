@@ -1,6 +1,7 @@
 using Code.Common.Extensions;
 using Code.Gameplay.CoreLoop;
 using Code.Infrastructure.AppMetadata.Snapshots;
+using Code.Infrastructure.Audio.Services;
 using Code.Infrastructure.EntityComponentSystem.Identifiers;
 using Code.Infrastructure.Settings.Services;
 using Code.Storage.SaveFiles;
@@ -20,19 +21,22 @@ namespace Code.Infrastructure.StateManagement.States
 		private readonly IIdentifierService _identifierService;
 		private readonly ITimeService _timeService;
 		private readonly ISettingsService _settingsService;
+		private readonly IAudioService _audioService;
 
 		public LoadProgressState(
 			IGameStateMachine gameStateMachine,
 			ISaveLoadService saveLoadService,
 			IIdentifierService identifierService,
 			ITimeService timeService,
-			ISettingsService settingsService)
+			ISettingsService settingsService,
+			IAudioService audioService)
 		{
 			_gameStateMachine = gameStateMachine;
 			_saveLoadService = saveLoadService;
 			_identifierService = identifierService;
 			_timeService = timeService;
 			_settingsService = settingsService;
+			_audioService = audioService;
 		}
 
 		public void Enter()
@@ -81,6 +85,7 @@ namespace Code.Infrastructure.StateManagement.States
 
 			_identifierService.SetLastUsedId(generalSaveFile.AppMetadata.LastUsedId);
 			_settingsService.LoadProgress();
+			_audioService.RefreshSettings();
 		}
 	}
 }

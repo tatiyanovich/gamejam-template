@@ -18,6 +18,7 @@ using Code.Gameplay.Suspicion.Queries;
 using Code.Gameplay.Suspicion.Services;
 using Code.Gameplay.Teacher.Queries;
 using Code.Gameplay.Teacher.Services;
+using Code.Infrastructure.Audio.Services;
 using Code.Infrastructure.EntityComponentSystem.Destruct.Services;
 using Code.Infrastructure.EntityComponentSystem.Installers;
 using Code.Infrastructure.ErrorHandler;
@@ -62,6 +63,7 @@ namespace Code.Infrastructure.Installers
 
 		private void BindConfigServices()
 		{
+			Container.BindInterfacesTo<AudioConfigsService>().AsSingle();
 			Container.BindInterfacesTo<CameraConfigsService>().AsSingle();
 			Container.BindInterfacesTo<ExamConfigsService>().AsSingle();
 			Container.BindInterfacesTo<MeowConfigsService>().AsSingle();
@@ -111,6 +113,8 @@ namespace Code.Infrastructure.Installers
 			Container.BindInterfacesTo<SatelliteService>().AsSingle();
 			Container.BindInterfacesTo<ExamGradeService>().AsSingle();
 			Container.BindInterfacesTo<LeaderboardService>().AsSingle();
+			Container.BindInterfacesTo<AudioService>().AsSingle().NonLazy();
+			Container.BindInterfacesTo<GameplayAudioPresenter>().AsSingle().NonLazy();
 
 			new SaveManagementInstaller(Container, new()
 			{

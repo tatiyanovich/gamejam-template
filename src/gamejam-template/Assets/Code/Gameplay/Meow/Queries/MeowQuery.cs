@@ -19,6 +19,7 @@ namespace Code.Gameplay.Meow.Queries
 
 		public event Action<float> OnMicrophoneLevelChanged;
 		public event Action OnMicrophoneTestPassed;
+		public event Action<bool> OnMeow;
 
 		public MeowQuery(
 			GameContext game,
@@ -56,6 +57,8 @@ namespace Code.Gameplay.Meow.Queries
 
 			foreach (GameEntity meowEvent in _meowEvents)
 			{
+				OnMeow?.Invoke(meowEvent.meowEvent.FromMicrophone);
+
 				if (meowEvent.meowEvent.FromMicrophone)
 					OnMicrophoneTestPassed?.Invoke();
 			}

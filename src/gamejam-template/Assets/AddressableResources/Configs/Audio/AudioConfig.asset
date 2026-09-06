@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: faf9e5d6777594b22a2d26e096b36390, type: 3}
+  m_Name: AudioConfig
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Infrastructure.Audio.Configs.AudioConfig
+  meowFallback:
+  - {fileID: 8300000, guid: 7a4b7d987dab84e218d782d65ba384dd, type: 3}
+  - {fileID: 8300000, guid: 3214339a1b0c9499c933d7232638ee3d, type: 3}
+  - {fileID: 8300000, guid: 5280296a58cb547e1a8068be1c5b9d3a, type: 3}
+  duckSqueak: {fileID: 8300000, guid: eccccc75cb5c94f2e84e29abfc4680b6, type: 3}
+  duckThrow: {fileID: 8300000, guid: dc662a508dcdf4596b69302861328308, type: 3}
+  duckLand: {fileID: 8300000, guid: 8a570946c44e34657b7b05aef1a57fd2, type: 3}
+  classLaugh: {fileID: 8300000, guid: c995a026c5dd74ad19d88a6640cc09b4, type: 3}
+  pencilSnap: {fileID: 8300000, guid: 987e3b9d0a6ef4e3f9f09970f86ab6cd, type: 3}
+  pencilScratch: {fileID: 8300000, guid: 0c2025311642249188e148a399fe8e54, type: 3}
+  answerCopied: {fileID: 8300000, guid: b8b9d34ae5efe4e31a24fbaa4cb49809, type: 3}
+  chalkScratch: {fileID: 8300000, guid: 66e70deed820b4c80905405eb32eca29, type: 3}
+  teacherHmm: {fileID: 8300000, guid: 0b232675f0a1b41588bc931abaf5aaeb, type: 3}
+  heartbeat: {fileID: 8300000, guid: 271052597801d477d99b5592b3a83511, type: 3}
+  clockTick: {fileID: 8300000, guid: d5f0f6d876bd24120bcd22c0880a0af0, type: 3}
+  schoolBell: {fileID: 8300000, guid: 11c90e78fc9f64f629808fe9be1b2e35, type: 3}
+  teacherFootsteps: {fileID: 8300000, guid: cc225b98348e143cd96deb768476e0a3, type: 3}
+  timeWarning: {fileID: 8300000, guid: 4144d1064c2954539ab7af98d9f9c40e, type: 3}
+  classroomMusic: {fileID: 8300000, guid: 55330f292a54845b998059537d92642c, type: 3}
+  classroomUrgentMusic: {fileID: 8300000, guid: d79d5f5333a364e1481a5fb2ade960b2, type: 3}
+  introPanelOne: {fileID: 8300000, guid: d0a3b0fba77ff4bc48105f92c2d9f4fd, type: 3}
+  introPanelTwo: {fileID: 8300000, guid: 54e597888b8664eb7a7ce13078ca1c7e, type: 3}
+  introPanelThree: {fileID: 8300000, guid: 70d876079123d47dd98e119d8292355a, type: 3}
+  introPanelFour: {fileID: 8300000, guid: d45497ac0cb21464bbaa6b0b084fdc2b, type: 3}
+  microphoneDuckingMultiplier: 0.25
+  duckingTransitionSeconds: 0.2
+  heartbeatThreshold: 0.8

@@ -14,7 +14,122 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
   m_GroupName: Audio
   m_GUID: 143943d6dfe2dd14cb89a8872d225601
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 0b232675f0a1b41588bc931abaf5aaeb
+    m_Address: audio_teacher_hmm
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0c2025311642249188e148a399fe8e54
+    m_Address: audio_pencil_scratch
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 11c90e78fc9f64f629808fe9be1b2e35
+    m_Address: audio_school_bell
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 271052597801d477d99b5592b3a83511
+    m_Address: audio_heartbeat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3214339a1b0c9499c933d7232638ee3d
+    m_Address: audio_meow_2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4144d1064c2954539ab7af98d9f9c40e
+    m_Address: audio_time_warning
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5280296a58cb547e1a8068be1c5b9d3a
+    m_Address: audio_meow_3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 54e597888b8664eb7a7ce13078ca1c7e
+    m_Address: audio_intro_panel_2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 55330f292a54845b998059537d92642c
+    m_Address: audio_classroom
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 66e70deed820b4c80905405eb32eca29
+    m_Address: audio_chalk_scratch
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 70d876079123d47dd98e119d8292355a
+    m_Address: audio_intro_panel_3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7a4b7d987dab84e218d782d65ba384dd
+    m_Address: audio_meow_1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8a570946c44e34657b7b05aef1a57fd2
+    m_Address: audio_duck_land
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 987e3b9d0a6ef4e3f9f09970f86ab6cd
+    m_Address: audio_pencil_snap
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b8b9d34ae5efe4e31a24fbaa4cb49809
+    m_Address: audio_answer_copied
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c995a026c5dd74ad19d88a6640cc09b4
+    m_Address: audio_class_laugh
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cc225b98348e143cd96deb768476e0a3
+    m_Address: audio_teacher_footsteps
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d0a3b0fba77ff4bc48105f92c2d9f4fd
+    m_Address: audio_intro_panel_1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d45497ac0cb21464bbaa6b0b084fdc2b
+    m_Address: audio_intro_panel_4
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d5f0f6d876bd24120bcd22c0880a0af0
+    m_Address: audio_clock_tick
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d79d5f5333a364e1481a5fb2ade960b2
+    m_Address: audio_classroom_urgent
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dc662a508dcdf4596b69302861328308
+    m_Address: audio_duck_throw
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: eccccc75cb5c94f2e84e29abfc4680b6
+    m_Address: audio_duck_squeak
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 93b346209c333447f9df9a22fceba535, type: 2}
   m_SchemaSet:

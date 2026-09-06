@@ -103,10 +103,10 @@
 - [x] **E6** (0.5, P1) Шейк камеры на CAUGHT, пульс виньета, punch‑scale счётчика. Готово: `GameplayWindow` отправляет один `Default` shake request на `Caught`, `DangerVignetteView` даёт красный импульс 0.55 с, счётчик ответов пульсирует до 1.22× за 0.32 с; штамп Report Card появляется отдельным slam + punch. Проверки: [E6.md](../src/gamejam-template/tools/playtest/E6.md), 13 HUD PASS + 8 Report Card PASS + 16 gameplay regression PASS.
 
 ### F. Аудио (Claude) — P0 1.5 ч, P1 1 ч
-- [ ] **F1** (1.0, P0) SFX из `GDD §16` (синтез Python/ffmpeg + `say` для мяу‑фолбэка), нормализация −6 dBFS.
-- [ ] **F2** (0.5, P1) Музыкальный луп 60 с «класс/тик‑так» + ускоренная версия для последних 60 с.
-- [ ] **F3** (0.5, P1) VO интро: EN «meow meow» + UA `Lesya` гундосый дубляж, микс, 4 файла по панелям.
-- [ ] **F4** (0.5, P0) `AudioService`: SFX по `SfxId`, музыка, дакинг при активном мике, громкости из `SettingsSaveFile`.
+- [x] **F1** (1.0, P0) 15 SFX‑событий из `GDD §16`: три варианта мяу, писк/бросок/приземление утки, смех класса, карандаш/мел/штамп, `Hmm?`, heartbeat, тик, звонок, шаги и предупреждение учительницы. Подходящие исходники взяты из `sounds/`, недостающие синтезированы `art/audio/build.py`; эффекты нормализованы до −6 dBFS. События подключены через `GameplayAudioPresenter`, локальный процедурный писк E4 удалён. Проверка: [F1-F4.md](../src/gamejam-template/tools/playtest/F1-F4.md), PASS.
+- [x] **F2** (0.5, P1) Два бесшовных 60‑секундных лупа «класс/тик‑так»: спокойный и ускоренный с напряжённым слоем; переключение на `BellAnnouncementEvent` за последние 45 с, оба мастеринга −18 dBFS. Проверка: [F1-F4.md](../src/gamejam-template/tools/playtest/F1-F4.md), PASS.
+- [x] **F3** (0.5, P1) Четыре WAV по панелям интро: варианты EN‑мяу и микс тихого мяу с гундосым UA‑дубляжом `Lesya`; ссылки заведены в `AudioConfig` и готовы для B6 `IntroWindow`. Проверка: [F1-F4.md](../src/gamejam-template/tools/playtest/F1-F4.md), PASS.
+- [x] **F4** (0.5, P0) Bootstrap `AudioService`: SFX по `SfxId`, независимые one-shot/loop/VO/music источники, музыка по `MusicId`, плавный ducking до 25 % при активном микрофоне, независимые Music/Effects из `SettingsSaveFile`; `AudioConfig` грузится из Addressables по `audio_config`. Проверка: [F1-F4.md](../src/gamejam-template/tools/playtest/F1-F4.md), PASS + `dotnet build` 0 ошибок.
 
 ### G. Контент и баланс (Коля) — ~4 ч
 - [x] **G1** (0.5) Финальные 12 вопросов по структуре `GDD §13.1` (тип/сосед/длина не менять). Готово: тексты финализированы в `GDD §13.1` и `ExamConfig.asset`.

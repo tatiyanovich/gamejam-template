@@ -96,14 +96,12 @@ namespace Code.Editor
 				query.ReactToChanges();
 				await UniTask.DelayFrame(2);
 				ParticleSystem dust = instance.GetComponentInChildren<ParticleSystem>();
-				AudioSource audio = instance.GetComponent<AudioSource>();
 				Require(Vector3.Distance(instance.transform.position, new Vector3(-3.6f, 1f, 0f)) < 0.01f,
 					"Floor landing position");
 				Require(dust.particleCount > 0, "Landing dust burst");
-				Require(audio.isPlaying, "Landing squeak");
 				ScreenCapture.CaptureScreenshot(PlaytestPaths.Get("duck-landing.png"));
 				await UniTask.DelayFrame(2);
-				report.AppendLine("PASS landing: floor impact emits eight dust particles and plays the squeak");
+				report.AppendLine("PASS landing: floor impact emits eight dust particles");
 
 				duck.SwitchDuckState(DuckState.Carried, 10f);
 				query.ReactToChanges();

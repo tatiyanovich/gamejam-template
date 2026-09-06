@@ -9,7 +9,6 @@ namespace Code.Gameplay.Duck.Behaviours
 	{
 		[SF] private Transform[] frames;
 		[SF] private ParticleSystem landingDust;
-		[SF] private AudioSource audioSource;
 
 		private Transform _sceneParent;
 		private Transform _teacher;
@@ -18,7 +17,6 @@ namespace Code.Gameplay.Duck.Behaviours
 		private Vector3 _deskScale;
 		private Vector3 _flightControl;
 		private DuckState _state;
-		private AudioClip _squeak;
 
 		private Tween _motion;
 		private Tween _frameSwap;
@@ -46,9 +44,6 @@ namespace Code.Gameplay.Duck.Behaviours
 		private const float ConfiscatedScale = 0.55f;
 		private const float PickUpSeconds = 0.3f;
 		private const float ReturnSeconds = 0.5f;
-		private const float SqueakSeconds = 0.18f;
-		private const float SqueakVolume = 0.35f;
-		private const int AudioSampleRate = 44100;
 
 		private void Awake()
 		{
@@ -56,14 +51,11 @@ namespace Code.Gameplay.Duck.Behaviours
 			_deskPosition = transform.position;
 			_deskRotation = transform.rotation;
 			_deskScale = transform.localScale;
-			_squeak = CreateSqueak();
 		}
 
 		private void OnDestroy()
 		{
 			Unbind();
-			if (_squeak != null)
-				Destroy(_squeak);
 		}
 
 		public void Bind(IDuckQuery query, Transform teacher)
@@ -86,11 +78,10 @@ namespace Code.Gameplay.Duck.Behaviours
 			SetParent(_sceneParent, true);
 		}
 
-		public void Configure(Transform[] values, ParticleSystem dust, AudioSource source)
+		public void Configure(Transform[] values, ParticleSystem dust)
 		{
 			frames = values;
 			landingDust = dust;
-			audioSource = source;
 		}
 
 		private void StopTweens()
@@ -198,8 +189,6 @@ namespace Code.Gameplay.Duck.Behaviours
 
 			landingDust.Play(
 				withChildren: true);
-			audioSource.clip = _squeak;
-			audioSource.Play();
 			_motion = transform.DOPunchScale(Vector3.one * 0.08f, 0.2f, 5, 0.5f);
 		}
 
@@ -241,27 +230,6 @@ namespace Code.Gameplay.Duck.Behaviours
 				tween.Kill();
 
 			return null;
-		}
-
-		private static AudioClip CreateSqueak()
-		{
-			int sampleCount = Mathf.CeilToInt(AudioSampleRate * SqueakSeconds);
-			float[] samples = new float[sampleCount];
-			float phase = 0f;
-			for (int sample = 0; sample < sampleCount; sample++)
-			{
-				float progress = (float)sample / sampleCount;
-				float arc = 1f - Mathf.Abs(progress * 2f - 1f);
-				float frequency = Mathf.Lerp(650f, 1400f, arc);
-				phase += 2f * Mathf.PI * frequency / AudioSampleRate;
-				float envelope = Mathf.Sin(Mathf.PI * progress) * (1f - progress);
-				samples[sample] = (Mathf.Sin(phase) + Mathf.Sin(phase * 2f) * 0.25f)
-					* envelope * SqueakVolume;
-			}
-
-			AudioClip clip = AudioClip.Create("DuckSqueak", sampleCount, 1, AudioSampleRate, false);
-			clip.SetData(samples, 0);
-			return clip;
 		}
 
 		private void HandleState(DuckState state) => SetState(state, true);
