@@ -7,6 +7,7 @@ using Code.Infrastructure.Audio.Services;
 using Code.Infrastructure.CoreLoop;
 using Code.UI.Attendance;
 using Code.UI.Intro;
+using Code.UI.Tutorial;
 using Cysharp.Threading.Tasks;
 using Framework.UI.UiManagement.Elements.Windows;
 using UnityEngine;
@@ -81,10 +82,15 @@ namespace Code.UI.Launch
 
 		private async UniTask OpenIntro()
 		{
-			_isStarting = true;
-			SetInteractable(false);
 			await _uiService.CloseWindow<LaunchWindow>(withAnimation: false);
 			await _uiService.OpenWindow<IntroWindow>(
+				beforeOpen: window => window.Prepare(HandleIntroDismissed));
+		}
+
+		private async UniTask OpenTutorial()
+		{
+			await _uiService.CloseWindow<LaunchWindow>(withAnimation: false);
+			await _uiService.OpenWindow<TutorialWindow>(
 				beforeOpen: window => window.Prepare(StartExam));
 		}
 
@@ -98,6 +104,11 @@ namespace Code.UI.Launch
 		private async UniTask OpenAttendance()
 		{
 			await _uiService.CloseWindow<LaunchWindow>(withAnimation: false);
+			await ShowAttendance();
+		}
+
+		private async UniTask ShowAttendance()
+		{
 			await _uiService.OpenWindow<AttendanceWindow>();
 		}
 
@@ -106,23 +117,27 @@ namespace Code.UI.Launch
 			if (_isStarting)
 				return;
 
+			_isStarting = true;
+			SetInteractable(false);
+
+			if (_progressQuery.HasSeenIntro() == false)
+			{
+				OpenIntro().Forget();
+				return;
+			}
+
 			if (string.IsNullOrWhiteSpace(_progressQuery.GetPlayerName()))
 			{
-				_isStarting = true;
-				SetInteractable(false);
 				OpenAttendance().Forget();
 				return;
 			}
 
-			if (_progressQuery.HasSeenIntro())
-			{
-				_isStarting = true;
-				SetInteractable(false);
-				StartExam();
-				return;
-			}
+			OpenTutorial().Forget();
+		}
 
-			OpenIntro().Forget();
+		private void HandleIntroDismissed()
+		{
+			ShowAttendance().Forget();
 		}
 
 		private void HandleQuit()

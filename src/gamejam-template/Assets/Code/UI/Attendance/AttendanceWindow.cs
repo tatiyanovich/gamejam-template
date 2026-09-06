@@ -5,7 +5,7 @@ using Code.Gameplay.Meow.Queries;
 using Code.Gameplay.Progress.Services;
 using Code.Infrastructure.CoreLoop;
 using Code.Infrastructure.Microphone;
-using Code.UI.Intro;
+using Code.UI.Tutorial;
 using Cysharp.Threading.Tasks;
 using Framework.UI.UiManagement.Elements.Windows;
 using TMPro;
@@ -130,10 +130,10 @@ namespace Code.UI.Attendance
 				: _quietSeconds >= 0.5f ? "LOUDER!" : "Meow to test your mic";
 		}
 
-		private async UniTask OpenIntro()
+		private async UniTask OpenTutorial()
 		{
 			await _uiService.CloseWindow<AttendanceWindow>(withAnimation: false);
-			await _uiService.OpenWindow<IntroWindow>(
+			await _uiService.OpenWindow<TutorialWindow>(
 				beforeOpen: window => window.Prepare(StartExam));
 		}
 
@@ -175,7 +175,7 @@ namespace Code.UI.Attendance
 			studentName.interactable = false;
 			string playerName = string.IsNullOrWhiteSpace(studentName.text) ? "Nameless Kitten" : studentName.text;
 			_progressFactory.CreateSetPlayerNameRequest(playerName);
-			OpenIntro().Forget();
+			OpenTutorial().Forget();
 		}
 	}
 }
