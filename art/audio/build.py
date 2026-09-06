@@ -157,10 +157,6 @@ def synthesize_speech(temporary):
 	run("say", "-v", "Daniel", "-r", "275", "-o", str(temporary / "laugh_two.aiff"), "Ha! Ha ha!")
 	run("say", "-v", "Karen", "-r", "250", "-o", str(temporary / "laugh_three.aiff"), "Ha ha!")
 	run(
-		"say", "-v", "Lesya", "-r", "215", "-o", str(temporary / "intro_ukrainian.aiff"),
-		"Контрольна. Правило перше: не списувати. Правило друге: не м'явкати.",
-	)
-	run(
 		"say", "-v", "Samantha", "-r", "205", "-o", str(temporary / "time_warning.aiff"),
 		"Ten minutes left, class!",
 	)
@@ -261,7 +257,7 @@ def build_supplemental():
 		normalize_peak(path, -18.0 if path.parent == music else -6.0)
 
 
-def build_voice_over(temporary):
+def build_voice_over():
 	voice_over = OUTPUT / "VoiceOver"
 	voice_over.mkdir(parents=True, exist_ok=True)
 	render(
@@ -274,12 +270,8 @@ def build_voice_over(temporary):
 	)
 	ffmpeg(
 		"-stream_loop", "4", "-i", str(SOURCES / "meow_3.mp3"),
-		"-i", str(temporary / "intro_ukrainian.aiff"),
-		"-filter_complex",
-		"[0:a]atrim=duration=7,volume=0.16,highpass=f=250,lowpass=f=4200[meow];"
-		f"[1:a]volume=0.9,highpass=f=300,lowpass=f=3400[ua];[meow][ua]amix=inputs=2:normalize=0,"
-		f"{SFX_NORMALIZE}[out]",
-		"-map", "[out]", "-ar", str(SAMPLE_RATE), "-ac", "1", "-c:a", "pcm_s16le",
+		"-af", f"asetrate=42000,aresample=44100,atrim=duration=5.2,highpass=f=250,lowpass=f=4200,{SFX_NORMALIZE}",
+		"-ar", str(SAMPLE_RATE), "-ac", "1", "-c:a", "pcm_s16le",
 		str(voice_over / "intro_panel_2.wav"),
 	)
 	ffmpeg(
@@ -300,7 +292,7 @@ def main():
 		build_sfx(temporary)
 		build_music(temporary)
 		build_supplemental()
-		build_voice_over(temporary)
+		build_voice_over()
 		normalize_existing()
 
 
@@ -309,5 +301,7 @@ if __name__ == "__main__":
 		normalize_existing()
 	elif "--supplemental" in sys.argv:
 		build_supplemental()
+	elif "--voice-over" in sys.argv:
+		build_voice_over()
 	else:
 		main()
