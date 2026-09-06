@@ -8,7 +8,7 @@
 | Таблица | https://docs.google.com/spreadsheets/d/16S1OR1MXPm18jIZbqPbqVxVEikHrkhA_pou0qC3AXH0/edit |
 | Лист | `scores`, шапка `name \| answers \| timeSeconds \| grade \| dateUtc` |
 | Скрипт | [`Code.gs`](Code.gs) — единственный источник правды, правим здесь и копируем в Apps Script |
-| URL деплоя (`/exec`) | `https://script.google.com/macros/s/AKfycbwRgAcaRgD7gI5p3p-bDdFPsn-8oS_dW3dwgXE7-Gg9KY1W2mzS1H2L8_oy1zEPzJli/exec` — проверено `smoke.sh`, для `LeaderboardConfig` в C2 |
+| URL деплоя (`/exec`) | `https://script.google.com/macros/s/AKfycbzZYW1_67M4vCdjRPXMr_zIbCGIO_ryOejjWJA9COBOGhJbbYrJR9irm9GeixUnPO4/exec` — **New version** после дедуп-фикса; предыдущая `AKfycbwRg...` осталась на старом коде и отдавала дубли ников |
 
 > Таблица пересоздана (D‑37 отменяет первоначальную ссылку на `1a9t4uwVDtyPE-...`): исходная таблица принадлежала корпоративному
 > Google‑аккаунту, и Apps Script систематически возвращал 403/редирект на логин анонимным запросам, даже с манифестом

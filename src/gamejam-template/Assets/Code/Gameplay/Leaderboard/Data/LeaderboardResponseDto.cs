@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Code.Gameplay.Leaderboard.Data
 {
@@ -12,16 +13,29 @@ namespace Code.Gameplay.Leaderboard.Data
 
 		public LeaderboardResponse ToResponse()
 		{
-			LeaderboardEntry[] entries = new LeaderboardEntry[top?.Length ?? 0];
-
-			for (int index = 0; index < entries.Length; index++)
-				entries[index] = top[index].ToEntry();
-
 			return new LeaderboardResponse(
-				top: entries,
+				top: BestPerName(top),
 				rank: rank,
 				total: total,
 				isOffline: false);
+		}
+
+		private static IReadOnlyList<LeaderboardEntry> BestPerName(LeaderboardEntryDto[] entries)
+		{
+			List<LeaderboardEntry> result = new(entries?.Length ?? 0);
+			HashSet<string> seenNames = new();
+
+			for (int index = 0; index < (entries?.Length ?? 0); index++)
+			{
+				LeaderboardEntryDto entry = entries[index];
+
+				if (seenNames.Add(entry.name) == false)
+					continue;
+
+				result.Add(entry.ToEntry());
+			}
+
+			return result;
 		}
 	}
 }

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 192f997f6d7d1487484c8724fe529433, type: 3}
   m_Name: LeaderboardConfig
   m_EditorClassIdentifier: Assembly-CSharp::Code.Gameplay.Leaderboard.Configs.LeaderboardConfig
-  url: https://script.google.com/macros/s/AKfycbwRgAcaRgD7gI5p3p-bDdFPsn-8oS_dW3dwgXE7-Gg9KY1W2mzS1H2L8_oy1zEPzJli/exec
+  url: https://script.google.com/macros/s/AKfycbzZYW1_67M4vCdjRPXMr_zIbCGIO_ryOejjWJA9COBOGhJbbYrJR9irm9GeixUnPO4/exec
   requestTimeoutSeconds: 5
