@@ -22,6 +22,7 @@ MonoBehaviour:
     meowAlertChance: 0
     pencilSnapAlerts: 0
     staringEnabled: 0
+    faintPickCircle: 0
     pawWindow: 10
   - questionCount: 2
     teacherChecks: 1
@@ -32,6 +33,7 @@ MonoBehaviour:
     meowAlertChance: 0
     pencilSnapAlerts: 0
     staringEnabled: 0
+    faintPickCircle: 0
     pawWindow: 7
   - questionCount: 3
     teacherChecks: 1
@@ -42,6 +44,7 @@ MonoBehaviour:
     meowAlertChance: 0.35
     pencilSnapAlerts: 1
     staringEnabled: 1
+    faintPickCircle: 1
     pawWindow: 5
   - questionCount: 2
     teacherChecks: 1
@@ -52,6 +55,7 @@ MonoBehaviour:
     meowAlertChance: 0.6
     pencilSnapAlerts: 1
     staringEnabled: 1
+    faintPickCircle: 1
     pawWindow: 4
   - questionCount: 2
     teacherChecks: 1
@@ -62,4 +66,5 @@ MonoBehaviour:
     meowAlertChance: 0.9
     pencilSnapAlerts: 1
     staringEnabled: 1
+    faintPickCircle: 1
     pawWindow: 3

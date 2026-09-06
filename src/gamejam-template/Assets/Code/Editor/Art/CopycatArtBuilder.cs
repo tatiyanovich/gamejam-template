@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Code.Gameplay.Duck.Behaviours;
+using Code.Gameplay.Exam.Behaviours;
 using Code.Gameplay.Input.Behaviours;
 using Code.Gameplay.Neighbours.Behaviours;
 using Code.Gameplay.Teacher;
@@ -27,7 +28,9 @@ namespace Code.Editor.Art
 		private const string Content = "Assets/AddressableResources/Content/";
 		private const string Shared = "CopycatShared";
 		private const string UserInterface = "UI/Copycat";
+		private const int GlyphSlotCount = 6;
 		private static readonly string ArtRoot = Path.GetFullPath(Path.Combine(Application.dataPath, "../../../art"));
+		private static readonly Vector2 GlyphRowOffset = new Vector2(30f, 30f);
 		private static readonly string[] Folders =
 		{
 			"Classroom", "Characters/Kitten", "Characters/Teacher", "Characters/Neighbours",
@@ -75,6 +78,19 @@ namespace Code.Editor.Art
 			ConfigureNeighbourPrefab("Fluffy", "fluffy_head");
 			AssetDatabase.SaveAssets();
 			Debug.Log("E3: configured both neighbour views.");
+		}
+
+		[MenuItem("COPYCAT/Art/Build D6 Paper Views")]
+		public static void BuildPaperViews()
+		{
+			if (EditorApplication.isPlaying)
+				throw new InvalidOperationException("Stop Play Mode before building paper views.");
+
+			JObject layout = Read(6);
+			ConfigurePaperPrefab("PlayerPaper", layout, ConfigurePlayerPaperViews);
+			ConfigurePaperPrefab("NeighbourPaper", layout, ConfigureNeighbourPaperViews);
+			AssetDatabase.SaveAssets();
+			Debug.Log("D6: rebuilt paper glyph rows, scribbles and the wrapped question line.");
 		}
 
 		[MenuItem("COPYCAT/Art/Build E4 Duck View")]
@@ -464,6 +480,91 @@ namespace Code.Editor.Art
 			view.Configure(paw, head);
 		}
 
+		private static void ConfigurePaperPrefab(string name, JObject layout, Action<Transform, JObject> configure)
+		{
+			string path = Content + "Papers/" + name + ".prefab";
+			GameObject root = PrefabUtility.LoadPrefabContents(path);
+			try
+			{
+				configure(root.transform, layout);
+				PrefabUtility.SaveAsPrefabAsset(root, path);
+			}
+			finally
+			{
+				PrefabUtility.UnloadPrefabContents(root);
+			}
+		}
+
+		private static void ConfigurePlayerPaperViews(Transform paper, JObject layout)
+		{
+			JToken row = layout["playerPaper"]["answerRow"];
+			Transform glyphs = Replace(paper, "AnswerGlyphs", Local(Point(row["origin"]) + GlyphRowOffset));
+			BuildGlyphRow(glyphs, ((float)row["advance"] / 100f, (float)row["glyphScale"], false));
+
+			TextMeshPro question = paper.Find("question").GetComponent<TextMeshPro>();
+			question.textWrappingMode = TextWrappingModes.Normal;
+		}
+
+		private static void ConfigureNeighbourPaperViews(Transform paper, JObject layout)
+		{
+			JToken strokes = layout["neighbourPaper"]["strokes"];
+			Transform glyphs = Replace(paper, "StrokeGlyphs", Local(new Vector2(240f, (float)strokes["centerY"])));
+			BuildGlyphRow(glyphs, ((float)strokes["advance"] / 100f, (float)strokes["glyphScale"], true));
+
+			Remove(paper, "scribble_2");
+			Remove(paper, "scribble_4");
+			Layer(paper, "Papers", ("scribble_2", Local(new Vector2(300f, 108f)), 1)).transform.localScale
+				= Vector3.one * 0.5f;
+			Layer(paper, "Papers", ("scribble_4", Local(new Vector2(74f, 162f)), 1)).transform.localScale
+				= Vector3.one * 0.6f;
+		}
+
+		private static Transform Replace(Transform parent, string name, Vector3 position)
+		{
+			Remove(parent, name);
+			return Node(parent, name, position);
+		}
+
+		private static void Remove(Transform parent, string name)
+		{
+			Transform existing = parent.Find(name);
+			if (existing != null)
+				Object.DestroyImmediate(existing.gameObject);
+		}
+
+		private static void BuildGlyphRow(Transform parent, (float Advance, float Scale, bool Centered) settings)
+		{
+			SpriteRenderer[] slots = new SpriteRenderer[GlyphSlotCount];
+			for (int index = 0; index < slots.Length; index++)
+			{
+				slots[index] = Layer(parent, "Papers", ("glyph_arrow_up_normal", Vector3.zero, 1));
+				slots[index].name = "Glyph" + (index + 1);
+				slots[index].transform.localScale = Vector3.one * settings.Scale;
+				slots[index].gameObject.SetActive(false);
+			}
+
+			parent.gameObject.AddComponent<PaperGlyphRow>().Configure(new PaperGlyphRowDto
+			{
+				Slots = slots,
+				NormalGlyphs = Glyphs("normal"),
+				DoneGlyphs = Glyphs("done"),
+				WrongGlyphs = Glyphs("wrong"),
+				Advance = settings.Advance,
+				Centered = settings.Centered
+			});
+		}
+
+		private static Sprite[] Glyphs(string state)
+		{
+			string[] directions = { "up", "right", "down", "left" };
+			Sprite[] sprites = new Sprite[directions.Length];
+
+			for (int index = 0; index < directions.Length; index++)
+				sprites[index] = Sprite("Papers", "glyph_arrow_" + directions[index] + "_" + state);
+
+			return sprites;
+		}
+
 		private static void BuildPapers()
 		{
 			JObject layout = Read(6);
@@ -486,7 +587,7 @@ namespace Code.Editor.Art
 				("stamp_copied", Local(Point(layout["playerPaper"]["stamp"]["center"])), 2)).transform;
 			stamp.localEulerAngles = new Vector3(0f, 0f, 12f);
 			stamp.gameObject.SetActive(false);
-			Node(player, "AnswerGlyphs", Local(Point(layout["playerPaper"]["answerRow"]["origin"])));
+			ConfigurePlayerPaperViews(player, layout);
 			Save(player, "Papers");
 
 			Transform neighbour = Node(null, "NeighbourPaper", Vector3.zero);
@@ -506,7 +607,7 @@ namespace Code.Editor.Art
 				option.rectTransform.pivot = new Vector2(0.5f, 0.5f);
 				option.alignment = TextAlignmentOptions.Center;
 			}
-			Node(neighbour, "StrokeGlyphs", Local(new Vector2(240f, 246f)));
+			ConfigureNeighbourPaperViews(neighbour, layout);
 			Transform circle = Layer(neighbour, "Papers", ("glyph_pick_circle", Vector3.zero, 2)).transform;
 			circle.localScale = Vector3.one * 0.9f;
 			circle.gameObject.SetActive(false);

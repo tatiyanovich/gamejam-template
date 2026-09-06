@@ -142,7 +142,8 @@ namespace Code.Editor
 				GameplayWindow window = instance.GetComponent<GameplayWindow>();
 				control = window;
 				window.Construct(exam, bell, suspicion, meow, ducks,
-					fixture.Container.Resolve<IDuckFactory>(), teachers, neighbours, inputs, camera);
+					fixture.Container.Resolve<IDuckFactory>(), teachers, neighbours, inputs,
+					fixture.Container.Resolve<IDifficultyService>(), camera);
 				await window.Initialize("Overlay", "hud-playtest");
 				await control.Open(false, default);
 

@@ -6,6 +6,7 @@ using Code.Gameplay.Camera.Services;
 using Code.Gameplay.Duck;
 using Code.Gameplay.Duck.Behaviours;
 using Code.Gameplay.Duck.Queries;
+using Code.Gameplay.Difficulty.Services;
 using Code.Gameplay.Duck.Services;
 using Code.Gameplay.Exam;
 using Code.Gameplay.Exam.Behaviours;
@@ -76,6 +77,7 @@ namespace Code.UI.Gameplay
 		private ITeacherQuery _teacher;
 		private INeighbourQuery _neighbours;
 		private IInputQuery _input;
+		private IDifficultyService _difficulty;
 		private ICameraFactory _cameraFactory;
 
 		private static readonly Color OkTint = new Color32(79, 203, 122, 255);
@@ -102,6 +104,7 @@ namespace Code.UI.Gameplay
 			ITeacherQuery teacher,
 			INeighbourQuery neighbours,
 			IInputQuery input,
+			IDifficultyService difficulty,
 			ICameraFactory cameraFactory)
 		{
 			_exam = exam;
@@ -113,6 +116,7 @@ namespace Code.UI.Gameplay
 			_teacher = teacher;
 			_neighbours = neighbours;
 			_input = input;
+			_difficulty = difficulty;
 			_cameraFactory = cameraFactory;
 		}
 
@@ -237,7 +241,7 @@ namespace Code.UI.Gameplay
 			_duckView.Bind(_duck, _teacherView.transform);
 			_teacherView.Bind(_teacher);
 			_kittenView.Bind(_input, _exam, _teacher);
-			_papersView.Bind(_exam);
+			_papersView.Bind(_exam, _difficulty);
 			_worldViewsBound = true;
 		}
 

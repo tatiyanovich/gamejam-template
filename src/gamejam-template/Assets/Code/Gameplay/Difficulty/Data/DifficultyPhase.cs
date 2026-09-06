@@ -15,6 +15,7 @@ namespace Code.Gameplay.Difficulty.Data
 		[SF] private float meowAlertChance;
 		[SF] private bool pencilSnapAlerts;
 		[SF] private bool staringEnabled;
+		[SF] private bool faintPickCircle;
 		[SF] private float pawWindow;
 
 		public int QuestionCount => questionCount;
@@ -26,6 +27,7 @@ namespace Code.Gameplay.Difficulty.Data
 		public float MeowAlertChance => meowAlertChance;
 		public bool PencilSnapAlerts => pencilSnapAlerts;
 		public bool StaringEnabled => staringEnabled;
+		public bool FaintPickCircle => faintPickCircle;
 		public float PawWindow => pawWindow;
 	}
 }
