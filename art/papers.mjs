@@ -19,6 +19,17 @@ export function paperOutputs(root) {
       glyphs.push({ name, ...layout.glyphAsset });
     }
   }
+  const digitTemplate = read('glyph_digit');
+  for (const digit of layout.glyphDigits) {
+    for (const [state, colors] of Object.entries(layout.glyphStates)) {
+      const name = `glyph_digit_${digit}_${state}`;
+      sources[name] = digitTemplate
+        .replace('{{GLYPH_DIGIT}}', digit)
+        .replace('{{GLYPH_FILL}}', `{{${colors.fill}}}`)
+        .replace('{{GLYPH_INK}}', `{{${colors.ink}}}`);
+      glyphs.push({ name, ...layout.glyphAsset });
+    }
+  }
   const assets = [...layout.assets.slice(0, 2), ...glyphs, ...layout.assets.slice(2)];
   const neighbours = neighbourComposer(root);
   const { frame, label, deskTransform } = neighbours;
@@ -86,7 +97,8 @@ export function paperOutputs(root) {
     } else if (question.type === 'pick') {
       question.options.forEach((option, index) => {
         const [x, y] = sheet.pick.cells[index];
-        content += hand(x, y + 10, `${'ABCD'[index]}  ${option}`, sheet.pick.fontSize, 'text-anchor="middle"');
+        content += sprite(`glyph_digit_${index + 1}_normal`, x + sheet.pick.glyphOffsetX, y, sheet.pick.glyphScale);
+        content += hand(x + sheet.pick.textOffsetX, y + sheet.pick.textBaselineY, option, sheet.pick.fontSize);
       });
       if (!options.hideCircle) {
         const [x, y] = sheet.pick.cells[question.correct];
@@ -165,9 +177,20 @@ export function paperOutputs(root) {
     });
     ['normal', 'done', 'wrong'].forEach((state, row) => { glyphRow += label(0, 66 + row * 100, state, 18); });
     content += cell(1015, 920, '12 arrow glyphs / normal, done, wrong', glyphRow, 1);
-    content += cell(1505, 920, 'stamp_copied + glyph_pick_circle', `${sprite('stamp_copied', 230, 90, 1.2, -8)}${sprite('glyph_pick_circle', 230, 240, 1.4)}` + hand(230, 250, 'B  Betrayal', 40, 'text-anchor="middle"'), 1);
-    content += label(35, 1370, 'Glyphs 84x84, papers 640x460 / 480x360, stamp 300x120, ring 160x160, scribbles 240x40 - all PNG @2x, PPU 200, no trim. Import D11, gameplay binding A5/B3.', 21);
-    return frame(1920, 1400, content);
+    content += cell(1505, 920, 'stamp_copied + glyph_pick_circle',
+      `${sprite('stamp_copied', 230, 90, 1.2, -8)}${sprite('glyph_pick_circle', 230, 240, 1.4)}`
+      + sprite('glyph_digit_2_normal', 160, 240, .55) + hand(196, 250, 'Betrayal', 40), 1);
+    let digitRow = '';
+    layout.glyphDigits.forEach((digit, column) => {
+      Object.keys(layout.glyphStates).forEach((state, row) => {
+        digitRow += sprite(`glyph_digit_${digit}_${state}`, 100 + column * 105, 60 + row * 100);
+      });
+      digitRow += label(88 + column * 105, 335, digit, 20);
+    });
+    ['normal', 'done', 'wrong'].forEach((state, row) => { digitRow += label(0, 66 + row * 100, state, 18); });
+    content += cell(35, 1320, '12 pick digit glyphs / normal, done, wrong', digitRow, 1);
+    content += label(35, 1770, 'Glyphs 84x84, papers 640x460 / 480x360, stamp 300x120, ring 160x160, scribbles 240x40 - all PNG @2x, PPU 200, no trim. Import D11, gameplay binding A5/B3.', 21);
+    return frame(1920, 1800, content);
   }
   function layerSheet() {
     let content = '<rect width="1920" height="1000" fill="{{PAPER}}"/>' + label(30, 52, 'D6 / SPRITES AND PIVOTS', 32);
@@ -187,9 +210,10 @@ export function paperOutputs(root) {
     const [, width, height] = sources[asset.name].match(/viewBox="0 0 (\d+) (\d+)"/) || [];
     if (+width !== asset.size[0] || +height !== asset.size[1]) throw new Error(`D6 size mismatch: ${asset.name}`);
     if (/\{\{GLYPH_/.test(sources[asset.name])) throw new Error(`D6 unresolved glyph token: ${asset.name}`);
-    if (asset.name !== 'stamp_copied' && /<text\b/.test(sources[asset.name])) throw new Error(`D6 sprite contains text: ${asset.name}`);
+    const baked = asset.name === 'stamp_copied' || asset.name.startsWith('glyph_digit_');
+    if (baked === false && /<text\b/.test(sources[asset.name])) throw new Error(`D6 sprite contains text: ${asset.name}`);
   }
-  if (new Set(assets.map(asset => asset.name)).size !== 22) throw new Error('D6 requires 22 unique sprites');
+  if (new Set(assets.map(asset => asset.name)).size !== 34) throw new Error('D6 requires 34 unique sprites');
   const q1 = exam.questions.find(question => question.id === 1);
   const q6 = exam.questions.find(question => question.id === 6);
   const q8 = exam.questions.find(question => question.id === 8);

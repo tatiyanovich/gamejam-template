@@ -29,8 +29,11 @@ namespace Code.Editor.Art
 		private const string Shared = "CopycatShared";
 		private const string UserInterface = "UI/Copycat";
 		private const int GlyphSlotCount = 6;
+		private const int PickCellCount = 4;
 		private static readonly string ArtRoot = Path.GetFullPath(Path.Combine(Application.dataPath, "../../../art"));
 		private static readonly Vector2 GlyphRowOffset = new Vector2(30f, 30f);
+		private static readonly string[] GlyphStates = { "normal", "done", "wrong" };
+		private static readonly string[] GlyphDirections = { "up", "right", "down", "left" };
 		private static readonly string[] Folders =
 		{
 			"Classroom", "Characters/Kitten", "Characters/Teacher", "Characters/Neighbours",
@@ -154,18 +157,25 @@ namespace Code.Editor.Art
 				List<JToken> assets = (layout[day == 2 ? "layers" : "assets"]).ToList();
 				if (day == 6)
 				{
-					foreach (string direction in new[] { "up", "right", "down", "left" })
-					foreach (string state in new[] { "normal", "done", "wrong" })
-					{
-						JObject glyph = (JObject)layout["glyphAsset"].DeepClone();
-						glyph["name"] = $"glyph_arrow_{direction}_{state}";
-						assets.Add(glyph);
-					}
+					foreach (string direction in GlyphDirections)
+					foreach (string state in GlyphStates)
+						assets.Add(GlyphAsset(layout, $"glyph_arrow_{direction}_{state}"));
+
+					foreach (JToken digit in layout["glyphDigits"])
+					foreach (string state in GlyphStates)
+						assets.Add(GlyphAsset(layout, $"glyph_digit_{(string)digit}_{state}"));
 				}
 
 				foreach (JToken asset in assets)
 					ImportTexture(Folders[day - 2], asset);
 			}
+		}
+
+		private static JObject GlyphAsset(JObject layout, string name)
+		{
+			JObject glyph = (JObject)layout["glyphAsset"].DeepClone();
+			glyph["name"] = name;
+			return glyph;
 		}
 
 		private static void ImportTexture(string folder, JToken asset)
@@ -511,12 +521,30 @@ namespace Code.Editor.Art
 			Transform glyphs = Replace(paper, "StrokeGlyphs", Local(new Vector2(240f, (float)strokes["centerY"])));
 			BuildGlyphRow(glyphs, ((float)strokes["advance"] / 100f, (float)strokes["glyphScale"], true));
 
+			BuildPickCells(paper, layout["neighbourPaper"]["pick"]);
+
 			Remove(paper, "scribble_2");
 			Remove(paper, "scribble_4");
 			Layer(paper, "Papers", ("scribble_2", Local(new Vector2(300f, 108f)), 1)).transform.localScale
 				= Vector3.one * 0.5f;
 			Layer(paper, "Papers", ("scribble_4", Local(new Vector2(74f, 162f)), 1)).transform.localScale
 				= Vector3.one * 0.6f;
+		}
+
+		private static void BuildPickCells(Transform paper, JToken pick)
+		{
+			for (int index = 0; index < PickCellCount; index++)
+			{
+				Remove(paper, "Pick" + (index + 1));
+				Transform cell = Replace(paper, "PickCell" + (index + 1), Local(Point(pick["cells"][index])));
+				SpriteRenderer glyph = Layer(cell, "Papers", ("glyph_digit_" + (index + 1) + "_normal",
+					Local(new Vector2((float)pick["glyphOffsetX"], 0f)), 1));
+				glyph.transform.localScale = Vector3.one * (float)pick["glyphScale"];
+				Text(cell, "PickOption" + (index + 1), ("",
+					new Vector2((float)pick["textOffsetX"], (float)pick["textBaselineY"]),
+					(float)pick["fontSize"], 180f, 1, "PatrickHand-Regular", "PENCIL_INK"));
+				cell.gameObject.SetActive(false);
+			}
 		}
 
 		private static Transform Replace(Transform parent, string name, Vector3 position)
@@ -599,14 +627,6 @@ namespace Code.Editor.Art
 				"PatrickHand-Regular", "PENCIL_INK"));
 			word.rectTransform.pivot = new Vector2(0.5f, 0.5f);
 			word.alignment = TextAlignmentOptions.Baseline;
-			for (int index = 0; index < 4; index++)
-			{
-				TextMeshPro option = Text(neighbour, "Pick" + (index + 1), ("",
-					Point(layout["neighbourPaper"]["pick"]["cells"][index]), 34f, 180f, 1,
-					"PatrickHand-Regular", "PENCIL_INK"));
-				option.rectTransform.pivot = new Vector2(0.5f, 0.5f);
-				option.alignment = TextAlignmentOptions.Center;
-			}
 			ConfigureNeighbourPaperViews(neighbour, layout);
 			Transform circle = Layer(neighbour, "Papers", ("glyph_pick_circle", Vector3.zero, 2)).transform;
 			circle.localScale = Vector3.one * 0.9f;

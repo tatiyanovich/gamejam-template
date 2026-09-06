@@ -138,7 +138,11 @@
         ]
       ],
       "fontSize": 34,
-      "circleScale": 0.9
+      "circleScale": 0.9,
+      "glyphScale": 0.5,
+      "glyphOffsetX": -72,
+      "textOffsetX": -42,
+      "textBaselineY": 10
     },
     "word": {
       "centerX": 246,
@@ -184,6 +188,12 @@
       "ink": "PAPER"
     }
   },
+  "glyphDigits": [
+    "1",
+    "2",
+    "3",
+    "4"
+  ],
   "glyphDirections": {
     "up": 0,
     "right": 90,

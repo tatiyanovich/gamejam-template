@@ -2,16 +2,16 @@
   {
     "name": "state_sheet",
     "width": 1920,
-    "height": 1400,
+    "height": 1800,
     "scale": 1,
-    "sha256": "3a7c4b9ac2da2ce5e4c3ef9adb4d6ad9ee8853a714e1f8bd431ef6c4b63084cd"
+    "sha256": "e901b4cb548037c0d055ea1f2d98a169a6513c89db934e131103d2c73f27cdcc"
   },
   {
     "name": "layer_sheet",
     "width": 1920,
     "height": 1000,
     "scale": 1,
-    "sha256": "b4ebdc41ba5e3adc3f3cafadf8ec15fe802120b64c91f5a4f7283205f3c101d1"
+    "sha256": "c41c6bb76f760f00ec853bb3dde1876a059b6aa91cb5559b026e00f534842f69"
   },
   {
     "name": "classroom_strokes",
@@ -32,7 +32,7 @@
     "width": 1920,
     "height": 1080,
     "scale": 1,
-    "sha256": "978945e13a7452a8ee12774c1b10fe652bbbc3762dec409708e197bd29661a28"
+    "sha256": "54b9096d39d0c1d32af1a51e401d68a3ecd54a87e3e90867a0396e301dbda8c7"
   },
   {
     "name": "classroom_copied",

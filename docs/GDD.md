@@ -60,7 +60,7 @@ Main Menu ──Play──▶ Attendance Sheet (имя + тест микрофо
 | Мяукнуть | **Микрофон** (громкость выше порога) / `M` фолбэк | Порог такой, что обычная речь не срабатывает (§8) |
 | Наклониться (списывать) | **Удерживать `SPACE`** | Пока не наклонился — ввод ответа не засчитывается |
 | Ввод ответа: Strokes | `← ↑ → ↓` или `W A S D` (физические клавиши) | Работает на любой раскладке |
-| Ввод ответа: Pick | `1` `2` `3` `4` | Соответствуют вариантам A B C D |
+| Ввод ответа: Pick | `1` `2` `3` `4` | Варианты на листе соседа помечены теми же цифрами |
 | Ввод ответа: Word | Буквы `A–Z` (физические клавиши) | Слова никогда не содержат `M` и `Q` |
 | Бросить утку | `Q` или клик по утке | Только когда утка на парте |
 | Пропустить интро | Клик / `Esc` / `Space` | |
@@ -91,8 +91,9 @@ Main Menu ──Play──▶ Attendance Sheet (имя + тест микрофо
 - Ввод: стрелки/WASD в порядке. Верный штрих — квадрат зеленеет. Ошибка — текущий квадрат мигает красным, прогресс **не** сбрасывается.
 - Длина по фазе: 2–3 → 3 → 4 → 5 → 6.
 
-### 6.2 Pick (тест A/B/C/D) — «подсмотри, что обвёл»
-- Лист соседа: четыре варианта `A B C D` (короткие смешные слова), один обведён карандашным кругом.
+### 6.2 Pick (тест 1/2/3/4) — «подсмотри, что обвёл»
+- Лист соседа: четыре варианта, помеченные глифами‑цифрами `1 2 3 4` (те же коробочки, что у стрелок Strokes),
+  рядом с каждой — короткое смешное слово; один вариант обведён карандашным кругом.
 - Ввод: одно нажатие `1–4`. Верно — сразу COPIED. Ошибка — `+8`, круг у соседа на 0.4 с исчезает (надо снова вглядеться), потом появляется.
 - Самый быстрый тип. Хитрость с фазы 3: обведённый круг **бледный** и заметен только в наклоне.
 
@@ -270,11 +271,11 @@ Distracted: учительница подбирает её в тот же мом
 | 1 | 1 | Strokes | L | How many lives does a cat claim to have? | `↑ →` |
 | 2 | 1 | Strokes | L | Complete: cat + empty cardboard box = ? | `← ↑ →` |
 | 3 | 1 | Strokes | L | Who discovered gravity by knocking a cup off? | `↓ → ↑` |
-| 4 | 2 | Pick | R | Best time for zoomies? | A 3 AM ✓ · B Noon · C Never · D Tuesday |
+| 4 | 2 | Pick | R | Best time for zoomies? | `1` 3 AM ✓ · `2` Noon · `3` Never · `4` Tuesday |
 | 5 | 2 | Strokes | L | Translate 'pspspsps' into formal Cat Latin. | `↑ ← ↓` |
 | 6 | 3 | Word | R | What sings outside your window at 5 AM? | `BIRD` |
 | 7 | 3 | Strokes | L | State the optimal nap-to-chaos ratio. | `↓ ← ↑ →` |
-| 8 | 3 | Pick | R | Why is the laser dot impossible to catch? | A Physics · B Betrayal ✓ · C Lag · D Magic |
+| 8 | 3 | Pick | R | Why is the laser dot impossible to catch? | `1` Physics · `2` Betrayal ✓ · `3` Lag · `4` Magic |
 | 9 | 4 | Strokes | L | Define cardboard-box quantum mechanics. | `← ↑ → ↓ ←` |
 | 10 | 4 | Word | R | The engine sound of a happy cat? | `PURRS` |
 | 11 | 5 | Word | L | Name the forbidden green plant of joy. | `CATNIP` |

@@ -15,6 +15,7 @@ namespace Code.Gameplay.Exam.Behaviours
 		{
 			public NeighbourSide Side;
 			public TMP_Text Word;
+			public Transform[] PickCells;
 			public TMP_Text[] Picks;
 			public Transform PickCircle;
 			public PaperGlyphRow Strokes;
@@ -39,7 +40,6 @@ namespace Code.Gameplay.Exam.Behaviours
 		private const string TypedColorTag = "<color=#4FCB7A>";
 		private const string ColorEndTag = "</color>";
 		private const string BlankAnswer = "____";
-		private const string PickLetters = "ABCD";
 		private const float WrongSeconds = 0.4f;
 
 		public void Bind(IExamQuery examQuery, IDifficultyService difficultyService)
@@ -106,10 +106,15 @@ namespace Code.Gameplay.Exam.Behaviours
 				{
 					Side = transform.position.x < 0f ? NeighbourSide.Left : NeighbourSide.Right,
 					Word = FindText(transform, "Word"),
+					PickCells = new[]
+					{
+						FindTransform(transform, "PickCell1"), FindTransform(transform, "PickCell2"),
+						FindTransform(transform, "PickCell3"), FindTransform(transform, "PickCell4")
+					},
 					Picks = new[]
 					{
-						FindText(transform, "Pick1"), FindText(transform, "Pick2"),
-						FindText(transform, "Pick3"), FindText(transform, "Pick4")
+						FindText(transform, "PickOption1"), FindText(transform, "PickOption2"),
+						FindText(transform, "PickOption3"), FindText(transform, "PickOption4")
 					},
 					PickCircle = FindTransform(transform, "glyph_pick_circle"),
 					Strokes = FindTransform(transform, "StrokeGlyphs")?.GetComponent<PaperGlyphRow>()
@@ -196,12 +201,14 @@ namespace Code.Gameplay.Exam.Behaviours
 					? SpacedWord(question.Word, _examQuery.GetAnswerProgress())
 					: string.Empty;
 
-			for (int index = 0; index < paper.Picks.Length; index++)
+			bool picking = visible && question.Type == QuestionType.Pick;
+			for (int index = 0; index < paper.PickCells.Length; index++)
 			{
-				if (paper.Picks[index] != null)
-					paper.Picks[index].text = visible && question.Type == QuestionType.Pick
-						? $"{PickLetters[index]}  {question.Options[index]}"
-						: string.Empty;
+				if (paper.PickCells[index] != null)
+					paper.PickCells[index].gameObject.SetActive(picking);
+
+				if (picking && paper.Picks[index] != null)
+					paper.Picks[index].text = question.Options[index];
 			}
 
 			SetPickCircle(paper, question, visible);
@@ -226,9 +233,9 @@ namespace Code.Gameplay.Exam.Behaviours
 			if (circled == false)
 				return;
 
-			TMP_Text cell = paper.Picks[question.CorrectOptionIndex];
+			Transform cell = paper.PickCells[question.CorrectOptionIndex];
 			if (cell != null)
-				paper.PickCircle.localPosition = cell.transform.localPosition;
+				paper.PickCircle.localPosition = cell.localPosition;
 
 			SpriteRenderer circle = paper.PickCircle.GetComponent<SpriteRenderer>();
 			DifficultyPhase phase = _difficultyService.GetPhase(_examQuery.GetCurrentQuestionIndex());

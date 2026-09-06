@@ -98,6 +98,90 @@
     "sha256": "ef6a49e52ca0d29fa140ad5d3087c38c9df333ea7eb80b13856359dcb1fc2861"
   },
   {
+    "name": "glyph_digit_1_normal",
+    "width": 168,
+    "height": 168,
+    "scale": 2,
+    "sha256": "5b003cd56c7b07dac0a8df176a61a48b9e4b8b5a587191c8bbd47a3a1d0daa40"
+  },
+  {
+    "name": "glyph_digit_1_done",
+    "width": 168,
+    "height": 168,
+    "scale": 2,
+    "sha256": "4f549d86ed6eca0624abbd80af781063dff72bca787df83a8d99b2b89c6d5582"
+  },
+  {
+    "name": "glyph_digit_1_wrong",
+    "width": 168,
+    "height": 168,
+    "scale": 2,
+    "sha256": "70d85b5872ae9be4de352c38aabbc4a26e3babc83c7b9b4c3a01ba7a5fd295b5"
+  },
+  {
+    "name": "glyph_digit_2_normal",
+    "width": 168,
+    "height": 168,
+    "scale": 2,
+    "sha256": "2e88803e78bde7f35356c4412d69aed1666ec992c4defe6fd073e14bb674a08b"
+  },
+  {
+    "name": "glyph_digit_2_done",
+    "width": 168,
+    "height": 168,
+    "scale": 2,
+    "sha256": "2a01fea32c11a98a8ac7f725daeb538d0d3d2f05410f43f029b88c866eb2739d"
+  },
+  {
+    "name": "glyph_digit_2_wrong",
+    "width": 168,
+    "height": 168,
+    "scale": 2,
+    "sha256": "273d3f70dcee90cfe2e0e475f576e77d9ab5f8e77fb387824e1e709db3b4415f"
+  },
+  {
+    "name": "glyph_digit_3_normal",
+    "width": 168,
+    "height": 168,
+    "scale": 2,
+    "sha256": "22b4abc4b51bd9bc14fd372acd062069314a39d903c1df059179cf05aa66b175"
+  },
+  {
+    "name": "glyph_digit_3_done",
+    "width": 168,
+    "height": 168,
+    "scale": 2,
+    "sha256": "128c657b864e92dff69e881f54dcd707c6cc8145782ab41743000bfedb8bca24"
+  },
+  {
+    "name": "glyph_digit_3_wrong",
+    "width": 168,
+    "height": 168,
+    "scale": 2,
+    "sha256": "56714026775bfcece5781755a7e94daf16a75178c6373f1357a476702de6b73f"
+  },
+  {
+    "name": "glyph_digit_4_normal",
+    "width": 168,
+    "height": 168,
+    "scale": 2,
+    "sha256": "8adb78d776630f2a9b17099d2248a6f498fa32e22f1a86aa5500fefef7bbc2d2"
+  },
+  {
+    "name": "glyph_digit_4_done",
+    "width": 168,
+    "height": 168,
+    "scale": 2,
+    "sha256": "7dac308e6c006200b8b53460ac864f804f44f9e4cf8ed157a5be021828a46764"
+  },
+  {
+    "name": "glyph_digit_4_wrong",
+    "width": 168,
+    "height": 168,
+    "scale": 2,
+    "sha256": "121f72c7f6bfa9d8681e55a23213fd8844b7ba9eb3c292d27bff76bf32ca4aa5"
+  },
+  {
     "name": "glyph_pick_circle",
     "width": 440,
     "height": 200,

@@ -37,10 +37,10 @@
         <clipPath id="d8-546-d5-0-d2-5-desk-clip">
             <path fill="#000000" stroke="none" d="M 79 16 Q 309 5 542 11 L 614 219 Q 307 232 6 221 Z"/>
         </clipPath>
-        <clipPath id="d8-546-d6-87-sheet-clip">
+        <clipPath id="d8-546-d6-120-sheet-clip">
             <path fill="#000000" stroke="none" d="M 66 72 Q 67 62 77 62 L 412 54 Q 422 54 423 64 L 478 328 Q 480 338 470 338 L 12 346 Q 2 346 3 336 L 58 80 Q 59 72 66 72 Z"/>
         </clipPath>
-        <clipPath id="d8-546-d6-92-sheet-clip">
+        <clipPath id="d8-546-d6-125-sheet-clip">
             <path fill="#000000" stroke="none" d="M 66 72 Q 67 62 77 62 L 412 54 Q 422 54 423 64 L 478 328 Q 480 338 470 338 L 12 346 Q 2 346 3 336 L 58 80 Q 59 72 66 72 Z"/>
         </clipPath>
         <clipPath id="d8-546-d5-18-shade">
@@ -55,13 +55,13 @@
         <clipPath id="d8-546-d5-0-d2-6-desk-clip">
             <path fill="#000000" stroke="none" d="M 145 12 Q 954 0 1772 14 L 1958 321 Q 961 350 -40 319 Z"/>
         </clipPath>
-        <clipPath id="d8-546-d6-95-sheet-clip">
+        <clipPath id="d8-546-d6-128-sheet-clip">
             <path fill="#000000" stroke="none" d="M 52 34 Q 54 22 66 22 L 596 12 Q 608 12 609 24 L 638 428 Q 639 440 627 441 L 14 452 Q 2 452 2 440 L 40 44 Q 41 34 52 34 Z"/>
         </clipPath>
         <clipPath id="d8-546-d5-30-kitten-back-clip">
             <path fill="#000000" stroke="none" d="M 107 150 L 95 40 Q 91 14 110 25 L 184 81 Q 229 67 274 82 L 344 31 Q 365 16 363 44 L 355 150 Q 384 195 348 234 Q 321 268 235 267 Q 141 264 113 232 Q 76 194 107 150 Z"/>
         </clipPath>
-        <clipPath id="d8-546-d6-wedge-97">
+        <clipPath id="d8-546-d6-wedge-130">
             <path fill="#000000" stroke="none" d="M 80 80 L 80 -10 C 118.991035 -10.001204 153.54826 15.104999 165.59756 52.187534 C 177.64687 89.27008 164.4474 129.89394 132.9028 152.81201 C 101.35819 175.73007 58.643738 175.72925 27.1 152.81 Z"/>
         </clipPath>
         <clipPath id="d8-547-duck-clip">
@@ -417,7 +417,7 @@
                 <g>
                     <path fill="#fff6e3" stroke="#2a1f1a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" d="M 66 72 Q 67 62 77 62 L 412 54 Q 422 54 423 64 L 478 328 Q 480 338 470 338 L 12 346 Q 2 346 3 336 L 58 80 Q 59 72 66 72 Z"/>
                 </g>
-                <g clip-path="url(#d8-546-d6-87-sheet-clip)">
+                <g clip-path="url(#d8-546-d6-120-sheet-clip)">
                     <g opacity="0.5">
                         <path fill="#000000" stroke="#8c8c8c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M 72 130 L 426 122 M 64 172 Q 246 168 434 160 M 54 222 L 444 210 M 42 270 Q 246 262 458 252 M 32 314 L 470 300"/>
                     </g>
@@ -436,7 +436,7 @@
             <g transform="matrix(0.75 0 0 0.75 175.5 214.5)">
                 <g>
                     <path fill="#4fcb7a" stroke="#2a1f1a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" d="M 14 7 L 70 5 Q 78 5 78 13 L 79 70 Q 79 78 71 78 L 13 79 Q 5 79 5 71 L 6 15 Q 6 7 14 7 Z"/>
-                    <g id="d8-546-d6-90-arrow">
+                    <g id="d8-546-d6-123-arrow">
                         <path fill="none" stroke="#fff6e3" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" d="M 42 64 L 42 24"/>
                         <path fill="none" stroke="#fff6e3" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" d="M 26 40 L 42 22 L 58 40"/>
                     </g>
@@ -445,7 +445,7 @@
             <g transform="matrix(0.75 0 0 0.75 241.5 214.5)">
                 <g>
                     <path fill="#fff6e3" stroke="#2a1f1a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" d="M 14 7 L 70 5 Q 78 5 78 13 L 79 70 Q 79 78 71 78 L 13 79 Q 5 79 5 71 L 6 15 Q 6 7 14 7 Z"/>
-                    <g id="d8-546-d6-91-arrow" transform="matrix(0 1 -1 0 84 0)">
+                    <g id="d8-546-d6-124-arrow" transform="matrix(0 1 -1 0 84 0)">
                         <path fill="none" stroke="#3b3a8c" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" d="M 42 64 L 42 24"/>
                         <path fill="none" stroke="#3b3a8c" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" d="M 26 40 L 42 22 L 58 40"/>
                     </g>
@@ -465,7 +465,7 @@
                 <g>
                     <path fill="#fff6e3" stroke="#2a1f1a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" d="M 66 72 Q 67 62 77 62 L 412 54 Q 422 54 423 64 L 478 328 Q 480 338 470 338 L 12 346 Q 2 346 3 336 L 58 80 Q 59 72 66 72 Z"/>
                 </g>
-                <g clip-path="url(#d8-546-d6-92-sheet-clip)">
+                <g clip-path="url(#d8-546-d6-125-sheet-clip)">
                     <g opacity="0.5">
                         <path fill="#000000" stroke="#8c8c8c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M 72 130 L 426 122 M 64 172 Q 246 168 434 160 M 54 222 L 444 210 M 42 270 Q 246 262 458 252 M 32 314 L 470 300"/>
                     </g>
@@ -597,7 +597,7 @@
             <g>
                 <path fill="#fff6e3" stroke="#2a1f1a" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" d="M 52 34 Q 54 22 66 22 L 596 12 Q 608 12 609 24 L 638 428 Q 639 440 627 441 L 14 452 Q 2 452 2 440 L 40 44 Q 41 34 52 34 Z"/>
             </g>
-            <g clip-path="url(#d8-546-d6-95-sheet-clip)">
+            <g clip-path="url(#d8-546-d6-128-sheet-clip)">
                 <g opacity="0.35">
                     <path fill="#000000" stroke="#e84c4c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M 86 20 L 74 452"/>
                 </g>
@@ -635,7 +635,7 @@
         <g transform="matrix(0.72 0 0 0.72 205.76 287.76)">
             <g>
                 <path fill="#4fcb7a" stroke="#2a1f1a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" d="M 14 7 L 70 5 Q 78 5 78 13 L 79 70 Q 79 78 71 78 L 13 79 Q 5 79 5 71 L 6 15 Q 6 7 14 7 Z"/>
-                <g id="d8-546-d6-96-arrow">
+                <g id="d8-546-d6-129-arrow">
                     <path fill="none" stroke="#fff6e3" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" d="M 42 64 L 42 24"/>
                     <path fill="none" stroke="#fff6e3" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" d="M 26 40 L 42 22 L 58 40"/>
                 </g>
@@ -667,7 +667,7 @@
             <path fill="none" stroke="#2a1f1a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" d="M 156 80 C 156 121.97364 121.97364 156 80 156 C 38.02636 156 4 121.97364 4 80 C 4 38.02636 38.02636 4 80 4 C 121.97364 4 156 38.02636 156 80 Z"/>
             <path fill="none" stroke="#2a1f1a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" d="M 128 80 C 128 106.509674 106.509674 128 80 128 C 53.490334 128 32 106.509674 32 80 C 32 53.490334 53.490334 32 80 32 C 106.509674 32 128 53.490334 128 80 Z"/>
         </g>
-        <g clip-path="url(#d8-546-d6-wedge-97)">
+        <g clip-path="url(#d8-546-d6-wedge-130)">
             <g>
                 <path fill="none" stroke="#ffd23f" stroke-width="26" stroke-linecap="round" stroke-linejoin="round" d="M 142 80 C 142 114.241646 114.241646 142 80 142 C 45.758347 142 18 114.241646 18 80 C 18 45.758347 45.758347 18 80 18 C 114.241646 18 142 45.758347 142 80 Z"/>
                 <path fill="none" stroke="#2a1f1a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" d="M 156 80 C 156 121.97364 121.97364 156 80 156 C 38.02636 156 4 121.97364 4 80 C 4 38.02636 38.02636 4 80 4 C 121.97364 4 156 38.02636 156 80 Z"/>
