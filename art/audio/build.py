@@ -198,7 +198,6 @@ def build_sfx(temporary):
 	render(SOURCES / "school_ring.wav", effects / "school_bell.wav", "atrim=duration=3.7")
 	render(temporary / "teacher_footsteps.wav", effects / "teacher_footsteps.wav", "anull")
 	render(temporary / "time_warning.aiff", effects / "time_warning.wav", "highpass=f=240,lowpass=f=3600")
-
 	ffmpeg(
 		"-i", str(temporary / "laugh_one.aiff"),
 		"-i", str(temporary / "laugh_two.aiff"),
@@ -234,6 +233,32 @@ def build_music(temporary):
 		"-map", "[out]", "-t", "60", "-ar", str(SAMPLE_RATE), "-ac", "2", "-c:a", "pcm_s16le",
 		str(music / "classroom_urgent.wav"),
 	)
+
+
+def build_supplemental():
+	effects = OUTPUT / "Effects"
+	music = OUTPUT / "Music"
+	OUTPUT.mkdir(parents=True, exist_ok=True)
+	render(SOURCES / "button_1.wav", effects / "ui_click.wav", "apad=pad_dur=0.06,atrim=duration=0.075")
+	render(SOURCES / "win_2.mp3", effects / "result_passed.wav", "atrim=duration=2.05")
+	render(SOURCES / "angrycat.mp3", effects / "result_caught.wav", "atrim=duration=3.2")
+	render(SOURCES / "fail_6.mp3", effects / "result_bell.wav", "atrim=duration=1.95")
+	music.mkdir(parents=True, exist_ok=True)
+	ffmpeg(
+		"-i", str(SOURCES / "main menu_3.wav"),
+		"-af", f"atrim=duration=60,{MUSIC_NORMALIZE}",
+		"-t", "60", "-ar", str(SAMPLE_RATE), "-ac", "2", "-c:a", "pcm_s16le",
+		str(music / "main_menu.wav"),
+	)
+
+	for path in (
+		effects / "ui_click.wav",
+		effects / "result_passed.wav",
+		effects / "result_caught.wav",
+		effects / "result_bell.wav",
+		music / "main_menu.wav",
+	):
+		normalize_peak(path, -18.0 if path.parent == music else -6.0)
 
 
 def build_voice_over(temporary):
@@ -274,6 +299,7 @@ def main():
 		synthesize_speech(temporary)
 		build_sfx(temporary)
 		build_music(temporary)
+		build_supplemental()
 		build_voice_over(temporary)
 		normalize_existing()
 
@@ -281,5 +307,7 @@ def main():
 if __name__ == "__main__":
 	if "--normalize-existing" in sys.argv:
 		normalize_existing()
+	elif "--supplemental" in sys.argv:
+		build_supplemental()
 	else:
 		main()

@@ -16,6 +16,10 @@ namespace Code.Infrastructure.Audio
 		ClockTick = 11,
 		SchoolBell = 12,
 		TeacherFootsteps = 13,
-		TimeWarning = 14
+		TimeWarning = 14,
+		UiClick = 15,
+		ResultPassed = 16,
+		ResultCaught = 17,
+		ResultBell = 18
 	}
 }

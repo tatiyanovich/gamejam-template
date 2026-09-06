@@ -246,6 +246,7 @@ GameObject:
   - component: {fileID: 2345147365057738176}
   - component: {fileID: 5527366354020333769}
   - component: {fileID: 1674501208866503016}
+  - component: {fileID: 1523691811735793878}
   m_Layer: 0
   m_Name: QuitButton
   m_TagString: Untagged
@@ -325,6 +326,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp-firstpass::Framework.UI.UiManagement.Elements.Buttons.Button
   text: {fileID: 5049025969325701724}
   dragThreshold: 100
+--- !u!114 &1523691811735793878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5293107805900180543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df49d2b3eb3ea409d89e4675c6a64a35, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::Code.UI.Audio.ButtonClickAudio
+  sound: 15
 --- !u!1 &5674674042401584887
 GameObject:
   m_ObjectHideFlags: 0

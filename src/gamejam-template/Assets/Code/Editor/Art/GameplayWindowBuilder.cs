@@ -1,4 +1,5 @@
 using System;
+using Code.UI.Audio;
 using Code.UI.Gameplay;
 using TMPro;
 using UnityEditor;
@@ -60,6 +61,7 @@ namespace Code.Editor.Art
 				duckHitArea.raycastTarget = true;
 				Button duckButton = duckHitArea.gameObject.AddComponent<Button>();
 				duckButton.targetGraphic = duck;
+				duckHitArea.gameObject.AddComponent<ButtonClickAudio>();
 				RectTransform bubble = Rectangle(layout, "TeacherBubble", new Rect(1140f, 378f, 260f, 112f));
 				Picture(bubble, "UI/Copycat/panel_paper_9slice", new Rect(0f, 0f, 260f, 112f));
 				TMP_Text speech = Label(bubble, "", new Rect(16f, 10f, 228f, 92f));
@@ -121,6 +123,7 @@ namespace Code.Editor.Art
 			label.fontSize = 46f;
 			Button button = circle.gameObject.AddComponent<Button>();
 			button.targetGraphic = circle;
+			circle.gameObject.AddComponent<ButtonClickAudio>();
 			return button;
 		}
 

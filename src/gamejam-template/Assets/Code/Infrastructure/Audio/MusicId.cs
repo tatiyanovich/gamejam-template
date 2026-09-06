@@ -2,7 +2,8 @@ namespace Code.Infrastructure.Audio
 {
 	public enum MusicId
 	{
-		Classroom = 0,
-		ClassroomUrgent = 1
+		MainMenu = 0,
+		Classroom = 1,
+		ClassroomUrgent = 2
 	}
 }

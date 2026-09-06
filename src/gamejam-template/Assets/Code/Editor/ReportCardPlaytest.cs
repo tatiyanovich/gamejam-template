@@ -11,6 +11,7 @@ using Code.Gameplay.Progress.Queries;
 using Code.Gameplay.Progress.Services;
 using Code.Gameplay.Teacher.Queries;
 using Code.Gameplay.Teacher.Services;
+using Code.Infrastructure.Audio.Services;
 using Code.Storage.SaveFiles;
 using Code.UI.Fade;
 using Code.UI.Gameplay;
@@ -79,6 +80,7 @@ namespace Code.Editor
 				PlaytestCoreLoop coreLoop = new();
 				PlaytestInput input = new();
 				IUiService uiService = ProjectContext.Instance.Container.Resolve<IUiService>();
+				IAudioService audioService = ProjectContext.Instance.Container.Resolve<IAudioService>();
 
 				instance = Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>(Prefab));
 				instance.transform.SetParent(live.transform.parent, false);
@@ -86,7 +88,7 @@ namespace Code.Editor
 				ResultWindow window = instance.GetComponent<ResultWindow>();
 				control = window;
 				window.Construct(exam, teachers, ducks, progress, new ExamGradeService(), leaderboard, input,
-					coreLoop, coreLoop);
+					coreLoop, coreLoop, audioService);
 				await window.Initialize("Overlay", "report-card-playtest");
 				await control.Open(false, default);
 				window.Canvas.enabled = false;

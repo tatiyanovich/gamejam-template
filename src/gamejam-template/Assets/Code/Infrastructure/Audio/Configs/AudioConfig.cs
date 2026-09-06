@@ -21,7 +21,12 @@ namespace Code.Infrastructure.Audio.Configs
 		[SF] private AudioClip schoolBell;
 		[SF] private AudioClip teacherFootsteps;
 		[SF] private AudioClip timeWarning;
+		[SF] private AudioClip uiClick;
+		[SF] private AudioClip resultPassed;
+		[SF] private AudioClip resultCaught;
+		[SF] private AudioClip resultBell;
 
+		[SF] private AudioClip mainMenuMusic;
 		[SF] private AudioClip classroomMusic;
 		[SF] private AudioClip classroomUrgentMusic;
 
@@ -57,6 +62,10 @@ namespace Code.Infrastructure.Audio.Configs
 				SfxId.SchoolBell => schoolBell,
 				SfxId.TeacherFootsteps => teacherFootsteps,
 				SfxId.TimeWarning => timeWarning,
+				SfxId.UiClick => uiClick,
+				SfxId.ResultPassed => resultPassed,
+				SfxId.ResultCaught => resultCaught,
+				SfxId.ResultBell => resultBell,
 				_ => null
 			};
 		}
@@ -80,6 +89,10 @@ namespace Code.Infrastructure.Audio.Configs
 				SfxId.SchoolBell => One(schoolBell),
 				SfxId.TeacherFootsteps => One(teacherFootsteps),
 				SfxId.TimeWarning => One(timeWarning),
+				SfxId.UiClick => One(uiClick),
+				SfxId.ResultPassed => One(resultPassed),
+				SfxId.ResultCaught => One(resultCaught),
+				SfxId.ResultBell => One(resultBell),
 				_ => System.Array.Empty<AudioClip>()
 			};
 		}
@@ -88,6 +101,7 @@ namespace Code.Infrastructure.Audio.Configs
 		{
 			return id switch
 			{
+				MusicId.MainMenu => mainMenuMusic,
 				MusicId.Classroom => classroomMusic,
 				MusicId.ClassroomUrgent => classroomUrgentMusic,
 				_ => null

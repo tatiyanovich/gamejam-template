@@ -6,10 +6,13 @@ using Code.Infrastructure.Audio.Services;
 using Code.Infrastructure.Microphone;
 using Code.Infrastructure.Settings;
 using Code.Infrastructure.Settings.Services;
+using Code.UI.Audio;
 using Cysharp.Threading.Tasks;
 using UnityEditor;
 using UnityEngine;
 using Zenject;
+using FrameworkButton = Framework.UI.UiManagement.Elements.Buttons.Button;
+using UnityButton = UnityEngine.UI.Button;
 
 namespace Code.Editor
 {
@@ -43,18 +46,31 @@ namespace Code.Editor
 				effectsEnabled = settingsService.IsEnabled(SettingTypeId.Effects);
 				settingsService.Toggle(SettingTypeId.Music, true);
 				settingsService.Toggle(SettingTypeId.Effects, true);
-
-				audioService.PlayMusic(MusicId.Classroom);
-				audioService.PlaySfx(SfxId.MeowFallback);
-				audioService.StartLoop(SfxId.Heartbeat);
-				audioService.PlayVoiceOver(VoiceOverId.IntroPanelTwo);
-				await UniTask.DelayFrame(2);
+				ValidateButtonAudio();
 
 				GameObject root = GameObject.Find(nameof(AudioService));
-				Require(root != null, "AudioService root was not created");
+				Require(root != null, "AudioService root was not created on the main menu");
+				Require(Source(root, "Music").isPlaying, "Main-menu music did not start");
+				Require(Source(root, "Music").clip == config.GetMusic(MusicId.MainMenu),
+					"Main-menu music uses the wrong clip");
+				ButtonClickAudio liveButton = UnityEngine.Object.FindFirstObjectByType<ButtonClickAudio>();
+				Require(liveButton != null, "No live UI button has click audio");
+				liveButton.SendMessage("HandleClicked");
+				await UniTask.DelayFrame(1);
+				Require(Source(root, "Sfx").isPlaying, "Live UI click SFX did not start");
+				audioService.StopSfx();
+
+				audioService.PlayMusic(MusicId.Classroom);
+				audioService.PlaySfx(SfxId.ResultPassed);
+				audioService.StartLoop(SfxId.Heartbeat);
+				audioService.StartLoop(SfxId.ClockTick);
+				audioService.PlayVoiceOver(VoiceOverId.IntroPanelTwo).Forget();
+				await UniTask.DelayFrame(2);
+
 				Require(Source(root, "Music").isPlaying, "Classroom music did not start");
-				Require(Source(root, "Sfx").isPlaying, "Fallback meow did not start");
+				Require(Source(root, "Sfx").isPlaying, "Result-screen SFX did not start");
 				Require(Source(root, "Heartbeat").isPlaying, "Heartbeat loop did not start");
+				Require(Source(root, "ClockTick").isPlaying, "Final countdown tick did not start");
 				Require(Source(root, "VoiceOver").isPlaying, "Intro voice-over did not start");
 				float expectedMusicVolume = microphoneService.IsAvailable
 					? config.MicrophoneDuckingMultiplier
@@ -66,7 +82,8 @@ namespace Code.Editor
 				settingsService.Toggle(SettingTypeId.Effects, false);
 				Require(Source(root, "Music").mute, "Music setting did not mute music");
 				Require(Source(root, "Sfx").mute, "Effects setting did not mute SFX");
-				File.WriteAllText(reportPath, "PASS F1-F4 audio: clips, music, loops, VO and settings\n");
+				File.WriteAllText(reportPath,
+					"PASS F1-F4 audio: clips, UI buttons, menu/result cues, loops, VO and settings\n");
 				Debug.Log("F1-F4 audio checks passed.");
 			}
 			catch (Exception exception)
@@ -106,6 +123,23 @@ namespace Code.Editor
 
 			foreach (VoiceOverId id in Enum.GetValues(typeof(VoiceOverId)))
 				Require(config.GetVoiceOver(id) != null, $"No voice-over for {id}");
+		}
+
+		private static void ValidateButtonAudio()
+		{
+			string[] prefabGuids = AssetDatabase.FindAssets(
+				"t:Prefab",
+				new[] { "Assets/AddressableResources/Content/UI" });
+			foreach (string prefabGuid in prefabGuids)
+			{
+				string path = AssetDatabase.GUIDToAssetPath(prefabGuid);
+				GameObject root = AssetDatabase.LoadAssetAtPath<GameObject>(path);
+				foreach (UnityButton button in root.GetComponentsInChildren<UnityButton>(true))
+					Require(button.GetComponent<ButtonClickAudio>() != null, $"No click SFX on {path}/{button.name}");
+
+				foreach (FrameworkButton button in root.GetComponentsInChildren<FrameworkButton>(true))
+					Require(button.GetComponent<ButtonClickAudio>() != null, $"No click SFX on {path}/{button.name}");
+			}
 		}
 
 		private static AudioSource Source(GameObject root, string name)

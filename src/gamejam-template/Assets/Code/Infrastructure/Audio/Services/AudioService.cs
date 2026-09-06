@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using Code.Infrastructure.Microphone;
 using Code.Infrastructure.Settings;
 using Code.Infrastructure.Settings.Services;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 using Object = UnityEngine.Object;
@@ -70,6 +72,12 @@ namespace Code.Infrastructure.Audio.Services
 			_sfxSource.PlayOneShot(clip);
 		}
 
+		public void StopSfx()
+		{
+			if (_sfxSource != null)
+				_sfxSource.Stop();
+		}
+
 		public void StartLoop(SfxId id)
 		{
 			if (_settingsService.IsEnabled(SettingTypeId.Effects) == false)
@@ -77,12 +85,12 @@ namespace Code.Infrastructure.Audio.Services
 
 			EnsureSources();
 
-			if (_loopSources.TryGetValue(id, out AudioSource source) == false)
+			if (_loopSources.TryGetValue(id, out AudioSource source) == false || source == null)
 			{
 				source = CreateSource(id.ToString());
 				source.loop = true;
 				source.clip = _audioConfigsService.AudioConfig.GetSfx(id);
-				_loopSources.Add(id, source);
+				_loopSources[id] = source;
 			}
 
 			if (source.isPlaying == false)
@@ -91,14 +99,17 @@ namespace Code.Infrastructure.Audio.Services
 
 		public void StopLoop(SfxId id)
 		{
-			if (_loopSources.TryGetValue(id, out AudioSource source))
+			if (_loopSources.TryGetValue(id, out AudioSource source) && source != null)
 				source.Stop();
 		}
 
 		public void StopAllLoops()
 		{
 			foreach (AudioSource source in _loopSources.Values)
-				source.Stop();
+			{
+				if (source != null)
+					source.Stop();
+			}
 		}
 
 		public void PlayMusic(MusicId id)
@@ -124,14 +135,19 @@ namespace Code.Infrastructure.Audio.Services
 			_music = null;
 		}
 
-		public void PlayVoiceOver(VoiceOverId id)
+		public async UniTask PlayVoiceOver(VoiceOverId id, CancellationToken cancellationToken = default)
 		{
 			if (_settingsService.IsEnabled(SettingTypeId.Effects) == false)
 				return;
 
 			EnsureSources();
-			_voiceOverSource.clip = _audioConfigsService.AudioConfig.GetVoiceOver(id);
+			AudioClip clip = _audioConfigsService.AudioConfig.GetVoiceOver(id);
+			_voiceOverSource.clip = clip;
 			_voiceOverSource.Play();
+			await UniTask.Delay(
+				TimeSpan.FromSeconds(clip.length),
+				ignoreTimeScale: true,
+				cancellationToken: cancellationToken);
 		}
 
 		public void StopVoiceOver()
@@ -152,7 +168,10 @@ namespace Code.Infrastructure.Audio.Services
 			_musicSource.mute = musicEnabled == false;
 
 			foreach (AudioSource source in _loopSources.Values)
-				source.mute = effectsEnabled == false;
+			{
+				if (source != null)
+					source.mute = effectsEnabled == false;
+			}
 		}
 
 		private AudioSource CreateSource(string name)

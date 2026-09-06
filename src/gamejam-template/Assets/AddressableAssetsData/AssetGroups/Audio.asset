@@ -25,8 +25,18 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0f50680d1ef034f66b9cffc03205f1d0
+    m_Address: audio_result_caught
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 11c90e78fc9f64f629808fe9be1b2e35
     m_Address: audio_school_bell
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 25a5b7a9ade2349eab020284e5cb2c50
+    m_Address: audio_main_menu
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -37,6 +47,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 3214339a1b0c9499c933d7232638ee3d
     m_Address: audio_meow_2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 355405ffefad14914b5060c0be09535b
+    m_Address: audio_ui_click
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -80,6 +95,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8ce4cca6c8ef044cbad84d6f65a5f417
+    m_Address: audio_result_passed
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 987e3b9d0a6ef4e3f9f09970f86ab6cd
     m_Address: audio_pencil_snap
     m_ReadOnly: 0
@@ -87,6 +107,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b8b9d34ae5efe4e31a24fbaa4cb49809
     m_Address: audio_answer_copied
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c3511a1b91e1f4aea9c5271b1bbd02a8
+    m_Address: audio_result_bell
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

@@ -149,6 +149,7 @@ GameObject:
   - component: {fileID: 651907489511071011}
   - component: {fileID: 6710282337325529218}
   - component: {fileID: 6587565570757207536}
+  - component: {fileID: 223792008611822763}
   m_Layer: 5
   m_Name: 'RETAKE EXAM [R]'
   m_TagString: Untagged
@@ -259,6 +260,19 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   label: {fileID: 786184408628174341}
+--- !u!114 &223792008611822763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 109309559207463026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df49d2b3eb3ea409d89e4675c6a64a35, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::Code.UI.Audio.ButtonClickAudio
+  sound: 15
 --- !u!1 &125580680980214633
 GameObject:
   m_ObjectHideFlags: 0
@@ -3345,6 +3359,7 @@ GameObject:
   - component: {fileID: 2948330035583122949}
   - component: {fileID: 3819692280962617442}
   - component: {fileID: 3032803683001763440}
+  - component: {fileID: 4017409937320555641}
   m_Layer: 5
   m_Name: MAIN MENU
   m_TagString: Untagged
@@ -3455,6 +3470,19 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   label: {fileID: 6396257996384009516}
+--- !u!114 &4017409937320555641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3183420977823368016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df49d2b3eb3ea409d89e4675c6a64a35, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::Code.UI.Audio.ButtonClickAudio
+  sound: 15
 --- !u!1 &3319767933250278174
 GameObject:
   m_ObjectHideFlags: 0

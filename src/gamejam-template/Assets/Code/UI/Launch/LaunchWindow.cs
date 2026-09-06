@@ -2,6 +2,8 @@ using System.Threading;
 using Code.Gameplay.Camera.Services;
 using Code.Gameplay.CoreLoop.Services;
 using Code.Gameplay.Progress.Queries;
+using Code.Infrastructure.Audio;
+using Code.Infrastructure.Audio.Services;
 using Code.Infrastructure.CoreLoop;
 using Code.UI.Attendance;
 using Code.UI.Tutorial;
@@ -26,16 +28,19 @@ namespace Code.UI.Launch
 		private ICoreLoopRequestFactory _coreLoopRequestFactory;
 		private ICameraSwitcher _cameraSwitcher;
 		private IProgressQuery _progressQuery;
+		private IAudioService _audioService;
 
 		[Inject]
 		public void Construct(
 			ICoreLoopRequestFactory coreLoopRequestFactory,
 			ICameraSwitcher cameraSwitcher,
-			IProgressQuery progressQuery)
+			IProgressQuery progressQuery,
+			IAudioService audioService)
 		{
 			_coreLoopRequestFactory = coreLoopRequestFactory;
 			_cameraSwitcher = cameraSwitcher;
 			_progressQuery = progressQuery;
+			_audioService = audioService;
 		}
 
 		private void OnRectTransformDimensionsChange()
@@ -55,6 +60,8 @@ namespace Code.UI.Launch
 			SetInteractable(true);
 			playButton.onClick.AddListener(HandlePlay);
 			quitButton.onClick.AddListener(HandleQuit);
+			_audioService.StopSfx();
+			_audioService.PlayMusic(MusicId.MainMenu);
 			return base.OnOpen(cancellationToken);
 		}
 
@@ -62,6 +69,7 @@ namespace Code.UI.Launch
 		{
 			playButton.onClick.RemoveListener(HandlePlay);
 			quitButton.onClick.RemoveListener(HandleQuit);
+			_audioService.StopMusic();
 			return base.OnClose(cancellationToken);
 		}
 
@@ -77,7 +85,7 @@ namespace Code.UI.Launch
 			SetInteractable(false);
 			await _uiService.CloseWindow<LaunchWindow>(withAnimation: false);
 			await _uiService.OpenWindow<TutorialWindow>(
-				beforeOpen: window => window.Prepare(StartExam));
+				beforeOpen: window => window.Prepare(StartExam, playVoiceOver: true));
 		}
 
 		private void StartExam()

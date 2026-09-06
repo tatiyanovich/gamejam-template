@@ -1,4 +1,5 @@
 using System;
+using Code.UI.Audio;
 using Code.UI.Tutorial;
 using Framework.UI.UiManagement;
 using TMPro;
@@ -69,6 +70,7 @@ namespace Code.Editor.Art
 			circle.raycastTarget = true;
 			Button button = circle.gameObject.AddComponent<Button>();
 			button.targetGraphic = circle;
+			circle.gameObject.AddComponent<ButtonClickAudio>();
 			CrossStroke(circle.transform, 45f);
 			CrossStroke(circle.transform, -45f);
 			return button;

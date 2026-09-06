@@ -1,5 +1,7 @@
 using System;
+using Code.Infrastructure.Audio;
 using Code.UI.Animations;
+using Code.UI.Audio;
 using Code.UI.Launch;
 using TMPro;
 using UnityEditor;
@@ -57,6 +59,11 @@ namespace Code.Editor.Art
 				Picture(menu, "UI/Copycat/panel_paper_9slice", new Rect(600f, 498f, 720f, 350f));
 				Button play = Button(menu, "PLAY", new Rect(730f, 530f, 460f, 100f));
 				Button quit = Button(menu, "QUIT", new Rect(730f, 656f, 460f, 100f));
+				Image duck = Picture(menu, "Duck/duck_idle", new Rect(1260f, 565f, 180f, 180f));
+				duck.raycastTarget = true;
+				Button duckButton = duck.gameObject.AddComponent<Button>();
+				duckButton.targetGraphic = duck;
+				duck.gameObject.AddComponent<ButtonClickAudio>().Configure(SfxId.DuckSqueak);
 				TextMeshProUGUI footer = Label(menu, "Microphone required. You will have to meow out loud.",
 					new Rect(160f, 932f, 1600f, 70f));
 				footer.fontSize = 32f;
@@ -136,6 +143,7 @@ namespace Code.Editor.Art
 				pressedSprite = Sprite("button_yellow_9slice_pressed"),
 				disabledSprite = Sprite("button_yellow_9slice")
 			};
+			image.gameObject.AddComponent<ButtonClickAudio>();
 			SerializedObject serialized = new SerializedObject(button);
 			Assign(serialized, "label", label.rectTransform);
 			serialized.ApplyModifiedPropertiesWithoutUndo();

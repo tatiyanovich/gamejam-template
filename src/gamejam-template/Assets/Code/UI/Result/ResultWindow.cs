@@ -9,6 +9,8 @@ using Code.Gameplay.Leaderboard.Data;
 using Code.Gameplay.Leaderboard.Services;
 using Code.Gameplay.Progress.Queries;
 using Code.Gameplay.Teacher.Queries;
+using Code.Infrastructure.Audio;
+using Code.Infrastructure.Audio.Services;
 using Code.Infrastructure.CoreLoop;
 using Code.Infrastructure.Input;
 using Code.UI.Fade;
@@ -56,6 +58,7 @@ namespace Code.UI.Result
 		private IInputService _inputService;
 		private ICoreLoopRequestFactory _coreLoopRequestFactory;
 		private ICameraSwitcher _cameraSwitcher;
+		private IAudioService _audioService;
 
 		private const float FadeInDuration = 0.3f;
 		private const float ScaleDuration = 0.5f;
@@ -74,7 +77,8 @@ namespace Code.UI.Result
 			ILeaderboardService leaderboardService,
 			IInputService inputService,
 			ICoreLoopRequestFactory coreLoopRequestFactory,
-			ICameraSwitcher cameraSwitcher)
+			ICameraSwitcher cameraSwitcher,
+			IAudioService audioService)
 		{
 			_exam = exam;
 			_teacher = teacher;
@@ -85,6 +89,7 @@ namespace Code.UI.Result
 			_inputService = inputService;
 			_coreLoopRequestFactory = coreLoopRequestFactory;
 			_cameraSwitcher = cameraSwitcher;
+			_audioService = audioService;
 		}
 
 		private void OnRectTransformDimensionsChange()
@@ -118,6 +123,7 @@ namespace Code.UI.Result
 		protected override UniTask OnClose(CancellationToken cancellationToken = default)
 		{
 			Unsubscribe();
+			_audioService.StopSfx();
 
 			return base.OnClose(cancellationToken);
 		}
@@ -156,6 +162,8 @@ namespace Code.UI.Result
 			ExamOutcome outcome = _exam.GetOutcome();
 			ExamGrade grade = _examGradeService.GetGrade(answersCopied);
 			int starCount = _examGradeService.GetStars(answersCopied, ducksThrown, almostCaughtCount);
+			_audioService.StopSfx();
+			_audioService.PlaySfx(GetResultSound(outcome));
 
 			title.text = GetTitle(outcome);
 			subtitle.text = GetSubtitle(outcome);
@@ -301,6 +309,16 @@ namespace Code.UI.Result
 				ExamOutcome.Caught => "CAUGHT",
 				ExamOutcome.BellRang => "BELL RANG",
 				_ => "EXAM PASSED!"
+			};
+		}
+
+		private static SfxId GetResultSound(ExamOutcome outcome)
+		{
+			return outcome switch
+			{
+				ExamOutcome.Caught => SfxId.ResultCaught,
+				ExamOutcome.BellRang => SfxId.ResultBell,
+				_ => SfxId.ResultPassed
 			};
 		}
 

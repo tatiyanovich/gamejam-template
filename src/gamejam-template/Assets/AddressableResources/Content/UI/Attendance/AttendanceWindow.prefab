@@ -1413,6 +1413,7 @@ GameObject:
   - component: {fileID: 7155940097033743218}
   - component: {fileID: 7732898536278958949}
   - component: {fileID: 1752781305181108492}
+  - component: {fileID: 2353202021344108247}
   m_Layer: 5
   m_Name: START EXAM
   m_TagString: Untagged
@@ -1523,6 +1524,19 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   label: {fileID: 863683875176233980}
+--- !u!114 &2353202021344108247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6670507570137560093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df49d2b3eb3ea409d89e4675c6a64a35, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::Code.UI.Audio.ButtonClickAudio
+  sound: 15
 --- !u!1 &6777889124807135117
 GameObject:
   m_ObjectHideFlags: 0

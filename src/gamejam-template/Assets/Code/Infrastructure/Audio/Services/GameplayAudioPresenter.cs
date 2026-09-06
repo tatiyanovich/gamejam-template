@@ -75,6 +75,11 @@ namespace Code.Infrastructure.Audio.Services
 		{
 			MusicId music = _bellQuery.IsAnnounced() ? MusicId.ClassroomUrgent : MusicId.Classroom;
 			_audioService.PlayMusic(music);
+
+			if (_bellQuery.GetTimeLeft() <= 10f)
+				_audioService.StartLoop(SfxId.ClockTick);
+			else
+				_audioService.StopLoop(SfxId.ClockTick);
 		}
 
 		private void HandleAnswerProgressChanged(int questionIndex, int progress, int length)

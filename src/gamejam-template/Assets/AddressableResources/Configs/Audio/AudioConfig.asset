@@ -30,6 +30,11 @@ MonoBehaviour:
   schoolBell: {fileID: 8300000, guid: 11c90e78fc9f64f629808fe9be1b2e35, type: 3}
   teacherFootsteps: {fileID: 8300000, guid: cc225b98348e143cd96deb768476e0a3, type: 3}
   timeWarning: {fileID: 8300000, guid: 4144d1064c2954539ab7af98d9f9c40e, type: 3}
+  uiClick: {fileID: 8300000, guid: 355405ffefad14914b5060c0be09535b, type: 3}
+  resultPassed: {fileID: 8300000, guid: 8ce4cca6c8ef044cbad84d6f65a5f417, type: 3}
+  resultCaught: {fileID: 8300000, guid: 0f50680d1ef034f66b9cffc03205f1d0, type: 3}
+  resultBell: {fileID: 8300000, guid: c3511a1b91e1f4aea9c5271b1bbd02a8, type: 3}
+  mainMenuMusic: {fileID: 8300000, guid: 25a5b7a9ade2349eab020284e5cb2c50, type: 3}
   classroomMusic: {fileID: 8300000, guid: 55330f292a54845b998059537d92642c, type: 3}
   classroomUrgentMusic: {fileID: 8300000, guid: d79d5f5333a364e1481a5fb2ade960b2, type: 3}
   introPanelOne: {fileID: 8300000, guid: d0a3b0fba77ff4bc48105f92c2d9f4fd, type: 3}

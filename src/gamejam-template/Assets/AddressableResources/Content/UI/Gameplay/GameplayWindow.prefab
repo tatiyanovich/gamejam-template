@@ -1364,6 +1364,7 @@ GameObject:
   - component: {fileID: 8814443618430603235}
   - component: {fileID: 4415525301723849521}
   - component: {fileID: 8268931978154397886}
+  - component: {fileID: 3719460196716900070}
   m_Layer: 5
   m_Name: TutorialButton
   m_TagString: Untagged
@@ -1473,6 +1474,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &3719460196716900070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5409564024450648790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df49d2b3eb3ea409d89e4675c6a64a35, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::Code.UI.Audio.ButtonClickAudio
+  sound: 15
 --- !u!1 &5430369043430013877
 GameObject:
   m_ObjectHideFlags: 0
@@ -1598,6 +1612,7 @@ GameObject:
   - component: {fileID: 7667007410785518977}
   - component: {fileID: 3343251990620625345}
   - component: {fileID: 18593772926961652}
+  - component: {fileID: 2543732581327579486}
   m_Layer: 5
   m_Name: DuckButton
   m_TagString: Untagged
@@ -1706,6 +1721,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2543732581327579486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6113436633765908635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df49d2b3eb3ea409d89e4675c6a64a35, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::Code.UI.Audio.ButtonClickAudio
+  sound: 15
 --- !u!1 &6424468089460681855
 GameObject:
   m_ObjectHideFlags: 0

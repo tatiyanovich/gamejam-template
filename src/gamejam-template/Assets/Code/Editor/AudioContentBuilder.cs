@@ -1,10 +1,15 @@
 using System;
 using System.Collections.Generic;
+using Code.Editor.Art;
+using Code.Infrastructure.Audio;
 using Code.Infrastructure.Audio.Configs;
+using Code.UI.Audio;
 using UnityEditor;
 using UnityEditor.AddressableAssets;
 using UnityEditor.AddressableAssets.Settings;
 using UnityEngine;
+using FrameworkButton = Framework.UI.UiManagement.Elements.Buttons.Button;
+using UnityButton = UnityEngine.UI.Button;
 
 namespace Code.Editor
 {
@@ -13,6 +18,7 @@ namespace Code.Editor
 		private const string AudioRoot = "Assets/AddressableResources/Content/Audio";
 		private const string ConfigFolder = "Assets/AddressableResources/Configs/Audio";
 		private const string ConfigPath = ConfigFolder + "/AudioConfig.asset";
+		private const string LaunchPrefabPath = "Assets/AddressableResources/Content/UI/Launch/LaunchWindow.prefab";
 
 		[MenuItem("COPYCAT/Audio/Build F1-F4")]
 		public static void Build()
@@ -21,6 +27,8 @@ namespace Code.Editor
 			AudioConfig config = LoadOrCreateConfig();
 			ConfigureConfig(config);
 			ConfigureAddressables(config);
+			ConfigureMenuDuck();
+			ConfigureButtonAudio();
 			AssetDatabase.SaveAssets();
 			AssetDatabase.Refresh();
 			Debug.Log("F1-F4 audio content and AudioConfig built successfully.");
@@ -82,6 +90,11 @@ namespace Code.Editor
 			Set(serialized, "schoolBell", Clip("Effects/school_bell.wav"));
 			Set(serialized, "teacherFootsteps", Clip("Effects/teacher_footsteps.wav"));
 			Set(serialized, "timeWarning", Clip("Effects/time_warning.wav"));
+			Set(serialized, "uiClick", Clip("Effects/ui_click.wav"));
+			Set(serialized, "resultPassed", Clip("Effects/result_passed.wav"));
+			Set(serialized, "resultCaught", Clip("Effects/result_caught.wav"));
+			Set(serialized, "resultBell", Clip("Effects/result_bell.wav"));
+			Set(serialized, "mainMenuMusic", Clip("Music/main_menu.wav"));
 			Set(serialized, "classroomMusic", Clip("Music/classroom.wav"));
 			Set(serialized, "classroomUrgentMusic", Clip("Music/classroom_urgent.wav"));
 			Set(serialized, "introPanelOne", Clip("VoiceOver/intro_panel_1.wav"));
@@ -93,6 +106,69 @@ namespace Code.Editor
 			serialized.FindProperty("heartbeatThreshold").floatValue = 0.8f;
 			serialized.ApplyModifiedPropertiesWithoutUndo();
 			EditorUtility.SetDirty(config);
+		}
+
+		private static void ConfigureButtonAudio()
+		{
+			string[] prefabGuids = AssetDatabase.FindAssets(
+				"t:Prefab",
+				new[] { "Assets/AddressableResources/Content/UI" });
+			foreach (string prefabGuid in prefabGuids)
+			{
+				string path = AssetDatabase.GUIDToAssetPath(prefabGuid);
+				GameObject root = PrefabUtility.LoadPrefabContents(path);
+				bool changed = false;
+				try
+				{
+					foreach (UnityButton button in root.GetComponentsInChildren<UnityButton>(true))
+						changed |= AddButtonAudio(button.gameObject);
+
+					foreach (FrameworkButton button in root.GetComponentsInChildren<FrameworkButton>(true))
+						changed |= AddButtonAudio(button.gameObject);
+
+					if (changed)
+						PrefabUtility.SaveAsPrefabAsset(root, path);
+				}
+				finally
+				{
+					PrefabUtility.UnloadPrefabContents(root);
+				}
+			}
+		}
+
+		private static void ConfigureMenuDuck()
+		{
+			GameObject root = PrefabUtility.LoadPrefabContents(LaunchPrefabPath);
+			try
+			{
+				Transform menu = root.transform.Find("Layout/Menu");
+				if (menu.Find("MenuDuck") != null)
+					return;
+
+				UnityEngine.UI.Image duck = LaunchWindowBuilder.Picture(
+					menu,
+					"Duck/duck_idle",
+					new Rect(1260f, 565f, 180f, 180f));
+				duck.name = "MenuDuck";
+				duck.raycastTarget = true;
+				UnityButton button = duck.gameObject.AddComponent<UnityButton>();
+				button.targetGraphic = duck;
+				duck.gameObject.AddComponent<ButtonClickAudio>().Configure(SfxId.DuckSqueak);
+				PrefabUtility.SaveAsPrefabAsset(root, LaunchPrefabPath);
+			}
+			finally
+			{
+				PrefabUtility.UnloadPrefabContents(root);
+			}
+		}
+
+		private static bool AddButtonAudio(GameObject target)
+		{
+			if (target.GetComponent<ButtonClickAudio>() != null)
+				return false;
+
+			target.AddComponent<ButtonClickAudio>();
+			return true;
 		}
 
 		private static void ConfigureAddressables(AudioConfig config)
