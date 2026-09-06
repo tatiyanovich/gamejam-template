@@ -67,7 +67,7 @@ namespace Code.Infrastructure.StateManagement.States
 		private void InitializeUI()
 		{
 			AddWindowDefinitions();
-			_cursorLockService.SetLockPreference(LockPreferenceType.RequestMeansLock);
+			_cursorLockService.SetLockPreference(LockPreferenceType.RequestMeansUnlock);
 		}
 
 		private async UniTask ShowLoadingWindow()
