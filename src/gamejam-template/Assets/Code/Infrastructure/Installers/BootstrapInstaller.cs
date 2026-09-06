@@ -14,6 +14,7 @@ using Code.Gameplay.Meow.Queries;
 using Code.Gameplay.Meow.Services;
 using Code.Gameplay.Neighbours.Queries;
 using Code.Gameplay.Progress.Queries;
+using Code.Gameplay.Progress.Services;
 using Code.Gameplay.Suspicion.Queries;
 using Code.Gameplay.Suspicion.Services;
 using Code.Gameplay.Teacher.Queries;
@@ -112,6 +113,7 @@ namespace Code.Infrastructure.Installers
 			Container.BindInterfacesTo<SettingsService>().AsSingle();
 			Container.BindInterfacesTo<SatelliteService>().AsSingle();
 			Container.BindInterfacesTo<ExamGradeService>().AsSingle();
+			Container.BindInterfacesTo<NewPlayerService>().AsSingle();
 			Container.BindInterfacesTo<LeaderboardService>().AsSingle();
 			Container.BindInterfacesTo<AudioService>().AsSingle().NonLazy();
 			Container.BindInterfacesTo<GameplayAudioPresenter>().AsSingle().NonLazy();

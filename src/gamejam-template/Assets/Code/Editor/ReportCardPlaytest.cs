@@ -78,6 +78,7 @@ namespace Code.Editor
 				ProgressQuery progress = new(fixture.Game);
 				PlaytestLeaderboard leaderboard = new() { IsPending = true };
 				PlaytestCoreLoop coreLoop = new();
+				PlaytestNewPlayerService newPlayer = new();
 				PlaytestInput input = new();
 				IUiService uiService = ProjectContext.Instance.Container.Resolve<IUiService>();
 				IAudioService audioService = ProjectContext.Instance.Container.Resolve<IAudioService>();
@@ -87,7 +88,7 @@ namespace Code.Editor
 				scene.Container.InjectGameObject(instance);
 				ResultWindow window = instance.GetComponent<ResultWindow>();
 				control = window;
-				window.Construct(exam, teachers, ducks, progress, new ExamGradeService(), leaderboard, input,
+				window.Construct(exam, teachers, ducks, progress, newPlayer, new ExamGradeService(), leaderboard, input,
 					coreLoop, coreLoop, audioService);
 				await window.Initialize("Overlay", "report-card-playtest");
 				await control.Open(false, default);
@@ -182,8 +183,8 @@ namespace Code.Editor
 				menu.onClick.Invoke();
 				Require(retake.interactable == false, "Menu locks the buttons");
 				await WaitForTransition(uiService);
-				Require(coreLoop.Calls.Contains("camera:StartLaunch") && coreLoop.Calls.Contains("close:Exam")
-					&& coreLoop.Calls.Contains("node:StartLaunch"), "Menu transition");
+				Require(coreLoop.Calls.Contains("camera:StartLaunch") && newPlayer.StartCount == 1,
+					"Menu starts a new player");
 				await control.Close(false, default);
 				coreLoop.Calls.Clear();
 				await control.Open(false, default);
@@ -192,7 +193,7 @@ namespace Code.Editor
 				await WaitForTransition(uiService);
 				Require(coreLoop.Calls.Contains("camera:Exam") && coreLoop.Calls.Contains("close:Exam")
 					&& coreLoop.Calls.Contains("branch:Exam"), "Retake transition");
-				report.AppendLine("PASS R key, MAIN MENU node request and RETAKE EXAM branch restart");
+				report.AppendLine("PASS R key, MAIN MENU new player and RETAKE EXAM branch restart");
 
 				await control.Close(false, default);
 				Require(leaderboard.SubmitCount == 7, "One submit per open");

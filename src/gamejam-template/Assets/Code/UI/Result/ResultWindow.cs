@@ -8,6 +8,7 @@ using Code.Gameplay.Exam.Services;
 using Code.Gameplay.Leaderboard.Data;
 using Code.Gameplay.Leaderboard.Services;
 using Code.Gameplay.Progress.Queries;
+using Code.Gameplay.Progress.Services;
 using Code.Gameplay.Teacher.Queries;
 using Code.Infrastructure.Audio;
 using Code.Infrastructure.Audio.Services;
@@ -53,6 +54,7 @@ namespace Code.UI.Result
 		private ITeacherQuery _teacher;
 		private IDuckQuery _duck;
 		private IProgressQuery _progress;
+		private INewPlayerService _newPlayerService;
 		private IExamGradeService _examGradeService;
 		private ILeaderboardService _leaderboardService;
 		private IInputService _inputService;
@@ -73,6 +75,7 @@ namespace Code.UI.Result
 			ITeacherQuery teacher,
 			IDuckQuery duck,
 			IProgressQuery progress,
+			INewPlayerService newPlayerService,
 			IExamGradeService examGradeService,
 			ILeaderboardService leaderboardService,
 			IInputService inputService,
@@ -84,6 +87,7 @@ namespace Code.UI.Result
 			_teacher = teacher;
 			_duck = duck;
 			_progress = progress;
+			_newPlayerService = newPlayerService;
 			_examGradeService = examGradeService;
 			_leaderboardService = leaderboardService;
 			_inputService = inputService;
@@ -287,12 +291,14 @@ namespace Code.UI.Result
 			await fadeWindow.FadeIn(FadeInDuration);
 
 			_cameraSwitcher.SwitchTo(loopNodeId);
-			_coreLoopRequestFactory.CreateCloseBranchRequest(LoopNodeId.Exam);
 
 			if (loopNodeId == LoopNodeId.Exam)
+			{
+				_coreLoopRequestFactory.CreateCloseBranchRequest(LoopNodeId.Exam);
 				_coreLoopRequestFactory.CreateGoToBranchRequest(LoopNodeId.Exam);
+			}
 			else
-				_coreLoopRequestFactory.CreateGoToNodeRequest(loopNodeId);
+				_newPlayerService.StartNewPlayer();
 		}
 
 		private string GetPlayerName()
