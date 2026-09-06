@@ -12,20 +12,18 @@ public static class InputComponentsLookup {
     public const int Input = 1;
     public const int LeanHeld = 2;
     public const int LetterInput = 3;
-    public const int MeowKeyPressed = 4;
-    public const int PickInput = 5;
-    public const int PointerWorldPosition = 6;
-    public const int StrokeInput = 7;
-    public const int LeanHeldChanged = 8;
+    public const int PickInput = 4;
+    public const int PointerWorldPosition = 5;
+    public const int StrokeInput = 6;
+    public const int LeanHeldChanged = 7;
 
-    public const int TotalComponents = 9;
+    public const int TotalComponents = 8;
 
     public static readonly string[] componentNames = {
         "DuckKeyPressed",
         "Input",
         "LeanHeld",
         "LetterInput",
-        "MeowKeyPressed",
         "PickInput",
         "PointerWorldPosition",
         "StrokeInput",
@@ -37,7 +35,6 @@ public static class InputComponentsLookup {
         typeof(Code.Gameplay.Input.Input),
         typeof(Code.Gameplay.Input.LeanHeld),
         typeof(Code.Gameplay.Input.LetterInput),
-        typeof(Code.Gameplay.Input.MeowKeyPressed),
         typeof(Code.Gameplay.Input.PickInput),
         typeof(Code.Gameplay.Input.PointerWorldPosition),
         typeof(Code.Gameplay.Input.StrokeInput),

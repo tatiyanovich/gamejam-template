@@ -8,8 +8,8 @@ it is excluded from player builds. No production config is changed by the tools.
 
 1. Open `Assets/Scenes/Boot.unity`, enter Play Mode, click START and wait for the exam.
 2. Select `COPYCAT/QA/Record gameplay`. Recordings go to `Temp/Playtest/<UTC timestamp>/`.
-3. Select `COPYCAT/QA/Use keyboard meow` to stop microphone capture for this Play Mode session.
-   M still uses the actual game's input pipeline. `Use microphone` restores capture.
+3. Select `COPYCAT/QA/Mute microphone` to stop microphone capture for this Play Mode session.
+   `Use microphone` restores capture.
 4. `Use diagnostic view` temporarily hides `CopycatArt` and enables the existing greybox.
    `Use game art` restores the art and original camera size, including after scene reloads.
 5. Play using Space (hold to lean), M, Q, arrows/WASD, 1–4 and letters.
@@ -19,7 +19,7 @@ it is excluded from player builds. No production config is changed by the tools.
 7. Stop recording or exit Play Mode. Tools never start recording automatically.
 
 For automation, write a **new unique line** to `Temp/Playtest/command.txt`, e.g.
-`record run-1`, `keyboard run-1`, `greybox run-1`, `art run-2`, `capture run-3`,
+`record run-1`, `mute-microphone run-1`, `greybox run-1`, `art run-2`, `capture run-3`,
 `gameview run-3`, `snapshot run-3`, `focus run-3`, `end run-3`, `microphone run-3`.
 Commands are processed one at a time; wait for the editor between writes.
 An existing command is ignored on entering Play Mode. Latest snapshot: `state.txt`.

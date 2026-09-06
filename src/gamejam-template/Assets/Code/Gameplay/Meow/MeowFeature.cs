@@ -12,7 +12,6 @@ namespace Code.Gameplay.Meow
 			Add(systemFactory.Create<SampleMicrophoneLevelSystem>());
 
 			Add(systemFactory.Create<EmitMeowOnLoudMicrophoneSystem>());
-			Add(systemFactory.Create<EmitMeowOnKeyPressedSystem>());
 			Add(systemFactory.Create<RearmMeowOnQuietMicrophoneSystem>());
 		}
 	}

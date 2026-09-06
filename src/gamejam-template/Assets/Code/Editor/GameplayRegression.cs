@@ -4,7 +4,6 @@ using Code.Gameplay.Exam;
 using Code.Gameplay.Difficulty.Services;
 using Code.Gameplay.Duck;
 using Code.Gameplay.Duck.Services;
-using Code.Gameplay.Meow.Systems;
 using Code.Gameplay.Neighbours;
 using Code.Gameplay.Neighbours.Services;
 using Code.Gameplay.Teacher;
@@ -37,7 +36,6 @@ namespace Code.Editor
 			}
 			Check(scene.Container, "duck plus meow is safe", DuckMeow);
 			Check(scene.Container, "staring retains meow extension", StaringMeow);
-			Check(scene.Container, "keyboard meow disarms microphone", KeyboardMeow);
 			Check(scene.Container, "last accepted answer beats bell", LastAnswer);
 			Check(scene.Container, "accepted answer counted at bell", AnswerAtBell);
 			Check(scene.Container, "finished exam ignores meow", FinishedMeow);
@@ -120,17 +118,6 @@ namespace Code.Editor
 				.AllOf(
 					GameMatcher.TeacherRemarkEvent)).GetSingleEntity();
 			Assert(remark.TeacherRemarkEvent == expected, $"Teacher remark={remark.TeacherRemarkEvent}");
-		}
-
-		private static void KeyboardMeow(GameplayPlaytestFixture fixture)
-		{
-			GameEntity source = fixture.Game.CreateEntity();
-			source.isMeowSource = true;
-			source.isMeowArmed = true;
-			source.AddMicrophoneLevel(0f);
-			fixture.Keyboard.isMeowKeyPressed = true;
-			fixture.Container.Instantiate<EmitMeowOnKeyPressedSystem>().Execute();
-			Assert(source.isMeowArmed == false, "Mic stays armed during keyboard cooldown");
 		}
 
 		private static void LastAnswer(GameplayPlaytestFixture fixture)

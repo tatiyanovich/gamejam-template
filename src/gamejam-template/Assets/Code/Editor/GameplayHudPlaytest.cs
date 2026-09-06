@@ -197,14 +197,13 @@ namespace Code.Editor
 					-216f + 192f * threshold), "Config threshold");
 				microphone.IsAvailable = false;
 				meow.ReactToChanges();
-				Require(Field<TMP_Text>(fields, "microphoneHint").text == "No mic — press M to meow", "Fallback");
 				fixture.Run.ReplaceTutorialHint(TutorialHint.Meow);
 				exam.ReactToChanges();
-				Require(Field<TMP_Text>(fields, "hint").text == "Press M to get Whiskerstein's attention!",
-					"Keyboard meow hint");
+				Require(Field<TMP_Text>(fields, "hint").text
+					== "MEOW into your mic to get Whiskerstein's attention!", "Microphone meow hint");
 				fixture.Run.ReplaceTutorialHint(TutorialHint.None);
 				exam.ReactToChanges();
-				report.AppendLine("PASS microphone fill, config threshold, cooldown, missing-device fallback and hint");
+				report.AppendLine("PASS microphone fill, config threshold, cooldown and microphone-only hint");
 				Button button = Field<Button>(fields, "duckButton");
 				button.onClick.Invoke();
 				Require(game.GetGroup(GameMatcher

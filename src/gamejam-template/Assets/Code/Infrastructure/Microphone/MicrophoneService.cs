@@ -8,33 +8,40 @@ namespace Code.Infrastructure.Microphone
 	{
 		private readonly float[] _samples = new float[SampleWindow];
 
-		private string _deviceName;
+		private string _defaultDeviceName;
 		private AudioClip _clip;
+		private int _lastPosition;
+		private float _lastProgressTime;
+		private bool _initialized;
 
 		private const int SampleWindow = 1024;
 		private const int ClipLengthSeconds = 1;
 		private const int PreferredFrequency = 44100;
 
-		public bool IsAvailable => _clip != null && UnityEngine.Microphone.IsRecording(_deviceName);
+		public bool IsAvailable => _clip != null
+			&& UnityEngine.Microphone.IsRecording(null)
+			&& UnityEngine.Microphone.GetPosition(null) > 0;
 
 		public void Initialize()
 		{
+			if (_initialized == false)
+				AudioSettings.OnAudioConfigurationChanged += HandleAudioConfigurationChanged;
+
+			_initialized = true;
 			StartRecording();
 		}
 
 		public void Dispose()
 		{
-			if (_clip == null)
-				return;
-
-			UnityEngine.Microphone.End(_deviceName);
-
-			_deviceName = null;
-			_clip = null;
+			AudioSettings.OnAudioConfigurationChanged -= HandleAudioConfigurationChanged;
+			_initialized = false;
+			StopRecording();
 		}
 
 		public float GetRootMeanSquare()
 		{
+			RefreshRecording();
+
 			if (IsAvailable == false)
 				return 0f;
 
@@ -52,31 +59,69 @@ namespace Code.Infrastructure.Microphone
 
 		private void StartRecording()
 		{
+			StopRecording();
+
 			if (UnityEngine.Microphone.devices.Length == 0)
 				return;
 
-			_deviceName = UnityEngine.Microphone.devices[0];
+			_defaultDeviceName = UnityEngine.Microphone.devices[0];
 
 			try
 			{
 				_clip = UnityEngine.Microphone.Start(
-					deviceName: _deviceName,
+					deviceName: null,
 					loop: true,
 					lengthSec: ClipLengthSeconds,
 					frequency: GetFrequency());
+				_lastPosition = 0;
+				_lastProgressTime = Time.realtimeSinceStartup;
 			}
 			catch (Exception exception)
 			{
-				Debug.LogWarning($"Microphone '{_deviceName}' is unavailable: {exception.Message}");
+				Debug.LogWarning($"Default microphone is unavailable: {exception.Message}");
 
-				_deviceName = null;
+				_defaultDeviceName = null;
 				_clip = null;
 			}
 		}
 
+		private void StopRecording()
+		{
+			if (_clip != null)
+				UnityEngine.Microphone.End(null);
+
+			_defaultDeviceName = null;
+			_clip = null;
+			_lastPosition = 0;
+		}
+
+		private void RefreshRecording()
+		{
+			string defaultDevice = UnityEngine.Microphone.devices.Length > 0
+				? UnityEngine.Microphone.devices[0]
+				: null;
+			if (_clip == null || _defaultDeviceName != defaultDevice
+				|| UnityEngine.Microphone.IsRecording(null) == false)
+			{
+				StartRecording();
+				return;
+			}
+
+			int position = UnityEngine.Microphone.GetPosition(null);
+			if (position != _lastPosition)
+			{
+				_lastPosition = position;
+				_lastProgressTime = Time.realtimeSinceStartup;
+				return;
+			}
+
+			if (Time.realtimeSinceStartup - _lastProgressTime >= ClipLengthSeconds)
+				StartRecording();
+		}
+
 		private int GetFrequency()
 		{
-			UnityEngine.Microphone.GetDeviceCaps(_deviceName, out int minimumFrequency, out int maximumFrequency);
+			UnityEngine.Microphone.GetDeviceCaps(null, out int minimumFrequency, out int maximumFrequency);
 
 			if (maximumFrequency == 0)
 				return PreferredFrequency;
@@ -86,12 +131,18 @@ namespace Code.Infrastructure.Microphone
 
 		private int GetSampleOffset()
 		{
-			int position = UnityEngine.Microphone.GetPosition(_deviceName);
+			int position = UnityEngine.Microphone.GetPosition(null);
 
 			if (position >= SampleWindow)
 				return position - SampleWindow;
 
 			return _clip.samples - SampleWindow;
+		}
+
+		private void HandleAudioConfigurationChanged(bool deviceWasChanged)
+		{
+			if (deviceWasChanged)
+				StartRecording();
 		}
 	}
 }

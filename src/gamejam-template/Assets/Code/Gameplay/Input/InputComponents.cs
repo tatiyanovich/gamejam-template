@@ -11,6 +11,5 @@ namespace Code.Gameplay.Input
 	[Input] public class StrokeInput : IComponent { public StrokeDirection Value; }
 	[Input] public class PickInput : IComponent { public int Value; }
 	[Input] public class LetterInput : IComponent { public char Value; }
-	[Input] public class MeowKeyPressed : IComponent { }
 	[Input] public class DuckKeyPressed : IComponent { }
 }

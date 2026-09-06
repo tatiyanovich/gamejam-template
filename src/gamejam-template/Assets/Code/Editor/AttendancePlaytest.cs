@@ -84,7 +84,7 @@ namespace Code.Editor
 				query.ReactToChanges();
 				Require(check.activeSelf == false, "Keyboard must not pass microphone check");
 				new EventsCleanupSystem(game).Cleanup();
-				report.AppendLine("PASS keyboard meow does not pass microphone check");
+				report.AppendLine("PASS non-microphone meow event does not pass microphone check");
 				microphone.Level = config.ThresholdLevel;
 				sample.Execute();
 				emit.Execute();
@@ -101,7 +101,7 @@ namespace Code.Editor
 				microphone.IsAvailable = false;
 				await control.Open(false, default);
 				Require(check.activeSelf == false && fill.fillAmount == 0f && start.interactable
-					&& hint.text == "No mic — press M to meow", "No microphone");
+					&& hint.text == "Microphone unavailable", "No microphone");
 				report.AppendLine("PASS reopen resets success; missing microphone keeps START EXAM enabled");
 				await control.Close(false, default);
 				microphone.IsAvailable = true;

@@ -47,8 +47,8 @@ namespace Code.Editor
 		[MenuItem("COPYCAT/QA/Stop recording")]
 		public static void StopRecording() => _recording = false;
 
-		[MenuItem("COPYCAT/QA/Use keyboard meow")]
-		public static void UseKeyboardMeow()
+		[MenuItem("COPYCAT/QA/Mute microphone")]
+		public static void MuteMicrophone()
 		{
 			SceneContext scene = GetGameplayScene();
 			if (scene == null || _mutedMicrophone != null)
@@ -127,7 +127,7 @@ namespace Code.Editor
 				case "end": StopRecording(); break;
 				case "greybox": UseGreybox(); break;
 				case "art": UseGameArt(); break;
-				case "keyboard": UseKeyboardMeow(); break;
+				case "mute-microphone": MuteMicrophone(); break;
 				case "microphone": UseMicrophone(); break;
 				case "focus": FocusGameView(); break;
 				case "snapshot": WriteSnapshot(GetGameplayScene()); break;
@@ -165,7 +165,7 @@ namespace Code.Editor
 		{
 			StringBuilder state = new();
 			state.AppendLine($"Frame={Time.frameCount} Time={Time.time} Scale={Time.timeScale}");
-			state.AppendLine($"KeyboardMeowOnly={_mutedMicrophone != null}");
+			state.AppendLine($"MicrophoneMuted={_mutedMicrophone != null}");
 			if (scene == null)
 			{
 				File.WriteAllText(PlaytestPaths.Get("state.txt"), state.AppendLine("No gameplay scene").ToString());

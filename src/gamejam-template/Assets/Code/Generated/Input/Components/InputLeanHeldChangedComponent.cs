@@ -22,10 +22,10 @@ public partial class InputEntity {
                             : leanHeldChangedComponent;
 
                     AddComponent(index, component);
-
+					
                 } else {
                     RemoveComponent(index);
-
+					
                 }
             }
         }

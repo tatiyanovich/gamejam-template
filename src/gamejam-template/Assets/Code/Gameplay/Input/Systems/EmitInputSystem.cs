@@ -32,7 +32,6 @@ namespace Code.Gameplay.Input.Systems
 			foreach (InputEntity input in _inputs)
 			{
 				input.isLeanHeld = _inputService.IsKeyHeld(InputKeyMap.Lean);
-				input.isMeowKeyPressed = _inputService.IsKeyPressed(InputKeyMap.Meow);
 				input.isDuckKeyPressed = _inputService.IsKeyPressed(InputKeyMap.Duck);
 
 				EmitStroke(input);

@@ -42,7 +42,6 @@ namespace Code.UI.Gameplay
 		[SF] private Image suspicionFill;
 		[SF] private Image microphoneFill;
 		[SF] private RectTransform microphoneThreshold;
-		[SF] private TMP_Text microphoneHint;
 		[SF] private Image cooldownFill;
 		[SF] private Button duckButton;
 		[SF] private Button tutorialButton;
@@ -445,7 +444,6 @@ namespace Code.UI.Gameplay
 			microphoneFill.fillAmount = available ? Mathf.Clamp01(level / 100f) : 0f;
 			microphoneFill.color = available && _meow.IsArmed() && _meow.IsOnCooldown() == false
 				? new Color32(80, 150, 76, 255) : new Color32(150, 150, 150, 255);
-			microphoneHint.text = available ? "[M] if no mic" : "No mic — press M to meow";
 			float threshold = Mathf.Clamp01(_meow.GetThresholdLevel() / 100f);
 			float chord = Mathf.Sqrt(Mathf.Max(0f, 1f - Mathf.Pow(2f * threshold - 1f, 2f)));
 			microphoneThreshold.anchoredPosition = new Vector2(120f, -216f + 192f * threshold);
@@ -507,9 +505,7 @@ namespace Code.UI.Gameplay
 		{
 			hint.text = tutorialHint switch
 			{
-				TutorialHint.Meow => _meow.IsMicrophoneAvailable()
-					? "MEOW into your mic to get Whiskerstein's attention!"
-					: "Press M to get Whiskerstein's attention!",
+				TutorialHint.Meow => "MEOW into your mic to get Whiskerstein's attention!",
 				TutorialHint.Lean => "Hold SPACE to lean over",
 				TutorialHint.Copy => "Copy the strokes:",
 				TutorialHint.Dodge => "Psst. She turns around sometimes. Let go of SPACE!",

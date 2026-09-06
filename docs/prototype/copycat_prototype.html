@@ -688,7 +688,6 @@
             <span class="meow-state" id="meowCooldownText">READY</span>
           </div>
         </div>
-        <div class="meow-hint">[M] Meow (or use mic)</div>
       </div>
     </div>
   </main>
@@ -1167,9 +1166,6 @@
       if(mappedKey){
         e.preventDefault();
         handleArrow(mappedKey);
-      }else if(e.code==="KeyM" || e.key.toLowerCase()==="m" || e.key.toLowerCase()==="ь"){
-        e.preventDefault();
-        distract("meow");
       }else if(e.code==="KeyQ" || e.key.toLowerCase()==="q" || e.key.toLowerCase()==="й"){
         e.preventDefault();
         useDuck();

@@ -125,7 +125,7 @@ namespace Code.UI.Attendance
 				? new Color32(220, 208, 180, 255)
 				: new Color32(150, 150, 150, 255);
 			microphoneCheckmark.SetActive(_microphonePassed);
-			microphoneHint.text = _microphoneAvailable == false ? "No mic — press M to meow"
+			microphoneHint.text = _microphoneAvailable == false ? "Microphone unavailable"
 				: _microphonePassed ? "LOUD ENOUGH!"
 				: _quietSeconds >= 0.5f ? "LOUDER!" : "Meow to test your mic";
 		}

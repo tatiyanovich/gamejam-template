@@ -7,7 +7,6 @@ namespace Code.Gameplay.Input.Data
 	public static class InputKeyMap
 	{
 		public const KeyCode Lean = KeyCode.Space;
-		public const KeyCode Meow = KeyCode.M;
 		public const KeyCode Duck = KeyCode.Q;
 
 		public static readonly KeyBinding<StrokeDirection>[] Strokes =
@@ -34,11 +33,11 @@ namespace Code.Gameplay.Input.Data
 
 		private static KeyBinding<char>[] BuildLetters()
 		{
-			List<KeyBinding<char>> letters = new(24);
+			List<KeyBinding<char>> letters = new(25);
 
 			for (KeyCode key = KeyCode.A; key <= KeyCode.Z; key++)
 			{
-				if (key == Meow || key == Duck)
+				if (key == Duck)
 					continue;
 
 				letters.Add(new KeyBinding<char>(key, (char)('A' + (key - KeyCode.A))));

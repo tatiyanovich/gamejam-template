@@ -49,8 +49,6 @@ namespace Code.Editor.Art
 				RectTransform suspicion = Widget(layout, "SuspicionMeter", new Vector2(650f, -388f));
 				suspicion.localScale = Vector3.one * 0.75f;
 				RectTransform meow = Widget(layout, "MeowMeter", new Vector2(80f, -760f));
-				TMP_Text hint = Label(layout, "", new Rect(25f, 1008f, 350f, 56f));
-				hint.fontSize = 24f;
 				Image cooldown = Picture(meow, "Papers/ring_timer", new Rect(0f, 0f, 240f, 240f));
 				cooldown.name = "Cooldown";
 				cooldown.type = Image.Type.Filled;
@@ -89,7 +87,6 @@ namespace Code.Editor.Art
 				Assign(window, "suspicionFill", suspicion.Find("bar_fill").GetComponent<Image>());
 				Assign(window, "microphoneFill", meow.Find("meow_fill").GetComponent<Image>());
 				Assign(window, "microphoneThreshold", threshold);
-				Assign(window, "microphoneHint", hint);
 				Assign(window, "cooldownFill", cooldown);
 				Assign(window, "duckButton", duckButton);
 				Assign(window, "tutorialButton", tutorialButton);
