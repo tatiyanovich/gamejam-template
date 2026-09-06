@@ -17,6 +17,8 @@ namespace Code.Infrastructure.Microphone
 		private const int SampleWindow = 1024;
 		private const int ClipLengthSeconds = 1;
 		private const int PreferredFrequency = 44100;
+		private const int LowSampleRateMaximumFrequency = 24000;
+		private const float LowSampleRateLevelMultiplier = 0.5f;
 
 		public bool IsAvailable => _clip != null
 			&& UnityEngine.Microphone.IsRecording(null)
@@ -54,7 +56,8 @@ namespace Code.Infrastructure.Microphone
 				squareSum += sample * sample;
 			}
 
-			return Mathf.Sqrt(squareSum / SampleWindow);
+			float rootMeanSquare = Mathf.Sqrt(squareSum / SampleWindow);
+			return rootMeanSquare * GetInputLevelMultiplier();
 		}
 
 		private void StartRecording()
@@ -138,6 +141,10 @@ namespace Code.Infrastructure.Microphone
 
 			return _clip.samples - SampleWindow;
 		}
+
+		private float GetInputLevelMultiplier() => _clip.frequency <= LowSampleRateMaximumFrequency
+			? LowSampleRateLevelMultiplier
+			: 1f;
 
 		private void HandleAudioConfigurationChanged(bool deviceWasChanged)
 		{
