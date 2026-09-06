@@ -89,11 +89,11 @@ namespace Code.Editor.Art
 			if (EditorApplication.isPlaying)
 				throw new InvalidOperationException("Stop Play Mode before building paper views.");
 
+			ImportPaperTextures();
 			JObject layout = Read(6);
-			ConfigurePaperPrefab("PlayerPaper", layout, ConfigurePlayerPaperViews);
 			ConfigurePaperPrefab("NeighbourPaper", layout, ConfigureNeighbourPaperViews);
 			AssetDatabase.SaveAssets();
-			Debug.Log("D6: rebuilt paper glyph rows, scribbles and the wrapped question line.");
+			Debug.Log("D6: rebuilt neighbour paper input glyphs and scribbles.");
 		}
 
 		[MenuItem("COPYCAT/Art/Build E4 Duck View")]
@@ -164,6 +164,9 @@ namespace Code.Editor.Art
 					foreach (JToken digit in layout["glyphDigits"])
 					foreach (string state in GlyphStates)
 						assets.Add(GlyphAsset(layout, $"glyph_digit_{(string)digit}_{state}"));
+
+					foreach (string state in GlyphStates)
+						assets.Add(GlyphAsset(layout, $"glyph_key_{state}"));
 				}
 
 				foreach (JToken asset in assets)
@@ -176,6 +179,30 @@ namespace Code.Editor.Art
 			JObject glyph = (JObject)layout["glyphAsset"].DeepClone();
 			glyph["name"] = name;
 			return glyph;
+		}
+
+		private static void ImportPaperTextures()
+		{
+			string destination = Content + "Papers";
+			foreach (string source in Directory.GetFiles(Path.Combine(ArtRoot, "exports/d6"), "*.png"))
+				File.Copy(source, Path.Combine(destination, Path.GetFileName(source)), true);
+
+			AssetDatabase.Refresh(ImportAssetOptions.ForceSynchronousImport);
+			JObject layout = Read(6);
+			List<JToken> assets = layout["assets"].ToList();
+			foreach (string direction in GlyphDirections)
+			foreach (string state in GlyphStates)
+				assets.Add(GlyphAsset(layout, $"glyph_arrow_{direction}_{state}"));
+
+			foreach (JToken digit in layout["glyphDigits"])
+			foreach (string state in GlyphStates)
+				assets.Add(GlyphAsset(layout, $"glyph_digit_{(string)digit}_{state}"));
+
+			foreach (string state in GlyphStates)
+				assets.Add(GlyphAsset(layout, $"glyph_key_{state}"));
+
+			foreach (JToken asset in assets)
+				ImportTexture("Papers", asset);
 		}
 
 		private static void ImportTexture(string folder, JToken asset)
@@ -521,6 +548,12 @@ namespace Code.Editor.Art
 			Transform glyphs = Replace(paper, "StrokeGlyphs", Local(new Vector2(240f, (float)strokes["centerY"])));
 			BuildGlyphRow(glyphs, ((float)strokes["advance"] / 100f, (float)strokes["glyphScale"], true));
 
+			Remove(paper, "Word");
+			JToken word = layout["neighbourPaper"]["word"];
+			Transform wordGlyphs = Replace(paper, "WordGlyphs",
+				Local(new Vector2((float)word["centerX"], (float)word["centerY"])));
+			BuildLetterRow(wordGlyphs, word);
+
 			BuildPickCells(paper, layout["neighbourPaper"]["pick"]);
 
 			Remove(paper, "scribble_2");
@@ -582,6 +615,39 @@ namespace Code.Editor.Art
 			});
 		}
 
+		private static void BuildLetterRow(Transform parent, JToken settings)
+		{
+			Transform[] slots = new Transform[GlyphSlotCount];
+			SpriteRenderer[] backgrounds = new SpriteRenderer[GlyphSlotCount];
+			TMP_Text[] letters = new TMP_Text[GlyphSlotCount];
+			for (int index = 0; index < slots.Length; index++)
+			{
+				slots[index] = Node(parent, "Letter" + (index + 1), Vector3.zero);
+				backgrounds[index] = Layer(slots[index], "Papers", ("glyph_key_normal", Vector3.zero, 1));
+				backgrounds[index].transform.localScale = Vector3.one * (float)settings["glyphScale"];
+				letters[index] = Text(slots[index], "Label", ("", Vector2.zero,
+					(float)settings["letterSize"], 84f, 2, "Nunito-Bold", "PENCIL_INK"));
+				letters[index].rectTransform.localPosition = Vector3.zero;
+				letters[index].rectTransform.pivot = new Vector2(0.5f, 0.5f);
+				letters[index].rectTransform.sizeDelta = new Vector2(0.84f, 0.84f);
+				letters[index].alignment = TextAlignmentOptions.Center;
+				slots[index].gameObject.SetActive(false);
+			}
+
+			parent.gameObject.AddComponent<PaperLetterRow>().Configure(new PaperLetterRowDto
+			{
+				Slots = slots,
+				Backgrounds = backgrounds,
+				Letters = letters,
+				NormalGlyph = Sprite("Papers", "glyph_key_normal"),
+				DoneGlyph = Sprite("Papers", "glyph_key_done"),
+				WrongGlyph = Sprite("Papers", "glyph_key_wrong"),
+				NormalColor = Color("PENCIL_INK"),
+				CompletedColor = Color("PAPER"),
+				Advance = (float)settings["advance"] / 100f
+			});
+		}
+
 		private static Sprite[] Glyphs(string state)
 		{
 			string[] directions = { "up", "right", "down", "left" };
@@ -623,13 +689,9 @@ namespace Code.Editor.Art
 			Layer(neighbour, "Papers", ("paper_neighbour", Local(Point(layout["neighbourPaper"]["pivotPixels"])), 0));
 			Text(neighbour, "StudentName", ("", new Vector2(96f, 116f), 32f, 360f, 1,
 				"PatrickHand-Regular", "PENCIL_INK"));
-			TextMeshPro word = Text(neighbour, "Word", ("", new Vector2(246f, 272f), 70f, 420f, 1,
-				"PatrickHand-Regular", "PENCIL_INK"));
-			word.rectTransform.pivot = new Vector2(0.5f, 0.5f);
-			word.alignment = TextAlignmentOptions.Baseline;
 			ConfigureNeighbourPaperViews(neighbour, layout);
 			Transform circle = Layer(neighbour, "Papers", ("glyph_pick_circle", Vector3.zero, 2)).transform;
-			circle.localScale = Vector3.one * 0.9f;
+			circle.localScale = Vector3.one * 1.05f;
 			circle.gameObject.SetActive(false);
 			Save(neighbour, "Papers");
 

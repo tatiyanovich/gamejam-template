@@ -14,7 +14,7 @@ namespace Code.Gameplay.Exam.Behaviours
 		private sealed class NeighbourPaper
 		{
 			public NeighbourSide Side;
-			public TMP_Text Word;
+			public PaperLetterRow Word;
 			public Transform[] PickCells;
 			public TMP_Text[] Picks;
 			public Transform PickCircle;
@@ -41,6 +41,7 @@ namespace Code.Gameplay.Exam.Behaviours
 		private const string ColorEndTag = "</color>";
 		private const string BlankAnswer = "____";
 		private const float WrongSeconds = 0.4f;
+		private const float PickCircleOffsetX = -0.06f;
 
 		public void Bind(IExamQuery examQuery, IDifficultyService difficultyService)
 		{
@@ -105,7 +106,7 @@ namespace Code.Gameplay.Exam.Behaviours
 				NeighbourPaper paper = new()
 				{
 					Side = transform.position.x < 0f ? NeighbourSide.Left : NeighbourSide.Right,
-					Word = FindText(transform, "Word"),
+					Word = FindTransform(transform, "WordGlyphs")?.GetComponent<PaperLetterRow>(),
 					PickCells = new[]
 					{
 						FindTransform(transform, "PickCell1"), FindTransform(transform, "PickCell2"),
@@ -197,9 +198,12 @@ namespace Code.Gameplay.Exam.Behaviours
 				return;
 
 			if (paper.Word != null)
-				paper.Word.text = visible && question.Type == QuestionType.Word
-					? SpacedWord(question.Word, _examQuery.GetAnswerProgress())
-					: string.Empty;
+			{
+				if (visible && question.Type == QuestionType.Word)
+					paper.Word.ShowWord(question.Word, _examQuery.GetAnswerProgress(), _wrongIndex);
+				else
+					paper.Word.Clear();
+			}
 
 			bool picking = visible && question.Type == QuestionType.Pick;
 			for (int index = 0; index < paper.PickCells.Length; index++)
@@ -235,7 +239,7 @@ namespace Code.Gameplay.Exam.Behaviours
 
 			Transform cell = paper.PickCells[question.CorrectOptionIndex];
 			if (cell != null)
-				paper.PickCircle.localPosition = cell.localPosition;
+				paper.PickCircle.localPosition = cell.localPosition + new Vector3(PickCircleOffsetX, 0f, 0f);
 
 			SpriteRenderer circle = paper.PickCircle.GetComponent<SpriteRenderer>();
 			DifficultyPhase phase = _difficultyService.GetPhase(_examQuery.GetCurrentQuestionIndex());

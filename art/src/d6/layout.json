@@ -138,17 +138,20 @@
         ]
       ],
       "fontSize": 34,
-      "circleScale": 0.9,
-      "glyphScale": 0.5,
+      "circleScale": 1.05,
+      "circleOffsetX": -12,
+      "glyphScale": 0.75,
       "glyphOffsetX": -72,
-      "textOffsetX": -42,
+      "textOffsetX": -35,
       "textBaselineY": 10
     },
     "word": {
       "centerX": 246,
-      "baseline": 272,
-      "fontSize": 70,
-      "letterSpacing": 4
+      "centerY": 246,
+      "glyphScale": 0.7,
+      "advance": 64,
+      "letterSize": 54,
+      "letterBaselineOffset": 18
     }
   },
   "ringTimer": {

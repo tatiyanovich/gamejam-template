@@ -5,6 +5,7 @@ using Code.UI.Attendance;
 using Code.UI.Gameplay;
 using Code.UI.Launch;
 using Code.UI.Result;
+using Code.UI.Tutorial;
 using Cysharp.Threading.Tasks;
 using Framework.UI.UiManagement.Services;
 
@@ -46,6 +47,7 @@ namespace Code.Infrastructure.StateManagement.Sessions
 			await UniTask.WhenAll(
 				_uiService.CloseWindow<LaunchWindow>(withAnimation: false),
 				_uiService.CloseWindow<AttendanceWindow>(withAnimation: false),
+				_uiService.CloseWindow<TutorialWindow>(withAnimation: false),
 				_uiService.CloseWindow<ResultWindow>(withAnimation: false));
 
 			await UniTask.WhenAll(
@@ -57,6 +59,7 @@ namespace Code.Infrastructure.StateManagement.Sessions
 		{
 			return UniTask.WhenAll(
 				_uiService.CloseWindow<ResultWindow>(withAnimation: false),
+				_uiService.CloseWindow<TutorialWindow>(withAnimation: false),
 				_uiService.CloseWindow<GameplayWindow>(withAnimation: false),
 				_uiService.CloseWindow<WorldOverlayWindow>(withAnimation: false));
 		}

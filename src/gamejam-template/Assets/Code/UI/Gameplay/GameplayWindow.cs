@@ -21,6 +21,7 @@ using Code.Gameplay.Teacher;
 using Code.Gameplay.Teacher.Behaviours;
 using Code.Gameplay.Teacher.Queries;
 using Code.UI.Result;
+using Code.UI.Tutorial;
 using Cysharp.Threading.Tasks;
 using Framework.UI.UiManagement.Elements.Windows;
 using TMPro;
@@ -42,6 +43,7 @@ namespace Code.UI.Gameplay
 		[SF] private TMP_Text microphoneHint;
 		[SF] private Image cooldownFill;
 		[SF] private Button duckButton;
+		[SF] private Button tutorialButton;
 		[SF] private GameObject bubble;
 		[SF] private TMP_Text speech;
 		[SF] private RectTransform hintBubble;
@@ -159,6 +161,7 @@ namespace Code.UI.Gameplay
 			_teacher.OnAttentionChanged += HandleAttention;
 			_teacher.OnRemark += HandleRemark;
 			duckButton.onClick.AddListener(HandleThrowDuck);
+			tutorialButton.onClick.AddListener(HandleTutorial);
 			BindWorldViews();
 			OnRectTransformDimensionsChange();
 			HandleAnswers(_exam.GetAnswersCopied());
@@ -205,6 +208,7 @@ namespace Code.UI.Gameplay
 			_teacher.OnAttentionChanged -= HandleAttention;
 			_teacher.OnRemark -= HandleRemark;
 			duckButton.onClick.RemoveListener(HandleThrowDuck);
+			tutorialButton.onClick.RemoveListener(HandleTutorial);
 			UnbindWorldViews();
 			bubble.SetActive(false);
 			hintBubble.gameObject.SetActive(false);
@@ -373,6 +377,12 @@ namespace Code.UI.Gameplay
 		}
 
 		private void HandleAnswers(int count) => answers.text = $"ANSWERS {count} / {_exam.GetTotalQuestions()}";
+
+		private void HandleTutorial()
+		{
+			_uiService.OpenWindow<TutorialWindow>(
+				beforeOpen: window => window.Prepare(onDismissed: null)).Forget();
+		}
 
 		private void HandleTime(float seconds)
 		{

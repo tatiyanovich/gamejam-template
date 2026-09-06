@@ -30,6 +30,13 @@ export function paperOutputs(root) {
       glyphs.push({ name, ...layout.glyphAsset });
     }
   }
+  const keyTemplate = read('glyph_key');
+  for (const [state, colors] of Object.entries(layout.glyphStates)) {
+    const name = `glyph_key_${state}`;
+    sources[name] = keyTemplate
+      .replace('{{GLYPH_FILL}}', `{{${colors.fill}}}`);
+    glyphs.push({ name, ...layout.glyphAsset });
+  }
   const assets = [...layout.assets.slice(0, 2), ...glyphs, ...layout.assets.slice(2)];
   const neighbours = neighbourComposer(root);
   const { frame, label, deskTransform } = neighbours;
@@ -52,8 +59,8 @@ export function paperOutputs(root) {
     const [px, py] = asset.pivotPixels;
     return `<g transform="translate(${x} ${y}) rotate(${rotation}) scale(${scale}) translate(${-px} ${-py})">${body(sources[name])}</g>`;
   }
-  function hand(x, y, value, size, extra = '', color = ink) {
-    return `<text x="${x}" y="${y}" font-family="${paperFont}" font-size="${size}" fill="${color}" ${extra}>${value}</text>`;
+  function hand(x, y, value, size, extra = '', color = ink, font = paperFont) {
+    return `<text x="${x}" y="${y}" font-family="${font}" font-size="${size}" fill="${color}" ${extra}>${value}</text>`;
   }
   function strokeState(index, progress, wrongIndex) {
     if (index === wrongIndex) return 'wrong';
@@ -102,14 +109,18 @@ export function paperOutputs(root) {
       });
       if (!options.hideCircle) {
         const [x, y] = sheet.pick.cells[question.correct];
-        content += `<g opacity="${options.faint ? .35 : 1}">${sprite('glyph_pick_circle', x, y, sheet.pick.circleScale)}</g>`;
+        content += `<g opacity="${options.faint ? .35 : 1}">${sprite('glyph_pick_circle', x + sheet.pick.circleOffsetX, y, sheet.pick.circleScale)}</g>`;
       }
     } else if (question.type === 'word') {
       const letters = [...question.word];
-      const advance = sheet.word.fontSize * .62 + sheet.word.letterSpacing;
-      const start = sheet.word.centerX - (letters.length - 1) * advance / 2;
+      const start = sheet.word.centerX - (letters.length - 1) * sheet.word.advance / 2;
       letters.forEach((letter, index) => {
-        content += hand(start + index * advance, sheet.word.baseline, letter, sheet.word.fontSize, 'text-anchor="middle"', index < progress ? '{{OK}}' : ink);
+        const state = strokeState(index, progress, options.wrongIndex);
+        const x = start + index * sheet.word.advance;
+        content += sprite(`glyph_key_${state}`, x, sheet.word.centerY, sheet.word.glyphScale);
+        content += hand(x, sheet.word.centerY + sheet.word.letterBaselineOffset, letter,
+          sheet.word.letterSize, 'text-anchor="middle" font-weight="800"',
+          state === 'normal' ? ink : '{{PAPER}}', 'Nunito');
       });
     }
     return content;
@@ -146,7 +157,7 @@ export function paperOutputs(root) {
     });
   }
   function stateSheet() {
-    let content = '<rect width="1920" height="1400" fill="{{WALL}}"/>' + label(35, 52, 'COPYCAT / D6 / PAPERS AND INPUT', 34);
+    let content = '<rect width="1920" height="1800" fill="{{WALL}}"/>' + label(35, 52, 'COPYCAT / D6 / PAPERS AND INPUT', 34);
     content += label(35, 92, 'Own paper: header, student, question, answer row, COPIED stamp. Neighbour paper: strokes / pick / word. Text is TMP in Unity.');
     const q1 = exam.questions.find(question => question.id === 1);
     const q9 = exam.questions.find(question => question.id === 9);
@@ -193,7 +204,7 @@ export function paperOutputs(root) {
     return frame(1920, 1800, content);
   }
   function layerSheet() {
-    let content = '<rect width="1920" height="1000" fill="{{PAPER}}"/>' + label(30, 52, 'D6 / SPRITES AND PIVOTS', 32);
+    let content = '<rect width="1920" height="1600" fill="{{PAPER}}"/>' + label(30, 52, 'D6 / SPRITES AND PIVOTS', 32);
     assets.forEach((asset, index) => {
       const column = index % 8;
       const row = Math.floor(index / 8);
@@ -204,7 +215,7 @@ export function paperOutputs(root) {
       content += `<g transform="translate(${x + (220 - asset.size[0] * scale) / 2} ${y + 20 + (180 - asset.size[1] * scale) / 2}) scale(${scale})">${body(sources[asset.name])}<circle cx="${asset.pivotPixels[0]}" cy="${asset.pivotPixels[1]}" r="${5 / scale}" fill="{{DANGER}}"/></g>`;
       content += label(x + 10, y + 236, asset.name, 15) + label(x + 10, y + 262, `${asset.size.join(' x ')} / pivot ${asset.pivotPixels.join(', ')}`, 13);
     });
-    return frame(1920, 1000, content);
+    return frame(1920, 1600, content);
   }
   for (const asset of assets) {
     const [, width, height] = sources[asset.name].match(/viewBox="0 0 (\d+) (\d+)"/) || [];
@@ -213,7 +224,7 @@ export function paperOutputs(root) {
     const baked = asset.name === 'stamp_copied' || asset.name.startsWith('glyph_digit_');
     if (baked === false && /<text\b/.test(sources[asset.name])) throw new Error(`D6 sprite contains text: ${asset.name}`);
   }
-  if (new Set(assets.map(asset => asset.name)).size !== 34) throw new Error('D6 requires 34 unique sprites');
+  if (new Set(assets.map(asset => asset.name)).size !== 37) throw new Error('D6 requires 37 unique sprites');
   const q1 = exam.questions.find(question => question.id === 1);
   const q6 = exam.questions.find(question => question.id === 6);
   const q8 = exam.questions.find(question => question.id === 8);

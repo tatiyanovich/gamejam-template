@@ -2,8 +2,9 @@ using System.Threading;
 using Code.Gameplay.Camera.Services;
 using Code.Gameplay.CoreLoop.Services;
 using Code.Gameplay.Progress.Queries;
-using Code.UI.Attendance;
 using Code.Infrastructure.CoreLoop;
+using Code.UI.Attendance;
+using Code.UI.Tutorial;
 using Cysharp.Threading.Tasks;
 using Framework.UI.UiManagement.Elements.Windows;
 using UnityEngine;
@@ -23,17 +24,17 @@ namespace Code.UI.Launch
 		private bool _isStarting;
 
 		private ICoreLoopRequestFactory _coreLoopRequestFactory;
-		private ICameraSwitcher _cameraSwitch;
+		private ICameraSwitcher _cameraSwitcher;
 		private IProgressQuery _progressQuery;
 
 		[Inject]
 		public void Construct(
 			ICoreLoopRequestFactory coreLoopRequestFactory,
-			ICameraSwitcher cameraSwitch,
+			ICameraSwitcher cameraSwitcher,
 			IProgressQuery progressQuery)
 		{
 			_coreLoopRequestFactory = coreLoopRequestFactory;
-			_cameraSwitch = cameraSwitch;
+			_cameraSwitcher = cameraSwitcher;
 			_progressQuery = progressQuery;
 		}
 
@@ -70,12 +71,18 @@ namespace Code.UI.Launch
 			quitButton.interactable = interactable;
 		}
 
-		private async UniTask StartExam()
+		private async UniTask OpenTutorial()
 		{
 			_isStarting = true;
 			SetInteractable(false);
 			await _uiService.CloseWindow<LaunchWindow>(withAnimation: false);
-			_cameraSwitch.SwitchTo(LoopNodeId.Exam);
+			await _uiService.OpenWindow<TutorialWindow>(
+				beforeOpen: window => window.Prepare(StartExam));
+		}
+
+		private void StartExam()
+		{
+			_cameraSwitcher.SwitchTo(LoopNodeId.Exam);
 			_coreLoopRequestFactory.CreateCloseBranchRequest(LoopNodeId.Exam);
 			_coreLoopRequestFactory.CreateGoToBranchRequest(LoopNodeId.Exam);
 		}
@@ -99,7 +106,7 @@ namespace Code.UI.Launch
 				return;
 			}
 
-			StartExam().Forget();
+			OpenTutorial().Forget();
 		}
 
 		private void HandleQuit()

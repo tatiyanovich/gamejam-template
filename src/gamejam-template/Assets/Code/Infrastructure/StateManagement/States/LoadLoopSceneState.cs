@@ -53,10 +53,11 @@ namespace Code.Infrastructure.StateManagement.States
 
 			SceneInstance scene = await _sceneLoadService.LoadScene(
 				loopScenePayload.SceneAddress,
-				LoadSceneMode.Single,
-				onLoaded: () => ChooseNextState(loopScenePayload));
+				LoadSceneMode.Single);
 
+			_loadedSceneRegistry.Clear();
 			_loadedSceneRegistry.Register(loopScenePayload.LoopNodeId, scene);
+			ChooseNextState(loopScenePayload);
 		}
 
 		private void ChooseNextState(LoopScenePayload loopScenePayload)

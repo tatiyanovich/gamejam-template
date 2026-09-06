@@ -33,8 +33,7 @@ namespace Code.Editor.Art
 				RectTransform layout = Rectangle(root.transform, "Layout", new Rect(0f, 0f, 1920f, 1080f));
 				layout.anchorMin = layout.anchorMax = layout.pivot = Vector2.one * 0.5f;
 				layout.anchoredPosition = Vector2.zero;
-				Picture(layout, "UI/Copycat/chip_hud", new Rect(42f, 8f, 280f, 60f)).pixelsPerUnitMultiplier = 1.5f;
-				Label(layout, "COPYCAT", new Rect(42f, 8f, 280f, 60f)).fontSize = 28f;
+				Button tutorialButton = TutorialButton(layout);
 				Picture(layout, "UI/Copycat/chip_hud", new Rect(732f, 8f, 456f, 60f)).pixelsPerUnitMultiplier = 1.5f;
 				TMP_Text answers = Label(layout, "", new Rect(732f, 8f, 456f, 60f));
 				answers.fontSize = 28f;
@@ -89,6 +88,7 @@ namespace Code.Editor.Art
 				Assign(window, "microphoneHint", hint);
 				Assign(window, "cooldownFill", cooldown);
 				Assign(window, "duckButton", duckButton);
+				Assign(window, "tutorialButton", tutorialButton);
 				Assign(window, "bubble", bubble.gameObject);
 				Assign(window, "speech", speech);
 				Assign(window, "hintBubble", hintBubble);
@@ -108,6 +108,20 @@ namespace Code.Editor.Art
 			RemoveStaticKeycap();
 			RemoveClockHands();
 			AssetDatabase.SaveAssets();
+		}
+
+		private static Button TutorialButton(Transform parent)
+		{
+			Image circle = Rectangle(parent, "TutorialButton", new Rect(1816f, 24f, 72f, 72f))
+				.gameObject.AddComponent<Image>();
+			circle.sprite = AssetDatabase.GetBuiltinExtraResource<Sprite>("UI/Skin/Knob.psd");
+			circle.color = new Color32(255, 210, 51, 255);
+			circle.raycastTarget = true;
+			TMP_Text label = Label(circle.transform, "?", new Rect(0f, 0f, 72f, 72f));
+			label.fontSize = 46f;
+			Button button = circle.gameObject.AddComponent<Button>();
+			button.targetGraphic = circle;
+			return button;
 		}
 
 		private static DangerVignetteView Vignette(Transform parent)

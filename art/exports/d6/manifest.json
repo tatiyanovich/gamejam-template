@@ -102,84 +102,105 @@
     "width": 168,
     "height": 168,
     "scale": 2,
-    "sha256": "5b003cd56c7b07dac0a8df176a61a48b9e4b8b5a587191c8bbd47a3a1d0daa40"
+    "sha256": "8b922c0c12a2bfad82e1f6e944738d85472685304009c2a012bb8695fb37a45b"
   },
   {
     "name": "glyph_digit_1_done",
     "width": 168,
     "height": 168,
     "scale": 2,
-    "sha256": "4f549d86ed6eca0624abbd80af781063dff72bca787df83a8d99b2b89c6d5582"
+    "sha256": "9992bd77e38bf89c6b9a41ddbd8bda68735aa79d0802b5d5d59c450d952e7eb7"
   },
   {
     "name": "glyph_digit_1_wrong",
     "width": 168,
     "height": 168,
     "scale": 2,
-    "sha256": "70d85b5872ae9be4de352c38aabbc4a26e3babc83c7b9b4c3a01ba7a5fd295b5"
+    "sha256": "eb89cb68d328ec0abec3009e1d0fab748110ab5ef79542fe7f0204ec064de074"
   },
   {
     "name": "glyph_digit_2_normal",
     "width": 168,
     "height": 168,
     "scale": 2,
-    "sha256": "2e88803e78bde7f35356c4412d69aed1666ec992c4defe6fd073e14bb674a08b"
+    "sha256": "986f9310dd1f2c486d407a659e7cf8bf5986227554b843abe5f88c67d925167b"
   },
   {
     "name": "glyph_digit_2_done",
     "width": 168,
     "height": 168,
     "scale": 2,
-    "sha256": "2a01fea32c11a98a8ac7f725daeb538d0d3d2f05410f43f029b88c866eb2739d"
+    "sha256": "d8e65b1b975b6d4eff83a547abb15055ebd3f0464b84cef843a452ed36210105"
   },
   {
     "name": "glyph_digit_2_wrong",
     "width": 168,
     "height": 168,
     "scale": 2,
-    "sha256": "273d3f70dcee90cfe2e0e475f576e77d9ab5f8e77fb387824e1e709db3b4415f"
+    "sha256": "3b92e4c7731097b5e7283bdc03ec2f9aa17933c0fefa4663adb2ce4bcd5a461e"
   },
   {
     "name": "glyph_digit_3_normal",
     "width": 168,
     "height": 168,
     "scale": 2,
-    "sha256": "22b4abc4b51bd9bc14fd372acd062069314a39d903c1df059179cf05aa66b175"
+    "sha256": "f1f619a4a670842bfc846b4eef8ab7c13dc72d42477f5eb47be01fd9a8dc298b"
   },
   {
     "name": "glyph_digit_3_done",
     "width": 168,
     "height": 168,
     "scale": 2,
-    "sha256": "128c657b864e92dff69e881f54dcd707c6cc8145782ab41743000bfedb8bca24"
+    "sha256": "7ba5ca5b419e669978500be6a7dfe422e1182b06f0bc8f6a80a61da16c537147"
   },
   {
     "name": "glyph_digit_3_wrong",
     "width": 168,
     "height": 168,
     "scale": 2,
-    "sha256": "56714026775bfcece5781755a7e94daf16a75178c6373f1357a476702de6b73f"
+    "sha256": "52570fdc3299882763c693708184f06c163f2216185209c2ba650e95703d040c"
   },
   {
     "name": "glyph_digit_4_normal",
     "width": 168,
     "height": 168,
     "scale": 2,
-    "sha256": "8adb78d776630f2a9b17099d2248a6f498fa32e22f1a86aa5500fefef7bbc2d2"
+    "sha256": "45795dde3f6b120e0292f27ccdd67e1fbdb4f5aa017ef68768abdc72a5673c29"
   },
   {
     "name": "glyph_digit_4_done",
     "width": 168,
     "height": 168,
     "scale": 2,
-    "sha256": "7dac308e6c006200b8b53460ac864f804f44f9e4cf8ed157a5be021828a46764"
+    "sha256": "f8517cb72cc81d0a9c49762ea9654308fbc8a564d1b833616e8b4a4502f9907a"
   },
   {
     "name": "glyph_digit_4_wrong",
     "width": 168,
     "height": 168,
     "scale": 2,
-    "sha256": "121f72c7f6bfa9d8681e55a23213fd8844b7ba9eb3c292d27bff76bf32ca4aa5"
+    "sha256": "3a64c341b21ede92e26bbb4399339c409e4c94fb079476fd9e59e951cc719a83"
+  },
+  {
+    "name": "glyph_key_normal",
+    "width": 168,
+    "height": 168,
+    "scale": 2,
+    "sha256": "b6c5b9a9a5aa7d866215803a6e36c59696a9a283bc8c58f23e1ba19d8a34a6f7"
+  },
+  {
+    "name": "glyph_key_done",
+    "width": 168,
+    "height": 168,
+    "scale": 2,
+    "sha256": "17a1eb0791b6f3ece8c6bb38fea039613a3470e35dc93fec2c4999f3c2b37fb1"
+  },
+  {
+    "name": "glyph_key_wrong",
+    "width": 168,
+    "height": 168,
+    "scale": 2,
+    "sha256": "af6cd2c81872ee8253fea0ecdc5a74191032a11299b6d3152e8f1ecc594721d3"
   },
   {
     "name": "glyph_pick_circle",

@@ -2,5 +2,5 @@
   <g stroke="{{INK}}" stroke-width="6" stroke-linejoin="round" stroke-linecap="round">
     <path d="M14 7 L70 5 Q78 5 78 13 L79 70 Q79 78 71 78 L13 79 Q5 79 5 71 L6 15 Q6 7 14 7Z" fill="{{GLYPH_FILL}}"/>
   </g>
-  <text x="42" y="61" font-family="Patrick Hand" font-size="58" fill="{{GLYPH_INK}}" text-anchor="middle">{{GLYPH_DIGIT}}</text>
+  <text x="42" y="60" font-family="Nunito" font-size="50" font-weight="800" fill="{{GLYPH_INK}}" text-anchor="middle">{{GLYPH_DIGIT}}</text>
 </svg>

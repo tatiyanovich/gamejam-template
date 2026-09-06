@@ -13,5 +13,7 @@ namespace Code.Infrastructure.Scenes
 		public bool TryGet(LoopNodeId nodeId, out SceneInstance scene) => _scenes.TryGetValue(nodeId, out scene);
 
 		public void Remove(LoopNodeId nodeId) => _scenes.Remove(nodeId);
+
+		public void Clear() => _scenes.Clear();
 	}
 }

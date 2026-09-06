@@ -10,5 +10,6 @@ namespace Code.Infrastructure.Scenes
 		void Register(LoopNodeId nodeId, SceneInstance scene);
 		bool TryGet(LoopNodeId nodeId, out SceneInstance scene);
 		void Remove(LoopNodeId nodeId);
+		void Clear();
 	}
 }

@@ -4,14 +4,14 @@
     "width": 1920,
     "height": 1800,
     "scale": 1,
-    "sha256": "e901b4cb548037c0d055ea1f2d98a169a6513c89db934e131103d2c73f27cdcc"
+    "sha256": "cba95dcc1825d65da79e6144a9bbd60ef96a8d9b19e5917f0a8465aee8ee0a82"
   },
   {
     "name": "layer_sheet",
     "width": 1920,
-    "height": 1000,
+    "height": 1600,
     "scale": 1,
-    "sha256": "c41c6bb76f760f00ec853bb3dde1876a059b6aa91cb5559b026e00f534842f69"
+    "sha256": "98c30c1c53e336e27b575d3483129625ae74af1cdd3f12b51a54d44434283262"
   },
   {
     "name": "classroom_strokes",
@@ -25,14 +25,14 @@
     "width": 1920,
     "height": 1080,
     "scale": 1,
-    "sha256": "1a9c2a7d4aaa050c38d7fcd159dcd5f860e8a4053f57ba7f6f3688555a787ff7"
+    "sha256": "f23e5b4f06756817dd6854557e58632e0d67b63a6b33d599a931389670386ae8"
   },
   {
     "name": "classroom_pick",
     "width": 1920,
     "height": 1080,
     "scale": 1,
-    "sha256": "54b9096d39d0c1d32af1a51e401d68a3ecd54a87e3e90867a0396e301dbda8c7"
+    "sha256": "1396fd5039ca8a225f9ec6c934a8c180e3097389fb8dc737097ddfed1f4117f6"
   },
   {
     "name": "classroom_copied",
